@@ -2,6 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// 행성 이미지 위치 목록
+/// </summary>
+public enum PlanetImagePosition
+{
+    Left,
+    Middle,
+    Right
+}
+
 public class AnimationManager : MonoBehaviour
 {
     /* ==================== Variables ==================== */
@@ -15,14 +25,33 @@ public class AnimationManager : MonoBehaviour
     [Header("좌우 버튼")]
     [SerializeField] private float _leftRightBtnMinBrightness = 0.5f;
 
+    [Header("좌우 목록 선택")]
+    [SerializeField] private float _selectionMaxBrightness = 1.0f;
+    [SerializeField] private float _selectionMinBrightness = 0.5f;
+    [SerializeField] private Color _selectionColor = Color.white;
+
+    [Header("3D 애니메이션")]
+    [SerializeField] private float _spinSpeedmult = 1.0f;
+
     [Header("참조")]
     [SerializeField] private Image _background = null;
-    [SerializeField] private TMP_Text[] _leftRightBtns = null;
+    [SerializeField] private Image _messageBoxBackground = null;
+    [SerializeField] private TMP_Text[] _leftRightBtns = new TMP_Text[6];
+    [SerializeField] private Image[] _selections = new Image[2];
+    [SerializeField] private Transform _planet = null;
+    [SerializeField] private Transform _sun = null;
+    [SerializeField] private RectTransform _planetImage = null;
+    [SerializeField] private RectTransform _spaceImage = null;
 
     private RectTransform _backgroundTransform = null;
+    private RectTransform _messageBoxBackgroundTransform = null;
     private float _leftRightTimer = 0.0f;
     private float _leftRightAdd = 0.0f;
     private float _leftRightMultiply = 0.0f;
+    private float _selectionAdd = 0.0f;
+    private float _selectionMultiply = 0.0f;
+    private float _planetImageTargetPos = 0.0f;
+    private float _spaceImageTargetPos = 0.0f;
 
     public static AnimationManager Instance
     {
@@ -40,6 +69,30 @@ public class AnimationManager : MonoBehaviour
     public void NoiseEffect()
     {
         _background.color = new Color(1.0f, 1.0f, 1.0f, _noiseAlpha);
+        _messageBoxBackground.color = new Color(1.0f, 1.0f, 1.0f, _noiseAlpha);
+    }
+
+
+    /// <summary>
+    /// 행성 이미지 목표 위치 설정
+    /// </summary>
+    public void SetPlanetImagePosition(PlanetImagePosition position)
+    {
+        switch (position)
+        {
+            case PlanetImagePosition.Left:
+                _planetImageTargetPos = -Constants.HALF_CANVAS_WIDTH;
+                _spaceImageTargetPos = -Constants.SPACE_IMAGE_TARGET_POSITION;
+                break;
+            case PlanetImagePosition.Middle:
+                _planetImageTargetPos = 0.0f;
+                _spaceImageTargetPos = 0.0f;
+                break;
+            case PlanetImagePosition.Right:
+                _planetImageTargetPos = Constants.HALF_CANVAS_WIDTH;
+                _spaceImageTargetPos = Constants.SPACE_IMAGE_TARGET_POSITION;
+                break;
+        }
     }
 
 
@@ -53,10 +106,15 @@ public class AnimationManager : MonoBehaviour
 
         // 배경 rectTransform 참조
         _backgroundTransform = _background.rectTransform;
+        _messageBoxBackgroundTransform = _messageBoxBackground.rectTransform;
 
         // 좌우 버튼 애니메이션 상수 산출
         _leftRightMultiply = (1.0f - _leftRightBtnMinBrightness) * 0.5f;
         _leftRightAdd = _leftRightBtnMinBrightness + _leftRightMultiply;
+
+        // 좌우 목록 선택 애니메이션 상수 산출
+        _selectionMultiply = (_selectionMaxBrightness - _selectionMinBrightness) * 0.5f;
+        _selectionAdd = _selectionMinBrightness + _selectionMultiply;
     }
 
 
@@ -64,18 +122,22 @@ public class AnimationManager : MonoBehaviour
     {
         // 계산용 지역변수
         float float0;
+        Vector3 vector3_0;
 
         #region 노이즈 애니메이션
-        _backgroundTransform.localPosition += new Vector3(0.0f, _noiseSpeed, 0.0f);
-        if (Constants.HALF_CANVAS_HEIGHT < _backgroundTransform.localPosition.y)
+        vector3_0 = _backgroundTransform.localPosition + new Vector3(0.0f, _noiseSpeed, 0.0f);
+        if (Constants.HALF_CANVAS_HEIGHT < vector3_0.y)
         {
-            _backgroundTransform.localPosition -= new Vector3(0.0f, Constants.CANVAS_HEIGHT, 0.0f);
+            vector3_0 -= new Vector3(0.0f, Constants.CANVAS_HEIGHT, 0.0f);
         }
+        _backgroundTransform.localPosition = vector3_0;
+        _messageBoxBackgroundTransform.localPosition = vector3_0 * Constants.MASSAGEBOX_HEIGHT_RATIO;
         #endregion
 
         #region 노이즈 어두워지기
         float0 = _background.color.r + (_noiseBrightness - _background.color.r) * Time.deltaTime * _noiseEffectSpeedmult;
         _background.color = new Color(float0, float0, float0, _noiseAlpha);
+        _messageBoxBackground.color = new Color(float0, float0, float0, _noiseAlpha);
         #endregion
 
         #region 좌우 버튼 애니메이션
@@ -98,6 +160,22 @@ public class AnimationManager : MonoBehaviour
         {
             _leftRightTimer -= Constants.DOUBLE_PI;
         }
+        #endregion
+
+        #region 좌우 목록 선택 오브젝트 애니메이션
+        float0 = Mathf.Sin(_leftRightTimer) * _selectionMultiply + _selectionAdd;
+        _selections[0].color = new Color(_selectionColor.r, _selectionColor.g, _selectionColor.b, float0);
+        _selections[1].color = new Color(_selectionColor.r, _selectionColor.g, _selectionColor.b, float0);
+        #endregion
+
+        #region 행성 이미지 위치
+        _planetImage.localPosition += new Vector3((_planetImageTargetPos - _planetImage.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
+        _spaceImage.localPosition += new Vector3((_spaceImageTargetPos - _spaceImage.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
+        #endregion
+
+        #region 3D 애니메이션
+        _planet.Rotate(0.0f, -_spinSpeedmult * Time.deltaTime, 0.0f);
+        _sun.Rotate(0.0f, _spinSpeedmult * Time.deltaTime, 0.0f);
         #endregion
     }
 }

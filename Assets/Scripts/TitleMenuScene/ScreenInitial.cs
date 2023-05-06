@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScreenInitial : Screen
+public class ScreenInitial : TitleMenuScreenBase
 {
     /* ==================== Variables ==================== */
 

@@ -1,25 +1,61 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayManager : MonoBehaviour
 {
     /* ==================== Variables ==================== */
 
+    // 임시
+    [SerializeField] private GameObject _audioMamagerPrefab = null;
+
+
+    public static PlayManager Instance
+    {
+        get;
+        private set;
+    }
+
+    public bool IsPlaying
+    {
+        get;
+        set;
+    }
+
+    #region JsonData 프로퍼티
+
+    #endregion
+
+
+
     /* ==================== Public Methods ==================== */
 
-    public void BtnLeftRight(bool isLeft)
+    /* ==================== Private Methods ==================== */
+
+    private void Awake()
     {
-        if (isLeft)
+        // 임시
+        if (null == AudioManager.Instance)
         {
-            AnimationManager.Instance.NoiseEffect();
+            GameObject audioManager = Instantiate(_audioMamagerPrefab);
+            AudioManager.Instance = audioManager.GetComponent<AudioManager>();
+            DontDestroyOnLoad(audioManager);
         }
-        else
-        {
-            AnimationManager.Instance.NoiseEffect();
-        }
+
+        // 유니티식 싱글턴패턴
+        Instance = this;
     }
 
 
 
-    /* ==================== Private Methods ==================== */
+    /* ==================== Inner Class ==================== */
+
+    private class JsonData
+    {
+        public byte[] ByteArray = new byte[32];
+        public short[] ShortArray = new short[32];
+        public int[] IntArray = new int[32];
+        public long[] LongArray = new long[32];
+        public float[] FloatArray = new float[32];
+        public double[] DoubleArray = new double[32];
+    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-public class ScreenStart : Screen
+public class ScreenStart : TitleMenuScreenBase
 {
     /* ==================== Variables ==================== */
 

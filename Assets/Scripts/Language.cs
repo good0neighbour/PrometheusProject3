@@ -37,6 +37,15 @@ public class Language
                 "설정",
                 "기타",
                 "종료",
+                "평균 대기압",
+                "평균 기온",
+                "물의 체적",
+                "산소 농도",
+                "대기압",
+                "물",
+                "탄소",
+                "광합성 생물",
+                "호흡 생물",
             };
         }
     }
@@ -56,7 +65,7 @@ public class Language
 
     private JsonLanguage _jsonLanguage;
     private TMP_FontAsset _fontAsset;
-    private Dictionary<string, string> _texts = new Dictionary<string, string>();
+    private Dictionary<string, ushort> _texts = new Dictionary<string, ushort>();
 
     public static Language Instance
     {
@@ -80,7 +89,7 @@ public class Language
     /// </summary>
     public string GetLanguage(string koreanKey)
     {
-        return _texts[koreanKey];
+        return _jsonLanguage.Texts[_texts[koreanKey]];
     }
 
 
@@ -155,16 +164,21 @@ public class Language
 
     private Language()
     {
-        // 임시
-        _jsonLanguage = new JsonLanguage(true);
-
-        // to do
-        // json 파일 읽어오기
+        // 한국어 구조체 생성
+        JsonLanguage jsonLanguage = new JsonLanguage(true);
 
         // Dictionary에 추가
-        for (ushort i = 0; i < _jsonLanguage.Texts.Length; ++i)
+        for (ushort i = 0; i < jsonLanguage.Texts.Length; ++i)
         {
-            _texts.Add(_jsonLanguage.Texts[i], _jsonLanguage.Texts[i]);
+            try
+            {
+                // 해당 한국에가 어느 인덱스에 있는지 저장
+                _texts.Add(jsonLanguage.Texts[i], i);
+            }
+            catch
+            {
+                Debug.LogError($"같은 키가 존재 - {jsonLanguage.Texts[i]}");
+            }
         }
     }
 
@@ -182,6 +196,6 @@ public class Language
         }
 
         // 텍스트 파일로 저장
-        File.WriteAllText(Application.dataPath + "/Translations/Korean.txt", text.ToString());
+        File.WriteAllText(Application.dataPath + "/TranslateThis.txt", text.ToString());
     }
 }
