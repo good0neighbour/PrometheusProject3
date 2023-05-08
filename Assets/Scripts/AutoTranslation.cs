@@ -5,6 +5,8 @@ public class AutoTranslation : MonoBehaviour
 {
     /* ==================== Variables ==================== */
 
+    [SerializeField] private bool _onlyChangeFont = false;
+
     private LanguageType _currentLanguage = LanguageType.Korean;
     private string _koreanKey = null;
     private TMP_Text _text = null;
@@ -18,22 +20,42 @@ public class AutoTranslation : MonoBehaviour
     /// </summary>
     public void TranslationReady()
     {
-        // 한국어 키 찾는다.
+        // 컴포넌트 가져온다.
         _text = GetComponent<TMP_Text>();
-        _koreanKey = _text.text;
 
         // 언어 대리자에 등록한다.
         Language.OLC += OnLanguageChange;
+
+        // 폰트만 바꿀 경우 여기서 종료.
+        if (_onlyChangeFont)
+        {
+            return;
+        }
+
+        // 이것이 한국어 키다.
+        _koreanKey = _text.text;
     }
 
 
     /// <summary>
     /// 언어 변경 시 동작
     /// </summary>
-    public void OnLanguageChange()
+    public void OnLanguageChange(LanguageType currentLanguage)
     {
-        _text.text = Language.Instance.GetLanguage(_koreanKey);
+        // 현재 언어 정보 변경.
+        _currentLanguage = currentLanguage;
+
+        // 폰트 변경.
         _text.font = Language.Instance.GetFontAsset();
+
+        // 폰트만 바꿀 경우 여기서 종료.
+        if (_onlyChangeFont)
+        {
+            return;
+        }
+
+        // 번역 가져온다.
+        _text.text = Language.Instance[_koreanKey];
     }
 
 
@@ -46,7 +68,7 @@ public class AutoTranslation : MonoBehaviour
         if (_currentLanguage != GameManager.Instance.CurrentLanguage)
         {
             _currentLanguage = GameManager.Instance.CurrentLanguage;
-            OnLanguageChange();
+            OnLanguageChange(_currentLanguage);
         }
     }
 }

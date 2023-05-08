@@ -46,6 +46,8 @@ public class Language
                 "탄소",
                 "광합성 생물",
                 "호흡 생물",
+                "대기 조정 인프라 건설",
+                "건설된 인프라",
             };
         }
     }
@@ -54,7 +56,7 @@ public class Language
     /// <summary>
     /// 언어 변경 시 동작할 대리자
     /// </summary>
-    public delegate void LanguageDelegate();
+    public delegate void LanguageDelegate(LanguageType currentLanguage);
 
 
 
@@ -80,18 +82,20 @@ public class Language
         }
     }
 
+    /// <summary>
+    /// 편리한 접근을 위해 만들었다. 한국어 '키'를 입력하면 번역된 '값'을 반환.
+    /// </summary>
+    public string this[string koreanKey]
+    {
+        get
+        {
+            return _jsonLanguage.Texts[_texts[koreanKey]];
+        }
+    }
+
 
 
     /* ==================== Public Methods ==================== */
-
-    /// <summary>
-    /// 한국어 '키'를 입력하면 번역된 '값'을 반환.
-    /// </summary>
-    public string GetLanguage(string koreanKey)
-    {
-        return _jsonLanguage.Texts[_texts[koreanKey]];
-    }
-
 
     /// <summary>
     /// 폰트를 가져온다.

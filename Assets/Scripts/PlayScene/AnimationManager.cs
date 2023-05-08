@@ -52,6 +52,7 @@ public class AnimationManager : MonoBehaviour
     private float _selectionMultiply = 0.0f;
     private float _planetImageTargetPos = 0.0f;
     private float _spaceImageTargetPos = 0.0f;
+    private float _messageBoxTargetPos = 0.0f;
 
     public static AnimationManager Instance
     {
@@ -74,7 +75,7 @@ public class AnimationManager : MonoBehaviour
 
 
     /// <summary>
-    /// 행성 이미지 목표 위치 설정
+    /// 행성 이미지, 우주 배경, 메세지 상자의 목표 위치 설정
     /// </summary>
     public void SetPlanetImagePosition(PlanetImagePosition position)
     {
@@ -83,14 +84,17 @@ public class AnimationManager : MonoBehaviour
             case PlanetImagePosition.Left:
                 _planetImageTargetPos = -Constants.HALF_CANVAS_WIDTH;
                 _spaceImageTargetPos = -Constants.SPACE_IMAGE_TARGET_POSITION;
+                _messageBoxTargetPos = -Constants.QUARTER_CANVAS_HEIGHT;
                 break;
             case PlanetImagePosition.Middle:
                 _planetImageTargetPos = 0.0f;
                 _spaceImageTargetPos = 0.0f;
+                _messageBoxTargetPos = 0.0f;
                 break;
             case PlanetImagePosition.Right:
                 _planetImageTargetPos = Constants.HALF_CANVAS_WIDTH;
                 _spaceImageTargetPos = Constants.SPACE_IMAGE_TARGET_POSITION;
+                _messageBoxTargetPos = Constants.QUARTER_CANVAS_HEIGHT;
                 break;
         }
     }
@@ -168,9 +172,10 @@ public class AnimationManager : MonoBehaviour
         _selections[1].color = new Color(_selectionColor.r, _selectionColor.g, _selectionColor.b, float0);
         #endregion
 
-        #region 행성 이미지 위치
+        #region 행성 이미지, 우주 배경, 메세지 상자의 위치
         _planetImage.localPosition += new Vector3((_planetImageTargetPos - _planetImage.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
         _spaceImage.localPosition += new Vector3((_spaceImageTargetPos - _spaceImage.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
+        _messageBoxBackgroundTransform.localPosition += new Vector3((_messageBoxTargetPos - _messageBoxBackgroundTransform.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
         #endregion
 
         #region 3D 애니메이션
