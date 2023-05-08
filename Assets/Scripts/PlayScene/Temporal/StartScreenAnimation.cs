@@ -54,6 +54,12 @@ public class StartScreenAnimation : MonoBehaviour
 
         // 아래 값은 식을 간단히 하기 위해 음수로 유지
         _backBarCos = ((Constants.CANVAS_HEIGHT * _backBarHeightRatio) * 0.5f - Constants.HALF_CANVAS_HEIGHT) * 0.5f;
+
+        // 시작 전에는 비활성화할 것.
+        for (byte i = 0; i < _enableOnStart.Length; ++i)
+        {
+            _enableOnStart[i].SetActive(false);
+        }
     }
 
     private void Update()
