@@ -11,6 +11,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     [Header("참조")]
     [SerializeField] private GameObject _upButton = null;
     [SerializeField] private GameObject _downButton = null;
+    [SerializeField] private RectTransform _meterCursor = null;
     [SerializeField] private TMP_Text _buildInfraButton = null;
     [SerializeField] private TMP_Text _numOfInfra = null;
     [SerializeField] private TMP_Text _montlyMovementText = null;
@@ -19,12 +20,14 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     [SerializeField] private TMP_Text _airMassText = null;
     [SerializeField] private TMP_Text _waterGasMassText = null;
     [SerializeField] private TMP_Text _carbonGasMassText = null;
+    [SerializeField] private TMP_Text _etcAirMassText = null;
     [SerializeField] private TMP_Text _gravityAccelationText = null;
     [SerializeField] private TMP_Text _planetAreaText = null;
 
     private float _waterGasMass = 0.0f;
     private string _waterGasMassString = null;
     private bool _infraBuildavailable = true;
+    private float _meterMultiply = 0.0f;
 
 
 
@@ -88,6 +91,9 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
 
         // 건설
         ++PlayManager.Instance[VariableByte.AirPressureInfra];
+
+        // 지출
+        PlayManager.Instance[VariableLong.Funds] -= _buildingInfraCost;
 
         // 건설된 인프라 수 표시
         _numOfInfra.text = PlayManager.Instance[VariableByte.AirPressureInfra].ToString();
@@ -154,6 +160,9 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
 
         // 월간 비용 표시
         _montlyCostText.text = $"{PlayManager.Instance[VariableShort.AirMassMovement]}Tt/{Language.Instance["월"]}";
+
+        // 계산용
+        _meterMultiply = 1.0f / 1013.25f * Constants.HALF_METAIMAGE_WIDTH;
     }
 
 
@@ -164,12 +173,19 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         _airMassText.text = UIString.Instance[VariableFloat.TotalAirMass_Tt];
         _waterGasMassText.text = GetWaterGasMass();
         _carbonGasMassText.text = UIString.Instance[VariableFloat.CarbonGasMass_Tt];
+        _etcAirMassText.text = UIString.Instance[VariableFloat.EtcAirMass_Tt];
+
+        // 시각적 정보 표시
+        _meterCursor.localPosition = new Vector3(
+            (PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] - 1013.25f) * _meterMultiply,
+            _meterCursor.localPosition.y,
+            0.0f);
 
         // 인프라 건설 가능 여부
         if (_infraBuildavailable)
         {
             // 건설 비용이 없거나 255개가 됐을 때
-            if (_buildingInfraCost < PlayManager.Instance[VariableLong.Funds] || PlayManager.Instance[VariableByte.AirPressureInfra] >= 255)
+            if (_buildingInfraCost > PlayManager.Instance[VariableLong.Funds] || PlayManager.Instance[VariableByte.AirPressureInfra] >= 255)
             {
                 _infraBuildavailable = false;
                 _buildInfraButton.color = Constants.TEXT_BUTTON_DISABLE;

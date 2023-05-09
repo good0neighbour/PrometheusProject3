@@ -41,6 +41,9 @@ public class StartScreenAnimation : MonoBehaviour
 
         // 플레이 중으로 전환
         PlayManager.Instance.IsPlaying = true;
+
+        // 게임 속도
+        PlayManager.Instance.GameSpeed = 1.0f;
     }
 
 

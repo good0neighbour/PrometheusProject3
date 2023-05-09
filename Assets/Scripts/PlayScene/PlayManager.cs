@@ -101,6 +101,9 @@ public class PlayManager : MonoBehaviour
 
     private JsonData _data = null;
     private float _timer = 0.0f;
+    private float _etcAirMassGoal = 0.0f;
+    private float _temperatureMovement = 0.0f;
+    private float _totalWaterVolumeGoal = 0.0f;
     private float _incomeEnergy_C = 0.0f;
     private double _cloudReflectionMultiply = 0.0d;
 
@@ -231,7 +234,7 @@ public class PlayManager : MonoBehaviour
             DontDestroyOnLoad(audioManager);
         }
         _data = new JsonData();
-        this[VariableLong.Funds] = 50;
+        this[VariableLong.Funds] = 500000;
         this[VariableFloat.EtcAirMass_Tt] = 300.0f;
         this[VariableFloat.TotalWater_PL] = 300.0f;
         /*
@@ -261,23 +264,15 @@ public class PlayManager : MonoBehaviour
         // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
+
+        _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
+        _temperatureMovement = this[VariableShort.TemperatureMovement];
+        _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
     }
 
 
     private void Update()
     {
-        // 시간 경과
-        _timer += Time.deltaTime * GameSpeed;
-
-        // 한 달 간격
-        if (_timer >= Constants.MONTH_TIMER)
-        {
-            _timer -= Constants.MONTH_TIMER;
-            #region 대기 변화
-            this[VariableFloat.EtcAirMass_Tt] += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT * Time.deltaTime;
-            #endregion
-        }
-
         /*
         불변의 물리량
 
@@ -376,7 +371,7 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.AbsorbEnergy] = this[VariableFloat.IncomeEnergy] * (1.0f - this[VariableFloat.TotalReflection]);
 
         // 기온
-        this[VariableFloat.TotalTemperature_C] = Constants.MIN_KELVIN + _incomeEnergy_C + this[VariableFloat.AbsorbEnergy] * 15.797788309636650868878357030016f + this[VariableFloat.WaterGreenHouse_C] + this[VariableFloat.CarbonGreenHouse_C] + this[VariableFloat.EtcGreenHouse_C];
+        this[VariableFloat.TotalTemperature_C] = Constants.MIN_KELVIN + _incomeEnergy_C + this[VariableFloat.AbsorbEnergy] * 15.797788309636650868878357030016f + this[VariableFloat.WaterGreenHouse_C] + this[VariableFloat.CarbonGreenHouse_C] + this[VariableFloat.EtcGreenHouse_C] + _temperatureMovement;
         if (this[VariableFloat.TotalTemperature_C] < Constants.MIN_KELVIN)
         {
             this[VariableFloat.TotalTemperature_C] = Constants.MIN_KELVIN;
@@ -415,6 +410,37 @@ public class PlayManager : MonoBehaviour
         // 액체
         this[VariableFloat.WaterLiquid_PL] = this[VariableFloat.TotalWater_PL] - (this[VariableFloat.WaterGas_PL] + this[VariableFloat.WaterSolid_PL]);
         #endregion
+
+        // 환경 조정은 천천히 적용.
+        this[VariableFloat.EtcAirMass_Tt] += (_etcAirMassGoal - this[VariableFloat.EtcAirMass_Tt]) * Time.deltaTime * GameSpeed;
+        this[VariableFloat.TotalWater_PL] += (_totalWaterVolumeGoal - this[VariableFloat.TotalWater_PL]) * Time.deltaTime * GameSpeed;
+        _temperatureMovement += (this[VariableShort.TemperatureMovement] - _temperatureMovement) * Time.deltaTime * GameSpeed;
+
+        // 시작 전이면 함수 종료.
+        if (!IsPlaying)
+        {
+            return;
+        }
+
+        // 시간 경과
+        _timer += Time.deltaTime * GameSpeed;
+
+        // 한 달 간격
+        if (_timer >= Constants.MONTH_TIMER)
+        {
+            _timer -= Constants.MONTH_TIMER;
+
+            // 자금이 있을 때
+            if (this[VariableLong.Funds] > 0)
+            {
+                // 인위적 환경 조정
+                _etcAirMassGoal += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT;
+                _totalWaterVolumeGoal += this[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT;
+
+                // 비용 지출
+                this[VariableLong.Funds] -= this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement];
+            }
+        }
     }
 
 

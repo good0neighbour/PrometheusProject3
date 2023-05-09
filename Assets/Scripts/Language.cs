@@ -55,6 +55,7 @@ public class Language
                     "총 기체 질량",
                     "수증기 질량",
                     "탄소 기체 질량",
+                    "기타 기체 질량",
                     "중력가속도",
                     "행성 표면적",
                 };
@@ -191,7 +192,7 @@ public class Language
     private Language()
     {
         // 임시
-        _jsonLanguage = new JsonLanguage();
+        _jsonLanguage = new JsonLanguage(true);
 
         // 한국어 구조체 생성
         JsonLanguage jsonLanguage = new JsonLanguage(true);

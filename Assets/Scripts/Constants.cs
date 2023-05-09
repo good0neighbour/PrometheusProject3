@@ -25,10 +25,12 @@ public static class Constants
     public const float CANVAS_HEIGHT = 1080.0f;
     public const float CANVAS_WIDTH = 1920.0f;
     public const float MASSAGEBOX_HEIGHT_RATIO = 0.15f;
+    public const float METERIMAGE_WIDTH_RATIO = 0.3f;
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
     // 게임 플레이 관련 값
-    public const float AIRMASS_MOVEMENT = 5.0f;
+    public const float AIRMASS_MOVEMENT = 1.0f;
+    public const float WATER_VOLUME_MOVEMENT = 5.0f;
     public const float MONTH_TIMER = 1.0f;
 
     // 색상
@@ -39,5 +41,6 @@ public static class Constants
     public const float HALF_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.5f;
     public const float QUARTER_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.25f;
     public const float HALF_CANVAS_WIDTH = CANVAS_WIDTH * 0.5f;
+    public const float HALF_METAIMAGE_WIDTH = CANVAS_WIDTH * METERIMAGE_WIDTH_RATIO * 0.5f;
     public const double MAX_ICE_TEMP_LOG = MAX_ICE_TEMP + 1.0d;
 }
