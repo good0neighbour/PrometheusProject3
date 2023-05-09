@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
+using System.IO;
 using UnityEngine;
 using TMPro;
 
@@ -31,24 +31,38 @@ public class Language
         /// </summary>
         public JsonLanguage(bool initialize)
         {
-            Texts = new string[]
+            if (initialize)
             {
-                "시작",
-                "설정",
-                "기타",
-                "종료",
-                "평균 대기압",
-                "평균 기온",
-                "물의 체적",
-                "산소 농도",
-                "대기압",
-                "물",
-                "탄소",
-                "광합성 생물",
-                "호흡 생물",
-                "대기 조정 인프라 건설",
-                "건설된 인프라",
-            };
+                Texts = new string[]
+                {
+                    "년",
+                    "월",
+                    "시작",
+                    "설정",
+                    "기타",
+                    "종료",
+                    "평균 대기압",
+                    "평균 기온",
+                    "물의 체적",
+                    "산소 농도",
+                    "대기압",
+                    "물",
+                    "탄소",
+                    "광합성 생물",
+                    "호흡 생물",
+                    "대기 조정 인프라 건설",
+                    "건설된 인프라",
+                    "총 기체 질량",
+                    "수증기 질량",
+                    "탄소 기체 질량",
+                    "중력가속도",
+                    "행성 표면적",
+                };
+            }
+            else
+            {
+                Texts = null;
+            }
         }
     }
 
@@ -66,7 +80,7 @@ public class Language
     public static LanguageDelegate OLC = null;
 
     private JsonLanguage _jsonLanguage;
-    private TMP_FontAsset _fontAsset;
+    private TMP_FontAsset _fontAsset = null;
     private Dictionary<string, ushort> _texts = new Dictionary<string, ushort>();
 
     public static Language Instance
@@ -83,13 +97,21 @@ public class Language
     }
 
     /// <summary>
-    /// 편리한 접근을 위해 만들었다. 한국어 '키'를 입력하면 번역된 '값'을 반환.
+    /// 이것이 주 목적이므로 편리한 접근을 위해 만들었다. 한국어 '키'를 입력하면 번역된 '값'을 반환한다.
     /// </summary>
     public string this[string koreanKey]
     {
         get
         {
-            return _jsonLanguage.Texts[_texts[koreanKey]];
+            try
+            {
+                return _jsonLanguage.Texts[_texts[koreanKey]];
+            }
+            catch
+            {
+                Debug.LogError($"없는 한국어 키 \"{koreanKey}\"");
+                return null;
+            }
         }
     }
 
@@ -156,7 +178,7 @@ public class Language
         File.WriteAllText(Application.dataPath + "/Resources/Korean.Json", json);
 
         // 구글 번역을 위해 텍스트 파일로 저장한다.
-        TextFileForGoogleTranslate();
+        TextFileForGoogleTranslate(jsonLanguage);
 
         // 에디터에 출력한다.
         Debug.Log(json);
@@ -168,6 +190,9 @@ public class Language
 
     private Language()
     {
+        // 임시
+        _jsonLanguage = new JsonLanguage();
+
         // 한국어 구조체 생성
         JsonLanguage jsonLanguage = new JsonLanguage(true);
 
@@ -176,12 +201,12 @@ public class Language
         {
             try
             {
-                // 해당 한국에가 어느 인덱스에 있는지 저장
+                // 해당 한국어가 어느 인덱스에 있는지 저장
                 _texts.Add(jsonLanguage.Texts[i], i);
             }
             catch
             {
-                Debug.LogError($"같은 키가 존재 - {jsonLanguage.Texts[i]}");
+                Debug.LogError($"같은 키가 존재 - \"{jsonLanguage.Texts[i]}\"");
             }
         }
     }
@@ -190,16 +215,16 @@ public class Language
     /// <summary>
     /// 구글 번역을 위해 텍스트 파일로 저장
     /// </summary>
-    private void TextFileForGoogleTranslate()
+    private void TextFileForGoogleTranslate(JsonLanguage jsonLanguage)
     {
         // 문자열 생성
         StringBuilder text = new StringBuilder();
-        for (ushort i = 0; i < _jsonLanguage.Texts.Length; ++i)
+        for (ushort i = 0; i < jsonLanguage.Texts.Length; ++i)
         {
-            text.Append($"{_jsonLanguage.Texts[i]};\n");
+            text.Append($"{jsonLanguage.Texts[i]};\n");
         }
 
         // 텍스트 파일로 저장
-        File.WriteAllText(Application.dataPath + "/TranslateThis.txt", text.ToString());
+        File.WriteAllText(Application.dataPath + "/Translations/TranslateThis.txt", text.ToString());
     }
 }
