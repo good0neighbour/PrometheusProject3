@@ -99,7 +99,9 @@ public class PlayManager : MonoBehaviour
 
     public static OnMonthChange OMC = null;
 
-    private JsonData _data = null;
+    [SerializeField] private float _monthTimer = 2.0f;
+
+    private JsonData _data;
     private float _timer = 0.0f;
     private float _etcAirMassGoal = 0.0f;
     private float _temperatureMovement = 0.0f;
@@ -233,10 +235,10 @@ public class PlayManager : MonoBehaviour
             AudioManager.Instance = audioManager.GetComponent<AudioManager>();
             DontDestroyOnLoad(audioManager);
         }
-        _data = new JsonData();
+        _data = new JsonData(true);
         this[VariableLong.Funds] = 500000;
-        this[VariableFloat.EtcAirMass_Tt] = 300.0f;
-        this[VariableFloat.TotalWater_PL] = 300.0f;
+        this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
+        this[VariableFloat.TotalWater_PL] = 1408718f;
         /*
         불변의 물리량
 
@@ -300,7 +302,7 @@ public class PlayManager : MonoBehaviour
 
         #region 기온
         // 수증기 온실
-        this[VariableFloat.WaterGreenHouse_C] = (float)(24.06923987d * Math.Log10(this[VariableFloat.WaterGas_PL] * Constants.E3 + 1.0d));
+        this[VariableFloat.WaterGreenHouse_C] = (float)(24.06923987d * Math.Log10(this[VariableFloat.WaterGas_PL] + 1.0d));
 
         // 탄소 온실
         this[VariableFloat.CarbonGreenHouse_C] = (float)(20.97411189d * Math.Log10(this[VariableFloat.CarbonGasMass_Tt] + 1.0d));
@@ -396,6 +398,7 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
+            //double1 = 0.75630419551640106261813122516001d * Math.Log10(Constants.MAX_ICE_TEMP_LOG - this[VariableFloat.TotalTemperature_C]);
             double1 = 0.02645536938010781533821225333651d * Math.Log10(Constants.MAX_ICE_TEMP_LOG - this[VariableFloat.TotalTemperature_C]);
             if (double1 < 1.0d)
             {
@@ -409,6 +412,10 @@ public class PlayManager : MonoBehaviour
 
         // 액체
         this[VariableFloat.WaterLiquid_PL] = this[VariableFloat.TotalWater_PL] - (this[VariableFloat.WaterGas_PL] + this[VariableFloat.WaterSolid_PL]);
+        #endregion
+
+        #region 기권 탄소량
+        this[VariableFloat.CarbonGasMass_Tt] = this[VariableFloat.TotalAirPressure_hPa] * 7.1058475203552923760177646188009e-4f;
         #endregion
 
         // 환경 조정은 천천히 적용.
@@ -426,16 +433,42 @@ public class PlayManager : MonoBehaviour
         _timer += Time.deltaTime * GameSpeed;
 
         // 한 달 간격
-        if (_timer >= Constants.MONTH_TIMER)
+        if (_timer >= _monthTimer)
         {
-            _timer -= Constants.MONTH_TIMER;
+            _timer -= _monthTimer;
 
             // 자금이 있을 때
             if (this[VariableLong.Funds] > 0)
             {
-                // 인위적 환경 조정
-                _etcAirMassGoal += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT;
-                _totalWaterVolumeGoal += this[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT;
+                #region 인위적 환경 조정
+                // 대기 질량
+                switch (this[VariableShort.AirMassMovement])
+                {
+                    case 0:
+                        break;
+                    default:
+                        _etcAirMassGoal += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT;
+                        if (0 > this[VariableShort.AirMassMovement])
+                        {
+                            this[VariableShort.AirMassMovement] = 0;
+                        }
+                        break;
+                }
+
+                // 물 양
+                switch (this[VariableShort.WaterMovement])
+                {
+                    case 0:
+                        break;
+                    default:
+                        _totalWaterVolumeGoal += this[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT;
+                        if (0 > this[VariableShort.WaterMovement])
+                        {
+                            this[VariableShort.WaterMovement] = 0;
+                        }
+                        break;
+                }
+                #endregion
 
                 // 비용 지출
                 this[VariableLong.Funds] -= this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement];
@@ -445,15 +478,37 @@ public class PlayManager : MonoBehaviour
 
 
 
-    /* ==================== Inner Class ==================== */
+    /* ==================== Struct ==================== */
 
-    private class JsonData
+    private struct JsonData
     {
-        public byte[] ByteArray = new byte[(int)VariableByte.EndByte];
-        public short[] ShortArray = new short[(int)VariableShort.EndShort];
-        public int[] IntArray = new int[(int)VariableInt.EndInt];
-        public long[] LongArray = new long[(int)VariableLong.EndLong];
-        public float[] FloatArray = new float[(int)VariableFloat.EndFloat];
-        public double[] DoubleArray = new double[(int)VariableDouble.EndDouble];
+        public byte[] ByteArray;
+        public short[] ShortArray;
+        public int[] IntArray;
+        public long[] LongArray;
+        public float[] FloatArray;
+        public double[] DoubleArray;
+
+        public JsonData(bool initialize)
+        {
+            if (initialize)
+            {
+                ByteArray = new byte[(int)VariableByte.EndByte];
+                ShortArray = new short[(int)VariableShort.EndShort];
+                IntArray = new int[(int)VariableInt.EndInt];
+                LongArray = new long[(int)VariableLong.EndLong];
+                FloatArray = new float[(int)VariableFloat.EndFloat];
+                DoubleArray = new double[(int)VariableDouble.EndDouble];
+            }
+            else
+            {
+                ByteArray = null;
+                ShortArray = null;
+                IntArray = null;
+                LongArray = null;
+                FloatArray = null;
+                DoubleArray = null;
+            }
+    }
     }
 }

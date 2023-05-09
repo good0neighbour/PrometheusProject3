@@ -27,7 +27,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     private float _waterGasMass = 0.0f;
     private string _waterGasMassString = null;
     private bool _infraBuildavailable = true;
-    private float _meterMultiply = 0.0f;
+    private float _meterMultiply = 1.0f / 1013.25f * Constants.HALF_METAIMAGE_WIDTH;
 
 
 
@@ -35,6 +35,9 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
 
     public void BtnUpDown(bool isUp)
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido();
+
         if (isUp)
         {
             // 대기 질량 변화량 증가
@@ -71,13 +74,10 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         }
 
         // 월간 변화량 표시
-        _montlyMovementText.text = $"{PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT}Tt/{Language.Instance["월"]}";
+        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT).ToString()}Tt/{Language.Instance["월"]}";
 
         // 월간 비용 표시
-        _montlyCostText.text = $"{PlayManager.Instance[VariableShort.AirMassMovement]}Tt/{Language.Instance["월"]}";
-
-        // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.AirMassMovement].ToString()}/{Language.Instance["월"]}";
     }
 
 
@@ -88,6 +88,9 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         {
             return;
         }
+
+        // 소리 재생
+        AudioManager.Instance.PlayAuido();
 
         // 건설
         ++PlayManager.Instance[VariableByte.AirPressureInfra];
@@ -107,9 +110,6 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         {
             _downButton.SetActive(true);
         }
-
-        // 소리 재생
-        AudioManager.Instance.PlayAuido();
     }
 
 
@@ -156,13 +156,10 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         }
 
         // 월간 변화량 표시
-        _montlyMovementText.text = $"{PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT}Tt/{Language.Instance["월"]}";
+        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT).ToString()}Tt/{Language.Instance["월"]}";
 
         // 월간 비용 표시
-        _montlyCostText.text = $"{PlayManager.Instance[VariableShort.AirMassMovement]}Tt/{Language.Instance["월"]}";
-
-        // 계산용
-        _meterMultiply = 1.0f / 1013.25f * Constants.HALF_METAIMAGE_WIDTH;
+        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.AirMassMovement].ToString()}/{Language.Instance["월"]}";
     }
 
 
@@ -176,10 +173,12 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         _etcAirMassText.text = UIString.Instance[VariableFloat.EtcAirMass_Tt];
 
         // 시각적 정보 표시
-        _meterCursor.localPosition = new Vector3(
-            (PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] - 1013.25f) * _meterMultiply,
-            _meterCursor.localPosition.y,
-            0.0f);
+        float meterX = (PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] - 1013.25f) * _meterMultiply;
+        if (meterX > Constants.HALF_METAIMAGE_WIDTH)
+        {
+            meterX = Constants.HALF_METAIMAGE_WIDTH;
+        }
+        _meterCursor.localPosition = new Vector3(meterX, 0.0f, 0.0f);
 
         // 인프라 건설 가능 여부
         if (_infraBuildavailable)
