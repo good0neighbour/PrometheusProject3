@@ -10,6 +10,7 @@ public static class Constants
     public const float TRIPLE_PI = Mathf.PI * 3.0f;
 
     // 단위 조정용 값
+    public const float E_2 = 0.01f;
     public const float E_3 = 0.001f;
     public const double E3 = 100.0d;
     public const double E7 = 10000000.0d;
@@ -33,6 +34,8 @@ public static class Constants
     public const float AIRMASS_MOVEMENT = 1.0f;
     public const float TEMPERATURE_MOVEMENT = 0.2f;
     public const float WATER_VOLUME_MOVEMENT = 5.0f;
+    public const float CARBON_RATIO_MOVEMENT = 0.2f;
+    public const float LIFE_STABILITY_SPEEDMULT = 0.01f;
 
     // 색상
     public static readonly Color WHITE = new Color(1.0f, 1.0f, 1.0f);

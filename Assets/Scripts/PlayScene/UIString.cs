@@ -75,9 +75,14 @@ public class UIString
         _units[(int)VariableFloat.WaterGas_PL] = "PL";
         _units[(int)VariableFloat.WaterLiquid_PL] = "PL";
         _units[(int)VariableFloat.WaterSolid_PL] = "PL";
+        _units[(int)VariableFloat.TotalCarbonRatio_ppm] = "ppm";
         _units[(int)VariableFloat.CarbonGasMass_Tt] = "Tt";
         _units[(int)VariableFloat.CarbonLiquidMass_Tt] = "Tt";
         _units[(int)VariableFloat.CarbonSolidMass_Tt] = "Tt";
+        _units[(int)VariableFloat.CarbonLifeMass_Tt] = "Tt";
+        _units[(int)VariableFloat.PhotoLifePosibility] = "%";
+        _units[(int)VariableFloat.BreathLifePosibility] = "%";
+        _units[(int)VariableFloat.OxygenRatio] = "%";
         _units[(int)VariableFloat.GravityAccelation_m_s2] = "m/s©÷";
         _units[(int)VariableFloat.PlanetRadius_km] = "km";
         _units[(int)VariableFloat.PlanetDensity_g_cm3] = "g/cm©ø";

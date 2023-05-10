@@ -37,7 +37,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
 
         if (isUp)
         {
-            // 대기 질량 변화량 증가
+            // 온도 변화량 증가
             ++PlayManager.Instance[VariableShort.TemperatureMovement];
 
             // 아래 버튼 활성화
@@ -54,7 +54,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
         }
         else
         {
-            // 대기 질량 변화량 감소
+            // 온도 변화량 감소
             --PlayManager.Instance[VariableShort.TemperatureMovement];
 
             // 위 버튼 활성화

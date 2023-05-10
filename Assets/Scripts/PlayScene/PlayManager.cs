@@ -22,6 +22,7 @@ public enum VariableShort
     AirMassMovement,
     TemperatureMovement,
     WaterMovement,
+    CarbonMovement,
     EndShort
 }
 
@@ -65,11 +66,15 @@ public enum VariableFloat
     WaterGas_PL,
     WaterLiquid_PL,
     WaterSolid_PL,
+    TotalCarbonRatio_ppm,
     CarbonGasMass_Tt,
     CarbonLiquidMass_Tt,
     CarbonSolidMass_Tt,
+    CarbonLifeMass_Tt,
     PhotoLifePosibility,
     BreathLifePosibility,
+    PhotoLifeStability,
+    BreathLifeStability,
     OxygenRatio,
     GravityAccelation_m_s2,
     PlanetRadius_km,
@@ -109,7 +114,9 @@ public class PlayManager : MonoBehaviour
     private float _etcAirMassGoal = 0.0f;
     private float _temperatureMovement = 0.0f;
     private float _totalWaterVolumeGoal = 0.0f;
+    private float _totalCarboneRatioGoal = 0.0f;
     private float _incomeEnergy_C = 0.0f;
+    private float _carbonRatio = 1.0f / 480.0f;
     private double _cloudReflectionMultiply = 0.0d;
 
 
@@ -231,7 +238,7 @@ public class PlayManager : MonoBehaviour
 
     private void Awake()
     {
-        // 임시
+        #region 임시
         if (null == AudioManager.Instance)
         {
             GameObject audioManager = Instantiate(_audioMamagerPrefab);
@@ -244,6 +251,7 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.TotalWater_PL] = 1408718.0f;
         this[VariableFloat.PlanetRadius_km] = 6378.14f;
         this[VariableFloat.PlanetDensity_g_cm3] = 5.51f;
+        this[VariableFloat.TotalCarbonRatio_ppm] = 480.0f;
 
         this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
 
@@ -252,6 +260,7 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
 
         this[VariableFloat.IncomeEnergy] = 1.0f;
+        #endregion
 
         // 유니티식 싱글턴패턴
         Instance = this;
@@ -263,6 +272,7 @@ public class PlayManager : MonoBehaviour
         _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
         _temperatureMovement = this[VariableShort.TemperatureMovement];
         _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
+        _totalCarboneRatioGoal = this[VariableFloat.TotalCarbonRatio_ppm];
     }
 
 
@@ -409,24 +419,69 @@ public class PlayManager : MonoBehaviour
 
         #region 탄소 순환
         // 기권
-        this[VariableFloat.CarbonGasMass_Tt] = this[VariableFloat.TotalAirPressure_hPa] * 7.1058475203552923760177646188009e-4f;
+        this[VariableFloat.CarbonGasMass_Tt] = this[VariableFloat.TotalAirPressure_hPa] * 7.1058475203552923760177646188009e-4f * this[VariableFloat.TotalCarbonRatio_ppm] * _carbonRatio;
 
         // 수권
-        this[VariableFloat.CarbonLiquidMass_Tt] = this[VariableFloat.WaterLiquid_PL] * 2.6548961538079303309817862766004e-5f;
+        this[VariableFloat.CarbonLiquidMass_Tt] = this[VariableFloat.WaterLiquid_PL] * 2.6548961538079303309817862766004e-5f * this[VariableFloat.TotalCarbonRatio_ppm] * _carbonRatio;
 
         // 생물권
+        this[VariableFloat.CarbonLifeMass_Tt] = (this[VariableFloat.PhotoLifeStability] + this[VariableFloat.BreathLifeStability]) * this[VariableFloat.TotalCarbonRatio_ppm] * _carbonRatio * Constants.E_2;
+
+        // 암권
+        this[VariableFloat.CarbonSolidMass_Tt] = 60041.3f * this[VariableFloat.TotalCarbonRatio_ppm] * _carbonRatio;
         #endregion 탄소 순환
 
         #region 생물 생존률
         // 공통 계산
-        float0 = Mathf.Abs(this[VariableFloat.TotalAirPressure_hPa] / 1013.25f - 1.0f) * Math.Abs(this[VariableFloat.TotalTemperature_C] / 15.0f - 1.0f) * this[VariableFloat.WaterLiquid_PL] / 1379.7053f;
+        float0 = Mathf.Abs(this[VariableFloat.TotalAirPressure_hPa] / 1013.25f - 1.0f) + Math.Abs(this[VariableFloat.TotalTemperature_C] / 15.0f - 1.0f);
 
-        // 광합성 생물 생존률
-        this[VariableFloat.PhotoLifePosibility] = 1.0f - float0;
+        // 광합성 생물 생존율
+        this[VariableFloat.PhotoLifePosibility] = (1.0f - float0) * this[VariableFloat.WaterLiquid_PL] / 1379705.3f * 100.0f;
+        if (100.0f < this[VariableFloat.PhotoLifePosibility])
+        {
+            this[VariableFloat.PhotoLifePosibility] = 100.0f;
+        }
 
-        // 호흡 생물 생존률
-        this[VariableFloat.BreathLifePosibility] = 1.0f - float0 * Mathf.Abs(this[VariableFloat.OxygenRatio] / 21.0f - 1.0f);
+        // 호흡 생물 생존율
+        this[VariableFloat.BreathLifePosibility] = (1.0f - float0 - Mathf.Abs(this[VariableFloat.OxygenRatio] / 21.0f - 1.0f)) * this[VariableFloat.WaterLiquid_PL] / 1379705.3f * 100.0f;
+        if (100.0f < this[VariableFloat.BreathLifePosibility])
+        {
+            this[VariableFloat.BreathLifePosibility] = 100.0f;
+        }
         #endregion 생물 생존률
+
+        #region 생물 안정도
+        // 광합성 생물
+        if (this[VariableFloat.PhotoLifeStability] > 0.0f)
+        {
+            this[VariableFloat.PhotoLifeStability] += (this[VariableFloat.PhotoLifePosibility] - this[VariableFloat.PhotoLifeStability]) * Time.deltaTime * GameSpeed * Constants.LIFE_STABILITY_SPEEDMULT;
+            if (0.0f > this[VariableFloat.PhotoLifeStability])
+            {
+                this[VariableFloat.PhotoLifeStability] = 0.0f;
+            }
+        }
+
+        // 호흡 생물
+        if (this[VariableFloat.BreathLifeStability] > 0.0f)
+        {
+            this[VariableFloat.BreathLifeStability] += (this[VariableFloat.BreathLifePosibility] - this[VariableFloat.BreathLifeStability]) * Time.deltaTime * GameSpeed * Constants.LIFE_STABILITY_SPEEDMULT;
+            if (0.0f > this[VariableFloat.BreathLifeStability])
+            {
+                this[VariableFloat.BreathLifeStability] = 0.0f;
+            }
+        }
+        #endregion 생물 안정도
+
+        #region 산소 농도
+        if (0.0f < this[VariableFloat.PhotoLifeStability])
+        {
+            this[VariableFloat.OxygenRatio] = this[VariableFloat.PhotoLifeStability] * 0.42f - this[VariableFloat.BreathLifeStability] * 0.21f;
+        }
+        else
+        {
+            this[VariableFloat.OxygenRatio] = 0.0f;
+        }
+        #endregion 산소 농도
         #endregion 물리량 계산
 
         #region 인위적 환경조정 적용
@@ -434,6 +489,7 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.EtcAirMass_Tt] += (_etcAirMassGoal - this[VariableFloat.EtcAirMass_Tt]) * Time.deltaTime * GameSpeed;
         this[VariableFloat.TotalWater_PL] += (_totalWaterVolumeGoal - this[VariableFloat.TotalWater_PL]) * Time.deltaTime * GameSpeed;
         _temperatureMovement += (this[VariableShort.TemperatureMovement] - _temperatureMovement) * Time.deltaTime * GameSpeed;
+        this[VariableFloat.TotalCarbonRatio_ppm] += (_totalCarboneRatioGoal - this[VariableFloat.TotalCarbonRatio_ppm]) * Time.deltaTime * GameSpeed;
         #endregion 인위적 환경조정 적용
 
         // 시작 전이면 함수 종료.
@@ -461,9 +517,9 @@ public class PlayManager : MonoBehaviour
                         break;
                     default:
                         _etcAirMassGoal += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT;
-                        if (0 > this[VariableShort.AirMassMovement])
+                        if (0.0f > _etcAirMassGoal)
                         {
-                            this[VariableShort.AirMassMovement] = 0;
+                            _etcAirMassGoal = 0.0f;
                         }
                         break;
                 }
@@ -475,16 +531,30 @@ public class PlayManager : MonoBehaviour
                         break;
                     default:
                         _totalWaterVolumeGoal += this[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT;
-                        if (0 > this[VariableShort.WaterMovement])
+                        if (0.0f > _totalWaterVolumeGoal)
                         {
-                            this[VariableShort.WaterMovement] = 0;
+                            _totalWaterVolumeGoal = 0.0f;
+                        }
+                        break;
+                }
+
+                // 탄소 농도
+                switch (this[VariableShort.CarbonMovement])
+                {
+                    case 0:
+                        break;
+                    default:
+                        _totalCarboneRatioGoal += this[VariableShort.CarbonMovement] * Constants.CARBON_RATIO_MOVEMENT;
+                        if (0.0f > _totalCarboneRatioGoal)
+                        {
+                            _totalCarboneRatioGoal = 0.0f;
                         }
                         break;
                 }
                 #endregion
 
                 // 비용 지출
-                this[VariableLong.Funds] -= this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement];
+                this[VariableLong.Funds] -= this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement] + this[VariableShort.CarbonMovement];
             }
         }
     }

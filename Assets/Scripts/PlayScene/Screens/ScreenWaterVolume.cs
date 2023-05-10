@@ -35,7 +35,7 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
 
         if (isUp)
         {
-            // 대기 질량 변화량 증가
+            // 물 체적 변화량 증가
             ++PlayManager.Instance[VariableShort.WaterMovement];
 
             // 아래 버튼 활성화
@@ -52,7 +52,7 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
         }
         else
         {
-            // 대기 질량 변화량 감소
+            // 물 체적 변화량 감소
             --PlayManager.Instance[VariableShort.WaterMovement];
 
             // 위 버튼 활성화
