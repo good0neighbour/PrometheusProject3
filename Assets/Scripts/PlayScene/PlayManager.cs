@@ -68,6 +68,9 @@ public enum VariableFloat
     CarbonGasMass_Tt,
     CarbonLiquidMass_Tt,
     CarbonSolidMass_Tt,
+    PhotoLifePosibility,
+    BreathLifePosibility,
+    OxygenRatio,
     GravityAccelation_m_s2,
     PlanetRadius_km,
     PlanetDensity_g_cm3,
@@ -239,16 +242,6 @@ public class PlayManager : MonoBehaviour
         this[VariableLong.Funds] = 500000;
         this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
         this[VariableFloat.TotalWater_PL] = 1408718.0f;
-        /*
-        불변의 물리량
-
-        가속도 = (중력상수 * 행성질량) / 적도반경^2 * 가속도보정
-        행성질량 = 4 / 3 * pi * 적도반경^3 * 밀도 * 질량보정
-        면적 = 4 * pi * 적도반경^2 * 면적보정
-
-        입사에너지 = 거리비율^2
-        거리비율 = 1(AU) / 거리(AU)
-        */
         this[VariableFloat.PlanetRadius_km] = 6378.14f;
         this[VariableFloat.PlanetDensity_g_cm3] = 5.51f;
 
@@ -289,6 +282,7 @@ public class PlayManager : MonoBehaviour
         // 계산용 지역변수
         double double0;
         double double1;
+        float float0;
 
         #region 물리량 계산
         // 천문학적인 계산은 기본적으로 큰 자료형으로 변환 후 계산한다.
@@ -422,6 +416,17 @@ public class PlayManager : MonoBehaviour
 
         // 생물권
         #endregion 탄소 순환
+
+        #region 생물 생존률
+        // 공통 계산
+        float0 = Mathf.Abs(this[VariableFloat.TotalAirPressure_hPa] / 1013.25f - 1.0f) * Math.Abs(this[VariableFloat.TotalTemperature_C] / 15.0f - 1.0f) * this[VariableFloat.WaterLiquid_PL] / 1379.7053f;
+
+        // 광합성 생물 생존률
+        this[VariableFloat.PhotoLifePosibility] = 1.0f - float0;
+
+        // 호흡 생물 생존률
+        this[VariableFloat.BreathLifePosibility] = 1.0f - float0 * Mathf.Abs(this[VariableFloat.OxygenRatio] / 21.0f - 1.0f);
+        #endregion 생물 생존률
         #endregion 물리량 계산
 
         #region 인위적 환경조정 적용
