@@ -238,7 +238,7 @@ public class PlayManager : MonoBehaviour
         _data = new JsonData(true);
         this[VariableLong.Funds] = 500000;
         this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
-        this[VariableFloat.TotalWater_PL] = 1408718f;
+        this[VariableFloat.TotalWater_PL] = 1408718.0f;
         /*
         불변의 물리량
 
@@ -290,15 +290,15 @@ public class PlayManager : MonoBehaviour
         double double0;
         double double1;
 
+        #region 물리량 계산
         // 천문학적인 계산은 기본적으로 큰 자료형으로 변환 후 계산한다.
-
         #region 대기압
         // 기체질량
         this[VariableFloat.TotalAirMass_Tt] = this[VariableFloat.WaterGas_PL] + this[VariableFloat.CarbonGasMass_Tt] + this[VariableFloat.EtcAirMass_Tt];
 
         // 대기압
         this[VariableFloat.TotalAirPressure_hPa] = (float)(Constants.E7 * this[VariableFloat.TotalAirMass_Tt] * this[VariableFloat.GravityAccelation_m_s2] / this[VariableFloat.PlanetArea_km2]);
-        #endregion
+        #endregion 대기압
 
         #region 기온
         // 수증기 온실
@@ -378,7 +378,7 @@ public class PlayManager : MonoBehaviour
         {
             this[VariableFloat.TotalTemperature_C] = Constants.MIN_KELVIN;
         }
-        #endregion
+        #endregion 기온
 
         #region 물의 체적
         // 전체
@@ -398,7 +398,6 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            //double1 = 0.75630419551640106261813122516001d * Math.Log10(Constants.MAX_ICE_TEMP_LOG - this[VariableFloat.TotalTemperature_C]);
             double1 = 0.02645536938010781533821225333651d * Math.Log10(Constants.MAX_ICE_TEMP_LOG - this[VariableFloat.TotalTemperature_C]);
             if (double1 < 1.0d)
             {
@@ -412,16 +411,25 @@ public class PlayManager : MonoBehaviour
 
         // 액체
         this[VariableFloat.WaterLiquid_PL] = this[VariableFloat.TotalWater_PL] - (this[VariableFloat.WaterGas_PL] + this[VariableFloat.WaterSolid_PL]);
-        #endregion
+        #endregion 물의 체적
 
-        #region 기권 탄소량
+        #region 탄소 순환
+        // 기권
         this[VariableFloat.CarbonGasMass_Tt] = this[VariableFloat.TotalAirPressure_hPa] * 7.1058475203552923760177646188009e-4f;
-        #endregion
 
+        // 수권
+        this[VariableFloat.CarbonLiquidMass_Tt] = this[VariableFloat.WaterLiquid_PL] * 2.6548961538079303309817862766004e-5f;
+
+        // 생물권
+        #endregion 탄소 순환
+        #endregion 물리량 계산
+
+        #region 인위적 환경조정 적용
         // 환경 조정은 천천히 적용.
         this[VariableFloat.EtcAirMass_Tt] += (_etcAirMassGoal - this[VariableFloat.EtcAirMass_Tt]) * Time.deltaTime * GameSpeed;
         this[VariableFloat.TotalWater_PL] += (_totalWaterVolumeGoal - this[VariableFloat.TotalWater_PL]) * Time.deltaTime * GameSpeed;
         _temperatureMovement += (this[VariableShort.TemperatureMovement] - _temperatureMovement) * Time.deltaTime * GameSpeed;
+        #endregion 인위적 환경조정 적용
 
         // 시작 전이면 함수 종료.
         if (!IsPlaying)
