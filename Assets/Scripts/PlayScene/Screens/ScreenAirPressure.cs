@@ -6,7 +6,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     /* ==================== Variables ==================== */
 
     [Header("비용")]
-    [SerializeField] private short _buildingInfraCost = 0;
+    [SerializeField] private ushort _buildingInfraCost = 0;
 
     [Header("참조")]
     [SerializeField] private GameObject _upButton = null;
@@ -27,7 +27,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     private float _waterGasMass = 0.0f;
     private string _waterGasMassString = null;
     private bool _infraBuildavailable = true;
-    private float _meterMultiply = 1.0f / 1013.25f * Constants.HALF_METAIMAGE_WIDTH;
+    private float _meterMultiply = 1.0f / Constants.EARTH_AIR_PRESSURE * Constants.HALF_METAIMAGE_WIDTH;
 
 
 
@@ -36,7 +36,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     public void BtnUpDown(bool isUp)
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         if (isUp)
         {
@@ -90,7 +90,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 건설
         ++PlayManager.Instance[VariableByte.AirPressureInfra];
@@ -173,7 +173,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         _etcAirMassText.text = UIString.Instance[VariableFloat.EtcAirMass_Tt];
 
         // 시각적 정보 표시
-        float meterX = (PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] - 1013.25f) * _meterMultiply;
+        float meterX = (PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] - Constants.EARTH_AIR_PRESSURE) * _meterMultiply;
         if (meterX > Constants.HALF_METAIMAGE_WIDTH)
         {
             meterX = Constants.HALF_METAIMAGE_WIDTH;
@@ -195,6 +195,28 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         {
             _infraBuildavailable = true;
             _buildInfraButton.color = Constants.WHITE;
+        }
+
+        // 단축키 동작
+#if PLATFORM_STANDALONE_WIN
+        // 키보드 동작
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex - 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex + 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
+        }
+#endif
+        // PC, 모바일 공용
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
         }
     }
 }

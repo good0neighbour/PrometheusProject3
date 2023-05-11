@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public enum VariableByte
 {
+    ExploreDevice,
     AirPressureInfra,
     TemperatureInfra,
     WaterInfra,
@@ -82,6 +83,8 @@ public enum VariableFloat
     PlanetMass_Tt,
     PlanetDistance_AU,
     PlanetArea_km2,
+    ExploreProgress,
+    ExploreGoal,
     EndFloat
 }
 
@@ -102,21 +105,25 @@ public class PlayManager : MonoBehaviour
 
     /* ==================== Variables ==================== */
 
-    // 임시
-    [SerializeField] private GameObject _audioMamagerPrefab = null;
-
     public static OnMonthChange OMC = null;
 
+    [Header("조정")]
     [SerializeField] private float _monthTimer = 2.0f;
+
+    [Header("참조")]
+    [SerializeField] private GameObject _audioManagerPrefab = null;
+    [SerializeField] private GameObject _landSlot = null;
+    [SerializeField] private Transform _contentArea = null;
 
     private JsonData _data;
     private float _timer = 0.0f;
+    private float _gameSpeed = 1.0f;
     private float _etcAirMassGoal = 0.0f;
     private float _temperatureMovement = 0.0f;
     private float _totalWaterVolumeGoal = 0.0f;
     private float _totalCarboneRatioGoal = 0.0f;
     private float _incomeEnergy_C = 0.0f;
-    private float _carbonRatio = 1.0f / 480.0f;
+    private float _carbonRatio = 1.0f / Constants.EARTH_CARBON_RATIO;
     private double _cloudReflectionMultiply = 0.0d;
 
 
@@ -132,10 +139,22 @@ public class PlayManager : MonoBehaviour
         set;
     }
 
-    public float GameSpeed
+    public float GameResume
     {
         get;
         set;
+    }
+
+    public float GameSpeed
+    {
+        get
+        {
+            return _gameSpeed * GameResume;
+        }
+        set
+        {
+            _gameSpeed = value;
+        }
     }
 
     #region JsonData의 배열에 접근
@@ -239,19 +258,14 @@ public class PlayManager : MonoBehaviour
     private void Awake()
     {
         #region 임시
-        if (null == AudioManager.Instance)
-        {
-            GameObject audioManager = Instantiate(_audioMamagerPrefab);
-            AudioManager.Instance = audioManager.GetComponent<AudioManager>();
-            DontDestroyOnLoad(audioManager);
-        }
         _data = new JsonData(true);
+        this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
         this[VariableLong.Funds] = 500000;
         this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
-        this[VariableFloat.TotalWater_PL] = 1408718.0f;
-        this[VariableFloat.PlanetRadius_km] = 6378.14f;
-        this[VariableFloat.PlanetDensity_g_cm3] = 5.51f;
-        this[VariableFloat.TotalCarbonRatio_ppm] = 480.0f;
+        this[VariableFloat.TotalWater_PL] = Constants.EARTH_WATER_VOLUME;
+        this[VariableFloat.PlanetRadius_km] = Constants.EARTH_RADIUS;
+        this[VariableFloat.PlanetDensity_g_cm3] = Constants.EARTH_DENSITY;
+        this[VariableFloat.TotalCarbonRatio_ppm] = Constants.EARTH_CARBON_RATIO;
 
         this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
 
@@ -261,6 +275,14 @@ public class PlayManager : MonoBehaviour
 
         this[VariableFloat.IncomeEnergy] = 1.0f;
         #endregion
+
+        // 개발 중 테스트 시 에러 방지
+        if (null == AudioManager.Instance)
+        {
+            GameObject audioManager = Instantiate(_audioManagerPrefab);
+            AudioManager.Instance = audioManager.GetComponent<AudioManager>();
+            DontDestroyOnLoad(audioManager);
+        }
 
         // 유니티식 싱글턴패턴
         Instance = this;
@@ -433,17 +455,17 @@ public class PlayManager : MonoBehaviour
 
         #region 생물 생존률
         // 공통 계산
-        float0 = Mathf.Abs(this[VariableFloat.TotalAirPressure_hPa] / 1013.25f - 1.0f) + Math.Abs(this[VariableFloat.TotalTemperature_C] / 15.0f - 1.0f);
+        float0 = Mathf.Abs(this[VariableFloat.TotalAirPressure_hPa] / Constants.EARTH_AIR_PRESSURE - 1.0f) + Math.Abs(this[VariableFloat.TotalTemperature_C] / Constants.EARTH_TEMPERATURE - 1.0f);
 
         // 광합성 생물 생존율
-        this[VariableFloat.PhotoLifePosibility] = (1.0f - float0) * this[VariableFloat.WaterLiquid_PL] / 1379705.3f * 100.0f;
+        this[VariableFloat.PhotoLifePosibility] = (1.0f - float0) * this[VariableFloat.WaterLiquid_PL] / Constants.EARTH_WATER_LIQUID * 100.0f;
         if (100.0f < this[VariableFloat.PhotoLifePosibility])
         {
             this[VariableFloat.PhotoLifePosibility] = 100.0f;
         }
 
         // 호흡 생물 생존율
-        this[VariableFloat.BreathLifePosibility] = (1.0f - float0 - Mathf.Abs(this[VariableFloat.OxygenRatio] / 21.0f - 1.0f)) * this[VariableFloat.WaterLiquid_PL] / 1379705.3f * 100.0f;
+        this[VariableFloat.BreathLifePosibility] = (1.0f - float0 - Mathf.Abs(this[VariableFloat.OxygenRatio] / 21.0f - 1.0f)) * this[VariableFloat.WaterLiquid_PL] / Constants.EARTH_WATER_LIQUID * 100.0f;
         if (100.0f < this[VariableFloat.BreathLifePosibility])
         {
             this[VariableFloat.BreathLifePosibility] = 100.0f;
@@ -500,6 +522,30 @@ public class PlayManager : MonoBehaviour
 
         // 시간 경과
         _timer += Time.deltaTime * GameSpeed;
+
+        #region 탐사 진행
+        /*
+            진행 상황을 게이지로 표시할 때, 한 프레임이라도 게이지가 가득 차거나 완전히 빈 모습을 볼 수 있게 한다.
+        */
+
+        // 탐사 완료 시
+        if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
+        {
+            // 토지 추가
+            Instantiate(_landSlot, _contentArea);
+
+            // 탐사 진행 초기화
+            this[VariableFloat.ExploreProgress] = 0.0f;
+
+            // 탐사 목표 증가
+            this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+        }
+        // 진행 중일 때
+        else
+        {
+            this[VariableFloat.ExploreProgress] += this[VariableByte.ExploreDevice] * Time.deltaTime * Constants.EXPLORE_SPEEDMULT * GameSpeed;
+        }
+        #endregion 탐사 진행
 
         // 한 달 간격
         if (_timer >= _monthTimer)

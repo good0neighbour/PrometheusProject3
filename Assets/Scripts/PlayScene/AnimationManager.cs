@@ -37,7 +37,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private Image _background = null;
     [SerializeField] private Image _messageBoxBackground = null;
     [SerializeField] private TMP_Text[] _leftRightBtns = new TMP_Text[6];
-    [SerializeField] private Image[] _selections = new Image[2];
+    [SerializeField] private Image _selection = null;
     [SerializeField] private Transform _planet = null;
     [SerializeField] private Transform _sun = null;
     [SerializeField] private RectTransform _planetImage = null;
@@ -168,8 +168,7 @@ public class AnimationManager : MonoBehaviour
 
         #region 좌우 목록 선택 오브젝트 애니메이션
         float0 = Mathf.Sin(_leftRightTimer) * _selectionMultiply + _selectionAdd;
-        _selections[0].color = new Color(_selectionColor.r, _selectionColor.g, _selectionColor.b, float0);
-        _selections[1].color = new Color(_selectionColor.r, _selectionColor.g, _selectionColor.b, float0);
+        _selection.color = new Color(_selectionColor.r, _selectionColor.g, _selectionColor.b, float0);
         #endregion
 
         #region 행성 이미지, 우주 배경, 메세지 상자의 위치
@@ -179,8 +178,12 @@ public class AnimationManager : MonoBehaviour
         #endregion
 
         #region 3D 애니메이션
-        _planet.Rotate(0.0f, -_spinSpeedmult * Time.deltaTime, 0.0f);
-        _sun.Rotate(0.0f, _spinSpeedmult * Time.deltaTime, 0.0f);
+        // 게임이 일시정지가 아닐 때만
+        if (Constants.GAME_RESUME == PlayManager.Instance.GameResume)
+        {
+            _planet.Rotate(0.0f, -_spinSpeedmult * Time.deltaTime, 0.0f);
+            _sun.Rotate(0.0f, _spinSpeedmult * Time.deltaTime, 0.0f);
+        }
         #endregion
     }
 }

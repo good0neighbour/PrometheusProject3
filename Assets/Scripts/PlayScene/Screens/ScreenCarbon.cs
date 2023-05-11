@@ -6,7 +6,7 @@ public class ScreenCarbon : PlayScreenBase, IUpDownAdjust
     /* ==================== Variables ==================== */
 
     [Header("비용")]
-    [SerializeField] private short _buildingInfraCost = 0;
+    [SerializeField] private ushort _buildingInfraCost = 0;
 
     [Header("참조")]
     [SerializeField] private GameObject _upButton = null;
@@ -30,7 +30,7 @@ public class ScreenCarbon : PlayScreenBase, IUpDownAdjust
     public void BtnUpDown(bool isUp)
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         if (isUp)
         {
@@ -84,7 +84,7 @@ public class ScreenCarbon : PlayScreenBase, IUpDownAdjust
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 건설
         ++PlayManager.Instance[VariableByte.CarbonInfra];
@@ -157,6 +157,28 @@ public class ScreenCarbon : PlayScreenBase, IUpDownAdjust
         {
             _infraBuildavailable = true;
             _buildInfraButton.color = Constants.WHITE;
+        }
+
+        // 단축키 동작
+#if PLATFORM_STANDALONE_WIN
+        // 키보드 동작
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex - 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex + 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
+        }
+#endif
+        // PC, 모바일 공용
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
         }
     }
 }

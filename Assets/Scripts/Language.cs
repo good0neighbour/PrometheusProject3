@@ -45,15 +45,19 @@ public class Language
                     "평균 기온",
                     "물의 체적",
                     "산소 농도",
+                    "탐사",
                     "대기압",
                     "물",
                     "탄소",
                     "광합성 생물",
                     "호흡 생물",
+                    "탐사 장비 추가",
                     "대기 조정 인프라 건설",
                     "기온 조정 인프라 건설",
                     "분자 합성 인프라 건설",
                     "농도 조정 인프라 건설",
+                    "가동 중인 탐사 장비",
+                    "탐사 진행도",
                     "건설된 인프라",
                     "비용",
                     "총 기체 질량",
@@ -62,6 +66,11 @@ public class Language
                     "기타 기체 질량",
                     "중력가속도",
                     "행성 표면적",
+                    "반사율",
+                    "수증기 온실",
+                    "탄소 온실",
+                    "기타 대기 온실",
+                    "궤도 장반경",
                     "기체",
                     "액체",
                     "고체",
@@ -76,7 +85,6 @@ public class Language
                     "대기압 적절성",
                     "기온 적절성",
                     "액체 상태 물",
-                    "산소 농도",
                 };
             }
             else
@@ -145,6 +153,12 @@ public class Language
     public TMP_FontAsset GetFontAsset()
     {
         return _fontAsset;
+    }
+
+
+    public bool GetContainsKey(string koreanKey)
+    {
+        return _texts.ContainsKey(koreanKey);
     }
 
 

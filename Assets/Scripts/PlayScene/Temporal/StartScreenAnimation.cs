@@ -25,7 +25,7 @@ public class StartScreenAnimation : MonoBehaviour
     public void BtnStartPlay()
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 시작 화면은 더이상 사용하지 않기 때문에 파괴한다.
         Destroy(gameObject);
@@ -42,8 +42,8 @@ public class StartScreenAnimation : MonoBehaviour
         // 플레이 중으로 전환
         PlayManager.Instance.IsPlaying = true;
 
-        // 게임 속도
-        PlayManager.Instance.GameSpeed = 1.0f;
+        // 게임 진행
+        PlayManager.Instance.GameResume = Constants.GAME_RESUME;
     }
 
 
@@ -70,6 +70,18 @@ public class StartScreenAnimation : MonoBehaviour
         // 애니메이션 진행 중인지 확인
         if (!_isProceeding)
         {
+#if PLATFORM_STANDALONE_WIN
+            // 단축키 동작
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Return))
+            {
+                BtnStartPlay();
+            }
+#endif
+            // PC, 모바일 공용
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                BtnStartPlay();
+            }
             return;
         }
 

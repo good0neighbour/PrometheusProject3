@@ -18,6 +18,13 @@ public static class Constants
     // 물리 값
     public const float MIN_KELVIN = -273.0f;
     public const float MAX_ICE_TEMP = 20.0f;
+    public const float EARTH_AIR_PRESSURE = 1013.25f;
+    public const float EARTH_TEMPERATURE = 15.0f;
+    public const float EARTH_WATER_VOLUME = 1408718.0f;
+    public const float EARTH_WATER_LIQUID = 1379705.3f;
+    public const float EARTH_RADIUS = 6378.14f;
+    public const float EARTH_DENSITY = 5.51f;
+    public const float EARTH_CARBON_RATIO = 480.0f;
     public const double GRAVITY_COEFICIENT = 0.0000000000667428d;
     public const double PLANET_GRAVITY_ADJUST = 1000517274389.2647640484152314488d;
     public const double PLANET_MASS_ADJUST = 0.00000099760221803384511479248479118797d;
@@ -31,11 +38,18 @@ public static class Constants
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
     // 게임 플레이 관련 값
+    public const float GAME_RESUME = 1.0f;
+    public const float GAME_PAUSE = 0.0f;
     public const float AIRMASS_MOVEMENT = 1.0f;
     public const float TEMPERATURE_MOVEMENT = 0.2f;
     public const float WATER_VOLUME_MOVEMENT = 5.0f;
     public const float CARBON_RATIO_MOVEMENT = 0.2f;
-    public const float LIFE_STABILITY_SPEEDMULT = 0.01f;
+    public const float LIFE_STABILITY_SPEEDMULT = 0.05f;
+    public const float EXPLORE_SPEEDMULT = 0.001f;
+    public const float INITIAL_EXPLORE_GOAL = 0.01f;
+    public const float EXPLORE_GOAL_INCREASEMENT = 5.0f;
+    public const string ON_EXPANDED = ">";
+    public const string ON_COLLAPSED = "<";
 
     // 색상
     public static readonly Color WHITE = new Color(1.0f, 1.0f, 1.0f);

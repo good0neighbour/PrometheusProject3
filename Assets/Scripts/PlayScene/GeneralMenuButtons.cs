@@ -6,6 +6,7 @@ public class GeneralMenuButtons : MonoBehaviour
     private enum PlayScreenIndex
     {
         Main,
+        Explore,
         AirPressure,
         Temperature,
         WaterVolume,
@@ -25,15 +26,25 @@ public class GeneralMenuButtons : MonoBehaviour
     [SerializeField] private GameObject _rightButton = null;
     [SerializeField] private GameObject _leftIndex = null;
     [SerializeField] private GameObject _rightIndex = null;
-    [SerializeField] private Transform _leftSelection = null;
-    [SerializeField] private Transform _rightSelection = null;
+    [SerializeField] private GameObject _selection = null;
 
     private PlayScreenBase _currentScreen = null;
+    private Transform _selectionTransform = null;
     private byte _currentMenuFocus = 1;
-    private byte _currentLeftIndex = 1;
-    private byte _currentRightIndex = 1;
 
     public static GeneralMenuButtons Instance
+    {
+        get;
+        private set;
+    }
+
+    public byte CurrentLeftIndex
+    {
+        get;
+        private set;
+    }
+
+    public byte CurrentRightIndex
     {
         get;
         private set;
@@ -44,6 +55,15 @@ public class GeneralMenuButtons : MonoBehaviour
     /* ==================== Public Methods ==================== */
 
     /// <summary>
+    /// 해당 오브젝트 활성화 여부
+    /// </summary>
+    public void EnableThis(bool enable)
+    {
+        gameObject.SetActive(enable);
+    }
+
+
+    /// <summary>
     /// 메뉴 화면 참조 가져오기.
     /// </summary>
     public PlayScreenBase GetScreen()
@@ -51,11 +71,11 @@ public class GeneralMenuButtons : MonoBehaviour
         switch (_currentMenuFocus)
         {
             case 0:
-                return _screens[(int)(PlayScreenIndex.Main + _currentLeftIndex)];
+                return _screens[(int)(PlayScreenIndex.Main + CurrentLeftIndex)];
             case 1:
                 return _screens[(int)(PlayScreenIndex.Main)];
             case 2:
-                return _screens[(int)(PlayScreenIndex.LeftEnd + _currentRightIndex)];
+                return _screens[(int)(PlayScreenIndex.LeftEnd + CurrentRightIndex)];
             default:
                 Debug.LogError("잘못된 메뉴 화면");
                 return null;
@@ -65,12 +85,26 @@ public class GeneralMenuButtons : MonoBehaviour
 
 
     /// <summary>
-    /// 현재 메뉴 화면 변경
+    /// 현재 메뉴 화면 변경, 커서 위치 변경
     /// </summary>
-    public void SetCurrentScreen(PlayScreenBase current)
+    public void SetCurrentScreen(PlayScreenBase current, Transform currorPosition)
     {
         // 현재 화면 참조 변경
         _currentScreen = current;
+
+        // 커서 위치
+        if (null == currorPosition)
+        {
+            _selection.SetActive(false);
+        }
+        else
+        {
+            _selectionTransform.SetParent(currorPosition, false);
+            if (!_selection.activeSelf)
+            {
+                _selection.SetActive(true);
+            }
+        }
     }
 
 
@@ -81,7 +115,7 @@ public class GeneralMenuButtons : MonoBehaviour
     public void BtnLeftRight(bool isLeft)
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 좌우 버튼에 의한 동작
         if (isLeft)
@@ -127,26 +161,24 @@ public class GeneralMenuButtons : MonoBehaviour
     public void BtnScreenIndex(int index)
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 화면 전환 변경 적용. 변경 안 됐으면 바로 함수 종료.
         switch (_currentMenuFocus)
         {
             case 0:
-                if (_currentLeftIndex == index)
+                if (CurrentLeftIndex == index)
                 {
                     return;
                 }
-                _currentLeftIndex = (byte)index;
-                _leftSelection.SetParent(EventSystem.current.currentSelectedGameObject.transform, false);
+                CurrentLeftIndex = (byte)index;
                 break;
             case 2:
-                if (_currentRightIndex == index)
+                if (CurrentRightIndex == index)
                 {
                     return;
                 }
-                _currentRightIndex = (byte)index;
-                _rightSelection.SetParent(EventSystem.current.currentSelectedGameObject.transform, false);
+                CurrentRightIndex = (byte)index;
                 break;
             default:
                 Debug.LogError("잘목된 메뉴 화면");
@@ -187,5 +219,10 @@ public class GeneralMenuButtons : MonoBehaviour
         _rightButton.SetActive(true);
         _leftIndex.SetActive(false);
         _rightIndex.SetActive(false);
+        CurrentLeftIndex = 1;
+        CurrentRightIndex = 1;
+
+        // 참조
+        _selectionTransform = _selection.transform;
     }
 }

@@ -6,7 +6,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     /* ==================== Variables ==================== */
 
     [Header("비용")]
-    [SerializeField] private short _requestCost = 0;
+    [SerializeField] private ushort _requestCost = 0;
 
     [Header("참조")]
     [SerializeField] private TMP_Text _requestButton = null;
@@ -42,7 +42,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _requestCost;
@@ -67,7 +67,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
             _airPressure = PlayManager.Instance[VariableFloat.TotalAirPressure_hPa];
 
             // 단위 표시
-            _airPressureString = $"{((1.0f - Mathf.Abs(_airPressure / 1013.25f - 1.0f)) * 100.0f).ToString("0")}%";
+            _airPressureString = $"{((1.0f - Mathf.Abs(_airPressure / Constants.EARTH_AIR_PRESSURE - 1.0f)) * 100.0f).ToString("0")}%";
         }
 
         // 반환
@@ -84,7 +84,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
             _temperature = PlayManager.Instance[VariableFloat.TotalTemperature_C];
 
             // 단위 표시
-            _temperatureString = $"{((1.0f - Mathf.Abs(_temperature / 15.0f - 1.0f)) * 100.0f).ToString("0")}%";
+            _temperatureString = $"{((1.0f - Mathf.Abs(_temperature / Constants.EARTH_TEMPERATURE - 1.0f)) * 100.0f).ToString("0")}%";
         }
 
         // 반환
@@ -182,6 +182,28 @@ public class ScreenPhoto : PlayScreenBase, IRequest
         {
             _requestAvailable = true;
             _requestButton.color = Constants.WHITE;
+        }
+
+        // 단축키 동작
+#if PLATFORM_STANDALONE_WIN
+        // 키보드 동작
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex - 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex + 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
+        }
+#endif
+        // PC, 모바일 공용
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
         }
     }
 }

@@ -6,7 +6,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
     /* ==================== Variables ==================== */
 
     [Header("비용")]
-    [SerializeField] private short _buildingInfraCost = 0;
+    [SerializeField] private ushort _buildingInfraCost = 0;
 
     [Header("참조")]
     [SerializeField] private GameObject _upButton = null;
@@ -33,7 +33,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
     public void BtnUpDown(bool isUp)
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         if (isUp)
         {
@@ -87,7 +87,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido();
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 건설
         ++PlayManager.Instance[VariableByte.TemperatureInfra];
@@ -149,7 +149,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
         _etcGreenHouseText.text = UIString.Instance[VariableFloat.EtcGreenHouse_C];
 
         // 시각적 정보 표시
-        float meterX = (PlayManager.Instance[VariableFloat.TotalTemperature_C] - 15.0f) * _meterMultiply;
+        float meterX = (PlayManager.Instance[VariableFloat.TotalTemperature_C] - Constants.EARTH_TEMPERATURE) * _meterMultiply;
         if (meterX > Constants.HALF_METAIMAGE_WIDTH)
         {
             meterX = Constants.HALF_METAIMAGE_WIDTH;
@@ -171,6 +171,28 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
         {
             _infraBuildavailable = true;
             _buildInfraButton.color = Constants.WHITE;
+        }
+
+        // 단축키 동작
+#if PLATFORM_STANDALONE_WIN
+        // 키보드 동작
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex - 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentLeftIndex + 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
+        }
+#endif
+        // PC, 모바일 공용
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(false);
         }
     }
 }
