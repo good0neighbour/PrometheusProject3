@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance = null;
 
     [Header("설정")]
-    [Range(2, 255)]
+    [Range(2, byte.MaxValue)]
     [SerializeField] private byte _numberOfChannel = 8;
 
     [Header("클릭")]
@@ -72,19 +72,16 @@ public class AudioManager : MonoBehaviour
     {
         // 채널 배열 생성
         _channels = new AudioSource[_numberOfChannel];
-        Debug.Log("채널 배열 생성");
 
         // 1개는 기본
         _channels[0] = GetComponent<AudioSource>();
         _channels[1] = _audioSource;
-        Debug.Log("1개는 기본");
 
         // 나머지는 추가 생성
         for (byte i = 2; i < _numberOfChannel; ++i)
         {
             AudioSource aS = Instantiate(_audioSource.gameObject, transform).GetComponent<AudioSource>();
             _channels[i] = aS;
-            Debug.Log("나머지는 추가 생성");
         }
     }
 }

@@ -27,6 +27,12 @@ public class ScreenExplore : PlayScreenBase
     private bool _addDeviceAvailable = true;
     private bool _isExpended = false;
 
+    public ushort CurrentSlot
+    {
+        get;
+        set;
+    }
+
 
 
     /* ==================== Public Methods ==================== */
@@ -119,7 +125,7 @@ public class ScreenExplore : PlayScreenBase
         if (_addDeviceAvailable)
         {
             // 건설 비용이 없거나 255개가 됐을 때
-            if (_deviceCost > PlayManager.Instance[VariableLong.Funds] || PlayManager.Instance[VariableByte.ExploreDevice] >= 255)
+            if (_deviceCost > PlayManager.Instance[VariableLong.Funds] || PlayManager.Instance[VariableByte.ExploreDevice] >= byte.MaxValue)
             {
                 _addDeviceAvailable = false;
                 _addDeviceBtn.color = Constants.TEXT_BUTTON_DISABLE;

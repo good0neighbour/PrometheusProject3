@@ -170,7 +170,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
         // 요청 가능 여부
         if (_requestAvailable)
         {
-            // 건설 비용이 없거나 255개가 됐을 때
+            // 요청 비용이 없됐을 때
             if (_requestCost > PlayManager.Instance[VariableLong.Funds])
             {
                 _requestAvailable = false;

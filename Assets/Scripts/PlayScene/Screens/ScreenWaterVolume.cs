@@ -166,7 +166,7 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
         if (_infraBuildavailable)
         {
             // 건설 비용이 없거나 255개가 됐을 때
-            if (_buildingInfraCost > PlayManager.Instance[VariableLong.Funds] || PlayManager.Instance[VariableByte.WaterInfra] >= 255)
+            if (_buildingInfraCost > PlayManager.Instance[VariableLong.Funds] || PlayManager.Instance[VariableByte.WaterInfra] >= byte.MaxValue)
             {
                 _infraBuildavailable = false;
                 _buildInfraButton.color = Constants.TEXT_BUTTON_DISABLE;

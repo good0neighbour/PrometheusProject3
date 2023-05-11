@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 #region JsonData 배열 인덱스를 위한 열거형
@@ -25,6 +26,15 @@ public enum VariableShort
     WaterMovement,
     CarbonMovement,
     EndShort
+}
+
+/// <summary>
+/// JsonData의 UshortArray 인덱스 접근을 위한 열거형
+/// </summary>
+public enum VariableUshort
+{
+    LandNum,
+    EndUshort
 }
 
 /// <summary>
@@ -116,6 +126,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private Transform _contentArea = null;
 
     private JsonData _data;
+    private List<Land> _lands = new List<Land>();
     private float _timer = 0.0f;
     private float _gameSpeed = 1.0f;
     private float _etcAirMassGoal = 0.0f;
@@ -189,6 +200,21 @@ public class PlayManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 편리한 접근을 위해 만들었다. ushort.
+    /// </summary>
+    public ushort this[VariableUshort variable]
+    {
+        get
+        {
+            return _data.UshortArray[(int)variable];
+        }
+        set
+        {
+            _data.UshortArray[(int)variable] = value;
+        }
+    }
+
+    /// <summary>
     /// 편리한 접근을 위해 만들었다. int.
     /// </summary>
     public int this[VariableInt variable]
@@ -252,6 +278,16 @@ public class PlayManager : MonoBehaviour
 
 
     /* ==================== Public Methods ==================== */
+
+    /// <summary>
+    /// 토지 정보 가져온다.
+    /// </summary>
+    public Land GetLand(ushort index)
+    {
+        return _lands[index];
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -528,22 +564,32 @@ public class PlayManager : MonoBehaviour
             진행 상황을 게이지로 표시할 때, 한 프레임이라도 게이지가 가득 차거나 완전히 빈 모습을 볼 수 있게 한다.
         */
 
-        // 탐사 완료 시
-        if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
+        // ushort의 최대치를 넘지 않을 때만
+        if (ushort.MaxValue > this[VariableUshort.LandNum])
         {
-            // 토지 추가
-            Instantiate(_landSlot, _contentArea);
+            // 탐사 완료 시
+            if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
+            {
+                // 토지 버튼 추가
+                Instantiate(_landSlot, _contentArea);
 
-            // 탐사 진행 초기화
-            this[VariableFloat.ExploreProgress] = 0.0f;
+                // 가변배열에 토지 추가
+                _lands.Add(new Land(this[VariableUshort.LandNum]));
 
-            // 탐사 목표 증가
-            this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
-        }
-        // 진행 중일 때
-        else
-        {
-            this[VariableFloat.ExploreProgress] += this[VariableByte.ExploreDevice] * Time.deltaTime * Constants.EXPLORE_SPEEDMULT * GameSpeed;
+                // 토지 개수 추가
+                ++this[VariableUshort.LandNum];
+
+                // 탐사 진행 초기화
+                this[VariableFloat.ExploreProgress] = 0.0f;
+
+                // 탐사 목표 증가
+                this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+            }
+            // 진행 중일 때
+            else
+            {
+                this[VariableFloat.ExploreProgress] += this[VariableByte.ExploreDevice] * Time.deltaTime * Constants.EXPLORE_SPEEDMULT * GameSpeed;
+            }
         }
         #endregion 탐사 진행
 
@@ -613,6 +659,7 @@ public class PlayManager : MonoBehaviour
     {
         public byte[] ByteArray;
         public short[] ShortArray;
+        public ushort[] UshortArray;
         public int[] IntArray;
         public long[] LongArray;
         public float[] FloatArray;
@@ -624,6 +671,7 @@ public class PlayManager : MonoBehaviour
             {
                 ByteArray = new byte[(int)VariableByte.EndByte];
                 ShortArray = new short[(int)VariableShort.EndShort];
+                UshortArray = new ushort[(int)VariableUshort.EndUshort];
                 IntArray = new int[(int)VariableInt.EndInt];
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
@@ -633,6 +681,7 @@ public class PlayManager : MonoBehaviour
             {
                 ByteArray = null;
                 ShortArray = null;
+                UshortArray = null;
                 IntArray = null;
                 LongArray = null;
                 FloatArray = null;
