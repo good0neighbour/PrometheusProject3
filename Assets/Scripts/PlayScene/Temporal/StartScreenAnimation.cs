@@ -25,7 +25,7 @@ public class StartScreenAnimation : MonoBehaviour
     public void BtnStartPlay()
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
+        AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 시작 화면은 더이상 사용하지 않기 때문에 파괴한다.
         Destroy(gameObject);

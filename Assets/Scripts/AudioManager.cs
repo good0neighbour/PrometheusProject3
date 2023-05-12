@@ -2,7 +2,8 @@ using UnityEngine;
 
 public enum AudioType
 {
-    Touch
+    Touch,
+    Select
 }
 
 public class AudioManager : MonoBehaviour
@@ -16,9 +17,13 @@ public class AudioManager : MonoBehaviour
     [Range(2, byte.MaxValue)]
     [SerializeField] private byte _numberOfChannel = 8;
 
-    [Header("클릭")]
+    [Header("Touch")]
     [SerializeField] private AudioClip _touchClip = null;
-    [SerializeField] private float __touchVolume = 1.0f;
+    [SerializeField] private float _touchVolume = 1.0f;
+
+    [Header("Select")]
+    [SerializeField] private AudioClip _selectClip = null;
+    [SerializeField] private float _selectVolume = 1.0f;
 
     [Header("참조")]
     [SerializeField] private AudioSource _audioSource = null;
@@ -38,7 +43,10 @@ public class AudioManager : MonoBehaviour
         switch (audio)
         {
             case AudioType.Touch:
-                UseChannel(_touchClip, __touchVolume);
+                UseChannel(_touchClip, _touchVolume);
+                return;
+            case AudioType.Select:
+                UseChannel(_selectClip, _selectVolume);
                 return;
         }
     }

@@ -85,7 +85,7 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
+        AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 건설
         ++PlayManager.Instance[VariableByte.WaterInfra];

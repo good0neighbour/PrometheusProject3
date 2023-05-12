@@ -54,6 +54,8 @@ public static class Constants
     // 색상
     public static readonly Color WHITE = new Color(1.0f, 1.0f, 1.0f);
     public static readonly Color TEXT_BUTTON_DISABLE = new Color(0.5f, 0.5f, 0.5f);
+    public static readonly Color BUTTON_UNSELECTED = new Color(50.0f / 255.0f, 50.0f / 255.0f, 50.0f / 255.0f);
+    public static readonly Color BUTTON_SELECTED = new Color(150.0f / 255.0f, 150.0f / 255.0f, 150.0f / 255.0f);
 
     // 수정이 필요 없는 값
     public const float HALF_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.5f;

@@ -4,7 +4,29 @@ public class ScreenMain : PlayScreenBase
 {
     /* ==================== Variables ==================== */
 
+    [Header("참조")]
+    [SerializeField] private GameObject _popUpMenuScreen = null;
+
+
+
     /* ==================== Public Methods ==================== */
+
+    /// <summary>
+    /// 메뉴 화면 열기
+    /// </summary>
+    public void BtnPopUpMenu()
+    {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
+        // 화면 변경
+        _popUpMenuScreen.SetActive(true);
+        gameObject.SetActive(false);
+        GeneralMenuButtons.Instance.EnableThis(false);
+        PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 

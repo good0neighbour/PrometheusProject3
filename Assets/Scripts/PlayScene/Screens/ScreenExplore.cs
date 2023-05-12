@@ -27,7 +27,7 @@ public class ScreenExplore : PlayScreenBase
     private bool _addDeviceAvailable = true;
     private bool _isExpended = false;
 
-    public ushort CurrentSlot
+    public LandSlot CurrentSlot
     {
         get;
         set;
@@ -68,7 +68,7 @@ public class ScreenExplore : PlayScreenBase
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
+        AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _deviceCost;

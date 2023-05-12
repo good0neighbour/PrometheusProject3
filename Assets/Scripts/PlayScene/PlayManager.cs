@@ -320,6 +320,27 @@ public class PlayManager : MonoBehaviour
             DontDestroyOnLoad(audioManager);
         }
 
+        // 현재 씬에서 모든 AutoTranslation을 찾는다.
+        AutoTranslation[] autoTranslations = FindObjectsOfType<AutoTranslation>(true);
+
+        // 모든 AutoTranslation을 준비시킨다.
+        for (ushort i = 0; i < autoTranslations.Length; ++i)
+        {
+            autoTranslations[i].TranslationReady();
+        }
+
+        // 현재 씬에서 모든 InputFieldFontChange 찾는다.
+        InputFieldFontChange[] inputFieldFontChange = FindObjectsOfType<InputFieldFontChange>(true);
+
+        // 모든 InputFieldFontChange 준비시킨다.
+        for (ushort i = 0; i < inputFieldFontChange.Length; ++i)
+        {
+            inputFieldFontChange[i].GetReady();
+        }
+
+        // 언어 불러온다.
+        Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
+
         // 유니티식 싱글턴패턴
         Instance = this;
 
@@ -570,11 +591,11 @@ public class PlayManager : MonoBehaviour
             // 탐사 완료 시
             if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
             {
-                // 토지 버튼 추가
-                Instantiate(_landSlot, _contentArea);
-
                 // 가변배열에 토지 추가
                 _lands.Add(new Land(this[VariableUshort.LandNum]));
+
+                // 토지 버튼 추가 및 초기화
+                Instantiate(_landSlot, _contentArea).GetComponent<LandSlot>().SlotInitialize();
 
                 // 토지 개수 추가
                 ++this[VariableUshort.LandNum];

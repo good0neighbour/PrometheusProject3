@@ -42,7 +42,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
         }
 
         // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
+        AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _requestCost;

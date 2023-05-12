@@ -4,6 +4,11 @@ public class JsonCreator : MonoBehaviour
 {
     public void LanSave()
     {
-        Language.Instance.LanSave();
+        Language.Instance.LanguageSave();
+    }
+
+    public void OhterLanSave()
+    {
+        Language.Instance.SaveOtherLanguages();
     }
 }

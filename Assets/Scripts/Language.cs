@@ -3,6 +3,7 @@ using System.Text;
 using System.IO;
 using UnityEngine;
 using TMPro;
+using static Unity.VisualScripting.Icons;
 
 /// <summary>
 /// 사용 가능한 언어 종류
@@ -41,6 +42,9 @@ public class Language
                     "설정",
                     "기타",
                     "종료",
+                    "언어",
+                    "뒤로",
+                    "지지율",
                     "평균 대기압",
                     "평균 기온",
                     "물의 체적",
@@ -85,6 +89,18 @@ public class Language
                     "대기압 적절성",
                     "기온 적절성",
                     "액체 상태 물",
+                    "채권",
+                    "인구",
+                    "기온",
+                    "안정도",
+                    "소도시",
+                    "중형도시",
+                    "대도시",
+                    "자금",
+                    "도시 건설",
+                    "메뉴",
+                    "토지",
+                    "수용량",
                 };
             }
             else
@@ -98,7 +114,7 @@ public class Language
     /// <summary>
     /// 언어 변경 시 동작할 대리자
     /// </summary>
-    public delegate void LanguageDelegate(LanguageType currentLanguage);
+    public delegate void LanguageDelegate();
 
 
 
@@ -156,6 +172,9 @@ public class Language
     }
 
 
+    /// <summary>
+    /// 존재하는 키인지 확인
+    /// </summary>
     public bool GetContainsKey(string koreanKey)
     {
         return _texts.ContainsKey(koreanKey);
@@ -190,26 +209,32 @@ public class Language
         }
         catch
         {
+            Debug.Log("언어 파일이 존재하지 않음.");
+
             // json 파일이 없으면 새로 저장한다.
-            LanSave();
+            LanguageSave();
 
             // 구조체를 초기화한다.
             _jsonLanguage = new JsonLanguage(true);
         }
+
+        // 대리자
+        OLC?.Invoke();
+        GameManager.Instance.CurrentLanguage = language;
     }
 
 
     /// <summary>
     /// 에디터에서 json 파일 생성한다.
     /// </summary>
-    public void LanSave()
+    public void LanguageSave()
     {
         // 구조체를 초기화한다.
         JsonLanguage jsonLanguage = new JsonLanguage(true);
 
         // json 파일을 저장한다.
         string json = JsonUtility.ToJson(jsonLanguage, true);
-        File.WriteAllText(Application.dataPath + "/Resources/Korean.Json", json);
+        File.WriteAllText($"{Application.dataPath}/Resources/Korean.Json", json);
 
         // 구글 번역을 위해 텍스트 파일로 저장한다.
         TextFileForGoogleTranslate(jsonLanguage);
@@ -219,15 +244,103 @@ public class Language
     }
 
 
+    /// <summary>
+    /// 다른 언어 json 파일을 생성한다.
+    /// </summary>
+    public void SaveOtherLanguages()
+    {
+        // 준비 단계
+        string[] path = Directory.GetFiles($"{Application.dataPath}/Translations/", "*.txt", SearchOption.AllDirectories);
+        ushort num = (ushort)new JsonLanguage(true).Texts.Length;
+        string jsonForm = Resources.Load("Korean").ToString();
+        StringBuilder[] words = new StringBuilder[num];
+        StringBuilder result = new StringBuilder();
+        StringBuilder record = new StringBuilder();
+        for (int j = 0; j < words.Length; ++j)
+        {
+            words[j] = new StringBuilder();
+        }
+
+        // 존재하는 모든 번역본 생성
+        for (byte i = 0; i < path.Length; ++i)
+        {
+            // 언어 하나 준비 단계
+            string text = File.ReadAllText(path[i]);
+            ushort index = 0;
+            for (int j = 0; j < words.Length; ++j)
+            {
+                words[j].Clear();
+            }
+
+            // 단어 추출
+            for (int j = 0; j < text.Length; ++j)
+            {
+                if (';' == text[j])
+                {
+                    j += 2;
+                    ++index;
+                }
+                else
+                {
+                    words[index].Append(text[j]);
+                }
+            }
+
+            // json화 시작 준비 단계
+            int count = 0;
+            index = 0;
+            result.Clear();
+            record.Clear();
+
+            // json 형식 따라가기
+            for (int j = 0; j < jsonForm.Length; ++j)
+            {
+                // 기록
+                record.Append(jsonForm[j]);
+
+                // 큰따옴표 세기
+                if ('\"' == jsonForm[j])
+                {
+                    ++count;
+
+                    // 큰따옴표 3개 이상일 때
+                    if (3 <= count)
+                    {
+                        // 큰따옴표 열렸을 때
+                        if (1 == count % 2)
+                        {
+                            // 기록 저장
+                            result.Append(record.ToString());
+                            result.Append(words[index]);
+                            result.Append('\"');
+                            ++index;
+                        }
+                        // 큰따옴표 닫혔을 때
+                        else
+                        {
+                            // 기록 초기화
+                            record.Clear();
+                        }
+                    }
+                }
+            }
+
+            // 마지막 기록 저장
+            result.Append(record.ToString());
+
+            // json 파일로 저장
+            File.WriteAllText($"{Application.dataPath}/Resources/{Path.GetFileNameWithoutExtension(path[i])}.Json", result.ToString());
+            Debug.Log(result.ToString());
+        }
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
     private Language()
     {
-        // 임시
-        _jsonLanguage = new JsonLanguage(true);
-
-        // 한국어 구조체 생성
+        // 한국어로 초기화
         JsonLanguage jsonLanguage = new JsonLanguage(true);
 
         // Dictionary에 추가
@@ -259,6 +372,6 @@ public class Language
         }
 
         // 텍스트 파일로 저장
-        File.WriteAllText(Application.dataPath + "/Translations/TranslateThis.txt", text.ToString());
+        File.WriteAllText($"{Application.dataPath}/TranslateThis.txt", text.ToString());
     }
 }

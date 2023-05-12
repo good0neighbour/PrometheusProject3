@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _numberOfChannel: 8
-  _touchClip: {fileID: 8300000, guid: 6eacbab76137e57429b19328199e0bd7, type: 3}
-  __touchVolume: 1
+  _touchClip: {fileID: 8300000, guid: 7e52e900c03a24042bc0fba1ecf7cd0f, type: 3}
+  _touchVolume: 1
+  _selectClip: {fileID: 8300000, guid: 6eacbab76137e57429b19328199e0bd7, type: 3}
+  _selectVolume: 1
   _audioSource: {fileID: 130908450216294753}
 --- !u!82 &4622122684644119703
 AudioSource:

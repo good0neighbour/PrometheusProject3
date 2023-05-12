@@ -6,8 +6,8 @@ public class AutoTranslation : MonoBehaviour
     /* ==================== Variables ==================== */
 
     [SerializeField] private bool _onlyChangeFont = false;
+    [SerializeField] private bool _shortenLineGap = true;
 
-    private LanguageType _currentLanguage = LanguageType.Korean;
     private string _koreanKey = null;
     private TMP_Text _text = null;
 
@@ -23,8 +23,26 @@ public class AutoTranslation : MonoBehaviour
         // 컴포넌트 가져온다.
         _text = GetComponent<TMP_Text>();
 
+        // 찾을 수 없으면
+        if (null == _text)
+        {
+            Debug.LogError($"AutoTranslation 잘못된 위치에 부착 - {name}");
+            return;
+        }
+
         // 언어 대리자에 등록한다.
         Language.OLC += OnLanguageChange;
+
+        // 줄 간격을 줄이려 할 때
+        if (_shortenLineGap)
+        {
+            _text.lineSpacing = -35.0f;
+            _text.enableWordWrapping = false;
+        }
+        else
+        {
+            _text.lineSpacing = 0.0f;
+        }
 
         // 폰트만 바꿀 경우 여기서 종료.
         if (_onlyChangeFont)
@@ -39,18 +57,19 @@ public class AutoTranslation : MonoBehaviour
         if (!Language.Instance.GetContainsKey(_koreanKey))
         {
             Debug.LogError($"\"{_koreanKey}\" - 존재하지 않는 키. 오타 수정 및 삭제 요망.");
+            Language.OLC -= OnLanguageChange;
         }
     }
 
 
+
+    /* ==================== Private Methods ==================== */
+
     /// <summary>
     /// 언어 변경 시 동작
     /// </summary>
-    public void OnLanguageChange(LanguageType currentLanguage)
+    private void OnLanguageChange()
     {
-        // 현재 언어 정보 변경.
-        _currentLanguage = currentLanguage;
-
         // 폰트 변경.
         _text.font = Language.Instance.GetFontAsset();
 
@@ -62,19 +81,5 @@ public class AutoTranslation : MonoBehaviour
 
         // 번역 가져온다.
         _text.text = Language.Instance[_koreanKey];
-    }
-
-
-
-    /* ==================== Private Methods ==================== */
-
-    private void Awake()
-    {
-        // 언어 설정이 한국어가 아닐 경우
-        if (_currentLanguage != GameManager.Instance.CurrentLanguage)
-        {
-            _currentLanguage = GameManager.Instance.CurrentLanguage;
-            OnLanguageChange(_currentLanguage);
-        }
     }
 }
