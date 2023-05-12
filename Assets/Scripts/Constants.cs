@@ -37,7 +37,7 @@ public static class Constants
     public const float METERIMAGE_WIDTH_RATIO = 0.3f;
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
-    // 게임 플레이 관련 값
+    // 게임 플레이 관련 값, 일반
     public const float GAME_RESUME = 1.0f;
     public const float GAME_PAUSE = 0.0f;
     public const float AIRMASS_MOVEMENT = 1.0f;
@@ -50,6 +50,12 @@ public static class Constants
     public const float EXPLORE_GOAL_INCREASEMENT = 5.0f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = "<";
+
+    // 게임 플레이 관련 값, 자원
+    public const int IRON_MAX = 5;
+    public const int IRON_MIN = -2;
+    public const int NUKE_MAX = -3;
+    public const int NUKE_MIN = 2;
 
     // 색상
     public static readonly Color WHITE = new Color(1.0f, 1.0f, 1.0f);

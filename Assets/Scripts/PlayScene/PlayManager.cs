@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 #region JsonData 배열 인덱스를 위한 열거형
 /// <summary>
@@ -291,71 +292,89 @@ public class PlayManager : MonoBehaviour
 
     /* ==================== Private Methods ==================== */
 
-    private void Awake()
+    /// <summary>
+    /// 탐사 진행
+    /// </summary>
+    private void ExploreProgress()
     {
-        #region 임시
-        _data = new JsonData(true);
-        this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
-        this[VariableLong.Funds] = 500000;
-        this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
-        this[VariableFloat.TotalWater_PL] = Constants.EARTH_WATER_VOLUME;
-        this[VariableFloat.PlanetRadius_km] = Constants.EARTH_RADIUS;
-        this[VariableFloat.PlanetDensity_g_cm3] = Constants.EARTH_DENSITY;
-        this[VariableFloat.TotalCarbonRatio_ppm] = Constants.EARTH_CARBON_RATIO;
-
-        this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
-
-        this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
-
-        this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
-
-        this[VariableFloat.IncomeEnergy] = 1.0f;
-        #endregion
-
-        // 개발 중 테스트 시 에러 방지
-        if (null == AudioManager.Instance)
+        // 토지 수가 ushort의 최대치를 넘지 않을 때만
+        if (ushort.MaxValue > this[VariableUshort.LandNum])
         {
-            GameObject audioManager = Instantiate(_audioManagerPrefab);
-            AudioManager.Instance = audioManager.GetComponent<AudioManager>();
-            DontDestroyOnLoad(audioManager);
+            // 탐사 완료 시
+            if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
+            {
+                // 가변배열에 토지 추가
+                _lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
+
+                // 토지 버튼 추가 및 초기화
+                Instantiate(_landSlot, _contentArea).GetComponent<LandSlot>().SlotInitialize();
+
+                // 토지 개수 추가
+                ++this[VariableUshort.LandNum];
+
+                // 탐사 진행 초기화
+                this[VariableFloat.ExploreProgress] = 0.0f;
+
+                // 탐사 목표 증가
+                this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+            }
+            // 진행 중일 때
+            else
+            {
+                this[VariableFloat.ExploreProgress] += this[VariableByte.ExploreDevice] * Time.deltaTime * Constants.EXPLORE_SPEEDMULT * GameSpeed;
+            }
         }
-
-        // 현재 씬에서 모든 AutoTranslation을 찾는다.
-        AutoTranslation[] autoTranslations = FindObjectsOfType<AutoTranslation>(true);
-
-        // 모든 AutoTranslation을 준비시킨다.
-        for (ushort i = 0; i < autoTranslations.Length; ++i)
-        {
-            autoTranslations[i].TranslationReady();
-        }
-
-        // 현재 씬에서 모든 InputFieldFontChange 찾는다.
-        InputFieldFontChange[] inputFieldFontChange = FindObjectsOfType<InputFieldFontChange>(true);
-
-        // 모든 InputFieldFontChange 준비시킨다.
-        for (ushort i = 0; i < inputFieldFontChange.Length; ++i)
-        {
-            inputFieldFontChange[i].GetReady();
-        }
-
-        // 언어 불러온다.
-        Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
-
-        // 유니티식 싱글턴패턴
-        Instance = this;
-
-        // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
-        _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
-        _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
-
-        _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
-        _temperatureMovement = this[VariableShort.TemperatureMovement];
-        _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
-        _totalCarboneRatioGoal = this[VariableFloat.TotalCarbonRatio_ppm];
     }
 
 
-    private void Update()
+    /// <summary>
+    /// 무작위 자원 생성
+    /// </summary>
+    private LandResources RandomResources()
+    {
+        // 자원 변수
+        int iron;
+        int nuke;
+
+        // 어느 하나라도 0이 아닐 때까지 반복
+        do
+        {
+            // 무작위 값
+            iron = Random.Range(Constants.IRON_MIN, Constants.IRON_MAX + 1);
+            nuke = Random.Range(Constants.NUKE_MIN, Constants.NUKE_MAX + 1);
+
+            // 0은 제외
+            if (0 > iron)
+            {
+                iron = 0;
+            }
+            if (0 > nuke)
+            {
+                nuke = 0;
+            }
+        } while (0 == iron + nuke);
+        
+        //반환
+        return new LandResources((byte)iron, (byte)nuke);
+    }
+
+
+    /// <summary>
+    /// 환경 조정은 천천히 적용.
+    /// </summary>
+    private void EnvironmentMovementAdopt()
+    {
+        this[VariableFloat.EtcAirMass_Tt] += (_etcAirMassGoal - this[VariableFloat.EtcAirMass_Tt]) * Time.deltaTime * GameSpeed;
+        this[VariableFloat.TotalWater_PL] += (_totalWaterVolumeGoal - this[VariableFloat.TotalWater_PL]) * Time.deltaTime * GameSpeed;
+        _temperatureMovement += (this[VariableShort.TemperatureMovement] - _temperatureMovement) * Time.deltaTime * GameSpeed;
+        this[VariableFloat.TotalCarbonRatio_ppm] += (_totalCarboneRatioGoal - this[VariableFloat.TotalCarbonRatio_ppm]) * Time.deltaTime * GameSpeed;
+    }
+
+
+    /// <summary>
+    /// 물리량 계산
+    /// </summary>
+    private void PhysicsCalculate()
     {
         /*
         불변의 물리량
@@ -373,7 +392,6 @@ public class PlayManager : MonoBehaviour
         double double1;
         float float0;
 
-        #region 물리량 계산
         // 천문학적인 계산은 기본적으로 큰 자료형으로 변환 후 계산한다.
         #region 대기압
         // 기체질량
@@ -448,7 +466,7 @@ public class PlayManager : MonoBehaviour
                 }
             }
         }
-        
+
         // 총 반사율
         this[VariableFloat.TotalReflection] = this[VariableFloat.GroundReflection] + this[VariableFloat.WaterReflection] + this[VariableFloat.IceReflection] + this[VariableFloat.CloudReflection];
 
@@ -561,15 +579,133 @@ public class PlayManager : MonoBehaviour
             this[VariableFloat.OxygenRatio] = 0.0f;
         }
         #endregion 산소 농도
-        #endregion 물리량 계산
+    }
 
-        #region 인위적 환경조정 적용
-        // 환경 조정은 천천히 적용.
-        this[VariableFloat.EtcAirMass_Tt] += (_etcAirMassGoal - this[VariableFloat.EtcAirMass_Tt]) * Time.deltaTime * GameSpeed;
-        this[VariableFloat.TotalWater_PL] += (_totalWaterVolumeGoal - this[VariableFloat.TotalWater_PL]) * Time.deltaTime * GameSpeed;
-        _temperatureMovement += (this[VariableShort.TemperatureMovement] - _temperatureMovement) * Time.deltaTime * GameSpeed;
-        this[VariableFloat.TotalCarbonRatio_ppm] += (_totalCarboneRatioGoal - this[VariableFloat.TotalCarbonRatio_ppm]) * Time.deltaTime * GameSpeed;
-        #endregion 인위적 환경조정 적용
+
+    /// <summary>
+    /// 인위적 환경 조정
+    /// </summary>
+    private void EnvironmentAdjust()
+    {
+        // 대기 질량
+        switch (this[VariableShort.AirMassMovement])
+        {
+            case 0:
+                break;
+            default:
+                _etcAirMassGoal += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT;
+                if (0.0f > _etcAirMassGoal)
+                {
+                    _etcAirMassGoal = 0.0f;
+                }
+                break;
+        }
+
+        // 물 양
+        switch (this[VariableShort.WaterMovement])
+        {
+            case 0:
+                break;
+            default:
+                _totalWaterVolumeGoal += this[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT;
+                if (0.0f > _totalWaterVolumeGoal)
+                {
+                    _totalWaterVolumeGoal = 0.0f;
+                }
+                break;
+        }
+
+        // 탄소 농도
+        switch (this[VariableShort.CarbonMovement])
+        {
+            case 0:
+                break;
+            default:
+                _totalCarboneRatioGoal += this[VariableShort.CarbonMovement] * Constants.CARBON_RATIO_MOVEMENT;
+                if (0.0f > _totalCarboneRatioGoal)
+                {
+                    _totalCarboneRatioGoal = 0.0f;
+                }
+                break;
+        }
+    }
+
+
+    private void Awake()
+    {
+        // 유니티식 싱글턴패턴
+        Instance = this;
+
+        #region 임시
+        _data = new JsonData(true);
+        this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
+        this[VariableLong.Funds] = 500000;
+        this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
+        this[VariableFloat.TotalWater_PL] = Constants.EARTH_WATER_VOLUME;
+        this[VariableFloat.PlanetRadius_km] = Constants.EARTH_RADIUS;
+        this[VariableFloat.PlanetDensity_g_cm3] = Constants.EARTH_DENSITY;
+        this[VariableFloat.TotalCarbonRatio_ppm] = Constants.EARTH_CARBON_RATIO;
+
+        this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
+
+        this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
+
+        this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
+
+        this[VariableFloat.IncomeEnergy] = 1.0f;
+        #endregion
+
+        #region AudioManager 생성
+        // 개발 중 테스트 시 에러 방지
+        if (null == AudioManager.Instance)
+        {
+            GameObject audioManager = Instantiate(_audioManagerPrefab);
+            AudioManager.Instance = audioManager.GetComponent<AudioManager>();
+            DontDestroyOnLoad(audioManager);
+        }
+        #endregion
+
+        #region 번역 준비
+        // 현재 씬에서 모든 AutoTranslation을 찾는다.
+        AutoTranslation[] autoTranslations = FindObjectsOfType<AutoTranslation>(true);
+
+        // 모든 AutoTranslation을 준비시킨다.
+        for (ushort i = 0; i < autoTranslations.Length; ++i)
+        {
+            autoTranslations[i].TranslationReady();
+        }
+
+        // 현재 씬에서 모든 InputFieldFontChange 찾는다.
+        InputFieldFontChange[] inputFieldFontChange = FindObjectsOfType<InputFieldFontChange>(true);
+
+        // 모든 InputFieldFontChange 준비시킨다.
+        for (ushort i = 0; i < inputFieldFontChange.Length; ++i)
+        {
+            inputFieldFontChange[i].GetReady();
+        }
+
+        // 언어 불러온다.
+        Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
+        #endregion
+
+        // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
+        _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
+        _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
+
+        _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
+        _temperatureMovement = this[VariableShort.TemperatureMovement];
+        _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
+        _totalCarboneRatioGoal = this[VariableFloat.TotalCarbonRatio_ppm];
+    }
+
+
+    private void Update()
+    {
+        // 물리량 계산
+        PhysicsCalculate();
+
+        // 인위적 환경조정 적용
+        EnvironmentMovementAdopt();
 
         // 시작 전이면 함수 종료.
         if (!IsPlaying)
@@ -580,39 +716,8 @@ public class PlayManager : MonoBehaviour
         // 시간 경과
         _timer += Time.deltaTime * GameSpeed;
 
-        #region 탐사 진행
-        /*
-            진행 상황을 게이지로 표시할 때, 한 프레임이라도 게이지가 가득 차거나 완전히 빈 모습을 볼 수 있게 한다.
-        */
-
-        // ushort의 최대치를 넘지 않을 때만
-        if (ushort.MaxValue > this[VariableUshort.LandNum])
-        {
-            // 탐사 완료 시
-            if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
-            {
-                // 가변배열에 토지 추가
-                _lands.Add(new Land(this[VariableUshort.LandNum]));
-
-                // 토지 버튼 추가 및 초기화
-                Instantiate(_landSlot, _contentArea).GetComponent<LandSlot>().SlotInitialize();
-
-                // 토지 개수 추가
-                ++this[VariableUshort.LandNum];
-
-                // 탐사 진행 초기화
-                this[VariableFloat.ExploreProgress] = 0.0f;
-
-                // 탐사 목표 증가
-                this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
-            }
-            // 진행 중일 때
-            else
-            {
-                this[VariableFloat.ExploreProgress] += this[VariableByte.ExploreDevice] * Time.deltaTime * Constants.EXPLORE_SPEEDMULT * GameSpeed;
-            }
-        }
-        #endregion 탐사 진행
+        //탐사 진행
+        ExploreProgress();
 
         // 한 달 간격
         if (_timer >= _monthTimer)
@@ -622,49 +727,8 @@ public class PlayManager : MonoBehaviour
             // 자금이 있을 때
             if (this[VariableLong.Funds] > 0)
             {
-                #region 인위적 환경 조정
-                // 대기 질량
-                switch (this[VariableShort.AirMassMovement])
-                {
-                    case 0:
-                        break;
-                    default:
-                        _etcAirMassGoal += this[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT;
-                        if (0.0f > _etcAirMassGoal)
-                        {
-                            _etcAirMassGoal = 0.0f;
-                        }
-                        break;
-                }
-
-                // 물 양
-                switch (this[VariableShort.WaterMovement])
-                {
-                    case 0:
-                        break;
-                    default:
-                        _totalWaterVolumeGoal += this[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT;
-                        if (0.0f > _totalWaterVolumeGoal)
-                        {
-                            _totalWaterVolumeGoal = 0.0f;
-                        }
-                        break;
-                }
-
-                // 탄소 농도
-                switch (this[VariableShort.CarbonMovement])
-                {
-                    case 0:
-                        break;
-                    default:
-                        _totalCarboneRatioGoal += this[VariableShort.CarbonMovement] * Constants.CARBON_RATIO_MOVEMENT;
-                        if (0.0f > _totalCarboneRatioGoal)
-                        {
-                            _totalCarboneRatioGoal = 0.0f;
-                        }
-                        break;
-                }
-                #endregion
+                // 인위적 환경 조정
+                EnvironmentAdjust();
 
                 // 비용 지출
                 this[VariableLong.Funds] -= this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement] + this[VariableShort.CarbonMovement];

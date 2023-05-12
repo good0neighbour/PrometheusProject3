@@ -101,6 +101,8 @@ public class Language
                     "메뉴",
                     "토지",
                     "수용량",
+                    "철",
+                    "핵물질",
                 };
             }
             else
