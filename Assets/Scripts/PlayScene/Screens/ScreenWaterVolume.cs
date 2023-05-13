@@ -12,6 +12,7 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
     [SerializeField] private GameObject _upButton = null;
     [SerializeField] private GameObject _downButton = null;
     [SerializeField] private TMP_Text _buildInfraButton = null;
+    [SerializeField] private TMP_Text _infraCost = null;
     [SerializeField] private TMP_Text _numOfInfra = null;
     [SerializeField] private TMP_Text _montlyMovementText = null;
     [SerializeField] private TMP_Text _montlyCostText = null;
@@ -68,11 +69,8 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
             }
         }
 
-        // 월간 변화량 표시
-        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT).ToString()}PL/{Language.Instance["월"]}";
-
-        // 월간 비용 표시
-        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.WaterMovement].ToString()}/{Language.Instance["월"]}";
+        // 텍스트 업데이트
+        OnLanguageChange();
     }
 
 
@@ -131,6 +129,19 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
     }
 
 
+    private void OnLanguageChange()
+    {
+        // 인프라 건설 비용
+        _infraCost.text = $"{Language.Instance["인프라 건설 비용"]} {_buildingInfraCost.ToString()}";
+
+        // 월간 변화량 표시
+        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT).ToString()}PL/{Language.Instance["월"]}";
+
+        // 월간 비용 표시
+        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.WaterMovement].ToString()}/{Language.Instance["월"]}";
+    }
+
+
     private void Awake()
     {
         // 건설된 인프라 수 표시
@@ -146,11 +157,11 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
             _downButton.SetActive(false);
         }
 
-        // 월간 변화량 표시
-        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.WaterMovement] * Constants.WATER_VOLUME_MOVEMENT).ToString()}PL/{Language.Instance["월"]}";
+        // 텍스트 한 번 업데이트
+        OnLanguageChange();
 
-        // 월간 비용 표시
-        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.WaterMovement].ToString()}/{Language.Instance["월"]}";
+        // 대리자 등록
+        Language.OLC += OnLanguageChange;
     }
 
 

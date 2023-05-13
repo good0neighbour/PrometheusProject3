@@ -3,111 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-#region JsonData 배열 인덱스를 위한 열거형
-/// <summary>
-/// JsonData의 ByteArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableByte
-{
-    ExploreDevice,
-    AirPressureInfra,
-    TemperatureInfra,
-    WaterInfra,
-    CarbonInfra,
-    EndByte
-}
-
-/// <summary>
-/// JsonData의 ShortArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableShort
-{
-    AirMassMovement,
-    TemperatureMovement,
-    WaterMovement,
-    CarbonMovement,
-    EndShort
-}
-
-/// <summary>
-/// JsonData의 UshortArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableUshort
-{
-    LandNum,
-    EndUshort
-}
-
-/// <summary>
-/// JsonData의 IntArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableInt
-{
-    EndInt
-}
-
-/// <summary>
-/// JsonData의 LongArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableLong
-{
-    Funds,
-    EndLong
-}
-
-/// <summary>
-/// JsonData의 FloatArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableFloat
-{
-    TotalAirPressure_hPa,
-    TotalAirMass_Tt,
-    EtcAirMass_Tt,
-    TotalTemperature_C,
-    IncomeEnergy,
-    AbsorbEnergy,
-    TotalReflection,
-    GroundReflection,
-    WaterReflection,
-    IceReflection,
-    CloudReflection,
-    WaterGreenHouse_C,
-    CarbonGreenHouse_C,
-    EtcGreenHouse_C,
-    TotalWater_PL,
-    WaterGas_PL,
-    WaterLiquid_PL,
-    WaterSolid_PL,
-    TotalCarbonRatio_ppm,
-    CarbonGasMass_Tt,
-    CarbonLiquidMass_Tt,
-    CarbonSolidMass_Tt,
-    CarbonLifeMass_Tt,
-    PhotoLifePosibility,
-    BreathLifePosibility,
-    PhotoLifeStability,
-    BreathLifeStability,
-    OxygenRatio,
-    GravityAccelation_m_s2,
-    PlanetRadius_km,
-    PlanetDensity_g_cm3,
-    PlanetMass_Tt,
-    PlanetDistance_AU,
-    PlanetArea_km2,
-    ExploreProgress,
-    ExploreGoal,
-    EndFloat
-}
-
-/// <summary>
-/// JsonData의 DoubleArray 인덱스 접근을 위한 열거형
-/// </summary>
-public enum VariableDouble
-{
-    EndDouble
-}
-#endregion
-
 public class PlayManager : MonoBehaviour
 {
     public delegate void OnMonthChange();
@@ -124,10 +19,12 @@ public class PlayManager : MonoBehaviour
     [Header("참조")]
     [SerializeField] private GameObject _audioManagerPrefab = null;
     [SerializeField] private GameObject _landSlot = null;
-    [SerializeField] private Transform _contentArea = null;
+    [SerializeField] private Transform _landListContentArea = null;
+    [SerializeField] private TechTrees _techTreeData = null;
 
     private JsonData _data;
     private List<Land> _lands = new List<Land>();
+    private List<City> _cities = new List<City>();
     private float _timer = 0.0f;
     private float _gameSpeed = 1.0f;
     private float _etcAirMassGoal = 0.0f;
@@ -137,7 +34,6 @@ public class PlayManager : MonoBehaviour
     private float _incomeEnergy_C = 0.0f;
     private float _carbonRatio = 1.0f / Constants.EARTH_CARBON_RATIO;
     private double _cloudReflectionMultiply = 0.0d;
-
 
     public static PlayManager Instance
     {
@@ -289,6 +185,70 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 토지 추가
+    /// </summary>
+    public void AddLand(Land land)
+    {
+        _lands.Add(land);
+    }
+
+
+    /// <summary>
+    /// 도시 정보를 가져온다.
+    /// </summary>
+    public City GetCity(ushort index)
+    {
+        return _cities[index];
+    }
+
+
+    /// <summary>
+    /// 도시 추가
+    /// </summary>
+    public void AddCity(City city)
+    {
+        _cities.Add(city);
+    }
+
+
+    /// <summary>
+    /// 토지 슬롯 추가
+    /// </summary>
+    public void AddLandSlot()
+    {
+        // 가변배열에 토지 추가
+        AddLand(new Land(this[VariableUshort.LandNum], RandomResources()));
+
+        // 토지 버튼 추가 및 초기화
+        Instantiate(_landSlot, _landListContentArea).GetComponent<LandSlot>().SlotInitialize(this[VariableUshort.LandNum]);
+
+        // 토지 개수 추가
+        ++this[VariableUshort.LandNum];
+
+        // 탐사 진행 초기화
+        this[VariableFloat.ExploreProgress] = 0.0f;
+
+        // 탐사 목표 증가
+        this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+    }
+
+
+    public void AddCitySlot()
+    {
+
+    }
+
+
+    /// <summary>
+    /// 테크 트리 정보 가져오기
+    /// </summary>
+    public TechTrees GetTechTreeData()
+    {
+        return _techTreeData;
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -303,24 +263,13 @@ public class PlayManager : MonoBehaviour
             // 탐사 완료 시
             if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
             {
-                // 가변배열에 토지 추가
-                _lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
-
-                // 토지 버튼 추가 및 초기화
-                Instantiate(_landSlot, _contentArea).GetComponent<LandSlot>().SlotInitialize();
-
-                // 토지 개수 추가
-                ++this[VariableUshort.LandNum];
-
-                // 탐사 진행 초기화
-                this[VariableFloat.ExploreProgress] = 0.0f;
-
-                // 탐사 목표 증가
-                this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+                // 토지 슬롯 추가
+                AddLandSlot();
             }
             // 진행 중일 때
             else
             {
+                // 시간에 따른 진행도 상승
                 this[VariableFloat.ExploreProgress] += this[VariableByte.ExploreDevice] * Time.deltaTime * Constants.EXPLORE_SPEEDMULT * GameSpeed;
             }
         }
@@ -330,32 +279,43 @@ public class PlayManager : MonoBehaviour
     /// <summary>
     /// 무작위 자원 생성
     /// </summary>
-    private LandResources RandomResources()
+    private byte[] RandomResources()
     {
         // 자원 변수
-        int iron;
-        int nuke;
+        int[] resources = new int[(int)ResourceType.End];
+        int total;
 
         // 어느 하나라도 0이 아닐 때까지 반복
         do
         {
-            // 무작위 값
-            iron = Random.Range(Constants.IRON_MIN, Constants.IRON_MAX + 1);
-            nuke = Random.Range(Constants.NUKE_MIN, Constants.NUKE_MAX + 1);
+            // 총 값 초기화
+            total = 0;
 
-            // 0은 제외
-            if (0 > iron)
+            for (byte i = 0; i < (byte)ResourceType.End; ++i)
             {
-                iron = 0;
+                // 무작위 값
+                resources[i] = Random.Range(Constants.RESOURCE_MIN_MAX[i, 0], Constants.RESOURCE_MIN_MAX[i, 1] + 1);
+
+                // 0은 제외
+                if (0 > resources[i])
+                {
+                    resources[i] = 0;
+                }
+
+                // 총합
+                total += resources[i];
             }
-            if (0 > nuke)
-            {
-                nuke = 0;
-            }
-        } while (0 == iron + nuke);
-        
+        } while (0 == total);
+
+        // 배열 생성
+        byte[] result = new byte[(int)ResourceType.End];
+        for (byte i = 0; i < (byte)ResourceType.End; ++i)
+        {
+            result[i] = (byte)resources[i];
+        }
+
         //반환
-        return new LandResources((byte)iron, (byte)nuke);
+        return result;
     }
 
 
@@ -631,6 +591,15 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 월간 비용
+    /// </summary>
+    private long MonthlyCost()
+    {
+        return this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement] + this[VariableShort.CarbonMovement]; 
+    }
+
+
     private void Awake()
     {
         // 유니티식 싱글턴패턴
@@ -731,7 +700,7 @@ public class PlayManager : MonoBehaviour
                 EnvironmentAdjust();
 
                 // 비용 지출
-                this[VariableLong.Funds] -= this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement] + this[VariableShort.CarbonMovement];
+                this[VariableLong.Funds] -= MonthlyCost();
             }
         }
     }

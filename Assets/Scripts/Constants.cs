@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public static class Constants
@@ -38,6 +37,7 @@ public static class Constants
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
     // 게임 플레이 관련 값, 일반
+    public const ushort INITIAL_POPULATION = 10;
     public const float GAME_RESUME = 1.0f;
     public const float GAME_PAUSE = 0.0f;
     public const float AIRMASS_MOVEMENT = 1.0f;
@@ -47,21 +47,28 @@ public static class Constants
     public const float LIFE_STABILITY_SPEEDMULT = 0.05f;
     public const float EXPLORE_SPEEDMULT = 0.001f;
     public const float INITIAL_EXPLORE_GOAL = 0.01f;
-    public const float EXPLORE_GOAL_INCREASEMENT = 5.0f;
+    public const float EXPLORE_GOAL_INCREASEMENT = 3.0f;
+    public const float TECHTREE_AREA_CENTER = 0.375f;
+    public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const string ON_EXPANDED = ">";
-    public const string ON_COLLAPSED = "<";
+    public const string ON_COLLAPSED = ">";
+    public const string FACILITY_UNADOPTED = "○";
+    public const string FACILITY_ADOPTED = "●";
 
     // 게임 플레이 관련 값, 자원
-    public const int IRON_MAX = 5;
-    public const int IRON_MIN = -2;
-    public const int NUKE_MAX = -3;
-    public const int NUKE_MIN = 2;
+    public static readonly int[,] RESOURCE_MIN_MAX = new int[(int)ResourceType.End, 2]
+    {
+        { -2, 5 },  //철
+        { -4, 2 },  //핵물질
+        { -5, 3 },  //보석
+    };
 
     // 색상
     public static readonly Color WHITE = new Color(1.0f, 1.0f, 1.0f);
     public static readonly Color TEXT_BUTTON_DISABLE = new Color(0.5f, 0.5f, 0.5f);
     public static readonly Color BUTTON_UNSELECTED = new Color(50.0f / 255.0f, 50.0f / 255.0f, 50.0f / 255.0f);
     public static readonly Color BUTTON_SELECTED = new Color(150.0f / 255.0f, 150.0f / 255.0f, 150.0f / 255.0f);
+    public static readonly Color FAIL_TEXT = new Color(1.0f, 100.0f / 255.0f, 0.0f);
 
     // 수정이 필요 없는 값
     public const float HALF_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.5f;

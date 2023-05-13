@@ -152,10 +152,20 @@ public class ScreenBreath : PlayScreenBase, IRequest
     }
 
 
-    private void Awake()
+    private void OnLanguageChange()
     {
         // 비용 표시
         _costText.text = $"{Language.Instance["비용"]} {_requestCost.ToString()}";
+    }
+
+
+    private void Awake()
+    {
+        // 텍스트 한 번 업데이트
+        OnLanguageChange();
+
+        // 대리자
+        Language.OLC += OnLanguageChange;
     }
 
 

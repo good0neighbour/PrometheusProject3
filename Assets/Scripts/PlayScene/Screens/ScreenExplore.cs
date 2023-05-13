@@ -12,20 +12,13 @@ public class ScreenExplore : PlayScreenBase
     [Header("비용")]
     [SerializeField] private ushort _deviceCost = 0;
 
-    [Header("토지 목록")]
-    [SerializeField] private Vector2 _anchorMaxCollapsed = new Vector2(0.7f, 0.55f);
-    [SerializeField] private Vector2 _anchorMaxExpanded = new Vector2(0.7f, 0.8f);
-
     [Header("참조")]
     [SerializeField] private Image _progressImage = null;
     [SerializeField] private TMP_Text _addDeviceBtn = null;
     [SerializeField] private TMP_Text _deviceNum = null;
-    [SerializeField] private TMP_Text _listExpandBtn = null;
-    [SerializeField] private RectTransform _list = null;
     [SerializeField] private GameObject _landScreen = null;
 
     private bool _addDeviceAvailable = true;
-    private bool _isExpended = false;
 
     public LandSlot CurrentSlot
     {
@@ -78,28 +71,6 @@ public class ScreenExplore : PlayScreenBase
 
         // 장비 개수 표시
         _deviceNum.text = PlayManager.Instance[VariableByte.ExploreDevice].ToString();
-    }
-
-
-    public void BtnListExpand()
-    {
-        // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
-
-        // 목록 축소
-        if (_isExpended)
-        {
-            _list.anchorMax = _anchorMaxCollapsed;
-            _listExpandBtn.text = Constants.ON_COLLAPSED;
-            _isExpended = false;
-        }
-        // 목록 확장
-        else
-        {
-            _list.anchorMax = _anchorMaxExpanded;
-            _listExpandBtn.text = Constants.ON_EXPANDED;
-            _isExpended = true;
-        }
     }
 
 

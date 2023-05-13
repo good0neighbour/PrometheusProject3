@@ -6,22 +6,23 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
 {
     /* ==================== Variables ==================== */
 
-    [Header("¼Òµµ½Ã")]
-    [SerializeField] private uint _smallCityCapacity = 0;
+    [Header("ì†Œë„ì‹œ")]
+    [SerializeField] private ushort _smallCityCapacity = 0;
     [SerializeField] private ushort _smallCityCost = 0;
 
-    [Header("ÁßÇüµµ½Ã")]
-    [SerializeField] private uint _middleCityCapacity = 0;
+    [Header("ì¤‘í˜•ë„ì‹œ")]
+    [SerializeField] private ushort _middleCityCapacity = 0;
     [SerializeField] private ushort _middleCityCost = 0;
 
-    [Header("´ëµµ½Ã")]
-    [SerializeField] private uint _bigCityCapacity = 0;
+    [Header("ëŒ€ë„ì‹œ")]
+    [SerializeField] private ushort _bigCityCapacity = 0;
     [SerializeField] private ushort _bigCityCost = 0;
 
-    [Header("ÂüÁ¶")]
+    [Header("ì°¸ì¡°")]
     [SerializeField] private GameObject _buildCityBtn = null;
     [SerializeField] private GameObject _cityName = null;
     [SerializeField] private GameObject _cityBuildScreen = null;
+    [SerializeField] private GameObject _resourceDisplayArea = null;
     [SerializeField] private Image _smallCityButton = null;
     [SerializeField] private Image _middleCityButton = null;
     [SerializeField] private Image _bigCityButton = null;
@@ -37,12 +38,14 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
     [SerializeField] private TMP_Text _bigCityCostText = null;
     [SerializeField] private TMP_InputField _cityNameInputField = null;
 
+    private GameObject[] _resourceDisplays = null;
+    private TMP_Text[] _resourceAmount = null;
     private LandSlot _currentSlot = null;
     private Land _currentLand = null;
     private TMP_Text _cityNameText = null;
     private bool _isBuildAvailable = false;
     private ushort _currentCost = 0;
-    private uint _currentCapacity = 0;
+    private ushort _currentCapacity = 0;
 
 
 
@@ -50,74 +53,80 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
 
     public void BtnBack()
     {
-        // ¼Ò¸® Àç»ı
+        // ì†Œë¦¬ ì¬ìƒ
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
-        // ÇöÀç Ã¢ ´İ±â
+        // í˜„ì¬ ì°½ ë‹«ê¸°
         ScreenExplore.Instance.OpenLandScreen(false);
     }
 
 
     public void BtnBuildCity()
     {
-        // ¼Ò¸® Àç»ı
+        // ì†Œë¦¬ ì¬ìƒ
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
-        // È°¼ºÈ­ÇÒ ¶§¸¶´Ù ÃÊ±âÈ­
-        _smallCityButton.color = Constants.BUTTON_UNSELECTED;
-        _middleCityButton.color = Constants.BUTTON_UNSELECTED;
-        _bigCityButton.color = Constants.BUTTON_UNSELECTED;
-        _currentCost = 0;
+        // ë„ì‹œ ê·œëª¨ ì„ íƒ ë²„íŠ¼ ì—…ë°ì´íŠ¸
+        CityButtonUpdate();
 
-        // µµ½Ã °Ç¼³ Ã¢ ¿­±â
+        // ì…ë ¥ì¹¸ ë¹„ìš´ë‹¤.
+        _cityNameInputField.text = null;
+
+        // ë„ì‹œ ê±´ì„¤ ì°½ ì—´ê¸°
         _cityBuildScreen.SetActive(true);
     }
 
 
     public void BtnPopUpBack()
     {
-        // ¼Ò¸® Àç»ı
+        // ì†Œë¦¬ ì¬ìƒ
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
-        // µµ½Ã °Ç¼³ Ã¢ ´İ±â
+        // ë„ì‹œ ê±´ì„¤ ì°½ ë‹«ê¸°
         _cityBuildScreen.SetActive(false);
     }
 
 
     public void BtnPopUpBuildCity()
     {
-        // »ç¿ë ºÒ°¡
+        // ì‚¬ìš© ë¶ˆê°€
         if (!_isBuildAvailable)
         {
             return;
         }
 
-        // ¼Ò¸® Àç»ı
+        // ì†Œë¦¬ ì¬ìƒ
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
-        // ºñ¿ë ÁöÃâ
-        PlayManager.Instance[VariableLong.Funds] -= _currentCost;
-
-        // µµ½Ã ÀÌ¸§
+        // ë„ì‹œ ì´ë¦„
         string cityName = _cityNameInputField.text;
 
-        // µµ½Ã ÀÌ¸§ ¾÷µ¥ÀÌÆ®
+        // ë¹„ìš© ì§€ì¶œ
+        PlayManager.Instance[VariableLong.Funds] -= _currentCost;
+
+        // ë„ì‹œ ì¶”ê°€
+        PlayManager.Instance.AddCity(new City(PlayManager.Instance[VariableUshort.CityNum], _currentLand.LandNum, cityName, _currentCapacity));
+
+        // ë„ì‹œ ìŠ¬ë¡¯ ì¶”ê°€
+        PlayManager.Instance.AddCitySlot();
+
+        // ë„ì‹œ ì´ë¦„ ì—…ë°ì´íŠ¸
         _currentLand.CityName = cityName;
 
-        // ½½·Ô ÀÌ¸§ ¾÷µ¥ÀÌÆ®
+        // ìŠ¬ë¡¯ ì´ë¦„ ì—…ë°ì´íŠ¸
         _currentSlot.SlotNameUpdate(cityName);
 
-        // ÀÌÀü È­¸é ¾÷µ¥ÀÌÆ®
+        // ì´ì „ í™”ë©´ ì—…ë°ì´íŠ¸
         BuildCityBtnDisplay(false);
 
-        // µµ½Ã °Ç¼³ Ã¢ ´İ±â
+        // ë„ì‹œ ê±´ì„¤ ì°½ ë‹«ê¸°
         _cityBuildScreen.SetActive(false);
     }
 
 
     public void BtnCityList(int whatCity)
     {
-        // ¼Ò¸® Àç»ı
+        // ì†Œë¦¬ ì¬ìƒ
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         switch (whatCity)
@@ -147,6 +156,9 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
 
     /* ==================== Private Methods ==================== */
 
+    /// <summary>
+    /// ë„ì‹œ ê±´ì„¤ ë²„íŠ¼ ì—…ë°ì´íŠ¸
+    /// </summary>
     private void BuildCityBtnDisplay(bool display)
     {
         if (display)
@@ -163,37 +175,16 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
     }
 
 
-    private void Awake()
+    /// <summary>
+    /// ë„ì‹œ ê·œëª¨ ì„ íƒ ë²„íŠ¼ ì—…ë°ì´íŠ¸
+    /// </summary>
+    private void CityButtonUpdate()
     {
-        // ÂüÁ¶
-        _cityNameText = _cityName.GetComponent<TMP_Text>();
+        // í˜„ì¬ ìê¸ˆ
+        long fund = PlayManager.Instance[VariableLong.Funds];
 
-        // ÅØ½ºÆ® ÁöÁ¤
-        _smallCityCapacityText.text = $"{Language.Instance["¼ö¿ë·®"]}\n{_smallCityCapacity.ToString()}";
-        _smallCityCostText.text = $"{Language.Instance["ºñ¿ë"]} {_smallCityCost.ToString()}";
-        _middleCityCapacityText.text = $"{Language.Instance["¼ö¿ë·®"]}\n{_middleCityCapacity.ToString()}";
-        _middleCityCostText.text = $"{Language.Instance["ºñ¿ë"]} {_middleCityCost.ToString()}";
-        _bigCityCapacityText.text = $"{Language.Instance["¼ö¿ë·®"]}\n{_bigCityCapacity.ToString()}";
-        _bigCityCostText.text = $"{Language.Instance["ºñ¿ë"]} {_bigCityCost.ToString()}";
-    }
-
-
-    private void OnEnable()
-    {
-        // ½½·Ô Á¤º¸¸¦ °¡Á®¿Â´Ù.
-        _currentSlot = ScreenExplore.Instance.CurrentSlot;
-
-        // ÅäÁö Á¤º¸ °¡Á®¿Â´Ù.
-        _currentLand = PlayManager.Instance.GetLand(_currentSlot.SlotNum);
-
-        // Á¤º¸ Ç¥½Ã
-        BuildCityBtnDisplay(null == _currentLand.CityName);
-
-        // ÀÔ·ÂÄ­ ºñ¿î´Ù.
-        _cityNameInputField.text = null;
-
-        #region ºñ¿ë °è»ê
-        if (_smallCityCost > PlayManager.Instance[VariableLong.Funds])
+        // ì†Œë„ì‹œ
+        if (_smallCityCost > fund)
         {
             _smallCityTitleText.color = Constants.TEXT_BUTTON_DISABLE;
             _smallCityCapacityText.color = Constants.TEXT_BUTTON_DISABLE;
@@ -205,7 +196,9 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
             _smallCityCapacityText.color = Constants.WHITE;
             _smallCityCostText.color = Constants.WHITE;
         }
-        if (_middleCityCost > PlayManager.Instance[VariableLong.Funds])
+
+        // ì¤‘í˜•ë„ì‹œ
+        if (_middleCityCost > fund)
         {
             _middleCityTitleText.color = Constants.TEXT_BUTTON_DISABLE;
             _middleCityCapacityText.color = Constants.TEXT_BUTTON_DISABLE;
@@ -217,7 +210,9 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
             _middleCityCapacityText.color = Constants.WHITE;
             _middleCityCostText.color = Constants.WHITE;
         }
-        if (_bigCityCost > PlayManager.Instance[VariableLong.Funds])
+
+        // ëŒ€ë„ì‹œ
+        if (_bigCityCost > fund)
         {
             _bigCityTitleText.color = Constants.TEXT_BUTTON_DISABLE;
             _bigCityCapacityText.color = Constants.TEXT_BUTTON_DISABLE;
@@ -229,13 +224,95 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
             _bigCityCapacityText.color = Constants.WHITE;
             _bigCityCostText.color = Constants.WHITE;
         }
-        #endregion
+
+        // ì„ íƒí•˜ì§€ ì•Šì€ ìƒíƒœë¡œ ë˜ëŒë¦°ë‹¤.
+        _smallCityButton.color = Constants.BUTTON_UNSELECTED;
+        _middleCityButton.color = Constants.BUTTON_UNSELECTED;
+        _bigCityButton.color = Constants.BUTTON_UNSELECTED;
+        _currentCost = 0;
+    }
+
+
+    /// <summary>
+    /// ìì› ì •ë³´ í‘œì‹œ
+    /// </summary>
+    private void ResourceDisplayUpdate()
+    {
+        for (byte i = 0; i < (byte)ResourceType.End; ++i)
+        {
+            byte amount = _currentLand.Resources[i];
+            if (0 < amount)
+            {
+                _resourceAmount[i].text = amount.ToString();
+                _resourceDisplays[i].SetActive(true);
+            }
+            else
+            {
+                _resourceDisplays[i].SetActive(false);
+            }
+        }
+    }
+
+
+    private void OnLanguageChange()
+    {
+        _smallCityCapacityText.text = $"{Language.Instance["ìˆ˜ìš©ëŸ‰"]}\n{_smallCityCapacity.ToString()}";
+        _smallCityCostText.text = $"{Language.Instance["ë¹„ìš©"]} {_smallCityCost.ToString()}";
+        _middleCityCapacityText.text = $"{Language.Instance["ìˆ˜ìš©ëŸ‰"]}\n{_middleCityCapacity.ToString()}";
+        _middleCityCostText.text = $"{Language.Instance["ë¹„ìš©"]} {_middleCityCost.ToString()}";
+        _bigCityCapacityText.text = $"{Language.Instance["ìˆ˜ìš©ëŸ‰"]}\n{_bigCityCapacity.ToString()}";
+        _bigCityCostText.text = $"{Language.Instance["ë¹„ìš©"]} {_bigCityCost.ToString()}";
+    }
+
+
+    private void Awake()
+    {
+        // ì„ì‹œë¡œ ì‚¬ìš©í•  ì§€ì—­ë³€ìˆ˜
+        Transform resourceDisplayArea = _resourceDisplayArea.transform;
+
+        // ë°°ì—´ ìƒì„±
+        byte length = (byte)resourceDisplayArea.childCount;
+        _resourceDisplays = new GameObject[length];
+        _resourceAmount = new TMP_Text[length];
+
+        // ìì› ì •ë³´ í‘œì‹œ ìë™ ì°¸ì¡°
+        for (byte i = 0; i < length; ++i)
+        {
+            Transform child = resourceDisplayArea.GetChild(i);
+            _resourceDisplays[i] = child.gameObject;
+            _resourceAmount[i] = child.Find("TextAmount").GetComponent<TMP_Text>();
+        }
+
+        // ì°¸ì¡°
+        _cityNameText = _cityName.GetComponent<TMP_Text>();
+
+        // ì²˜ìŒì— í•œ ë²ˆ ì—…ë°ì´íŠ¸
+        OnLanguageChange();
+
+        // ëŒ€ë¦¬ì ë“±ë¡
+        Language.OLC += OnLanguageChange;
+    }
+
+
+    private void OnEnable()
+    {
+        // ìŠ¬ë¡¯ ì •ë³´ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
+        _currentSlot = ScreenExplore.Instance.CurrentSlot;
+
+        // í† ì§€ ì •ë³´ ê°€ì ¸ì˜¨ë‹¤.
+        _currentLand = PlayManager.Instance.GetLand(_currentSlot.SlotNum);
+
+        // ë„ì‹œ ì¡´ì¬ ì—¬ë¶€
+        BuildCityBtnDisplay(null == _currentLand.CityName);
+
+        // ìì› ì •ë³´ í‘œì‹œí•œë‹¤.
+        ResourceDisplayUpdate();
     }
 
 
     private void Update()
     {
-        // °Ç¼³ °¡´É ¿©ºÎ
+        // ê±´ì„¤ ê°€ëŠ¥ ì—¬ë¶€
         if (_currentCost == 0 || _cityNameInputField.text == string.Empty || _currentCost > PlayManager.Instance[VariableLong.Funds])
         {
             _isBuildAvailable = false;
@@ -247,7 +324,7 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
             _popUpBuildCityText.color = Constants.WHITE;
         }
 
-        // ´ÜÃàÅ° µ¿ÀÛ
+        // ë‹¨ì¶•í‚¤ ë™ì‘
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             ScreenExplore.Instance.OpenLandScreen(false);

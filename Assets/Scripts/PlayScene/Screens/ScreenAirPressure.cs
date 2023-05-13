@@ -13,6 +13,7 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     [SerializeField] private GameObject _downButton = null;
     [SerializeField] private RectTransform _meterCursor = null;
     [SerializeField] private TMP_Text _buildInfraButton = null;
+    [SerializeField] private TMP_Text _infraCost = null;
     [SerializeField] private TMP_Text _numOfInfra = null;
     [SerializeField] private TMP_Text _montlyMovementText = null;
     [SerializeField] private TMP_Text _montlyCostText = null;
@@ -73,11 +74,8 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
             }
         }
 
-        // 월간 변화량 표시
-        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT).ToString()}Tt/{Language.Instance["월"]}";
-
-        // 월간 비용 표시
-        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.AirMassMovement].ToString()}/{Language.Instance["월"]}";
+        // 번역 필요한 텍스트 업데이트
+        OnLanguageChange();
     }
 
 
@@ -136,6 +134,19 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
     }
 
 
+    private void OnLanguageChange()
+    {
+        // 인프라 건설 비용
+        _infraCost.text = $"{Language.Instance["인프라 건설 비용"]} {_buildingInfraCost.ToString()}";
+
+        // 월간 변화량 표시
+        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT).ToString()}Tt/{Language.Instance["월"]}";
+
+        // 월간 비용 표시
+        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.AirMassMovement].ToString()}/{Language.Instance["월"]}";
+    }
+
+
     private void Awake()
     {
         // 고정 값
@@ -155,11 +166,11 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
             _downButton.SetActive(false);
         }
 
-        // 월간 변화량 표시
-        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.AirMassMovement] * Constants.AIRMASS_MOVEMENT).ToString()}Tt/{Language.Instance["월"]}";
+        // 번역 필요한 텍스트 업데이트
+        OnLanguageChange();
 
-        // 월간 비용 표시
-        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.AirMassMovement].ToString()}/{Language.Instance["월"]}";
+        // 대리자 등록
+        Language.OLC += OnLanguageChange;
     }
 
 

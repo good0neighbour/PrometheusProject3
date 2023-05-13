@@ -13,6 +13,7 @@ public class JsonCreatorEditor : Editor
     private JsonLanguage _json;
     private Dictionary<string, int> _texts = null;
     private LanguageType _language = LanguageType.English;
+    private string _status = null;
     private string _koreanKey = null;
     private string _value = null;
     private string _isLoadedString = null;
@@ -25,12 +26,29 @@ public class JsonCreatorEditor : Editor
         GUILayout.Label("\njson 파일 생성", EditorStyles.boldLabel);
         if (GUILayout.Button("한국어 json 및 번역용 파일 생성"))
         {
-            ((JsonCreator)target).LanSave();
+            try
+            {
+                ((JsonCreator)target).LanSave();
+                _status = "한국어 json 저장됨.";
+            }
+            catch
+            {
+                _status = "실패.";
+            }
         }
         if (GUILayout.Button("다른 언어 json 생성"))
         {
-            ((JsonCreator)target).OhterLanSave();
+            try
+            {
+                ((JsonCreator)target).OhterLanSave();
+                _status = "다른 언어 json 저장됨.";
+            }
+            catch
+            {
+                _status = "실패.";
+            }
         }
+        GUILayout.Label(_status, EditorStyles.boldLabel);
 
         // 언어 테스트
         GUILayout.Label("\n언어 테스트", EditorStyles.boldLabel);

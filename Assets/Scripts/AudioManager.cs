@@ -3,7 +3,8 @@ using UnityEngine;
 public enum AudioType
 {
     Touch,
-    Select
+    Select,
+    Failed
 }
 
 public class AudioManager : MonoBehaviour
@@ -25,6 +26,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _selectClip = null;
     [SerializeField] private float _selectVolume = 1.0f;
 
+    [Header("Failed")]
+    [SerializeField] private AudioClip _failedClip = null;
+    [SerializeField] private float _failedVolume = 1.0f;
+
     [Header("참조")]
     [SerializeField] private AudioSource _audioSource = null;
 
@@ -36,7 +41,7 @@ public class AudioManager : MonoBehaviour
     /* ==================== Public Methods ==================== */
 
     /// <summary>
-    /// 미구현 상태
+    /// 소리 재생
     /// </summary>
     public void PlayAuido(AudioType audio)
     {
@@ -47,6 +52,9 @@ public class AudioManager : MonoBehaviour
                 return;
             case AudioType.Select:
                 UseChannel(_selectClip, _selectVolume);
+                return;
+            case AudioType.Failed:
+                UseChannel(_failedClip, _failedVolume);
                 return;
         }
     }

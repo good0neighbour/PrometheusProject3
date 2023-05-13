@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class GeneralMenuButtons : MonoBehaviour
 {
@@ -14,6 +13,12 @@ public class GeneralMenuButtons : MonoBehaviour
         Photo,
         Breath,
         LeftEnd,
+        City,
+        Research,
+        Society,
+        Diplomacy,
+        OwnCulture,
+        MediaCulture,
         RightEnd
     }
 

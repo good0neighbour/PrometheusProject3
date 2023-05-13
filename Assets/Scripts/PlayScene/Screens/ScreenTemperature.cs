@@ -13,6 +13,7 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
     [SerializeField] private GameObject _downButton = null;
     [SerializeField] private RectTransform _meterCursor = null;
     [SerializeField] private TMP_Text _buildInfraButton = null;
+    [SerializeField] private TMP_Text _infraCost = null;
     [SerializeField] private TMP_Text _numOfInfra = null;
     [SerializeField] private TMP_Text _montlyMovementText = null;
     [SerializeField] private TMP_Text _montlyCostText = null;
@@ -70,11 +71,8 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
             }
         }
 
-        // 월간 변화량 표시
-        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.TemperatureMovement] * Constants.TEMPERATURE_MOVEMENT).ToString()}℃";
-
-        // 월간 비용 표시
-        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.TemperatureMovement].ToString()}/{Language.Instance["월"]}";
+        // 텍스트 업데이트
+        OnLanguageChange();
     }
 
 
@@ -113,6 +111,19 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
 
     /* ==================== Private Methods ==================== */
 
+    private void OnLanguageChange()
+    {
+        // 인프라 건설 비용
+        _infraCost.text = $"{Language.Instance["인프라 건설 비용"]} {_buildingInfraCost.ToString()}";
+
+        // 월간 변화량 표시
+        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.TemperatureMovement] * Constants.TEMPERATURE_MOVEMENT).ToString()}℃";
+
+        // 월간 비용 표시
+        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.TemperatureMovement].ToString()}/{Language.Instance["월"]}";
+    }
+
+
     private void Awake()
     {
         // 고정 값
@@ -131,11 +142,11 @@ public class ScreenTemperature : PlayScreenBase, IUpDownAdjust
             _downButton.SetActive(false);
         }
 
-        // 월간 변화량 표시
-        _montlyMovementText.text = $"{(PlayManager.Instance[VariableShort.TemperatureMovement] * Constants.TEMPERATURE_MOVEMENT).ToString()}℃";
+        // 텍스트 한 번 업데이트
+        OnLanguageChange();
 
-        // 월간 비용 표시
-        _montlyCostText.text = $"{Language.Instance["비용"]} {PlayManager.Instance[VariableShort.TemperatureMovement].ToString()}/{Language.Instance["월"]}";
+        // 대리자 등록
+        Language.OLC += OnLanguageChange;
     }
 
 

@@ -3,17 +3,6 @@ using System.Text;
 using System.IO;
 using UnityEngine;
 using TMPro;
-using static Unity.VisualScripting.Icons;
-
-/// <summary>
-/// 사용 가능한 언어 종류
-/// </summary>
-public enum LanguageType
-{
-    Korean,
-    English,
-    End
-}
 
 /// <summary>
 /// 번역된 언어를 위한 언어 관리 클래스
@@ -60,6 +49,7 @@ public class Language
                     "기온 조정 인프라 건설",
                     "분자 합성 인프라 건설",
                     "농도 조정 인프라 건설",
+                    "인프라 건설 비용",
                     "가동 중인 탐사 장비",
                     "탐사 진행도",
                     "건설된 인프라",
@@ -103,6 +93,27 @@ public class Language
                     "수용량",
                     "철",
                     "핵물질",
+                    "보석",
+                    "승인",
+                    "고유 문화",
+                    "미디어 문화",
+                    "외교",
+                    "연구",
+                    "도시",
+                    "사회",
+                    "승인 완료",
+                    "승인 실패",
+                    "도시 이름 입력",
+                    "탐사 설명",
+                    "대기압 설명",
+                    "온도 설명",
+                    "물 설명",
+                    "탄소 설명",
+                    "광합성 생물 설명",
+                    "호흡 생물 설명",
+                    "철 설명",
+                    "핵물질 설명",
+                    "보석 설명",
                 };
             }
             else
@@ -200,8 +211,20 @@ public class Language
                 case LanguageType.English:
                     filename = "English";
                     break;
+                case LanguageType.German:
+                    filename = "German";
+                    break;
+                case LanguageType.French:
+                    filename = "French";
+                    break;
+                case LanguageType.Taiwanese:
+                    filename = "Taiwanese";
+                    break;
+                case LanguageType.Japanese:
+                    filename = "Japanese";
+                    break;
                 default:
-                    Debug.LogError("잘못된 언어 종류.");
+                    Debug.LogError("LoadLangeage - LanguageType 수정 요망.");
                     return;
             }
 
@@ -235,14 +258,10 @@ public class Language
         JsonLanguage jsonLanguage = new JsonLanguage(true);
 
         // json 파일을 저장한다.
-        string json = JsonUtility.ToJson(jsonLanguage, true);
-        File.WriteAllText($"{Application.dataPath}/Resources/Korean.Json", json);
+        File.WriteAllText($"{Application.dataPath}/Resources/Korean.Json", JsonUtility.ToJson(jsonLanguage, true));
 
         // 구글 번역을 위해 텍스트 파일로 저장한다.
         TextFileForGoogleTranslate(jsonLanguage);
-
-        // 에디터에 출력한다.
-        Debug.Log(json);
     }
 
 
@@ -257,7 +276,6 @@ public class Language
         string jsonForm = Resources.Load("Korean").ToString();
         StringBuilder[] words = new StringBuilder[num];
         StringBuilder result = new StringBuilder();
-        StringBuilder record = new StringBuilder();
         for (int j = 0; j < words.Length; ++j)
         {
             words[j] = new StringBuilder();
@@ -290,15 +308,18 @@ public class Language
 
             // json화 시작 준비 단계
             int count = 0;
+            bool proceed = true;
             index = 0;
             result.Clear();
-            record.Clear();
 
             // json 형식 따라가기
             for (int j = 0; j < jsonForm.Length; ++j)
             {
                 // 기록
-                record.Append(jsonForm[j]);
+                if (proceed)
+                {
+                    result.Append(jsonForm[j]);
+                }
 
                 // 큰따옴표 세기
                 if ('\"' == jsonForm[j])
@@ -311,28 +332,28 @@ public class Language
                         // 큰따옴표 열렸을 때
                         if (1 == count % 2)
                         {
-                            // 기록 저장
-                            result.Append(record.ToString());
+                            // 새로운 단어 저장
                             result.Append(words[index]);
                             result.Append('\"');
+
+                            // 다음 단어
                             ++index;
+
+                            // 기록 중지
+                            proceed = false;
                         }
                         // 큰따옴표 닫혔을 때
                         else
                         {
-                            // 기록 초기화
-                            record.Clear();
+                            // 기록 재개
+                            proceed = true;
                         }
                     }
                 }
             }
 
-            // 마지막 기록 저장
-            result.Append(record.ToString());
-
             // json 파일로 저장
             File.WriteAllText($"{Application.dataPath}/Resources/{Path.GetFileNameWithoutExtension(path[i])}.Json", result.ToString());
-            Debug.Log(result.ToString());
         }
     }
 
