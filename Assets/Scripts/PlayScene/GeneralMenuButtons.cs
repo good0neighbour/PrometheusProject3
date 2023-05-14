@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GeneralMenuButtons : MonoBehaviour
@@ -31,11 +32,12 @@ public class GeneralMenuButtons : MonoBehaviour
     [SerializeField] private GameObject _rightButton = null;
     [SerializeField] private GameObject _leftIndex = null;
     [SerializeField] private GameObject _rightIndex = null;
-    [SerializeField] private GameObject _selection = null;
+    [SerializeField] private Transform _selection = null;
 
     private PlayScreenBase _currentScreen = null;
-    private Transform _selectionTransform = null;
+    private RectTransform _selectionRectTransform = null;
     private byte _currentMenuFocus = 1;
+    private bool _isRightButtonAvailable = false;
 
     public static GeneralMenuButtons Instance
     {
@@ -54,6 +56,7 @@ public class GeneralMenuButtons : MonoBehaviour
         get;
         private set;
     }
+
 
 
 
@@ -92,24 +95,13 @@ public class GeneralMenuButtons : MonoBehaviour
     /// <summary>
     /// 현재 메뉴 화면 변경, 커서 위치 변경
     /// </summary>
-    public void SetCurrentScreen(PlayScreenBase current, Transform currorPosition)
+    public void SetCurrentScreen(PlayScreenBase current, Transform cursorPosition)
     {
         // 현재 화면 참조 변경
         _currentScreen = current;
 
         // 커서 위치
-        if (null == currorPosition)
-        {
-            _selection.SetActive(false);
-        }
-        else
-        {
-            _selectionTransform.SetParent(currorPosition, false);
-            if (!_selection.activeSelf)
-            {
-                _selection.SetActive(true);
-            }
-        }
+        _selection.SetParent(cursorPosition, false);
     }
 
 
@@ -138,6 +130,8 @@ public class GeneralMenuButtons : MonoBehaviour
             case 0:
                 SetLeftRightButtonsActive(false, true);
                 AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Right);
+                _selectionRectTransform.anchorMax = new Vector2(1.2f, 0.75f);
+                _selectionRectTransform.anchorMin = new Vector2(-1.2f, 0.25f);
                 break;
             case 1:
                 SetLeftRightButtonsActive(true, true);
@@ -146,6 +140,8 @@ public class GeneralMenuButtons : MonoBehaviour
             case 2:
                 SetLeftRightButtonsActive(true, false);
                 AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Left);
+                _selectionRectTransform.anchorMax = new Vector2(2.2f, 0.75f);
+                _selectionRectTransform.anchorMin = new Vector2(-0.2f, 0.25f);
                 break;
             default:
                 Debug.LogError("잘못된 메뉴 화면");
@@ -165,9 +161,6 @@ public class GeneralMenuButtons : MonoBehaviour
     /// </summary>
     public void BtnScreenIndex(int index)
     {
-        // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
-
         // 화면 전환 변경 적용. 변경 안 됐으면 바로 함수 종료.
         switch (_currentMenuFocus)
         {
@@ -190,11 +183,31 @@ public class GeneralMenuButtons : MonoBehaviour
                 return;
         }
 
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 화면 상태 변경
         _currentScreen.ChangeState();
 
         // 노이즈 효과 시작
         AnimationManager.Instance.NoiseEffect();
+    }
+
+
+    /// <summary>
+    /// 우측 버튼 활성화
+    /// </summary>
+    public void SetRightButtonAvailable()
+    {
+        // 이미 활성화 된 경우
+        if (_isRightButtonAvailable)
+        {
+            return;
+        }
+
+        // 활성화
+        _isRightButtonAvailable = true;
+        _rightButton.SetActive(true);
     }
 
 
@@ -208,8 +221,16 @@ public class GeneralMenuButtons : MonoBehaviour
     {
         _leftButton.SetActive(left);
         _leftIndex.SetActive(!left);
-        _rightButton.SetActive(right);
-        _rightIndex.SetActive(!right);
+        if (right)
+        {
+            _rightButton.SetActive(_isRightButtonAvailable);
+            _rightIndex.SetActive(false);
+        }
+        else
+        {
+            _rightButton.SetActive(false);
+            _rightIndex.SetActive(true);
+        }
     }
 
 
@@ -218,16 +239,19 @@ public class GeneralMenuButtons : MonoBehaviour
         // 유니티 식 싱글턴패턴
         Instance = this;
 
+        // 우측 메뉴 사용 가능 여부
+        _isRightButtonAvailable = (0 < PlayManager.Instance[VariableUshort.CityNum]);
+
         // 처음 시작 시 메뉴 화면은 정해져 있다.
         _currentScreen = _screens[(int)PlayScreenIndex.Main];
         _leftButton.SetActive(true);
-        _rightButton.SetActive(true);
+        _rightButton.SetActive(_isRightButtonAvailable);
         _leftIndex.SetActive(false);
         _rightIndex.SetActive(false);
         CurrentLeftIndex = 1;
-        CurrentRightIndex = 1;
+        CurrentRightIndex = 0;
 
         // 참조
-        _selectionTransform = _selection.transform;
+        _selectionRectTransform = _selection.GetComponent<RectTransform>();
     }
 }

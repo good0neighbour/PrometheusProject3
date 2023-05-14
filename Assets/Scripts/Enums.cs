@@ -157,7 +157,6 @@ public enum FaciityTag
     Safety2,
     Safety3,
     Safety4,
-    Safety5,
     Police0,
     Police1,
     Police2,

@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     /* ==================== Variables ==================== */
 
     // 생성하는 쪽에서 이미 값 할당
-    public static AudioManager Instance = null;
+    private static AudioManager _instance = null;
 
     [Header("설정")]
     [Range(2, byte.MaxValue)]
@@ -35,6 +35,26 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource[] _channels = null;
     private byte _currentChannel = 0;
+
+    public static AudioManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+        set
+        {
+            if (null == _instance)
+            {
+                _instance = value;
+            }
+            else if (value != _instance)
+            {
+                // 이미 생성돼있는 경우 새로 생성한 것을 파괴한다.
+                Destroy(value.gameObject);
+            }
+        }
+    }
 
 
 

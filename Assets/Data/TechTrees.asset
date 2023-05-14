@@ -16,39 +16,417 @@ MonoBehaviour:
   - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
     Tag: 0
     NodePosition: {x: 0, y: 0}
+    Description: 
     FundCost: 0
+    IronCost: 0
+    NukeCost: 0
     Requirments: 
-    NextNodes: 
+    PreviousNodes: 
   - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
     Tag: 1
     NodePosition: {x: 0, y: 1}
+    Description: 
     FundCost: 0
+    IronCost: 0
+    NukeCost: 0
     Requirments: 
-    NextNodes: 
+    PreviousNodes: 00000000
   - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
     Tag: 2
     NodePosition: {x: 0, y: 2}
+    Description: 
     FundCost: 0
+    IronCost: 0
+    NukeCost: 0
     Requirments: 
-    NextNodes: 
-  - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
+    PreviousNodes: 01000000
+  - NodeName: "\uACE1\uCC3D"
     Tag: 3
     NodePosition: {x: 1, y: 0}
+    Description: 
     FundCost: 0
+    IronCost: 0
+    NukeCost: 0
     Requirments: 
-    NextNodes: 
-  - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
+    PreviousNodes: 
+  - NodeName: "\uB18D\uC5C5\uB2E8\uC9C0"
     Tag: 4
     NodePosition: {x: 1, y: 1}
+    Description: 
     FundCost: 0
+    IronCost: 0
+    NukeCost: 0
     Requirments: 
-    NextNodes: 
-  - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
+    PreviousNodes: 0300000000000000
+  - NodeName: "\uBAA9\uCD95\uC5C5\uB2E8\uC9C0"
     Tag: 5
-    NodePosition: {x: 2, y: 0}
+    NodePosition: {x: 1, y: 2}
+    Description: 
     FundCost: 0
+    IronCost: 0
+    NukeCost: 0
     Requirments: 
-    NextNodes: 
+    PreviousNodes: 0400000001000000
+  - NodeName: "\uC2DD\uB8CC\uD488\uC810"
+    Tag: 6
+    NodePosition: {x: 1, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 05000000
+  - NodeName: "\uBE44\uB8CC\uACF5\uC7A5"
+    Tag: 7
+    NodePosition: {x: 1, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0600000002000000
+  - NodeName: "\uB18D\uC0B0\uBB3C\uB958"
+    Tag: 8
+    NodePosition: {x: 1, y: 5}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 07000000
+  - NodeName: "\uBCF4\uAC74\uC18C"
+    Tag: 9
+    NodePosition: {x: 2, y: 0}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 
+  - NodeName: "\uBCF4\uAC74\uAD50\uC721"
+    Tag: 10
+    NodePosition: {x: 2, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0900000000000000
+  - NodeName: "\uC678\uACFC\uC13C\uD0C0"
+    Tag: 11
+    NodePosition: {x: 2, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0a00000001000000
+  - NodeName: "\uC751\uAE09\uC2E4"
+    Tag: 12
+    NodePosition: {x: 2, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0b000000
+  - NodeName: "\uBCD1\uC6D0"
+    Tag: 13
+    NodePosition: {x: 2, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0c00000002000000
+  - NodeName: "\uC758\uD559\uC5F0\uAD6C\uC18C"
+    Tag: 14
+    NodePosition: {x: 2, y: 5}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0d000000
+  - NodeName: "\uC18C\uBC29\uC11C"
+    Tag: 15
+    NodePosition: {x: 3, y: 0}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 
+  - NodeName: "\uC548\uC804\uAD50\uC721"
+    Tag: 16
+    NodePosition: {x: 3, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 0f00000000000000
+  - NodeName: "\uC18C\uBC29\uB4DC\uB860"
+    Tag: 17
+    NodePosition: {x: 3, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1000000001000000
+  - NodeName: "\uC7AC\uD574\uACBD\uBCF4"
+    Tag: 18
+    NodePosition: {x: 3, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 11000000
+  - NodeName: "\uC548\uC804\uAD00\uB9AC\uBCF8\uBD80"
+    Tag: 19
+    NodePosition: {x: 3, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1200000002000000
+  - NodeName: "\uD30C\uCD9C\uC18C"
+    Tag: 20
+    NodePosition: {x: 4, y: 0}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 
+  - NodeName: "\uBC94\uC8C4\uC608\uBC29\uAD50\uC721"
+    Tag: 21
+    NodePosition: {x: 4, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1400000000000000
+  - NodeName: "\uACBD\uCC30\uC11C"
+    Tag: 22
+    NodePosition: {x: 4, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1500000001000000
+  - NodeName: "\uAD50\uB3C4\uC18C"
+    Tag: 23
+    NodePosition: {x: 4, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 16000000
+  - NodeName: "\uD615\uC0AC"
+    Tag: 24
+    NodePosition: {x: 4, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1700000002000000
+  - NodeName: "\uBC94\uC8C4\uC218\uC0AC\uAD6D"
+    Tag: 25
+    NodePosition: {x: 4, y: 5}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 18000000
+  - NodeName: "\uC0C1\uC218\uB3C4"
+    Tag: 26
+    NodePosition: {x: 5, y: 0}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 
+  - NodeName: "\uC815\uC218\uCC98\uB9AC\uC2DC\uC124"
+    Tag: 27
+    NodePosition: {x: 5, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1a00000000000000
+  - NodeName: "\uAD00\uB85C \uAC1C\uC120"
+    Tag: 28
+    NodePosition: {x: 5, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1b00000001000000
+  - NodeName: "\uC790\uB3D9\uD654 \uC815\uC218\uCC98\uB9AC\uC7A5"
+    Tag: 29
+    NodePosition: {x: 5, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1c000000
+  - NodeName: "\uD558\uC218\uB3C4"
+    Tag: 30
+    NodePosition: {x: 6, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1a00000000000000
+  - NodeName: "\uD558\uC218\uCC98\uB9AC\uC2DC\uC124"
+    Tag: 31
+    NodePosition: {x: 6, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1e00000001000000
+  - NodeName: "\uAD00\uAC70 \uAC1C\uC120"
+    Tag: 32
+    NodePosition: {x: 6, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 1f000000
+  - NodeName: "\uC790\uB3D9\uD654 \uD558\uC218\uCC98\uB9AC\uC7A5"
+    Tag: 33
+    NodePosition: {x: 6, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2000000002000000
+  - NodeName: "\uC791\uC5C5\uC7A5"
+    Tag: 34
+    NodePosition: {x: 7, y: 0}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 
+  - NodeName: "\uACF5\uC7A5"
+    Tag: 35
+    NodePosition: {x: 7, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2200000000000000
+  - NodeName: "\uAE30\uACC4\uD654\uACF5\uC7A5"
+    Tag: 36
+    NodePosition: {x: 7, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2300000001000000
+  - NodeName: "\uC0B0\uC5C5\uB2E8\uC9C0"
+    Tag: 37
+    NodePosition: {x: 7, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 24000000
+  - NodeName: "\uCCA8\uB2E8\uC0B0\uC5C5"
+    Tag: 38
+    NodePosition: {x: 7, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2500000002000000
+  - NodeName: "\uC790\uB3D9\uD654 \uACF5\uC7A5"
+    Tag: 39
+    NodePosition: {x: 7, y: 5}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 26000000
+  - NodeName: "\uAD50\uC721\uC2DC\uC124"
+    Tag: 40
+    NodePosition: {x: 8, y: 0}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 
+  - NodeName: "\uC815\uBCF4\uC13C\uD0C0"
+    Tag: 41
+    NodePosition: {x: 8, y: 1}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2800000000000000
+  - NodeName: "\uACE0\uB4F1\uAD50\uC721\uC2DC\uC124"
+    Tag: 42
+    NodePosition: {x: 8, y: 2}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2900000001000000
+  - NodeName: "\uB300\uD559"
+    Tag: 43
+    NodePosition: {x: 8, y: 3}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2a000000
+  - NodeName: "\uC5F0\uAD6C\uC2DC\uC124"
+    Tag: 44
+    NodePosition: {x: 8, y: 4}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2b00000002000000
+  - NodeName: "\uC785\uC790\uAC00\uC18D\uAE30"
+    Tag: 45
+    NodePosition: {x: 8, y: 5}
+    Description: 
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: 
+    PreviousNodes: 2c000000
   _texhNodes: []
   _thoughtNodes: []
   _societyNodes: []

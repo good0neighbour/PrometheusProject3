@@ -12,9 +12,14 @@ public class TechTrees : ScriptableObject
         public string NodeName;
         public FaciityTag Tag;
         public Vector2 NodePosition;
+        public string Description;
+        [Header("비용")]
         public ushort FundCost;
+        public byte IronCost;
+        public byte NukeCost;
+        [Header("요구사항")]
         public TechTag[] Requirments;
-        public FaciityTag[] NextNodes;
+        public FaciityTag[] PreviousNodes;
     }
 
     [SerializeField] private Node[] _facilityNodes = null;

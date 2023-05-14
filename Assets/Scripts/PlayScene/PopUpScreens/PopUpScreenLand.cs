@@ -105,10 +105,13 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         PlayManager.Instance[VariableLong.Funds] -= _currentCost;
 
         // 도시 추가
-        PlayManager.Instance.AddCity(new City(PlayManager.Instance[VariableUshort.CityNum], _currentLand.LandNum, cityName, _currentCapacity));
+        PlayManager.Instance.AddCity(_currentLand.LandNum, cityName, _currentCapacity);
 
         // 도시 슬롯 추가
-        PlayManager.Instance.AddCitySlot();
+        PlayManager.Instance.AddCitySlot(PlayManager.Instance[VariableUshort.CityNum]);
+
+        // 도시 수 증가
+        ++PlayManager.Instance[VariableUshort.CityNum];
 
         // 도시 이름 업데이트
         _currentLand.CityName = cityName;
@@ -121,6 +124,9 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
 
         // 도시 건설 창 닫기
         _cityBuildScreen.SetActive(false);
+
+        // 우측 메뉴 사용 가능
+        GeneralMenuButtons.Instance.SetRightButtonAvailable();
     }
 
 

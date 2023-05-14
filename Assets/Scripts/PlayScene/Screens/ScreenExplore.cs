@@ -6,9 +6,6 @@ public class ScreenExplore : PlayScreenBase
 {
     /* ==================== Variables ==================== */
 
-    // 토지 버튼 때문에 싱글턴패턴이 필요하다.
-    public static ScreenExplore Instance = null;
-
     [Header("비용")]
     [SerializeField] private ushort _deviceCost = 0;
 
@@ -19,6 +16,13 @@ public class ScreenExplore : PlayScreenBase
     [SerializeField] private GameObject _landScreen = null;
 
     private bool _addDeviceAvailable = true;
+
+    // 토지 버튼 때문에 싱글턴패턴이 필요하다.
+    public static ScreenExplore Instance
+    {
+        get;
+        private set;
+    }
 
     public LandSlot CurrentSlot
     {
@@ -31,7 +35,7 @@ public class ScreenExplore : PlayScreenBase
     /* ==================== Public Methods ==================== */
 
     /// <summary>
-    /// 토지 버튼 클릭 시 호출한다.
+    /// 토지 버튼 클릭 시 호출한다. 토지 화면의 배경은 반투명하기 때문에 이러한 작업이 필요하다.
     /// </summary>
     public void OpenLandScreen(bool open)
     {

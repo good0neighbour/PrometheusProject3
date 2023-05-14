@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.Port;
 using Random = UnityEngine.Random;
 
 public class PlayManager : MonoBehaviour
@@ -19,7 +20,9 @@ public class PlayManager : MonoBehaviour
     [Header("참조")]
     [SerializeField] private GameObject _audioManagerPrefab = null;
     [SerializeField] private GameObject _landSlot = null;
+    [SerializeField] private GameObject _citySlot = null;
     [SerializeField] private Transform _landListContentArea = null;
+    [SerializeField] private Transform _cityListContentArea = null;
     [SerializeField] private TechTrees _techTreeData = null;
 
     private JsonData _data;
@@ -186,15 +189,6 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
-    /// 토지 추가
-    /// </summary>
-    public void AddLand(Land land)
-    {
-        _lands.Add(land);
-    }
-
-
-    /// <summary>
     /// 도시 정보를 가져온다.
     /// </summary>
     public City GetCity(ushort index)
@@ -204,39 +198,32 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
-    /// 도시 추가
+    /// 토지 슬롯 추가
     /// </summary>
-    public void AddCity(City city)
+    public void AddLandSlot(ushort landNum)
     {
-        _cities.Add(city);
+        // 토지 버튼 추가 및 초기화
+        Instantiate(_landSlot, _landListContentArea).GetComponent<LandSlot>().SlotInitialize(landNum);
     }
 
 
     /// <summary>
-    /// 토지 슬롯 추가
+    /// 도시 추가
     /// </summary>
-    public void AddLandSlot()
+    public void AddCity(ushort landNum, string cityName, ushort capacity)
     {
         // 가변배열에 토지 추가
-        AddLand(new Land(this[VariableUshort.LandNum], RandomResources()));
-
-        // 토지 버튼 추가 및 초기화
-        Instantiate(_landSlot, _landListContentArea).GetComponent<LandSlot>().SlotInitialize(this[VariableUshort.LandNum]);
-
-        // 토지 개수 추가
-        ++this[VariableUshort.LandNum];
-
-        // 탐사 진행 초기화
-        this[VariableFloat.ExploreProgress] = 0.0f;
-
-        // 탐사 목표 증가
-        this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+        _cities.Add(new City(this[VariableUshort.CityNum], landNum, cityName, capacity));
     }
 
 
-    public void AddCitySlot()
+    /// <summary>
+    /// 도시 슬롯 추가
+    /// </summary>
+    public void AddCitySlot(ushort cityNum)
     {
-
+        // 토지 버튼 추가 및 초기화
+        Instantiate(_citySlot, _cityListContentArea).GetComponent<CitySlot>().SlotInitialize(cityNum);
     }
 
 
@@ -263,8 +250,20 @@ public class PlayManager : MonoBehaviour
             // 탐사 완료 시
             if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
             {
+                // 가변배열에 토지 추가
+                _lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
+
                 // 토지 슬롯 추가
-                AddLandSlot();
+                AddLandSlot(this[VariableUshort.LandNum]);
+
+                // 토지 개수 추가
+                ++this[VariableUshort.LandNum];
+
+                // 탐사 진행 초기화
+                this[VariableFloat.ExploreProgress] = 0.0f;
+
+                // 탐사 목표 증가
+                this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
             }
             // 진행 중일 때
             else

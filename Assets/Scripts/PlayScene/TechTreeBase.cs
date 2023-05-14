@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Text;
 
 public abstract class TechTreeBase : MonoBehaviour
 {
@@ -13,23 +14,23 @@ public abstract class TechTreeBase : MonoBehaviour
 
     [Header("참조")]
     [SerializeField] protected TMP_Text AdoptBtn = null;
-    [SerializeField] protected TMP_Text Description = null;
     [SerializeField] protected TMP_Text GainsText = null;
-    [SerializeField] protected TMP_Text CostsText = null;
     [SerializeField] protected TMP_Text StatusText = null;
-    [SerializeField] protected TMP_Text BackBtn = null;
-    [SerializeField] protected Image ProgressionImage = null;
     [SerializeField] protected GameObject NodeObject = null;
-    [SerializeField] protected Transform TechTreeContentArea = null;
+    [SerializeField] private TMP_Text _costsText = null;
+    [SerializeField] private TMP_Text _backBtn = null;
+    [SerializeField] private TMP_Text _descriptionText = null;
+    [SerializeField] private Image _progressionImage = null;
     [SerializeField] private GameObject _cursor = null;
+    [SerializeField] private Transform _techTreeContentArea = null;
 
     protected TechTrees.Node[] NodeData = null;
+    protected GameObject[] NodeBtnObjects = null;
     protected TechTreeNode[] NodeBtns = null;
     protected TMP_Text[] NodeIcons = null;
     protected byte CurrentNode = 0;
     protected bool IsAdoptAvailable = false;
     protected bool IsBackAvailable = true;
-    private GameObject[] _nodeBtnObjects = null;
     private Transform _cursorTransform = null;
     private float _supportRate = 0.0f;
     private float _timer = 0.0f;
@@ -49,7 +50,7 @@ public abstract class TechTreeBase : MonoBehaviour
 
         // 뒤로가기 금지
         IsBackAvailable = false;
-        BackBtn.color = Constants.TEXT_BUTTON_DISABLE;
+        _backBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 상태 메세지 제거
         StatusText.text = null;
@@ -80,6 +81,12 @@ public abstract class TechTreeBase : MonoBehaviour
             AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
         }
 
+        // 설명 텍스트 업데이트
+        _descriptionText.text = $"[{NodeData[CurrentNode].NodeName}]\n{NodeData[CurrentNode].Description}";
+
+        // 비용 텍스트 업데이트
+        _costsText.text = GetCostText();
+
         // 상태 메세지 제거
         StatusText.text = null;
     }
@@ -99,14 +106,17 @@ public abstract class TechTreeBase : MonoBehaviour
         // 창 비활성화
         gameObject.SetActive(false);
 
+        // 게임 재개
+        PlayManager.Instance.GameResume = Constants.GAME_RESUME;
+
         // 처음 상태로 되돌린다.
         _cursor.SetActive(false);
         IsAdoptAvailable = false;
         AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
-        Description = null;
+        _descriptionText = null;
         GainsText = null;
-        CostsText = null;
-        StatusText = null;
+        _costsText = null;
+        StatusText.text = null;
     }
 
 
@@ -147,13 +157,49 @@ public abstract class TechTreeBase : MonoBehaviour
         {
             return false;
         }
+        //if (NodeData[CurrentNode].IronCost > PlayManager.Instance[VariableLong.Funds])
+        //{
+        //    return false;
+        //}
+        //if (NodeData[CurrentNode].NukeCost > PlayManager.Instance[VariableLong.Funds])
+        //{
+        //    return false;
+        //}
 
         // 사용 가능
         return true;
     }
 
 
-    private void Awake()
+    /// <summary>
+    /// 비용 텍스트 생성한다.
+    /// </summary>
+    private string GetCostText()
+    {
+        // 문자열 만들기
+        StringBuilder result = new StringBuilder();
+        result.Append($"[{Language.Instance["비용"]}]\n");
+
+        // 0 이상인 비용 표시
+        if (0 < NodeData[CurrentNode].FundCost)
+        {
+            result.Append($"{Language.Instance["자금"]} {NodeData[CurrentNode].FundCost}\n");
+        }
+        if (0 < NodeData[CurrentNode].IronCost)
+        {
+            result.Append($"{Language.Instance["철"]} {NodeData[CurrentNode].IronCost}\n");
+        }
+        if (0 < NodeData[CurrentNode].NukeCost)
+        {
+            result.Append($"{Language.Instance["핵물질"]} {NodeData[CurrentNode].NukeCost}\n");
+        }
+
+        // 반환
+        return result.ToString();
+    }
+
+
+    protected virtual void Awake()
     {
         // 참조
         _cursorTransform = _cursor.transform;
@@ -167,7 +213,7 @@ public abstract class TechTreeBase : MonoBehaviour
         // 배열 생성
         byte length = (byte)NodeData.Length;
         NodeBtns = new TechTreeNode[length];
-        _nodeBtnObjects = new GameObject[length];
+        NodeBtnObjects = new GameObject[length];
         NodeIcons = new TMP_Text[length];
 
         // 노드 배치
@@ -181,15 +227,15 @@ public abstract class TechTreeBase : MonoBehaviour
 
             // 노드 생성 후 위치 조정
             byte nodeIndex = (byte)NodeData[i].Tag;
-            NodeBtns[nodeIndex] = Instantiate(NodeObject, TechTreeContentArea).GetComponent<TechTreeNode>();
+            NodeBtns[nodeIndex] = Instantiate(NodeObject, _techTreeContentArea).GetComponent<TechTreeNode>();
             NodeBtns[nodeIndex].transform.localPosition = new Vector3(posX, posY, 0.0f);
 
             // 노드 초기화
             NodeBtns[nodeIndex].SetTechTree(this, nodeIndex);
 
             // 노드 참조
-            _nodeBtnObjects[nodeIndex] = NodeBtns[nodeIndex].gameObject;
-            NodeIcons[nodeIndex] = _nodeBtnObjects[nodeIndex].GetComponentInChildren<TMP_Text>();
+            NodeBtnObjects[nodeIndex] = NodeBtns[nodeIndex].gameObject;
+            NodeIcons[nodeIndex] = NodeBtnObjects[nodeIndex].GetComponentInChildren<TMP_Text>();
 
             // x, y 최대 값
             if (posX > sizeX)
@@ -204,9 +250,9 @@ public abstract class TechTreeBase : MonoBehaviour
 
         // 전체 크기
         float areaWidth = sizeX + Width * 0.5f;
-        RectTransform contentArea = TechTreeContentArea.GetComponent<RectTransform>();
-        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, areaWidth);
-        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, sizeY + Height * 0.5f);
+        RectTransform contentArea = _techTreeContentArea.GetComponent<RectTransform>();
+        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, areaWidth);
+        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, sizeY + Height * 0.5f);
 
         // 가운데 정렬
         float pivotX = (Constants.TECHTREE_AREA_CENTER * Constants.TECHTREE_AREA_WIDTH - areaWidth * 0.5f) / (Constants.TECHTREE_AREA_WIDTH - areaWidth);
@@ -224,7 +270,7 @@ public abstract class TechTreeBase : MonoBehaviour
         {
             // 애니메이션 진행
             _timer += Time.deltaTime;
-            ProgressionImage.fillAmount = _timer;
+            _progressionImage.fillAmount = _timer;
 
             // 애니메이션 완료
             if (1.0f <= _timer)
@@ -241,13 +287,13 @@ public abstract class TechTreeBase : MonoBehaviour
                 }
 
                 // 복귀
-                ProgressionImage.fillAmount = 0.0f;
+                _progressionImage.fillAmount = 0.0f;
                 _runAdoptProgression = false;
                 _timer = 0.0f;
 
                 // 뒤로가기 가능
                 IsBackAvailable = true;
-                BackBtn.color = Constants.WHITE;
+                _backBtn.color = Constants.WHITE;
             }
         }
     }
