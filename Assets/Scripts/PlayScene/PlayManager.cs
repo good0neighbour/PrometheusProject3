@@ -228,7 +228,7 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
-    /// 테크 트리 정보 가져오기
+    /// 테크 트리 정보 가져온다.
     /// </summary>
     public TechTrees GetTechTreeData()
     {
@@ -237,38 +237,11 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
-    /// 시설 잠금 해제 정보 가져온다.
+    /// 활성화 여부 정보 가져온다.
     /// </summary>
-    public bool[] GetUnlockedFacilities()
+    public bool[][] GetAdoptedData()
     {
-        return _data.UnlockedFacilities;
-    }
-
-
-    /// <summary>
-    /// 기술 잠금 해제 정보 가져온다.
-    /// </summary>
-    public bool[] GetUnlockedTechs()
-    {
-        return _data.UnlockedTechs;
-    }
-
-
-    /// <summary>
-    /// 사상 잠금 해제 정보 가져온다.
-    /// </summary>
-    public bool[] GetUnlockedThoughts()
-    {
-        return _data.UnlockedThoughts;
-    }
-
-
-    /// <summary>
-    /// 사회 잠금 해제 정보 가져온다.
-    /// </summary>
-    public bool[] GetUnlockedSocieties()
-    {
-        return _data.UnlockedSocieties;
+        return _data.Adopted;
     }
 
 
@@ -692,10 +665,20 @@ public class PlayManager : MonoBehaviour
         Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
         #endregion
 
+        // 테크트리 정보 준비
+        _techTreeData.GetReady();
+        for (TechTreeType i = 0; i < TechTreeType.TechTreeTypeEnd; ++i)
+        {
+            byte length = (byte)_techTreeData.GetNodes(i).Length;
+            _data.Adopted[(int)i] = new bool[length];
+            _data.Unlocked[(int)i] = new bool[length];
+        }
+
         // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
 
+        // 저장된 값
         _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
         _temperatureMovement = this[VariableShort.TemperatureMovement];
         _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
@@ -753,10 +736,7 @@ public class PlayManager : MonoBehaviour
         public long[] LongArray;
         public float[] FloatArray;
         public double[] DoubleArray;
-        public bool[] UnlockedFacilities;
-        public bool[] UnlockedTechs;
-        public bool[] UnlockedThoughts;
-        public bool[] UnlockedSocieties;
+        public bool[][] Adopted;
 
         public JsonData(bool initialize)
         {
@@ -769,10 +749,7 @@ public class PlayManager : MonoBehaviour
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
-                UnlockedFacilities = new bool[(int)FaciityTag.FacilityEnd];
-                UnlockedTechs = new bool[(int)TechTag.TechEnd];
-                UnlockedThoughts = new bool[(int)ThoughtTag.ThoughtEnd];
-                UnlockedSocieties = new bool[(int)SocietyTag.SocietyEnd];
+                Adopted = new bool[(int)TechTreeType.TechTreeTypeEnd][];
             }
             else
             {
@@ -783,11 +760,8 @@ public class PlayManager : MonoBehaviour
                 LongArray = null;
                 FloatArray = null;
                 DoubleArray = null;
-                UnlockedFacilities = null;
-                UnlockedTechs = null;
-                UnlockedThoughts = null;
-                UnlockedSocieties = null;
+                Adopted = null;
             }
-    }
+        }
     }
 }

@@ -75,40 +75,6 @@ public class PopUpScreenFacility : TechTreeBase
     }
 
 
-    protected override void Awake()
-    {
-        // 노드 정보 가져오기
-        NodeData = PlayManager.Instance.GetTechTreeData().GetFacilityNodes();
-
-        // 부모클래스 함수 호출
-        base.Awake();
-
-        // 다음 노드 가변 배열 생성
-        byte length = (byte)NodeData.Length;
-        _nextNodes = new List<byte>[length];
-
-        // 다음 노드 등록
-        for (byte i = 0; i < length; ++i)
-        {
-            // 이전 노드 정보
-            FaciityTag[] previousNodes = NodeData[i].PreviousNodes;
-
-            // 다음 노드로 등록
-            for (byte j = 0; j < (byte)previousNodes.Length; ++j)
-            {
-                // 가변배열 생성한 적 없으면 생성
-                if (null == _nextNodes[(int)previousNodes[j]])
-                {
-                    _nextNodes[(int)previousNodes[j]] = new List<byte>();
-                }
-
-                // 이전 노드로 설정된 것에 현재 노드를 다음 것으로 등록
-                _nextNodes[(int)previousNodes[j]].Add(i);
-            }
-        }
-    }
-
-
 
     /* ==================== Private Methods ==================== */
 
@@ -118,18 +84,81 @@ public class PopUpScreenFacility : TechTreeBase
     private bool EnableCheck(byte nextNode)
     {
         // 이전 노드로 설정된 것
-        FaciityTag[] previous = NodeData[nextNode].PreviousNodes;
-        for (int i = 0; i < previous.Length; i++)
+        TechTrees.Node.RequirmentNode[] requiredNodes = NodeData[nextNode].Requirments;
+        for (int i = 0; i < requiredNodes.Length; i++)
         {
             // 모두 승인된 것이 아니면 거짓 반환
-            if (!_adopted[(int)previous[i]])
+            switch (requiredNodes[i].Type)
             {
-                return false;
+                case TechTreeType.Facility:
+                    if (!_adopted[NodeIndex[requiredNodes[i].NodeName]])
+                    {
+                        return false;
+                    }
+                    break;
+                default:
+                    if (!Adopted[(int)requiredNodes[i].Type][NodeIndex[requiredNodes[i].NodeName]])
+                    {
+                        return false;
+                    }
+                    break;
             }
         }
 
         // 모두 승인 됐으면 참 반환
         return true;
+    }
+
+
+    private void Awake()
+    {
+        // 노드 정보 가져오기
+        NodeData = PlayManager.Instance.GetTechTreeData().GetNodes(TechTreeType.Facility);
+
+        // 다음 노드 가변 배열 생성
+        byte length = (byte)NodeData.Length;
+        _nextNodes = new List<byte>[length];
+
+        BasicInitialize(length);
+
+        // 다음 노드 등록
+        for (byte i = 0; i < length; ++i)
+        {
+            // 이전 노드 정보
+            TechTrees.Node.RequirmentNode[] requiredNodes = NodeData[i].Requirments;
+
+            // 다음 노드로 등록
+            for (byte j = 0; j < (byte)requiredNodes.Length; ++j)
+            {
+                // 요구 조건의 인덱스 번호
+                byte index = NodeIndex[requiredNodes[j].NodeName];
+
+                switch (requiredNodes[j].Type)
+                {
+                    // 요구 조건이 시설일 때
+                    case TechTreeType.Facility:
+                        {
+                            // 가변배열 생성한 적 없으면 생성
+                            if (null == _nextNodes[index])
+                            {
+                                _nextNodes[index] = new List<byte>();
+                            }
+
+                            // 이전 노드로 설정된 것에 현재 노드를 다음 것으로 등록
+                            _nextNodes[index].Add(i);
+
+                            break;
+                        }
+                    // 요구 조건이 시설이 아닐 때
+                    default:
+                        {
+                            //Adopted[][]
+
+                            break;
+                        }
+                }
+            }
+        }
     }
 
 

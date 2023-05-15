@@ -60,43 +60,50 @@ public class PopUpScreenTech : TechTreeBase
     }
 
 
-    protected override void Awake()
+
+    /* ==================== Private Methods ==================== */
+
+    protected void Awake()
     {
         // 노드 정보 가져오기
-        NodeData = PlayManager.Instance.GetTechTreeData().GetTechNodes();
-
-        // 부모의 함수 호출
-        base.Awake();
+        NodeData = PlayManager.Instance.GetTechTreeData().GetNodes(TechTreeType.Tech);
 
         // 다음 노드 가변 배열 생성
         byte length = (byte)NodeData.Length;
         _nextNodes = new List<byte>[length];
 
+        // 부모의 함수 호출
+        BasicInitialize(length);
+
         // 다음 노드 등록
         for (byte i = 0; i < length; ++i)
         {
             // 이전 노드 정보
-            FaciityTag[] previousNodes = NodeData[i].PreviousNodes;
+            TechTrees.Node.RequirmentNode[] requiredNodes = NodeData[i].Requirments;
 
             // 다음 노드로 등록
-            for (byte j = 0; j < (byte)previousNodes.Length; ++j)
+            for (byte j = 0; j < requiredNodes.Length; ++j)
             {
-                // 가변배열 생성한 적 없으면 생성
-                if (null == _nextNodes[(int)previousNodes[j]])
+                // 요구 조건이 기술일 때만 수행할 것
+                switch (requiredNodes[j].Type)
                 {
-                    _nextNodes[(int)previousNodes[j]] = new List<byte>();
-                }
+                    case TechTreeType.Tech:
+                        byte index = NodeIndex[requiredNodes[j].NodeName];
 
-                // 이전 노드로 설정된 것에 현재 노드를 다음 것으로 등록
-                _nextNodes[(int)previousNodes[j]].Add(i);
+                        // 가변배열 생성한 적 없으면 생성
+                        if (null == _nextNodes[index])
+                        {
+                            _nextNodes[index] = new List<byte>();
+                        }
+
+                        // 이전 노드로 설정된 것에 현재 노드를 다음 것으로 등록
+                        _nextNodes[index].Add(i);
+
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-
-        // 배열 참조
-        _unlocked = PlayManager.Instance.GetUnlockedTechs();
     }
-
-
-
-    /* ==================== Private Methods ==================== */
 }
