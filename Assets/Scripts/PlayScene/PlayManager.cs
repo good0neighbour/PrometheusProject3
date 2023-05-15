@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.Port;
 using Random = UnityEngine.Random;
 
 public class PlayManager : MonoBehaviour
@@ -66,6 +65,12 @@ public class PlayManager : MonoBehaviour
         {
             _gameSpeed = value;
         }
+    }
+
+    public byte FacilityLength
+    {
+        get;
+        private set;
     }
 
     #region JsonData의 배열에 접근
@@ -239,7 +244,7 @@ public class PlayManager : MonoBehaviour
     /// <summary>
     /// 활성화 여부 정보 가져온다.
     /// </summary>
-    public bool[][] GetAdoptedData()
+    public float[][] GetAdoptedData()
     {
         return _data.Adopted;
     }
@@ -669,9 +674,17 @@ public class PlayManager : MonoBehaviour
         _techTreeData.GetReady();
         for (TechTreeType i = 0; i < TechTreeType.TechTreeTypeEnd; ++i)
         {
-            byte length = (byte)_techTreeData.GetNodes(i).Length;
-            _data.Adopted[(int)i] = new bool[length];
-            _data.Unlocked[(int)i] = new bool[length];
+            switch (i)
+            {
+                case TechTreeType.Facility:
+                    // 시설 목록은 크기만 가져온다.
+                    FacilityLength = (byte)_techTreeData.GetNodes(i).Length;
+                    break;
+                default:
+                    byte length = (byte)_techTreeData.GetNodes(i).Length;
+                    _data.Adopted[(int)i] = new float[length];
+                    break;
+            }
         }
 
         // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
@@ -736,7 +749,7 @@ public class PlayManager : MonoBehaviour
         public long[] LongArray;
         public float[] FloatArray;
         public double[] DoubleArray;
-        public bool[][] Adopted;
+        public float[][] Adopted;
 
         public JsonData(bool initialize)
         {
@@ -749,7 +762,7 @@ public class PlayManager : MonoBehaviour
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
-                Adopted = new bool[(int)TechTreeType.TechTreeTypeEnd][];
+                Adopted = new float[(int)TechTreeType.TechTreeTypeEnd][];
             }
             else
             {

@@ -25,13 +25,15 @@ public abstract class TechTreeBase : MonoBehaviour
     [SerializeField] private GameObject _cursor = null;
     [SerializeField] private Transform _techTreeContentArea = null;
 
+    protected List<TechTrees.Node.SubNode>[] NextNodes = null;
     protected Dictionary<string, byte> NodeIndex = null;
     protected TechTrees.Node[] NodeData = null;
     protected GameObject[] NodeBtnObjects = null;
     protected TechTreeNode[] NodeBtns = null;
     protected TMP_Text[] NodeIcons = null;
+    protected TechTrees TechTreeData = null;
     protected byte CurrentNode = 0;
-    protected bool[][] Adopted = null;
+    protected float[][] Adopted = null;
     protected bool IsAdoptAvailable = false;
     protected bool IsBackAvailable = true;
     private Transform _cursorTransform = null;
@@ -73,7 +75,7 @@ public abstract class TechTreeBase : MonoBehaviour
         }
 
         // 비용 확인
-        SetAdoptButtonAvailable(CostAvailable());
+        SetAdoptButtonAvailable(IsUnadopted() && CostAvailable());
 
         // 설명 텍스트 업데이트
         _descriptionText.text = $"[{NodeData[CurrentNode].NodeName}]\n{NodeData[CurrentNode].Description}";
@@ -114,7 +116,7 @@ public abstract class TechTreeBase : MonoBehaviour
 
 
 
-    /* ==================== Public Methods ==================== */
+    /* ==================== Protected Methods ==================== */
 
     /// <summary>
     /// 승인 애니메이션 시작
@@ -126,10 +128,13 @@ public abstract class TechTreeBase : MonoBehaviour
     }
 
 
-    protected void BasicInitialize(byte nodeLength)
+    /// <summary>
+    /// 기본적인 테크트리 초기화
+    /// </summary>
+    protected void BasicInitialize()
     {
         // 참조
-        NodeIndex = PlayManager.Instance.GetTechTreeData().GetIndexDictionary();
+        NodeIndex = TechTreeData.GetIndexDictionary();
         Adopted = PlayManager.Instance.GetAdoptedData();
         _cursorTransform = _cursor.transform;
 
@@ -137,6 +142,7 @@ public abstract class TechTreeBase : MonoBehaviour
         AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 배열 생성
+        byte nodeLength = (byte)NodeData.Length;
         NodeBtns = new TechTreeNode[nodeLength];
         NodeBtnObjects = new GameObject[nodeLength];
         NodeIcons = new TMP_Text[nodeLength];
@@ -189,6 +195,27 @@ public abstract class TechTreeBase : MonoBehaviour
 
 
     /// <summary>
+    /// 다음 노드 활성화 가능 여부
+    /// </summary>
+    protected virtual bool EnableCheck(TechTrees.Node.SubNode nextNode)
+    {
+        // 이전 노드로 설정된 것
+        TechTrees.Node.SubNode[] requiredNodes = NodeData[NodeIndex[nextNode.NodeName]].Requirments;
+        for (int i = 0; i < requiredNodes.Length; i++)
+        {
+            // 모두 승인된 것이 아니면 거짓 반환
+            if (1.0f > Adopted[(int)requiredNodes[i].Type][NodeIndex[requiredNodes[i].NodeName]])
+            {
+                return false;
+            }
+        }
+
+        // 모두 승인 됐으면 참 반환
+        return true;
+    }
+
+
+    /// <summary>
     /// 승인 성공 시
     /// </summary>
     protected abstract void OnAdopt();
@@ -197,6 +224,12 @@ public abstract class TechTreeBase : MonoBehaviour
     /// 승인 실패 시
     /// </summary>
     protected abstract void OnFail();
+
+
+    /// <summary>
+    /// 승인 대기 상태인지 확인
+    /// </summary>
+    protected abstract bool IsUnadopted();
 
 
 
@@ -226,6 +259,10 @@ public abstract class TechTreeBase : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 승인 버튼 활성화, 비활성화
+    /// </summary>
+    /// <param name="available"></param>
     private void SetAdoptButtonAvailable(bool available)
     {
         if (available)
@@ -282,22 +319,42 @@ public abstract class TechTreeBase : MonoBehaviour
             {
                 if (_supportRate >= Random.Range(0.0f, 100.0f))
                 {
-                    // 성공
+                    // 소리 재생
+                    AudioManager.Instance.PlayAuido(AudioType.Select);
+
+                    // 성공 시 동작
                     OnAdopt();
+
+                    // 승인 버튼 텍스트 변경
+                    AdoptBtn.text = Language.Instance["승인 완료"];
+
+                    // 상태 메세지
+                    StatusText.color = Constants.WHITE;
+                    StatusText.text = Language.Instance["정책 성공"];
+
+                    // 승인 버튼 사용 불가
+                    AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
                 }
                 else
                 {
-                    // 실패
+                    // 소리 재생
+                    AudioManager.Instance.PlayAuido(AudioType.Failed);
+
+                    // 실패 시 동작
                     OnFail();
+
+                    // 상태 메세지
+                    StatusText.color = Constants.FAIL_TEXT;
+                    StatusText.text = Language.Instance["정책 실패"];
+
+                    // 비용 확인 후 승인 버튼 다시 활성화
+                    SetAdoptButtonAvailable(CostAvailable());
                 }
 
                 // 복귀
                 _progressionImage.fillAmount = 0.0f;
                 _runAdoptProgression = false;
                 _timer = 0.0f;
-
-                // 비용 확인
-                SetAdoptButtonAvailable(CostAvailable());
 
                 // 뒤로가기 가능
                 IsBackAvailable = true;
