@@ -236,6 +236,42 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 시설 잠금 해제 정보 가져온다.
+    /// </summary>
+    public bool[] GetUnlockedFacilities()
+    {
+        return _data.UnlockedFacilities;
+    }
+
+
+    /// <summary>
+    /// 기술 잠금 해제 정보 가져온다.
+    /// </summary>
+    public bool[] GetUnlockedTechs()
+    {
+        return _data.UnlockedTechs;
+    }
+
+
+    /// <summary>
+    /// 사상 잠금 해제 정보 가져온다.
+    /// </summary>
+    public bool[] GetUnlockedThoughts()
+    {
+        return _data.UnlockedThoughts;
+    }
+
+
+    /// <summary>
+    /// 사회 잠금 해제 정보 가져온다.
+    /// </summary>
+    public bool[] GetUnlockedSocieties()
+    {
+        return _data.UnlockedSocieties;
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -717,6 +753,10 @@ public class PlayManager : MonoBehaviour
         public long[] LongArray;
         public float[] FloatArray;
         public double[] DoubleArray;
+        public bool[] UnlockedFacilities;
+        public bool[] UnlockedTechs;
+        public bool[] UnlockedThoughts;
+        public bool[] UnlockedSocieties;
 
         public JsonData(bool initialize)
         {
@@ -729,6 +769,10 @@ public class PlayManager : MonoBehaviour
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
+                UnlockedFacilities = new bool[(int)FaciityTag.FacilityEnd];
+                UnlockedTechs = new bool[(int)TechTag.TechEnd];
+                UnlockedThoughts = new bool[(int)ThoughtTag.ThoughtEnd];
+                UnlockedSocieties = new bool[(int)SocietyTag.SocietyEnd];
             }
             else
             {
@@ -739,6 +783,10 @@ public class PlayManager : MonoBehaviour
                 LongArray = null;
                 FloatArray = null;
                 DoubleArray = null;
+                UnlockedFacilities = null;
+                UnlockedTechs = null;
+                UnlockedThoughts = null;
+                UnlockedSocieties = null;
             }
     }
     }

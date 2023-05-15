@@ -72,39 +72,15 @@ public class PopUpScreenFacility : TechTreeBase
         // 상태 메세지
         StatusText.color = Constants.FAIL_TEXT;
         StatusText.text = Language.Instance["승인 실패"];
-
-        // 승인 버튼 사용 가능
-        IsAdoptAvailable = true;
-    }
-
-
-
-    /* ==================== Private Methods ==================== */
-
-    /// <summary>
-    /// 다음 노드 활성화 가능 여부
-    /// </summary>
-    private bool EnableCheck(byte nextNode)
-    {
-        // 이전 노드로 설정된 것
-        FaciityTag[] previous = NodeData[nextNode].PreviousNodes;
-        for (int i = 0; i < previous.Length; i++)
-        {
-            // 모두 승인된 것이 아니면 거짓 반환
-            if (!_adopted[(int)previous[i]])
-            {
-                return false;
-            }
-        }
-
-        // 모두 승인 됐으면 참 반환
-        return true;
     }
 
 
     protected override void Awake()
     {
-        // 부모클래스 함수 먼저 호출
+        // 노드 정보 가져오기
+        NodeData = PlayManager.Instance.GetTechTreeData().GetFacilityNodes();
+
+        // 부모클래스 함수 호출
         base.Awake();
 
         // 다음 노드 가변 배열 생성
@@ -130,6 +106,30 @@ public class PopUpScreenFacility : TechTreeBase
                 _nextNodes[(int)previousNodes[j]].Add(i);
             }
         }
+    }
+
+
+
+    /* ==================== Private Methods ==================== */
+
+    /// <summary>
+    /// 다음 노드 활성화 가능 여부
+    /// </summary>
+    private bool EnableCheck(byte nextNode)
+    {
+        // 이전 노드로 설정된 것
+        FaciityTag[] previous = NodeData[nextNode].PreviousNodes;
+        for (int i = 0; i < previous.Length; i++)
+        {
+            // 모두 승인된 것이 아니면 거짓 반환
+            if (!_adopted[(int)previous[i]])
+            {
+                return false;
+            }
+        }
+
+        // 모두 승인 됐으면 참 반환
+        return true;
     }
 
 

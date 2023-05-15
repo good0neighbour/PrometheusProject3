@@ -24,20 +24,14 @@ public class City
         Capacity = capacity;
         Population = Constants.INITIAL_POPULATION;
 
-        // 배열 true로 초기화
-        for (byte i = 0; i < _facilityEnabled.Length; ++i)
-        {
-            _facilityEnabled[i] = true;
-        }
-
         // 시설 사용 가능 여부
         TechTrees.Node[] data = PlayManager.Instance.GetTechTreeData().GetFacilityNodes();
         for (byte i = 0; i < data.Length; ++i)
         {
-            if (0 < data[i].PreviousNodes.Length)
+            if (0 == data[i].PreviousNodes.Length)
             {
-                // 해당 노드에 해당하는 요소를 false로 전환
-                _facilityEnabled[i] = false;
+                // 이전 노드가 없으면 사용 가능
+                _facilityEnabled[i] = true;
             }
         }
     }
