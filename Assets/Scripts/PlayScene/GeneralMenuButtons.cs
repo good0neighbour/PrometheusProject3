@@ -37,7 +37,6 @@ public class GeneralMenuButtons : MonoBehaviour
     private PlayScreenBase _currentScreen = null;
     private RectTransform _selectionRectTransform = null;
     private byte _currentMenuFocus = 1;
-    private bool _isRightButtonAvailable = false;
 
     public static GeneralMenuButtons Instance
     {
@@ -57,6 +56,11 @@ public class GeneralMenuButtons : MonoBehaviour
         private set;
     }
 
+    public bool IsRightButtonAvailable
+    {
+        get;
+        set;
+    }
 
 
 
@@ -134,7 +138,7 @@ public class GeneralMenuButtons : MonoBehaviour
                 _selectionRectTransform.anchorMin = new Vector2(-1.2f, 0.25f);
                 break;
             case 1:
-                SetLeftRightButtonsActive(true, true);
+                SetLeftRightButtonsActive(true, IsRightButtonAvailable);
                 AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Middle);
                 break;
             case 2:
@@ -194,23 +198,6 @@ public class GeneralMenuButtons : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// 우측 버튼 활성화
-    /// </summary>
-    public void SetRightButtonAvailable()
-    {
-        // 이미 활성화 된 경우
-        if (_isRightButtonAvailable)
-        {
-            return;
-        }
-
-        // 활성화
-        _isRightButtonAvailable = true;
-        _rightButton.SetActive(true);
-    }
-
-
 
     /* ==================== Private Methods ==================== */
 
@@ -223,13 +210,13 @@ public class GeneralMenuButtons : MonoBehaviour
         _leftIndex.SetActive(!left);
         if (right)
         {
-            _rightButton.SetActive(_isRightButtonAvailable);
+            _rightButton.SetActive(true);
             _rightIndex.SetActive(false);
         }
         else
         {
             _rightButton.SetActive(false);
-            _rightIndex.SetActive(true);
+            _rightIndex.SetActive(IsRightButtonAvailable);
         }
     }
 
@@ -240,12 +227,12 @@ public class GeneralMenuButtons : MonoBehaviour
         Instance = this;
 
         // 우측 메뉴 사용 가능 여부
-        _isRightButtonAvailable = (0 < PlayManager.Instance[VariableUshort.CityNum]);
+        IsRightButtonAvailable = (0 < PlayManager.Instance[VariableUshort.CityNum]);
 
         // 처음 시작 시 메뉴 화면은 정해져 있다.
         _currentScreen = _screens[(int)PlayScreenIndex.Main];
         _leftButton.SetActive(true);
-        _rightButton.SetActive(_isRightButtonAvailable);
+        _rightButton.SetActive(IsRightButtonAvailable);
         _leftIndex.SetActive(false);
         _rightIndex.SetActive(false);
         CurrentLeftIndex = 1;

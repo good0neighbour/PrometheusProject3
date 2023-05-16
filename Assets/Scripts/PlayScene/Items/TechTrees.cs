@@ -12,7 +12,7 @@ public class TechTrees : ScriptableObject
         public TechTreeType Type;
         public Vector2 NodePosition;
         public string Description;
-        [Range(0f, 1f)]
+        [Range(0.0f, 1.0f)]
         public float ProgressionPerMonth;
         [Header("ºñ¿ë")]
         public ushort FundCost;

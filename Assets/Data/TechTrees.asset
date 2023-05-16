@@ -753,5 +753,350 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
       Type: 1
-  _thoughtNodes: []
+  _thoughtNodes:
+  - NodeName: "\uBC95\uCE58\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: []
+  - NodeName: "\uACBD\uD5D8\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: []
+  - NodeName: "\uC808\uB300\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uBC95\uCE58\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uACBD\uD5D8\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uD68C\uC758\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC808\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC2E4\uC874\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC808\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uD5C8\uBB34\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC808\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC5FC\uC138\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC808\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD68C\uC758\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2E4\uC874\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uD5C8\uBB34\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC5FC\uC138\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC790\uC720\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD68C\uC758\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2E4\uC874\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uD5C8\uBB34\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC5FC\uC138\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC0C1\uB300\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD68C\uC758\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2E4\uC874\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uD5C8\uBB34\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC5FC\uC138\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uBBFC\uC871\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC790\uC720\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC0C1\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC911\uC0C1\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC790\uC720\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC0C1\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC790\uC720\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC0C1\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC778\uBB38\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC790\uC720\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC0C1\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC790\uC720\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC0C1\uB300\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC804\uCCB4\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uBBFC\uC871\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC911\uC0C1\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC778\uBB38\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uBBFC\uC871\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC911\uC0C1\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC778\uBB38\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uBBFC\uC871\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC911\uC0C1\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC778\uBB38\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uAC1C\uC778\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uBBFC\uC871\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC911\uC0C1\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC778\uBB38\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uD569\uB9AC\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC804\uCCB4\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uAC1C\uC778\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC138\uC18D\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC804\uCCB4\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uAC1C\uC778\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uC2E4\uC6A9\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC804\uCCB4\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uAC1C\uC778\uC8FC\uC758"
+      Type: 2
+  - NodeName: "\uACC4\uBABD\uC8FC\uC758"
+    Type: 2
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC804\uCCB4\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
+      Type: 2
+    - NodeName: "\uAC1C\uC778\uC8FC\uC758"
+      Type: 2
   _societyNodes: []

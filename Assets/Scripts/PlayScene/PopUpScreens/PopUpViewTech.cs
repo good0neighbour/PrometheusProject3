@@ -91,6 +91,15 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
     }
 
 
+    /// <summary>
+    /// 연구 진행 중 목록 가져온다.
+    /// </summary>
+    public List<byte> GetProgressionList()
+    {
+        return _onProgress;
+    }
+
+
 
     /* ==================== Protected Methods ==================== */
 
@@ -165,6 +174,9 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
     }
 
 
+    /// <summary>
+    /// 연구 진행
+    /// </summary>
     private void TechResearchProgress()
     {
         for (byte i = 0; i < _onProgress.Count; ++i)

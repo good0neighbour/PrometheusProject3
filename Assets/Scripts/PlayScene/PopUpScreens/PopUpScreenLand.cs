@@ -126,7 +126,7 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         _cityBuildScreen.SetActive(false);
 
         // 우측 메뉴 사용 가능
-        GeneralMenuButtons.Instance.SetRightButtonAvailable();
+        GeneralMenuButtons.Instance.IsRightButtonAvailable = true;
     }
 
 
