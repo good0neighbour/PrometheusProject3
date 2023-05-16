@@ -105,6 +105,7 @@ public class Language
                     "정책 성공",
                     "정책 실패",
                     "도시 이름 입력",
+                    "개월",
                     "탐사 설명",
                     "대기압 설명",
                     "온도 설명",
@@ -125,17 +126,11 @@ public class Language
     }
 
 
-    /// <summary>
-    /// 언어 변경 시 동작할 대리자
-    /// </summary>
-    public delegate void LanguageDelegate();
-
-
 
     /* ==================== Variables ==================== */
 
     private static Language _instance = null;
-    public static LanguageDelegate OLC = null;
+    public static OnChangeDelegate OnLanguageChange = null;
 
     private JsonLanguage _jsonLanguage;
     private TMP_FontAsset _fontAsset = null;
@@ -245,7 +240,7 @@ public class Language
         }
 
         // 대리자
-        OLC?.Invoke();
+        OnLanguageChange?.Invoke();
         GameManager.Instance.CurrentLanguage = language;
     }
 

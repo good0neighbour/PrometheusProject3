@@ -165,7 +165,7 @@ public class ScreenBreath : PlayScreenBase, IRequest
         OnLanguageChange();
 
         // ´ë¸®ÀÚ
-        Language.OLC += OnLanguageChange;
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 

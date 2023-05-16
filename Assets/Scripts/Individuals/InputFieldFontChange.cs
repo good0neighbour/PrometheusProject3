@@ -24,7 +24,7 @@ public class InputFieldFontChange : MonoBehaviour
         }
 
         // 언어 대리자에 등록한다.
-        Language.OLC += OnLanguageChange;
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 /// <summary>
 /// UI에 어떤 정보를 표시하는데, 같은 정보를 여러 화면에 표시할 경우, 각각 따로 문자열을 생성하는 것보다 한 문자열을 참조하는 것이 더 나을 것으로 판단하여 만든 클래스. 공용 문자열을 관리한다.
 /// </summary>
@@ -10,6 +13,11 @@ public class UIString
     private float[] _currentValues = new float[(int)VariableFloat.EndFloat];
     private string[] _strings = new string[(int)VariableFloat.EndFloat];
     private string[] _units = new string[(int)VariableFloat.EndFloat];
+    private float[] _techValues = null;
+    private string[] _techRemainString = null;
+    private float[] _thoughtValues = null;
+    private string[] _thoughtRemainString = null;
+    private float[][] _adopted = null;
 
     public static UIString Instance
     {
@@ -58,6 +66,49 @@ public class UIString
 
     /* ==================== Public Methods ==================== */
 
+    public void TechInitialize(byte length)
+    {
+        _techValues = new float[length];
+        _techRemainString = new string[length];
+    }
+    
+
+    public void ThoughtInitialize(byte length)
+    {
+        _thoughtValues = new float[length];
+        _thoughtRemainString = new string[length];
+    }
+
+
+    /// <summary>
+    /// 테크트리 노드의 남은 시간 문자열 가져온다.
+    /// </summary>
+    public string GetRemainString(TechTreeType type, byte index, TechTrees.Node[] nodeData)
+    {
+        switch (type)
+        {
+            case TechTreeType.Tech:
+                if ((_techValues[index] != _adopted[(int)type][index]) || (null != _techRemainString[index]))
+                {
+                    _techValues[index] = _adopted[(int)type][index];
+                    _techRemainString[index] = $"{((1.0f - _techValues[index]) / nodeData[index].ProgressionPerMonth).ToString("0")}{Language.Instance["개월"]}";
+                }
+                return _techRemainString[index];
+            case TechTreeType.Thought:
+                if ((_thoughtValues[index] != _adopted[(int)type][index]) || (null != _thoughtRemainString[index]))
+                {
+                    _thoughtValues[index] = _adopted[(int)type][index];
+                    _thoughtRemainString[index] = $"{((1.0f - _thoughtValues[index]) / nodeData[index].ProgressionPerMonth).ToString("0")}{Language.Instance["개월"]}";
+                }
+                return _thoughtRemainString[index];
+            default:
+                Debug.LogError("UIString - 잘못된 테크트리");
+                return null;
+        }
+    }
+
+
+
     /* ==================== Private Methods ==================== */
 
     private UIString()
@@ -89,5 +140,7 @@ public class UIString
         _units[(int)VariableFloat.PlanetMass_Tt] = "Zt";
         _units[(int)VariableFloat.PlanetDistance_AU] = "AU";
         _units[(int)VariableFloat.PlanetArea_km2] = "Mm2";
+
+        _adopted = PlayManager.Instance.GetAdoptedData();
     }
 }

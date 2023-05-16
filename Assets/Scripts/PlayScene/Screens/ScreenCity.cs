@@ -5,8 +5,9 @@ public class ScreenCity : PlayScreenBase
 {
     /* ==================== Variables ==================== */
 
+    [Header("참조")]
     [SerializeField] private TMP_Text _cityNameText = null;
-    [SerializeField] private GameObject _popUpFacilityScreen = null;
+    [SerializeField] private PopUpScreenTechTree _popUpTechTreeScreen = null;
 
     private City _currentCity = null;
 
@@ -48,7 +49,7 @@ public class ScreenCity : PlayScreenBase
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         // 창 열기
-        _popUpFacilityScreen.SetActive(true);
+        _popUpTechTreeScreen.ActiveThis(TechTreeType.Facility);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
     }
 

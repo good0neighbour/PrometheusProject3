@@ -58,7 +58,7 @@ public class CitySlot : MonoBehaviour
         _population = Constants.INITIAL_POPULATION;
 
         // 대리자 등록
-        PlayManager.OMC += OnMonthChange;
+        PlayManager.OnMonthCahnge += OnMonthChange;
     }
 
 

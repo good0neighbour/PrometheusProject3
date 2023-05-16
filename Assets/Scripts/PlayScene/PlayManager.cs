@@ -5,16 +5,10 @@ using Random = UnityEngine.Random;
 
 public class PlayManager : MonoBehaviour
 {
-    public delegate void OnMonthChange();
-
-
-
     /* ==================== Variables ==================== */
 
-    public static OnMonthChange OMC = null;
-
-    [Header("조정")]
-    [SerializeField] private float _monthTimer = 2.0f;
+    public static OnChangeDelegate OnPlayUpdate = null;
+    public static OnChangeDelegate OnMonthCahnge = null;
 
     [Header("참조")]
     [SerializeField] private GameObject _audioManagerPrefab = null;
@@ -23,6 +17,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private Transform _landListContentArea = null;
     [SerializeField] private Transform _cityListContentArea = null;
     [SerializeField] private TechTrees _techTreeData = null;
+    [SerializeField] private PopUpViewTech _techView = null;
 
     private JsonData _data;
     private List<Land> _lands = new List<Land>();
@@ -687,6 +682,9 @@ public class PlayManager : MonoBehaviour
             }
         }
 
+        // 연구 진행 때문에 미리 활성화한다.
+        _techView.Activate();
+
         // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
@@ -716,13 +714,16 @@ public class PlayManager : MonoBehaviour
         // 시간 경과
         _timer += Time.deltaTime * GameSpeed;
 
-        //탐사 진행
+        // 탐사 진행
         ExploreProgress();
 
+        // 매 프레임 호출
+        OnPlayUpdate?.Invoke();
+
         // 한 달 간격
-        if (_timer >= _monthTimer)
+        if (_timer >= Constants.MONTH_TIMER)
         {
-            _timer -= _monthTimer;
+            _timer -= Constants.MONTH_TIMER;
 
             // 자금이 있을 때
             if (this[VariableLong.Funds] > 0)
@@ -733,6 +734,9 @@ public class PlayManager : MonoBehaviour
                 // 비용 지출
                 this[VariableLong.Funds] -= MonthlyCost();
             }
+
+            // 매달 호출
+            OnMonthCahnge?.Invoke();
         }
     }
 

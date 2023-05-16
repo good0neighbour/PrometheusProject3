@@ -49,7 +49,7 @@ public class LandSlot : MonoBehaviour
         OnLanguageChange();
 
         // 대리자에 등록
-        Language.OLC += OnLanguageChange;
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 

@@ -17,6 +17,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 0, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 0, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -35,6 +37,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 0, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -45,6 +48,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 1, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -53,6 +57,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 1, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -65,6 +70,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 1, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -77,6 +83,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 1, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -87,6 +94,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 1, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -99,6 +107,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 1, y: 5}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -109,6 +118,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 2, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -117,6 +127,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 2, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -129,6 +140,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 2, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -141,6 +153,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 2, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -151,6 +164,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 2, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -163,6 +177,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 2, y: 5}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -173,6 +188,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 3, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -181,6 +197,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 3, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -193,6 +210,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 3, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -205,6 +223,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 3, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -215,6 +234,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 3, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -227,6 +247,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 4, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -235,6 +256,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 4, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -247,6 +269,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 4, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -259,6 +282,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 4, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -269,6 +293,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 4, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -281,6 +306,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 4, y: 5}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -291,6 +317,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 5, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -299,6 +326,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 5, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -311,6 +339,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 5, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -323,6 +352,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 5, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -333,6 +363,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 6, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -345,6 +376,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 6, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -357,6 +389,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 6, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -367,6 +400,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 6, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -379,6 +413,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 7, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -387,6 +422,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 7, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -399,6 +435,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 7, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -411,6 +448,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 7, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -421,6 +459,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 7, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -433,6 +472,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 7, y: 5}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -443,6 +483,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 0}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -451,6 +492,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 1}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -463,6 +505,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 2}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -475,6 +518,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 3}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -485,6 +529,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 4}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
@@ -497,12 +542,216 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 5}
     Description: 
+    ProgressionPerMonth: 0
     FundCost: 0
     IronCost: 0
     NukeCost: 0
     Requirments:
     - NodeName: "\uC5F0\uAD6C\uC2DC\uC124"
       Type: 0
-  _techNodes: []
+  _techNodes:
+  - NodeName: "\uC6D0\uC790\uB860"
+    Type: 1
+    NodePosition: {x: 0, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: []
+  - NodeName: "\uD575\uBD84\uC5F4"
+    Type: 1
+    NodePosition: {x: 1, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC6D0\uC790\uB860"
+      Type: 1
+  - NodeName: "\uAC15\uB825"
+    Type: 1
+    NodePosition: {x: 2, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD575\uBD84\uC5F4"
+      Type: 1
+  - NodeName: "\uC591\uC790"
+    Type: 1
+    NodePosition: {x: 3, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uAC15\uB825"
+      Type: 1
+  - NodeName: "\uD575\uC735\uD569"
+    Type: 1
+    NodePosition: {x: 4, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC591\uC790"
+      Type: 1
+  - NodeName: "\uC591\uC790\uB9E4\uD2B8\uB9AD\uC2A4"
+    Type: 1
+    NodePosition: {x: 5, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD575\uC735\uD569"
+      Type: 1
+  - NodeName: "\uC911\uB825\uC7A5"
+    Type: 1
+    NodePosition: {x: 6, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC591\uC790\uB9E4\uD2B8\uB9AD\uC2A4"
+      Type: 1
+  - NodeName: "\uB9E4\uAC1C\uC785\uC790"
+    Type: 1
+    NodePosition: {x: 7, y: 0}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC911\uB825\uC7A5"
+      Type: 1
+  - NodeName: "\uBBF8\uC0DD\uBB3C\uD559"
+    Type: 1
+    NodePosition: {x: 0, y: 1}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: []
+  - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
+    Type: 1
+    NodePosition: {x: 1, y: 1}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uBBF8\uC0DD\uBB3C\uD559"
+      Type: 1
+  - NodeName: "\uD610\uAE30\uC131\uBBF8\uC0DD\uBB3C"
+    Type: 1
+    NodePosition: {x: 2, y: 1}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
+      Type: 1
+  - NodeName: "\uC801\uC751\uBBF8\uC0DD\uBB3C"
+    Type: 1
+    NodePosition: {x: 3, y: 1}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uD610\uAE30\uC131\uBBF8\uC0DD\uBB3C"
+      Type: 1
+  - NodeName: "\uAE30\uACC4"
+    Type: 1
+    NodePosition: {x: 0, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments: []
+  - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
+    Type: 1
+    NodePosition: {x: 1, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uAE30\uACC4"
+      Type: 1
+  - NodeName: "\uC804\uC790\uC7A5\uBE44"
+    Type: 1
+    NodePosition: {x: 2, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
+      Type: 1
+  - NodeName: "\uC815\uBCF4\uD1B5\uC2E0"
+    Type: 1
+    NodePosition: {x: 3, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC804\uC790\uC7A5\uBE44"
+      Type: 1
+  - NodeName: "\uC18C\uD504\uD2B8\uC6E8\uC5B4"
+    Type: 1
+    NodePosition: {x: 4, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC815\uBCF4\uD1B5\uC2E0"
+      Type: 1
+  - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
+    Type: 1
+    NodePosition: {x: 5, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC18C\uD504\uD2B8\uC6E8\uC5B4"
+      Type: 1
+  - NodeName: "\uC0AC\uC6A9\uC790\uD559\uC2B5"
+    Type: 1
+    NodePosition: {x: 6, y: 2}
+    Description: 
+    ProgressionPerMonth: 0.1
+    FundCost: 0
+    IronCost: 0
+    NukeCost: 0
+    Requirments:
+    - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
+      Type: 1
   _thoughtNodes: []
   _societyNodes: []

@@ -296,7 +296,7 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         OnLanguageChange();
 
         // 대리자 등록
-        Language.OLC += OnLanguageChange;
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 

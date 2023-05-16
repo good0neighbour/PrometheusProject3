@@ -38,6 +38,7 @@ public static class Constants
 
     // 게임 플레이 관련 값, 일반
     public const ushort INITIAL_POPULATION = 10;
+    public const float MONTH_TIMER = 2.0f;
     public const float GAME_RESUME = 1.0f;
     public const float GAME_PAUSE = 0.0f;
     public const float AIRMASS_MOVEMENT = 1.0f;
@@ -48,8 +49,10 @@ public static class Constants
     public const float EXPLORE_SPEEDMULT = 0.001f;
     public const float INITIAL_EXPLORE_GOAL = 0.01f;
     public const float EXPLORE_GOAL_INCREASEMENT = 3.0f;
-    public const float TECHTREE_AREA_CENTER = 0.375f;
+    public const float TECHTREE_AREA_WIDTH_CENTER = 0.375f;
+    public const float TECHTREE_AREA_HEIGHT_CENTER = 0.375f;
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
+    public const float TECHTREE_AREA_HEIGHT = 864.0f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";

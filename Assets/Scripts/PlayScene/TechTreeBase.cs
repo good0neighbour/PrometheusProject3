@@ -4,7 +4,7 @@ using TMPro;
 using System.Text;
 using System.Collections.Generic;
 
-public abstract class TechTreeBase : MonoBehaviour
+public abstract class TechTreeBase : MonoBehaviour, IState
 {
     /* ==================== Variables ==================== */
 
@@ -12,6 +12,7 @@ public abstract class TechTreeBase : MonoBehaviour
     [Header("노드 간격")]
     [SerializeField] private float _width = 100.0f;
     [SerializeField] private float _height = 100.0f;
+    [SerializeField] private bool _yCenterize = false;
 
     [Header("참조")]
     [SerializeField] protected TMP_Text AdoptBtn = null;
@@ -30,7 +31,6 @@ public abstract class TechTreeBase : MonoBehaviour
     protected TechTrees.Node[] NodeData = null;
     protected GameObject[] NodeBtnObjects = null;
     protected TechTreeNode[] NodeBtns = null;
-    protected TMP_Text[] NodeIcons = null;
     protected TechTrees TechTreeData = null;
     protected byte CurrentNode = 0;
     protected float[][] Adopted = null;
@@ -45,6 +45,9 @@ public abstract class TechTreeBase : MonoBehaviour
 
     /* ==================== Public Methods ==================== */
 
+    /// <summary>
+    /// 승인 버튼 동작
+    /// </summary>
     public virtual void BtnAdopt()
     {
         // 소리 재생
@@ -59,9 +62,15 @@ public abstract class TechTreeBase : MonoBehaviour
 
         // 상태 메세지 제거
         StatusText.text = null;
+
+        // 자금 비용 지출
+        PlayManager.Instance[VariableLong.Funds] -= NodeData[CurrentNode].FundCost;
     }
 
 
+    /// <summary>
+    /// 현재 노드 설정
+    /// </summary>
     public void SetCurrentNode(byte current, Vector3 position)
     {
         // 현재 노드 정보
@@ -88,7 +97,14 @@ public abstract class TechTreeBase : MonoBehaviour
     }
 
 
-    public void BtnBack()
+    public void Execute()
+    {
+        // 이 테크트리 활성화
+        gameObject.SetActive(true);
+    }
+
+
+    public void ChangeState()
     {
         // 사용 불가
         if (!IsBackAvailable)
@@ -131,7 +147,7 @@ public abstract class TechTreeBase : MonoBehaviour
     /// <summary>
     /// 기본적인 테크트리 초기화
     /// </summary>
-    protected void BasicInitialize()
+    protected void BasicInitialize(byte length)
     {
         // 참조
         NodeIndex = TechTreeData.GetIndexDictionary();
@@ -142,15 +158,13 @@ public abstract class TechTreeBase : MonoBehaviour
         AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 배열 생성
-        byte nodeLength = (byte)NodeData.Length;
-        NodeBtns = new TechTreeNode[nodeLength];
-        NodeBtnObjects = new GameObject[nodeLength];
-        NodeIcons = new TMP_Text[nodeLength];
+        NodeBtns = new TechTreeNode[length];
+        NodeBtnObjects = new GameObject[length];
 
         // 노드 배치
         float sizeX = 0.0f;
         float sizeY = 0.0f;
-        for (byte i = 0; i < nodeLength; ++i)
+        for (byte i = 0; i < length; ++i)
         {
             // 위치 계산
             float posX = (NodeData[i].NodePosition.x + 0.5f) * _width;
@@ -165,7 +179,6 @@ public abstract class TechTreeBase : MonoBehaviour
             
             // 노드 참조
             NodeBtnObjects[i] = NodeBtns[i].gameObject;
-            NodeIcons[i] = NodeBtnObjects[i].GetComponentInChildren<TMP_Text>();
 
             // x, y 최대 값
             if (posX > sizeX)
@@ -180,17 +193,23 @@ public abstract class TechTreeBase : MonoBehaviour
 
         // 전체 크기
         float areaWidth = sizeX + _width * 0.5f;
+        float areaHeight = sizeY + _height * 0.5f;
         RectTransform contentArea = _techTreeContentArea.GetComponent<RectTransform>();
         contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, areaWidth);
-        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, sizeY + _height * 0.5f);
+        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, areaHeight);
 
         // 가운데 정렬
-        float pivotX = (Constants.TECHTREE_AREA_CENTER * Constants.TECHTREE_AREA_WIDTH - areaWidth * 0.5f) / (Constants.TECHTREE_AREA_WIDTH - areaWidth);
-        if (0.0f > pivotX)
+        float pivotX = 0.0f;
+        float pivotY = 0.0f;
+        if (Constants.TECHTREE_AREA_WIDTH > areaWidth)
         {
-            pivotX = 0.0f;
+            pivotX = (Constants.TECHTREE_AREA_WIDTH_CENTER * Constants.TECHTREE_AREA_WIDTH - areaWidth * 0.5f) / (Constants.TECHTREE_AREA_WIDTH - areaWidth);
         }
-        contentArea.pivot = new Vector2(pivotX, 0.0f);
+        if (_yCenterize && Constants.TECHTREE_AREA_HEIGHT > areaHeight)
+        {
+            pivotY = (Constants.TECHTREE_AREA_HEIGHT_CENTER * Constants.TECHTREE_AREA_HEIGHT - areaHeight * 0.5f) / (Constants.TECHTREE_AREA_HEIGHT - areaHeight);
+        }
+        contentArea.pivot = new Vector2(pivotX, pivotY);
     }
 
 
@@ -201,10 +220,10 @@ public abstract class TechTreeBase : MonoBehaviour
     {
         // 이전 노드로 설정된 것
         TechTrees.Node.SubNode[] requiredNodes = NodeData[NodeIndex[nextNode.NodeName]].Requirments;
-        for (int i = 0; i < requiredNodes.Length; i++)
+        for (byte i = 0; i < requiredNodes.Length; ++i)
         {
             // 모두 승인된 것이 아니면 거짓 반환
-            if (1.0f > Adopted[(int)requiredNodes[i].Type][NodeIndex[requiredNodes[i].NodeName]])
+            if (0.0f >= Adopted[(int)requiredNodes[i].Type][NodeIndex[requiredNodes[i].NodeName]])
             {
                 return false;
             }

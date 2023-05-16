@@ -31,7 +31,7 @@ public class AutoTranslation : MonoBehaviour
         }
 
         // 언어 대리자에 등록한다.
-        Language.OLC += OnLanguageChange;
+        Language.OnLanguageChange += OnLanguageChange;
 
         // 줄 간격을 줄이려 할 때
         if (_shortenLineGap)
@@ -58,7 +58,7 @@ public class AutoTranslation : MonoBehaviour
         if (!Language.Instance.GetContainsKey(_koreanKey))
         {
             Debug.LogError($"\"{_koreanKey}\" - 존재하지 않는 키. 오타 수정 및 삭제 요망.");
-            Language.OLC -= OnLanguageChange;
+            Language.OnLanguageChange -= OnLanguageChange;
         }
     }
 
