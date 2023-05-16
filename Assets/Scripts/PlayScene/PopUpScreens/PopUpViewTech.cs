@@ -61,7 +61,7 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
             _progreesionImages[i] = node.transform.Find("ImageProgressionBackground").Find("ImageProgression").GetComponent<Image>();
 
             // 연구 진행 중이었던 것 가변 배열에 추가
-            if (0.0f <= Adopted[(int)TechTreeType.Tech][i])
+            if (0.0f < Adopted[(int)TechTreeType.Tech][i])
             {
                 _onProgress.Add(i);
             }
@@ -121,7 +121,7 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
                     }
                     break;
                 default:
-                    // 다른 테크트리는 연구 완료 후에 활성화한다.
+                    // 다른 테크트리는 활성화 여부를 해당 테크트리가 스스로 결정한다.
                     break;
             }
         }
@@ -170,13 +170,13 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
         for (byte i = 0; i < _onProgress.Count; ++i)
         {
             // 연구 진행
-            Adopted[(int)TechTreeType.Tech][i] += NodeData[i].ProgressionPerMonth * _researchSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
+            Adopted[(int)TechTreeType.Tech][_onProgress[i]] += NodeData[_onProgress[i]].ProgressionPerMonth * _researchSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
 
             // 연구 완료
-            if (1.0f <= Adopted[(int)TechTreeType.Tech][i])
+            if (1.0f <= Adopted[(int)TechTreeType.Tech][_onProgress[i]])
             {
                 // 진행 중인 연구 리스트에서 제외
-                _onProgress.Remove(i);
+                _onProgress.Remove(_onProgress[i]);
 
                 // 수정된 가변 배열 인덱스에 맞춘다.
                 --i;
