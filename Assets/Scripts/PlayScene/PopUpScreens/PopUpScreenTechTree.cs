@@ -4,7 +4,7 @@ public class PopUpScreenTechTree : MonoBehaviour
 {
     /* ==================== Variables ==================== */
 
-    [SerializeField] private TechTreeBase[] _techTreeView = new TechTreeBase[(int)TechTreeType.TechTreeTypeEnd];
+    [SerializeField] private TechTreeBase[] _techTreeView = new TechTreeBase[(int)TechTreeType.TechTreeEnd];
 
     private byte _currentTechTree = 0;
 

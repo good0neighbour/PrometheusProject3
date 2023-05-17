@@ -20,18 +20,18 @@ public class TechTrees : ScriptableObject
         public byte NukeCost;
         [Header("요구사항")]
         public SubNode[] Requirments;
+    }
 
-        [Serializable]
-        public struct SubNode
+    [Serializable]
+    public struct SubNode
+    {
+        public string NodeName;
+        public TechTreeType Type;
+
+        public SubNode(string nodeName, TechTreeType type)
         {
-            public string NodeName;
-            public TechTreeType Type;
-
-            public SubNode(string nodeName, TechTreeType type)
-            {
-                NodeName = nodeName;
-                Type = type;
-            }
+            NodeName = nodeName;
+            Type = type;
         }
     }
 
@@ -42,9 +42,8 @@ public class TechTrees : ScriptableObject
     [SerializeField] private Node[] _facilityNodes = null;
     [SerializeField] private Node[] _techNodes = null;
     [SerializeField] private Node[] _thoughtNodes = null;
-    [SerializeField] private Node[] _societyNodes = null;
     private Dictionary<string, byte> _indexDictionary = new Dictionary<string, byte>();
-    private List<Node.SubNode>[][] _nextNodes = new List<Node.SubNode>[(int)TechTreeType.TechTreeTypeEnd][];
+    private List<SubNode>[][] _nextNodes = new List<SubNode>[(int)TechTreeType.TechTreeEnd][];
 
 
 
@@ -58,7 +57,6 @@ public class TechTrees : ScriptableObject
         BuildNodeSettings(_facilityNodes, TechTreeType.Facility);
         BuildNodeSettings(_techNodes, TechTreeType.Tech);
         BuildNodeSettings(_thoughtNodes, TechTreeType.Thought);
-        BuildNodeSettings(_societyNodes, TechTreeType.Society);
     }
 
     /// <summary>
@@ -74,8 +72,6 @@ public class TechTrees : ScriptableObject
                 return _techNodes;
             case TechTreeType.Thought:
                 return _thoughtNodes;
-            case TechTreeType.Society:
-                return _societyNodes;
             default:
                 Debug.LogError("TechTrees - 잘못된 테크트리 종류");
                 return null;
@@ -85,7 +81,7 @@ public class TechTrees : ScriptableObject
     /// <summary>
     /// 다음 노드 반환
     /// </summary>
-    public List<Node.SubNode>[] GetNextNodes(TechTreeType type)
+    public List<SubNode>[] GetNextNodes(TechTreeType type)
     {
         return _nextNodes[(int)type];
     }
@@ -109,7 +105,7 @@ public class TechTrees : ScriptableObject
     {
         // 배열 생성
         byte length = (byte)techTreeNodes.Length;
-        _nextNodes[(int)techTreeType] = new List<Node.SubNode>[length];
+        _nextNodes[(int)techTreeType] = new List<SubNode>[length];
 
         // 노드 등록
         for (byte i = 0; i < length; ++i)
@@ -119,18 +115,18 @@ public class TechTrees : ScriptableObject
 
             for (int j = 0; j < node.Requirments.Length; j++)
             {
-                Node.SubNode subNode = node.Requirments[j];
+                SubNode subNode = node.Requirments[j];
                 byte type = (byte)subNode.Type;
                 byte index = _indexDictionary[subNode.NodeName];
 
                 // 가변 배열 생성한 적 없으면 새로 생성
                 if (null == _nextNodes[type][index])
                 {
-                    _nextNodes[type][index] = new List<Node.SubNode>();
+                    _nextNodes[type][index] = new List<SubNode>();
                 }
 
                 // 다음 노드로 등록
-                _nextNodes[type][index].Add(new Node.SubNode(node.NodeName, node.Type));
+                _nextNodes[type][index].Add(new SubNode(node.NodeName, node.Type));
             }
         }
     }

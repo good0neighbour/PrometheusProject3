@@ -70,7 +70,7 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
         // 비활성화할 것
         for (byte i = 0; i < NodeBtnObjects.Length; ++i)
         {
-            TechTrees.Node.SubNode[] requiredNodes = NodeData[i].Requirments;
+            TechTrees.SubNode[] requiredNodes = NodeData[i].Requirments;
             for (byte j = 0; j < requiredNodes.Length; ++j)
             {
                 // 모두 승인된 것이 아니면 비활성화
@@ -122,7 +122,7 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
         AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 다음 노드 활성화
-        List<TechTrees.Node.SubNode> nextNodes = NextNodes[CurrentNode];
+        List<TechTrees.SubNode> nextNodes = NextNodes[CurrentNode];
         for (byte i = 0; i < nextNodes.Count; ++i)
         {
             switch (nextNodes[i].Type)

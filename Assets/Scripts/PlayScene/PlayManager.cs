@@ -667,7 +667,7 @@ public class PlayManager : MonoBehaviour
 
         // 테크트리 정보 준비
         _techTreeData.GetReady();
-        for (TechTreeType i = 0; i < TechTreeType.TechTreeTypeEnd; ++i)
+        for (TechTreeType i = 0; i < TechTreeType.TechTreeEnd; ++i)
         {
             switch (i)
             {
@@ -766,7 +766,7 @@ public class PlayManager : MonoBehaviour
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
-                Adopted = new float[(int)TechTreeType.TechTreeTypeEnd][];
+                Adopted = new float[(int)TechTreeType.TechTreeEnd][];
             }
             else
             {

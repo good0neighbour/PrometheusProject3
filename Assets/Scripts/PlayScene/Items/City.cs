@@ -45,7 +45,7 @@ public class City
             // 사용 가능 여부 확인
             for (byte j = 0; j < data[i].Requirments.Length; ++j)
             {
-                TechTrees.Node.SubNode node = data[i].Requirments[j];
+                TechTrees.SubNode node = data[i].Requirments[j];
                 switch (node.Type)
                 {
                     case TechTreeType.Facility:

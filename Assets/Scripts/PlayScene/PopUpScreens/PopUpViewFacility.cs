@@ -53,7 +53,7 @@ public class PopUpViewFacility : TechTreeBase
         AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 다음 노드 활성화
-        foreach (TechTrees.Node.SubNode nextNodes in NextNodes[CurrentNode])
+        foreach (TechTrees.SubNode nextNodes in NextNodes[CurrentNode])
         {
             switch (nextNodes.Type)
             {
@@ -96,10 +96,10 @@ public class PopUpViewFacility : TechTreeBase
 
     /* ==================== Private Methods ==================== */
 
-    protected override bool EnableCheck(TechTrees.Node.SubNode nextNode)
+    protected override bool EnableCheck(TechTrees.SubNode nextNode)
     {
         // 이전 노드로 설정된 것
-        TechTrees.Node.SubNode[] requiredNodes = NodeData[NodeIndex[nextNode.NodeName]].Requirments;
+        TechTrees.SubNode[] requiredNodes = NodeData[NodeIndex[nextNode.NodeName]].Requirments;
         for (int i = 0; i < requiredNodes.Length; i++)
         {
             // 모두 승인된 것이 아니면 거짓 반환

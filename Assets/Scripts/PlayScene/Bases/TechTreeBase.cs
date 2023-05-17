@@ -26,7 +26,7 @@ public abstract class TechTreeBase : MonoBehaviour, IState
     [SerializeField] private GameObject _cursor = null;
     [SerializeField] private Transform _techTreeContentArea = null;
 
-    protected List<TechTrees.Node.SubNode>[] NextNodes = null;
+    protected List<TechTrees.SubNode>[] NextNodes = null;
     protected Dictionary<string, byte> NodeIndex = null;
     protected TechTrees.Node[] NodeData = null;
     protected GameObject[] NodeBtnObjects = null;
@@ -216,10 +216,10 @@ public abstract class TechTreeBase : MonoBehaviour, IState
     /// <summary>
     /// 다음 노드 활성화 가능 여부
     /// </summary>
-    protected virtual bool EnableCheck(TechTrees.Node.SubNode nextNode)
+    protected virtual bool EnableCheck(TechTrees.SubNode nextNode)
     {
         // 이전 노드로 설정된 것
-        TechTrees.Node.SubNode[] requiredNodes = NodeData[NodeIndex[nextNode.NodeName]].Requirments;
+        TechTrees.SubNode[] requiredNodes = NodeData[NodeIndex[nextNode.NodeName]].Requirments;
         for (byte i = 0; i < requiredNodes.Length; ++i)
         {
             // 모두 승인된 것이 아니면 거짓 반환

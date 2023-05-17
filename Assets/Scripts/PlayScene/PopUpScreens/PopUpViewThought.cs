@@ -71,7 +71,7 @@ public class PopUpViewThought : TechTreeBase, IActivateFirst
         for (byte i = 0; i < NodeBtnObjects.Length; ++i)
         {
             // 요구 조건 확인
-            TechTrees.Node.SubNode[] requiredNodes = NodeData[i].Requirments;
+            TechTrees.SubNode[] requiredNodes = NodeData[i].Requirments;
             for (byte j = 0; j < requiredNodes.Length; ++j)
             {
                 // 한 개라도 승인됐으면 활성화
@@ -179,7 +179,7 @@ public class PopUpViewThought : TechTreeBase, IActivateFirst
             // 연구 완료
             if (1.0f <= Adopted[(int)TechTreeType.Thought][_onProgress[i]])
             {
-                List<TechTrees.Node.SubNode> nextNodes = NextNodes[_onProgress[i]];
+                List<TechTrees.SubNode> nextNodes = NextNodes[_onProgress[i]];
                 for (byte j = 0; j < nextNodes.Count; ++j)
                 {
                     switch (nextNodes[j].Type)

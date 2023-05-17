@@ -140,7 +140,12 @@ public enum TechTreeType
     Facility,
     Tech,
     Thought,
+    TechTreeEnd
+}
+
+public enum ElementTechTreeType
+{
     Society,
-    TechTreeTypeEnd
+    TechTreeEnd
 }
 #endregion
