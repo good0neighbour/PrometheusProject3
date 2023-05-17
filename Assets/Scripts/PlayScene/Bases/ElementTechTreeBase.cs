@@ -16,6 +16,8 @@ public class ElementTechTreeBase : ScriptableObject
         public float ProgressionPerAdoption;
         [Header("비용")]
         public ushort FundCost;
+        [Header("하위 노드")]
+        public Node[] Elements;
     }
 
 

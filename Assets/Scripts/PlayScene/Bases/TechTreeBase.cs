@@ -124,6 +124,7 @@ public abstract class TechTreeBase : MonoBehaviour, IState
         // 처음 상태로 되돌린다.
         _cursor.SetActive(false);
         SetAdoptButtonAvailable(false);
+        AdoptBtn.text = Language.Instance["승인"];
         _descriptionText.text = null;
         GainsText.text = null;
         _costsText.text = null;

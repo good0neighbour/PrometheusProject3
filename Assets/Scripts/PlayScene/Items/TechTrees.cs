@@ -54,6 +54,12 @@ public class TechTrees : ScriptableObject
     /// </summary>
     public void GetReady()
     {
+        // 노드 등록
+        AddDictionary(_facilityNodes, TechTreeType.Facility);
+        AddDictionary(_techNodes, TechTreeType.Tech);
+        AddDictionary(_thoughtNodes, TechTreeType.Thought);
+
+        // 다음 노드 등록
         BuildNodeSettings(_facilityNodes, TechTreeType.Facility);
         BuildNodeSettings(_techNodes, TechTreeType.Tech);
         BuildNodeSettings(_thoughtNodes, TechTreeType.Thought);
@@ -99,19 +105,31 @@ public class TechTrees : ScriptableObject
     /* ==================== Private Methods ==================== */
 
     /// <summary>
+    /// 노드 등록
+    /// </summary>
+    private void AddDictionary(Node[] techTreeNodes, TechTreeType techTreeType)
+    {
+        // 해쉬테이블에 노드 인덱스 저장
+        for (byte i = 0; i < techTreeNodes.Length; ++i)
+        {
+            _indexDictionary.Add(techTreeNodes[i].NodeName, i);
+        }
+
+        // 다음 노드 저장을 위한 배열 생성
+        byte length = (byte)techTreeNodes.Length;
+        _nextNodes[(int)techTreeType] = new List<SubNode>[length];
+    }
+
+
+    /// <summary>
     /// 다음 노드 등록
     /// </summary>
     private void BuildNodeSettings(Node[] techTreeNodes, TechTreeType techTreeType)
     {
-        // 배열 생성
-        byte length = (byte)techTreeNodes.Length;
-        _nextNodes[(int)techTreeType] = new List<SubNode>[length];
-
         // 노드 등록
-        for (byte i = 0; i < length; ++i)
+        for (byte i = 0; i < techTreeNodes.Length; ++i)
         {
             Node node = techTreeNodes[i];
-            _indexDictionary.Add(node.NodeName, i);
 
             for (int j = 0; j < node.Requirments.Length; j++)
             {

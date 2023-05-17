@@ -159,16 +159,41 @@ public class PopUpViewFacility : TechTreeBase
         for (byte i = 0; i < NodeBtnObjects.Length; ++i)
         {
             // 사용 가능 여부
-            NodeBtnObjects[i].SetActive(_enabled[i]);
-
-            // 승인 완료, 미완료
-            if (_adopted[i])
+            if (_enabled[i])
             {
-                _nodeIcons[i].text = Constants.FACILITY_ADOPTED;
+                // 사용 가능
+                NodeBtnObjects[i].SetActive(true);
+
+                // 승인 완료, 미완료
+                if (_adopted[i])
+                {
+                    _nodeIcons[i].text = Constants.FACILITY_ADOPTED;
+                }
+                else
+                {
+                    _nodeIcons[i].text = Constants.FACILITY_UNADOPTED;
+                }
             }
             else
             {
-                _nodeIcons[i].text = Constants.FACILITY_UNADOPTED;
+                TechTrees.SubNode[] requiredNode = NodeData[i].Requirments;
+
+                for (byte j = 0; j < requiredNode.Length; ++j)
+                {
+                    switch (requiredNode[j].Type)
+                    {
+                        case TechTreeType.Facility:
+                            // 시설은 확인하지 않는다.
+                            break;
+                        default:
+                            if (1.0f > Adopted[(int)requiredNode[j].Type][NodeIndex[requiredNode[j].NodeName]])
+                            {
+                                // 사용 불가
+                                NodeBtnObjects[i].SetActive(false);
+                            }
+                            break;
+                    }
+                }
             }
         }
     }
