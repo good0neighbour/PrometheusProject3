@@ -343,16 +343,6 @@ public abstract class TechTreeBase : MonoBehaviour, IState
 
                     // 성공 시 동작
                     OnAdopt();
-
-                    // 승인 버튼 텍스트 변경
-                    AdoptBtn.text = Language.Instance["승인 완료"];
-
-                    // 상태 메세지
-                    StatusText.color = Constants.WHITE;
-                    StatusText.text = Language.Instance["정책 성공"];
-
-                    // 승인 버튼 사용 불가
-                    AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
                 }
                 else
                 {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -68,15 +67,29 @@ public class UIString
 
     public void TechInitialize(byte length)
     {
+        // 배열 길이를 매개변수로 받아서 배열을 생성한다.
         _techValues = new float[length];
         _techRemainString = new string[length];
+
+        // 배열의 모든 요소를 -1로 초기화한다.
+        for (byte i = 0; i < length; ++i)
+        {
+            _techValues[i] = -1.0f;
+        }
     }
     
 
     public void ThoughtInitialize(byte length)
     {
+        // 배열 길이를 매개변수로 받아서 배열을 생성한다.
         _thoughtValues = new float[length];
         _thoughtRemainString = new string[length];
+
+        // 배열의 모든 요소를 -1로 초기화한다.
+        for (byte i = 0; i < length; ++i)
+        {
+            _thoughtValues[i] = -1.0f;
+        }
     }
 
 

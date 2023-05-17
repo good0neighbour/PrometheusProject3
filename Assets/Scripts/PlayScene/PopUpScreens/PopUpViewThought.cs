@@ -111,11 +111,18 @@ public class PopUpViewThought : TechTreeBase, IActivateFirst
 
     protected override void OnAdopt()
     {
-        // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Select);
-
         // 활성화 정보 전달
         Adopted[(int)TechTreeType.Thought][CurrentNode] = 0.0001f;
+
+        // 승인 버튼 텍스트 변경
+        AdoptBtn.text = Language.Instance["승인 완료"];
+
+        // 상태 메세지
+        StatusText.color = Constants.WHITE;
+        StatusText.text = Language.Instance["정책 성공"];
+
+        // 승인 버튼 사용 불가
+        AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 연구 진행중인 리스트에 추가
         _onProgress.Add(CurrentNode);

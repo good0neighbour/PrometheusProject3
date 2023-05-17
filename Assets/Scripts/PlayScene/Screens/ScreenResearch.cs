@@ -22,7 +22,8 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
     private List<byte> _thoughtOnProgress = new List<byte>();
     private TechTrees.Node[] _techData = null;
     private TechTrees.Node[] _thoughtData = null;
-    private float[][] _adopted = null;
+    private float[] _adoptedTech = null;
+    private float[] _adoptedThought = null;
 
 
 
@@ -63,7 +64,8 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
     private void Awake()
     {
         // 참조
-        _adopted = PlayManager.Instance.GetAdoptedData();
+        _adoptedTech = PlayManager.Instance.GetAdoptedData()[(int)TechTreeType.Tech];
+        _adoptedThought = PlayManager.Instance.GetAdoptedData()[(int)TechTreeType.Thought];
         _techData = PlayManager.Instance.GetTechTreeData().GetNodes(TechTreeType.Tech);
         _thoughtData = PlayManager.Instance.GetTechTreeData().GetNodes(TechTreeType.Thought);
         _techOnProgress = _techView.GetProgressionList();
@@ -74,14 +76,13 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
     private void Update()
     {
         // 실시간 타게팅 변경
-        float[] adoped = _adopted[(int)TechTreeType.Tech];
         short index = -1;
         float progression = 0.0f;
         foreach (byte i in _techOnProgress)
         {
-            if (progression < adoped[i] && 1.0f > adoped[i])
+            if (progression < _adoptedTech[i] && 1.0f > _adoptedTech[i])
             {
-                progression = adoped[i];
+                progression = _adoptedTech[i];
                 index = i;
             }
         }
@@ -90,37 +91,36 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
         {
             _techResearchTitleText.text = _techData[index].NodeName;
             _techResearchRemainText.text = UIString.Instance.GetRemainString(TechTreeType.Tech, (byte)index, _techData);
-            _techResearchProgreesionImage.fillAmount = adoped[index];
+            _techResearchProgreesionImage.fillAmount = _adoptedTech[index];
         }
-        else
+        else if (null != _techResearchRemainText.text)
         {
-            _techResearchTitleText.text = Language.Instance["연구 없음"];
+            _techResearchTitleText.text = Language.Instance["상용화 연구 없음"];
             _techResearchRemainText.text = null;
             _techResearchProgreesionImage.fillAmount = 0.0f;
         }
 
         // 실시간 타게팅 변경
-        adoped = _adopted[(int)TechTreeType.Thought];
         index = -1;
         progression = 0.0f;
         foreach (byte i in _thoughtOnProgress)
         {
-            if (progression < adoped[i] && 1.0f > adoped[i])
+            if (progression < _adoptedThought[i] && 1.0f > _adoptedThought[i])
             {
-                progression = adoped[i];
+                progression = _adoptedThought[i];
                 index = i;
             }
         }
 
         if (-1 < index)
         {
-            _thoughtResearchTitleText.text = _techData[index].NodeName;
+            _thoughtResearchTitleText.text = _thoughtData[index].NodeName;
             _thoughtResearchRemainText.text = UIString.Instance.GetRemainString(TechTreeType.Thought, (byte)index, _thoughtData);
-            _thoughtResearchProgreesionImage.fillAmount = adoped[index];
+            _thoughtResearchProgreesionImage.fillAmount = _adoptedThought[index];
         }
-        else
+        else if (null != _thoughtResearchRemainText.text)
         {
-            _thoughtResearchTitleText.text = Language.Instance["연구 없음"];
+            _thoughtResearchTitleText.text = Language.Instance["사상 연구 없음"];
             _thoughtResearchRemainText.text = null;
             _thoughtResearchProgreesionImage.fillAmount = 0.0f;
         }

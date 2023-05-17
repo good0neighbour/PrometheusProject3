@@ -42,6 +42,16 @@ public class PopUpViewFacility : TechTreeBase
         // 노드 아이콘 변경
         _nodeIcons[CurrentNode].text = Constants.FACILITY_ADOPTED;
 
+        // 승인 버튼 텍스트 변경
+        AdoptBtn.text = Language.Instance["승인 완료"];
+
+        // 상태 메세지
+        StatusText.color = Constants.WHITE;
+        StatusText.text = Language.Instance["정책 성공"];
+
+        // 승인 버튼 사용 불가
+        AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
+
         // 다음 노드 활성화
         foreach (TechTrees.Node.SubNode nextNodes in NextNodes[CurrentNode])
         {

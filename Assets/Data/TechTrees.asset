@@ -756,7 +756,7 @@ MonoBehaviour:
   _thoughtNodes:
   - NodeName: "\uBC95\uCE58\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 0, y: 2}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
     Requirments: []
   - NodeName: "\uACBD\uD5D8\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 0, y: 3}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
     Requirments: []
   - NodeName: "\uC808\uB300\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 1, y: 2.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -787,7 +787,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uD68C\uC758\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 2, y: 1}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -798,7 +798,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC2E4\uC874\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 2, y: 2}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uD5C8\uBB34\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 2, y: 3}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC5FC\uC138\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 2, y: 4}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 3, y: 1.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC790\uC720\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 3, y: 2.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -865,7 +865,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC0C1\uB300\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 3, y: 3.8}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -882,7 +882,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uBBFC\uC871\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 4, y: 0.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -897,7 +897,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC911\uC0C1\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 4, y: 1.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -912,7 +912,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 4, y: 2.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC778\uBB38\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 4, y: 3.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -942,7 +942,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 4, y: 4.5}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -957,7 +957,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC804\uCCB4\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 5, y: 1}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -976,7 +976,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 5, y: 2}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -995,7 +995,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 5, y: 3}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uAC1C\uC778\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 5, y: 4}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -1033,7 +1033,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uD569\uB9AC\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 6, y: 0}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -1050,7 +1050,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC138\uC18D\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 6, y: 1}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -1067,7 +1067,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uC2E4\uC6A9\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 6, y: 2}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
@@ -1084,7 +1084,7 @@ MonoBehaviour:
       Type: 2
   - NodeName: "\uACC4\uBABD\uC8FC\uC758"
     Type: 2
-    NodePosition: {x: 0, y: 0}
+    NodePosition: {x: 6, y: 3}
     Description: 
     ProgressionPerMonth: 0.1
     FundCost: 0
