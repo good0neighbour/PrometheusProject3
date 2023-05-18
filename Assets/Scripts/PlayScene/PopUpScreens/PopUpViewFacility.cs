@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 using TMPro;
 
-public class PopUpViewFacility : TechTreeBase
+public class PopUpViewFacility : TechTreeViewBase
 {
     /* ==================== Variables ==================== */
 
@@ -65,6 +67,9 @@ public class PopUpViewFacility : TechTreeBase
                         NodeBtnObjects[index].SetActive(true);
                     }
                     break;
+                case TechTreeType.Society:
+                    // 사회 테크트리에는 행동하지 않는다.
+                    break;
                 default:
                     break;
             }
@@ -93,9 +98,6 @@ public class PopUpViewFacility : TechTreeBase
     }
 
 
-
-    /* ==================== Private Methods ==================== */
-
     protected override bool EnableCheck(TechTrees.SubNode nextNode)
     {
         // 이전 노드로 설정된 것
@@ -123,6 +125,44 @@ public class PopUpViewFacility : TechTreeBase
         // 모두 승인 됐으면 참 반환
         return true;
     }
+
+
+    protected override string GetGainText()
+    {
+        StringBuilder result = new StringBuilder();
+        result.Append($"[{Language.Instance["획득"]}]\n");
+
+        // 다음 잠금 해제
+        List<TechTrees.SubNode> requirments = NextNodes[CurrentNode];
+        if (0 < requirments.Count)
+        {
+            for (byte i = 0; i < requirments.Count; ++i)
+            {
+                switch (requirments[i].Type)
+                {
+                    case TechTreeType.Tech:
+                        result.Append($"{Language.Instance["상용화 연구 가능"]} - {requirments[i].NodeName}\n");
+                        break;
+                    case TechTreeType.Thought:
+                        result.Append($"{Language.Instance["사상 연구 가능"]} - {requirments[i].NodeName}\n");
+                        break;
+                    case TechTreeType.Society:
+                        result.Append($"{Language.Instance["사회 채택 가능"]} - {requirments[i].NodeName}\n");
+                        break;
+                    default:
+                        // 나머지는 표시하지 않는다.
+                        break;
+                }
+            }
+        }
+
+        // 반환. 마지막 \n은 제거한다.
+        return result.Remove(result.Length - 1, 1).ToString();
+    }
+
+
+
+    /* ==================== Private Methods ==================== */
 
 
     private void Awake()
@@ -177,23 +217,36 @@ public class PopUpViewFacility : TechTreeBase
             else
             {
                 TechTrees.SubNode[] requiredNode = NodeData[i].Requirments;
+                bool enable = true;
 
                 for (byte j = 0; j < requiredNode.Length; ++j)
                 {
                     switch (requiredNode[j].Type)
                     {
                         case TechTreeType.Facility:
-                            // 시설은 확인하지 않는다.
+                            if (!_adopted[NodeIndex[requiredNode[j].NodeName]])
+                            {
+                                // 사용 불가
+                                enable = false;
+                            }
                             break;
                         default:
                             if (1.0f > Adopted[(int)requiredNode[j].Type][NodeIndex[requiredNode[j].NodeName]])
                             {
                                 // 사용 불가
-                                NodeBtnObjects[i].SetActive(false);
+                                enable = false;
                             }
                             break;
                     }
+
+                    if (!enable)
+                    {
+                        break;
+                    }
                 }
+
+                // 활성화 혹은 비활성화
+                NodeBtnObjects[i].SetActive(enable);
             }
         }
     }

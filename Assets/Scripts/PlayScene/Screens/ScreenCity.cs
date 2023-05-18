@@ -17,7 +17,7 @@ public class ScreenCity : PlayScreenBase
         private set;
     }
 
-    public CitySlot CurrentSlot
+    public SlotCity CurrentSlot
     {
         get;
         set;

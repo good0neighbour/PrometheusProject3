@@ -40,7 +40,7 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
 
     private GameObject[] _resourceDisplays = null;
     private TMP_Text[] _resourceAmount = null;
-    private LandSlot _currentSlot = null;
+    private SlotLand _currentSlot = null;
     private Land _currentLand = null;
     private TMP_Text _cityNameText = null;
     private bool _isBuildAvailable = false;

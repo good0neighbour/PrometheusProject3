@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TechTrees", menuName = "PrometheusProject/TechTrees")]
@@ -12,8 +13,7 @@ public class TechTrees : ScriptableObject
         public TechTreeType Type;
         public Vector2 NodePosition;
         public string Description;
-        [Range(0.0f, 1.0f)]
-        public float ProgressionPerMonth;
+        public float ProgressionValue;
         [Header("비용")]
         public ushort FundCost;
         public byte IronCost;
@@ -60,10 +60,11 @@ public class TechTrees : ScriptableObject
         AddDictionary(_thoughtNodes, TechTreeType.Thought);
 
         // 다음 노드 등록
-        BuildNodeSettings(_facilityNodes, TechTreeType.Facility);
-        BuildNodeSettings(_techNodes, TechTreeType.Tech);
-        BuildNodeSettings(_thoughtNodes, TechTreeType.Thought);
+        SetNextNodes(_facilityNodes);
+        SetNextNodes(_techNodes);
+        SetNextNodes(_thoughtNodes);
     }
+
 
     /// <summary>
     /// 노드 배열 반환.
@@ -84,6 +85,7 @@ public class TechTrees : ScriptableObject
         }
     }
 
+
     /// <summary>
     /// 다음 노드 반환
     /// </summary>
@@ -92,12 +94,29 @@ public class TechTrees : ScriptableObject
         return _nextNodes[(int)type];
     }
 
+
     /// <summary>
     /// 노드 인덱스 해쉬테이블 반환.
     /// </summary>
     public Dictionary<string, byte> GetIndexDictionary()
     {
         return _indexDictionary;
+    }
+
+
+    /// <summary>
+    /// 다음 노드 가변 배열에 노드 추가
+    /// </summary>
+    public void AddNextNode(TechTreeType targetType, byte targetIndex, string nodeName, TechTreeType nodeType)
+    {
+        // 가변 배열 생성한 적 없으면 새로 생성
+        if (null == _nextNodes[(int)targetType][targetIndex])
+        {
+            _nextNodes[(int)targetType][targetIndex] = new List<SubNode>();
+        }
+
+        // 다음 노드로 등록
+        _nextNodes[(int)targetType][targetIndex].Add(new SubNode(nodeName, nodeType));
     }
 
 
@@ -124,7 +143,7 @@ public class TechTrees : ScriptableObject
     /// <summary>
     /// 다음 노드 등록
     /// </summary>
-    private void BuildNodeSettings(Node[] techTreeNodes, TechTreeType techTreeType)
+    private void SetNextNodes(Node[] techTreeNodes)
     {
         // 노드 등록
         for (byte i = 0; i < techTreeNodes.Length; ++i)

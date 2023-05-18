@@ -4,7 +4,7 @@ public class TechTreeNode : MonoBehaviour
 {
     /* ==================== Variables ==================== */
 
-    private TechTreeBase _techTree = null;
+    private TechTreeViewBase _techTree = null;
     private byte _nodeNum = 0;
 
 
@@ -24,7 +24,7 @@ public class TechTreeNode : MonoBehaviour
     /// <summary>
     /// 테크트리 참조하기.
     /// </summary>
-    public void SetTechTree(TechTreeBase current, byte nodeNum)
+    public void SetTechTree(TechTreeViewBase current, byte nodeNum)
     {
         _techTree = current;
         _nodeNum = nodeNum;

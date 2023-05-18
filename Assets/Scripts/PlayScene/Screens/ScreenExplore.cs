@@ -24,7 +24,7 @@ public class ScreenExplore : PlayScreenBase
         private set;
     }
 
-    public LandSlot CurrentSlot
+    public SlotLand CurrentSlot
     {
         get;
         set;

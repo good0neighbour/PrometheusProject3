@@ -25,6 +25,7 @@ public enum VariableByte
     TemperatureInfra,
     WaterInfra,
     CarbonInfra,
+    Era,
     EndByte
 }
 
@@ -140,11 +141,6 @@ public enum TechTreeType
     Facility,
     Tech,
     Thought,
-    TechTreeEnd
-}
-
-public enum ElementTechTreeType
-{
     Society,
     TechTreeEnd
 }

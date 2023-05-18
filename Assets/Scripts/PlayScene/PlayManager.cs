@@ -203,7 +203,7 @@ public class PlayManager : MonoBehaviour
     public void AddLandSlot(ushort landNum)
     {
         // 토지 버튼 추가 및 초기화
-        Instantiate(_landSlot, _landListContentArea).GetComponent<LandSlot>().SlotInitialize(landNum);
+        Instantiate(_landSlot, _landListContentArea).GetComponent<SlotLand>().SlotInitialize(landNum);
     }
 
 
@@ -223,7 +223,7 @@ public class PlayManager : MonoBehaviour
     public void AddCitySlot(ushort cityNum)
     {
         // 토지 버튼 추가 및 초기화
-        Instantiate(_citySlot, _cityListContentArea).GetComponent<CitySlot>().SlotInitialize(cityNum);
+        Instantiate(_citySlot, _cityListContentArea).GetComponent<SlotCity>().SlotInitialize(cityNum);
     }
 
 
@@ -674,6 +674,9 @@ public class PlayManager : MonoBehaviour
                 case TechTreeType.Facility:
                     // 시설 목록은 크기만 가져온다.
                     FacilityLength = (byte)_techTreeData.GetNodes(i).Length;
+                    break;
+                case TechTreeType.Society:
+                    // 사회 목록은 생성하지 않는다.
                     break;
                 default:
                     byte length = (byte)_techTreeData.GetNodes(i).Length;

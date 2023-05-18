@@ -104,14 +104,14 @@ public class UIString
                 if ((_techValues[index] != _adopted[(int)type][index]) || (null != _techRemainString[index]))
                 {
                     _techValues[index] = _adopted[(int)type][index];
-                    _techRemainString[index] = $"{((1.0f - _techValues[index]) / nodeData[index].ProgressionPerMonth).ToString("0")}{Language.Instance["개월"]}";
+                    _techRemainString[index] = $"{((1.0f - _techValues[index]) / nodeData[index].ProgressionValue).ToString("0")}{Language.Instance["개월"]}";
                 }
                 return _techRemainString[index];
             case TechTreeType.Thought:
                 if ((_thoughtValues[index] != _adopted[(int)type][index]) || (null != _thoughtRemainString[index]))
                 {
                     _thoughtValues[index] = _adopted[(int)type][index];
-                    _thoughtRemainString[index] = $"{((1.0f - _thoughtValues[index]) / nodeData[index].ProgressionPerMonth).ToString("0")}{Language.Instance["개월"]}";
+                    _thoughtRemainString[index] = $"{((1.0f - _thoughtValues[index]) / nodeData[index].ProgressionValue).ToString("0")}{Language.Instance["개월"]}";
                 }
                 return _thoughtRemainString[index];
             default:

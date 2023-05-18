@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
+using System.Text;
 
-public class PopUpViewTech : TechTreeBase, IActivateFirst
+public class PopUpViewTech : TechTreeViewBase, IActivateFirst
 {
     /* ==================== Variables ==================== */
 
@@ -65,11 +66,8 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
             {
                 _onProgress.Add(i);
             }
-        }
 
-        // 비활성화할 것
-        for (byte i = 0; i < NodeBtnObjects.Length; ++i)
-        {
+            // 비활성화할 것
             TechTrees.SubNode[] requiredNodes = NodeData[i].Requirments;
             for (byte j = 0; j < requiredNodes.Length; ++j)
             {
@@ -79,6 +77,13 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
                     NodeBtnObjects[i].SetActive(false);
                     break;
                 }
+            }
+
+            // 여기서 ProgressionValue는 연구 속도로 쓴다.
+            if (0.0f >= NodeData[i].ProgressionValue)
+            {
+                // 0이면 0.1로 바꾼다.
+                NodeData[i].ProgressionValue = 0.1f;
             }
         }
 
@@ -136,6 +141,9 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
                         NodeUpdate(index);
                     }
                     break;
+                case TechTreeType.Society:
+                    // 사회 테크트리에는 행동하지 않는다.
+                    break;
                 default:
                     // 다른 테크트리는 활성화 여부를 해당 테크트리가 스스로 결정한다.
                     break;
@@ -165,6 +173,40 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
     }
 
 
+    protected override string GetGainText()
+    {
+        StringBuilder result = new StringBuilder();
+        result.Append($"[{Language.Instance["획득"]}]\n");
+
+        // 다음 잠금 해제
+        List<TechTrees.SubNode> requirments = NextNodes[CurrentNode];
+        if (0 < requirments.Count)
+        {
+            for (byte i = 0; i < requirments.Count; ++i)
+            {
+                switch (requirments[i].Type)
+                {
+                    case TechTreeType.Facility:
+                        result.Append($"{Language.Instance["시설 사용 가능"]} - {requirments[i].NodeName}\n");
+                        break;
+                    case TechTreeType.Thought:
+                        result.Append($"{Language.Instance["사상 연구 가능"]} - {requirments[i].NodeName}\n");
+                        break;
+                    case TechTreeType.Society:
+                        result.Append($"{Language.Instance["사회 채택 가능"]} - {requirments[i].NodeName}\n");
+                        break;
+                    default:
+                        // 나머지는 표시하지 않는다.
+                        break;
+                }
+            }
+        }
+
+        // 반환. 마지막 \n은 제거한다.
+        return result.Remove(result.Length - 1, 1).ToString();
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -189,7 +231,7 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
         for (byte i = 0; i < _onProgress.Count; ++i)
         {
             // 연구 진행
-            Adopted[(int)TechTreeType.Tech][_onProgress[i]] += NodeData[_onProgress[i]].ProgressionPerMonth * _researchSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
+            Adopted[(int)TechTreeType.Tech][_onProgress[i]] += NodeData[_onProgress[i]].ProgressionValue * _researchSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
 
             // 연구 완료
             if (1.0f <= Adopted[(int)TechTreeType.Tech][_onProgress[i]])
@@ -219,10 +261,37 @@ public class PopUpViewTech : TechTreeBase, IActivateFirst
         // 활성화, 비활성화
         for (byte i = 0; i < NodeBtnObjects.Length; ++i)
         {
-            // 이미 활성화 된 것만
+            // 이미 활성화 된 것
             if (NodeBtnObjects[i].activeSelf)
             {
                 NodeUpdate(i);
+            }
+            // 비활성화인 것
+            else
+            {
+                TechTrees.SubNode[] requiredNode = NodeData[i].Requirments;
+                bool enable = true;
+
+                for (byte j = 0; j < requiredNode.Length; ++j)
+                {
+                    if (1.0f > Adopted[(int)requiredNode[j].Type][NodeIndex[requiredNode[j].NodeName]])
+                    {
+                        // 사용 불가
+                        enable = false;
+                    }
+
+                    if (!enable)
+                    {
+                        break;
+                    }
+                }
+
+                // 사용 가능한 경우
+                if (enable)
+                {
+                    NodeBtnObjects[i].SetActive(true);
+                    NodeUpdate(i);
+                }
             }
         }
     }
