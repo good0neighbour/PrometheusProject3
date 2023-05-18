@@ -18,6 +18,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private Transform _cityListContentArea = null;
     [SerializeField] private TechTrees _techTreeData = null;
     [SerializeField] private ScreenResearch _researchScreen = null;
+    [SerializeField] private ScreenSociety _societyScreen = null;
 
     private JsonData _data;
     private List<Land> _lands = new List<Land>();
@@ -685,8 +686,9 @@ public class PlayManager : MonoBehaviour
             }
         }
 
-        // 연구 진행 때문에 미리 활성화한다.
+        // 미리 활성화할 것.
         _researchScreen.Activate();
+        _societyScreen.Activate();
 
         // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
