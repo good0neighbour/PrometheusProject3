@@ -36,18 +36,37 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
 
     public void BtnAdopt()
     {
+        // 사용 불가
+        if (!_isAdoptAvailable)
+        {
+            return;
+        }
 
+        // 승인 시 동작
+        if (-1 < _currentNode)
+        {
+            _nodes[_currentNode].OnAdopt();
+        }
+        else
+        {
+            _elements[_currentElement].OnAdopt(_elementProgression);
+        }
+
+        Debug.Log("BtnAdopt");
     }
 
 
     public void ChangeState()
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 이 창 비활성화
         gameObject.SetActive(false);
 
         // 처음 상태로 되돌린다.
-        _adoptBtnText.text = null;
-        _isAdoptAvailable = false;
+        SetAdoptButtonAvailable(false);
+        _adoptBtnText.text = Language.Instance["승인"];
         _descriptionText.text = null;
         _costText.text = null;
         _gainText.text = null;
@@ -61,6 +80,9 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         {
             _elementImages[_currentElement].color = Constants.BUTTON_UNSELECTED;
         }
+
+        // 게임 재개
+        PlayManager.Instance.GameResume = Constants.GAME_RESUME;
     }
     
 
@@ -105,6 +127,9 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
 
         // 하위 요소 진행도 배열 생성
         _elementProgression = new float[_elements.Count];
+
+        // 승인 불가 상태로 시작한다.
+        SetAdoptButtonAvailable(false);
     }
 
 
@@ -141,6 +166,15 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         _descriptionText.text = description;
 
         // 사용 가능 여부
+        SetAdoptButtonAvailable(isAvailable);
+    }
+
+
+
+    /* ==================== Private Methods ==================== */
+
+    private void SetAdoptButtonAvailable(bool isAvailable)
+    {
         _isAdoptAvailable = isAvailable;
         if (_isAdoptAvailable)
         {
@@ -152,9 +186,6 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         }
     }
 
-
-
-    /* ==================== Private Methods ==================== */
 
     private void OnEnable()
     {

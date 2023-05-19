@@ -31,6 +31,15 @@ public class NodeSociety : MonoBehaviour
 
 
     /// <summary>
+    /// 승인 시 동작
+    /// </summary>
+    public void OnAdopt()
+    {
+        PlayManager.Instance[VariableByte.Era] = (byte)(_eraNum + 1);
+    }
+
+
+    /// <summary>
     /// 노드 초기화
     /// </summary>
     public void SetNode(byte nodeNum, List<NodeElementSociety> elementList, TechTrees techTreeData, Dictionary<string, byte> nodeIndex)

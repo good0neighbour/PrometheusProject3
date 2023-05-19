@@ -82,8 +82,8 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
             // 여기서 ProgressionValue는 연구 속도로 쓴다.
             if (0.0f >= NodeData[i].ProgressionValue)
             {
-                // 0이면 0.1로 바꾼다.
-                NodeData[i].ProgressionValue = 0.1f;
+                // 0이면 0.03으로 바꾼다.
+                NodeData[i].ProgressionValue = 0.03f;
             }
         }
 
