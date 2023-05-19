@@ -246,6 +246,15 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 사회 하위 요소 진행도 반환
+    /// </summary>
+    public float[] GetSocietyElementProgression()
+    {
+        return _data.SocietyElementProgression;
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -759,6 +768,7 @@ public class PlayManager : MonoBehaviour
         public float[] FloatArray;
         public double[] DoubleArray;
         public float[][] Adopted;
+        public float[] SocietyElementProgression;
 
         public JsonData(bool initialize)
         {
@@ -784,6 +794,8 @@ public class PlayManager : MonoBehaviour
                 DoubleArray = null;
                 Adopted = null;
             }
+
+            SocietyElementProgression = null;
         }
     }
 }

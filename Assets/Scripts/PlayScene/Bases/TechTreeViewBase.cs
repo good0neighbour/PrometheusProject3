@@ -73,6 +73,12 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
     /// </summary>
     public void SetCurrentNode(byte current, Vector3 position)
     {
+        // 애니메이션 진행 중에는 작동 불가
+        if (_runAdoptProgression)
+        {
+            return;
+        }
+
         // 현재 노드 정보
         CurrentNode = current;
 
