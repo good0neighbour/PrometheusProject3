@@ -4,7 +4,8 @@ public enum AudioType
 {
     Touch,
     Select,
-    Failed
+    Failed,
+    Alert
 }
 
 public class AudioManager : MonoBehaviour
@@ -29,6 +30,10 @@ public class AudioManager : MonoBehaviour
     [Header("Failed")]
     [SerializeField] private AudioClip _failedClip = null;
     [SerializeField] private float _failedVolume = 1.0f;
+
+    [Header("Alert")]
+    [SerializeField] private AudioClip _alertClip = null;
+    [SerializeField] private float _alertVolume = 1.0f;
 
     [Header("ÂüÁ¶")]
     [SerializeField] private AudioSource _audioSource = null;
@@ -75,6 +80,9 @@ public class AudioManager : MonoBehaviour
                 return;
             case AudioType.Failed:
                 UseChannel(_failedClip, _failedVolume);
+                return;
+            case AudioType.Alert:
+                UseChannel(_alertClip, _alertVolume);
                 return;
         }
     }

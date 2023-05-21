@@ -1,4 +1,3 @@
-using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ public class SlotCity : MonoBehaviour
     private ushort _slotNum = 0;
     private ushort _population = 0;
 
-    public string PopulationText
+    public string PopulationString
     {
         get;
         private set;
@@ -51,40 +50,27 @@ public class SlotCity : MonoBehaviour
         _name.text = _city.CityName;
 
         // 인구 표시
-        PopulationText = Constants.INITIAL_POPULATION.ToString();
-        _populationText.text = PopulationText;
+        PopulationString = Constants.INITIAL_POPULATION.ToString();
+        _populationText.text = PopulationString;
 
         // 인구수 저장
         _population = Constants.INITIAL_POPULATION;
-
-        // 대리자 등록
-        PlayManager.OnMonthCahnge += OnMonthChange;
     }
 
 
 
     /* ==================== Private Methods ==================== */
 
-    private void OnMonthChange()
+    private void Update()
     {
-        if (gameObject.activeSelf)
+        ushort newPopulation = (ushort)Mathf.Round(_city.Population);
+
+        // 인구가 변화했을 때만 갱신
+        if (_population != newPopulation)
         {
-            ushort newPopulation = (ushort)Mathf.RoundToInt(_city.Population);
-
-            // 인구가 변화했을 때만 갱신
-            if (_population != newPopulation)
-            {
-                _population = newPopulation;
-                PopulationText = _population.ToString("0");
-                _populationText.text = PopulationText;
-            }
+            _population = newPopulation;
+            PopulationString = _population.ToString("0");
+            _populationText.text = PopulationString;
         }
-    }
-
-
-    private void OnEnable()
-    {
-        // 비활성화된 동안에는 업데이트를 안 했으므로
-        OnMonthChange();
     }
 }

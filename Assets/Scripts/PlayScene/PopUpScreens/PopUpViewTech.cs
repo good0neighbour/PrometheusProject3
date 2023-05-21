@@ -12,7 +12,6 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
     private TMP_Text[] _remainTexts = null;
     private Image[] _progreesionImages = null;
     private List<byte> _onProgress = new List<byte>();
-    private float _researchSpeedmult = 1.0f / Constants.MONTH_TIMER;
 
 
 
@@ -30,8 +29,7 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
         base.BtnAdopt();
 
         // 승인 애니메이션
-        //AdoptAnimation(PlayManager.Instance[VariableFloat.ResearchSupportRate]);
-        AdoptAnimation(75.0f);
+        AdoptAnimation(PlayManager.Instance[VariableFloat.ResearchSupportRate]);
     }
 
 
@@ -253,7 +251,7 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
         for (byte i = 0; i < _onProgress.Count; ++i)
         {
             // 연구 진행
-            Adopted[(int)TechTreeType.Tech][_onProgress[i]] += NodeData[_onProgress[i]].ProgressionValue * _researchSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
+            Adopted[(int)TechTreeType.Tech][_onProgress[i]] += NodeData[_onProgress[i]].ProgressionValue * Constants.MONTHLY_MULTIPLY * PlayManager.Instance.GameSpeed * Time.deltaTime;
 
             // 연구 완료
             if (1.0f <= Adopted[(int)TechTreeType.Tech][_onProgress[i]])

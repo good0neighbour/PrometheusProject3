@@ -38,6 +38,7 @@ public static class Constants
 
     // 게임 플레이 관련 값, 일반
     public const ushort INITIAL_POPULATION = 10;
+    public const float INITIAL_POPULATION_MOVEMENT = 0.0001f;
     public const float MONTH_TIMER = 2.0f;
     public const float GAME_RESUME = 1.0f;
     public const float GAME_PAUSE = 0.0f;
@@ -53,13 +54,17 @@ public static class Constants
     public const float TECHTREE_AREA_HEIGHT_CENTER = 0.375f;
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
-    public const float SPEND_ANIMATION_DURATION = 0.2f;
-    public const float SUPPORT_RATE_DECREASEMENT = 0.05f;
+    public const float SPEND_ANIMATION_DURATION = 0.3f;
+    public const float SUPPORT_RATE_DECREASEMENT = 0.35f;
     public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
     public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
+    public const float SUPPORT_RATE_SPEEDMULT = 0.05f;
     public const float MAX_SUPPORT_RATE_ADOPTION = 90.0f;
     public const float GOV_ASSET_MULTIPLY = 0.02f;
     public const float GOV_AFFECTION_MULTIPLY = 0.1f;
+    public const float CRIME_RATE_SPEEDMULT = 0.05f;
+    public const float DEATH_RATE_SPEEDMULT = 0.07f;
+    public const float MIN_EVEN_POPULATION = 100.0f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";
@@ -82,6 +87,7 @@ public static class Constants
     public static readonly Color BOTTOM_TEXT_DEFAULT = new Color(220.0f / 255.0f, 220.0f / 255.0f, 220.0f / 255.0f);
 
     // 수정이 필요 없는 값
+    public const float MONTHLY_MULTIPLY = 1.0f / MONTH_TIMER;
     public const float HALF_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.5f;
     public const float QUARTER_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.25f;
     public const float HALF_CANVAS_WIDTH = CANVAS_WIDTH * 0.5f;

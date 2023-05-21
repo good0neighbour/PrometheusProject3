@@ -96,6 +96,9 @@ public class ScreenAirPressure : PlayScreenBase, IUpDownAdjust
         // 지출
         PlayManager.Instance[VariableLong.Funds] -= _buildingInfraCost;
 
+        // 지출 애니메이션
+        BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Fund);
+
         // 건설된 인프라 수 표시
         _numOfInfra.text = PlayManager.Instance[VariableByte.AirPressureInfra].ToString();
 

@@ -48,6 +48,9 @@ public class ScreenBreath : PlayScreenBase, IRequest
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _requestCost;
 
+        // 지출 애니메이션
+        BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Fund);
+
         // 안정도 1만큼 증가
         ++PlayManager.Instance[VariableFloat.BreathLifeStability];
     }

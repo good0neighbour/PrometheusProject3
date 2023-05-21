@@ -99,7 +99,7 @@ public class UIString
                 // 표시할 단위가 없을 때
                 if (null == _floatUnits[(int)variable])
                 {
-                    _floatStrings[(int)variable] = $"{_currentFloatValues[(int)variable].ToString("F2")}";
+                    _floatStrings[(int)variable] = _currentFloatValues[(int)variable].ToString("F2");
                 }
                 // 표시할 단위가 있을 때
                 else

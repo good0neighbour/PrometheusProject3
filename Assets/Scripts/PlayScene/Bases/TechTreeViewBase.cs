@@ -93,7 +93,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         SetAdoptButtonAvailable(IsUnadopted() && CostAvailable());
 
         // 설명 텍스트 업데이트
-        _descriptionText.text = $"[{NodeData[CurrentNode].NodeName}]\n{NodeData[CurrentNode].Description}";
+        _descriptionText.text = Language.Instance[NodeData[CurrentNode].Description];
 
         // 비용 텍스트 업데이트
         _costsText.text = GetCostText();
@@ -355,6 +355,10 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         if (0 < NodeData[CurrentNode].Maintenance)
         {
             result.Append($"{Language.Instance["유지비용"]} {NodeData[CurrentNode].Maintenance}\n");
+        }
+        if (0 < NodeData[CurrentNode].Injure)
+        {
+            result.Append($"{Language.Instance["부상 증가"]}\n");
         }
 
         // 반환. 마지막 \n은 제거한다.

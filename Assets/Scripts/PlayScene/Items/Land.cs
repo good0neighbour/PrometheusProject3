@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public class Land
 {
     public ushort LandNum { get; private set; }

@@ -312,10 +312,10 @@ public class PlayManager : MonoBehaviour
     /// <summary>
     /// 도시 추가
     /// </summary>
-    public void AddCity(ushort landNum, string cityName, ushort capacity)
+    public void AddCity(string cityName, ushort capacity)
     {
         // 가변배열에 토지 추가
-        _cities.Add(new City(this[VariableUshort.CityNum], landNum, cityName, capacity));
+        _cities.Add(new City(this[VariableUshort.CityNum], cityName, capacity));
     }
 
 
@@ -392,6 +392,11 @@ public class PlayManager : MonoBehaviour
 
                 // 탐사 목표 증가
                 this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
+
+                // 메세지
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "새로운 토지를 발견했습니다."
+                    ]);
             }
             // 진행 중일 때
             else
@@ -723,7 +728,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     private void SupportRateMovement()
     {
-        float speedmult = GameSpeed * Time.deltaTime;
+        float speedmult = Constants.SUPPORT_RATE_SPEEDMULT * GameSpeed * Time.deltaTime;
 
         // 목표 지지율. 프로퍼티의 함수를 이용하기 위해 프로퍼티를 사용한다.
         FacilitySupportGoal -= Constants.SUPPORT_RATE_DECREASEMENT * speedmult;
@@ -766,6 +771,7 @@ public class PlayManager : MonoBehaviour
 
         #region 임시
         _data = new JsonData(true);
+        this[VariableByte.Month] = 1;
         this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
         this[VariableLong.Funds] = 500000;
         this[VariableByte.Era] = 1;

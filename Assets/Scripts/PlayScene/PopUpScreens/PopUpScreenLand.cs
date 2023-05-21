@@ -104,8 +104,11 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _currentCost;
 
+        // 지출 애니메이션
+        BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Fund);
+
         // 도시 추가
-        PlayManager.Instance.AddCity(_currentLand.LandNum, cityName, _currentCapacity);
+        PlayManager.Instance.AddCity(cityName, _currentCapacity);
 
         // 도시 슬롯 추가
         PlayManager.Instance.AddCitySlot(PlayManager.Instance[VariableUshort.CityNum]);
@@ -129,12 +132,36 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         GeneralMenuButtons.Instance.IsRightButtonAvailable = true;
 
         // 자원 수익
-        PlayManager.Instance[VariableUshort.TotalIron] += _currentLand.Resources[(int)ResourceType.Iron];
-        PlayManager.Instance[VariableUshort.CurrentIron] += _currentLand.Resources[(int)ResourceType.Iron];
-        PlayManager.Instance[VariableUshort.TotalNuke] += _currentLand.Resources[(int)ResourceType.Nuke];
-        PlayManager.Instance[VariableUshort.CurrentNuke] += _currentLand.Resources[(int)ResourceType.Nuke];
-        PlayManager.Instance[VariableUshort.TotalJewel] += _currentLand.Resources[(int)ResourceType.Jewel];
-        PlayManager.Instance[VariableUshort.CurrentJewel] += _currentLand.Resources[(int)ResourceType.Jewel];
+        byte[] resouces = _currentLand.Resources;
+        if (0 < resouces[(int)ResourceType.Iron])
+        {
+            PlayManager.Instance[VariableUshort.TotalIron] += resouces[(int)ResourceType.Iron];
+            PlayManager.Instance[VariableUshort.CurrentIron] += resouces[(int)ResourceType.Iron];
+
+            // 애니메이션
+            BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Iron);
+        }
+        if (0 < resouces[(int)ResourceType.Nuke])
+        {
+            PlayManager.Instance[VariableUshort.TotalNuke] += resouces[(int)ResourceType.Nuke];
+            PlayManager.Instance[VariableUshort.CurrentNuke] += resouces[(int)ResourceType.Nuke];
+
+            // 애니메이션
+            BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Nuke);
+        }
+        if (0 < resouces[(int)ResourceType.Jewel])
+        {
+            PlayManager.Instance[VariableUshort.TotalJewel] += resouces[(int)ResourceType.Jewel];
+            PlayManager.Instance[VariableUshort.CurrentJewel] += resouces[(int)ResourceType.Jewel];
+
+            // 애니메이션
+            BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Jewel);
+        }
+
+        // 메세지
+        MessageBox.Instance.EnqueueMessage(Language.Instance[
+            "{도시}(이)가 건설됐습니다."
+            ], cityName);
     }
 
 
@@ -150,18 +177,21 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
                 _middleCityButton.color = Constants.BUTTON_UNSELECTED;
                 _bigCityButton.color = Constants.BUTTON_UNSELECTED;
                 _currentCost = _smallCityCost;
+                _currentCapacity = _smallCityCapacity;
                 return;
             case 1:
                 _smallCityButton.color = Constants.BUTTON_UNSELECTED;
                 _middleCityButton.color = Constants.BUTTON_SELECTED;
                 _bigCityButton.color = Constants.BUTTON_UNSELECTED;
                 _currentCost = _middleCityCost;
+                _currentCapacity = _middleCityCapacity;
                 return;
             case 2:
                 _smallCityButton.color = Constants.BUTTON_UNSELECTED;
                 _middleCityButton.color = Constants.BUTTON_UNSELECTED;
                 _bigCityButton.color = Constants.BUTTON_SELECTED;
                 _currentCost = _bigCityCost;
+                _currentCapacity = _bigCityCapacity;
                 return;
         }
     }

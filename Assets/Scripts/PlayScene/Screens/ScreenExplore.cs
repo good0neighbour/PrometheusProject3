@@ -70,6 +70,9 @@ public class ScreenExplore : PlayScreenBase
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _deviceCost;
 
+        // 지출 애니메이션
+        BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Fund);
+
         // 장비 개수 추가
         ++PlayManager.Instance[VariableByte.ExploreDevice];
 

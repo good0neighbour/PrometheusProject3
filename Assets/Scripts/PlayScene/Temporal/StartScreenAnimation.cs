@@ -44,6 +44,11 @@ public class StartScreenAnimation : MonoBehaviour
 
         // 게임 진행
         PlayManager.Instance.GameResume = Constants.GAME_RESUME;
+
+        // 메세지
+        MessageBox.Instance.EnqueueMessage(Language.Instance[
+            "당신은 테라포밍 프로젝트의 총괄을 목적으로 개발된 한 기업의 인공지능 모델입니다. 행성의 환경과 문명을 안정화하거나 다른 경쟁 기업을 잠식하는 것이 당신의 목표입니다."
+            ]);
     }
 
 

@@ -19,12 +19,17 @@ public class TechTrees : ScriptableObject
         public ushort ResearchCost;
         public ushort CultureCost;
         public ushort Maintenance;
+        public ushort Injure;
         public byte IronCost;
         public byte NukeCost;
         [Header("수익")]
         public ushort AnnualFund;
         public ushort AnnualResearch;
         public ushort AnnualCulture;
+        public float PopulationMovement;
+        public float Police;
+        public float Health;
+        public float Safety;
         [Header("요구사항")]
         public SubNode[] Requirments;
     }

@@ -28,8 +28,7 @@ public class PopUpViewFacility : TechTreeViewBase
         base.BtnAdopt();
 
         // 승인 애니메이션
-        //AdoptAnimation(PlayManager.Instance[VariableFloat.FacilitySupportRate]);
-        AdoptAnimation(75.0f);
+        AdoptAnimation(PlayManager.Instance[VariableFloat.FacilitySupportRate]);
     }
 
 
@@ -50,6 +49,13 @@ public class PopUpViewFacility : TechTreeViewBase
 
         // 지지율 상승 이내메이션
         BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.FacilitySupport);
+
+        // 시설 수 증가
+        ++_currentCity.NumOfFacility;
+        ScreenCity.Instance.CityImageUpdate();
+
+        // 시설 수익
+        FacilityGains();
 
         // 노드 아이콘 변경
         _nodeIcons[CurrentNode].text = Constants.FACILITY_ADOPTED;
@@ -149,11 +155,27 @@ public class PopUpViewFacility : TechTreeViewBase
         }
         if (0 < node.AnnualResearch)
         {
-            result.Append($"{Language.Instance["연간 연구"]} {node.AnnualFund.ToString()}\n");
+            result.Append($"{Language.Instance["연간 연구"]} {node.AnnualResearch.ToString()}\n");
         }
         if (0 < node.AnnualCulture)
         {
-            result.Append($"{Language.Instance["연간 문화"]} {node.AnnualFund.ToString()}\n");
+            result.Append($"{Language.Instance["연간 문화"]} {node.AnnualCulture.ToString()}\n");
+        }
+        if (0 < node.PopulationMovement)
+        {
+            result.Append($"{Language.Instance["인구 변화"]}\n");
+        }
+        if (0 < node.Police)
+        {
+            result.Append($"{Language.Instance["범죄율 감소"]}\n");
+        }
+        if (0 < node.Health)
+        {
+            result.Append($"{Language.Instance["질병 감소"]}\n");
+        }
+        if (0 < node.Safety)
+        {
+            result.Append($"{Language.Instance["부상 감소"]}\n");
         }
 
         // 다음 잠금 해제
@@ -201,6 +223,21 @@ public class PopUpViewFacility : TechTreeViewBase
         {
             _nodeIcons[index].text = Constants.FACILITY_UNADOPTED;
         }
+    }
+
+
+    /// <summary>
+    /// 시설 수익
+    /// </summary>
+    private void FacilityGains()
+    {
+        _currentCity.PopulationMovementMultiply += NodeData[CurrentNode].PopulationMovement;
+        _currentCity.AnnualFund += (short)(NodeData[CurrentNode].AnnualFund - NodeData[CurrentNode].Maintenance);
+        _currentCity.AnnualResearch += NodeData[CurrentNode].AnnualResearch;
+        _currentCity.InjurePosibility += NodeData[CurrentNode].Injure;
+        _currentCity.Police += NodeData[CurrentNode].Police;
+        _currentCity.Health += NodeData[CurrentNode].Health;
+        _currentCity.Safety += NodeData[CurrentNode].Safety;
     }
 
 
