@@ -11,6 +11,9 @@ public class NodeElementSociety : MonoBehaviour
     [SerializeField] private string _description = null;
     [SerializeField] private float _progreesionPerOnce = 0.1f;
 
+    [Header("기본")]
+    [SerializeField] private ushort _cultureCost = 1;
+
     [Header("참조")]
     [SerializeField] private TMP_Text _titleText = null;
     [SerializeField] private Image _progressionImage = null;
@@ -21,18 +24,48 @@ public class NodeElementSociety : MonoBehaviour
     private bool _isAvailable = false;
     private bool _animationProceed = false;
 
+    public bool IsAvailable
+    {
+        get
+        {
+            return _isAvailable;
+        }
+        set
+        {
+            _isAvailable = value;
+            if (IsAvailable)
+            {
+                _titleText.color = Constants.WHITE;
+            }
+            else
+            {
+                _titleText.color = Constants.TEXT_BUTTON_DISABLE;
+            }
+        }
+    }
+
 
 
     /* ==================== Public Methods ==================== */
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(-1, _elementNum, _description, _isAvailable);
+        PopUpViewSociety.Instance.NodeSelect(-1, _elementNum, _description, IsAvailable);
     }
 
 
     /// <summary>
-    /// 승인 시 동작
+    /// 승인 버튼 클릭 시
+    /// </summary>
+    public void BtnAdopt()
+    {
+        PlayManager.Instance[VariableUint.Culture] -= _cultureCost;
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Culture);
+    }
+
+
+    /// <summary>
+    /// 승인 성공 시 동작
     /// </summary>
     public void OnAdopt(float[] progresions)
     {
@@ -43,8 +76,6 @@ public class NodeElementSociety : MonoBehaviour
         _animationGoalValue = progresions[_elementNum];
         _animationAmount = _animationGoalValue - _progressionImage.fillAmount;
         _animationProceed = true;
-
-        Debug.Log("ElementAdopt");
     }
 
 
@@ -52,12 +83,16 @@ public class NodeElementSociety : MonoBehaviour
     {
         _elementNum = elementNum;
         _titleText.text = _elementName;
+        _titleText.color = Constants.TEXT_BUTTON_DISABLE;
     }
 
 
-    public void SetAvailable(bool available)
+    /// <summary>
+    /// 비용 확인
+    /// </summary>
+    public bool CostAvailable()
     {
-        _isAvailable = available;
+        return _cultureCost <= PlayManager.Instance[VariableUint.Culture];
     }
 
 

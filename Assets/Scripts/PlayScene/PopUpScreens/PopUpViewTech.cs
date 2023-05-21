@@ -83,7 +83,7 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
             if (0.0f >= NodeData[i].ProgressionValue)
             {
                 // 0이면 0.03으로 바꾼다.
-                NodeData[i].ProgressionValue = 0.03f;
+                NodeData[i].ProgressionValue = 0.3f;
             }
         }
 
@@ -113,18 +113,18 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
         // 활성화 정보 전달
         Adopted[(int)TechTreeType.Tech][CurrentNode] = 0.0001f;
 
+        // 지지율 상승
+        PlayManager.Instance[VariableFloat.ResearchSupportRate] += Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;
+        if (100.0f < PlayManager.Instance[VariableFloat.ResearchSupportRate])
+        {
+            PlayManager.Instance[VariableFloat.ResearchSupportRate] = 100.0f;
+        }
+
+        // 지지율 상승 이내메이션
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.ResearchSupport);
+
         // 연구 진행중인 리스트에 추가
         _onProgress.Add(CurrentNode);
-
-        // 승인 버튼 텍스트 변경
-        AdoptBtn.text = Language.Instance["승인 완료"];
-
-        // 상태 메세지
-        StatusText.color = Constants.WHITE;
-        StatusText.text = Language.Instance["정책 성공"];
-
-        // 승인 버튼 사용 불가
-        AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 다음 노드 활성화
         List<TechTrees.SubNode> nextNodes = NextNodes[CurrentNode];
@@ -154,7 +154,15 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
 
     protected override void OnFail()
     {
-        
+        // 지지율 감소
+        PlayManager.Instance[VariableFloat.ResearchSupportRate] -= Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;
+        if (0.0f > PlayManager.Instance[VariableFloat.ResearchSupportRate])
+        {
+            PlayManager.Instance[VariableFloat.ResearchSupportRate] = 0.0f;
+        }
+
+        // 지지율 애니메이션
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.ResearchSupport);
     }
 
 
@@ -176,7 +184,21 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
     protected override string GetGainText()
     {
         StringBuilder result = new StringBuilder();
-        result.Append($"[{Language.Instance["획득"]}]\n");
+        result.Append($"[{Language.Instance["수익"]}]\n");
+
+        TechTrees.Node node = NodeData[CurrentNode];
+        if (0 < node.AnnualFund)
+        {
+            result.Append($"{Language.Instance["연간 자금"]} {node.AnnualFund.ToString()}\n");
+        }
+        if (0 < node.AnnualResearch)
+        {
+            result.Append($"{Language.Instance["연간 연구"]} {node.AnnualFund.ToString()}\n");
+        }
+        if (0 < node.AnnualCulture)
+        {
+            result.Append($"{Language.Instance["연간 문화"]} {node.AnnualFund.ToString()}\n");
+        }
 
         // 다음 잠금 해제
         List<TechTrees.SubNode> requirments = NextNodes[CurrentNode];

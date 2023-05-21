@@ -47,7 +47,6 @@ public class AutoTranslation : MonoBehaviour
         // 폰트만 바꿀 경우 여기서 종료.
         if (_onlyChangeFont)
         {
-            _text.text = null;
             return;
         }
 

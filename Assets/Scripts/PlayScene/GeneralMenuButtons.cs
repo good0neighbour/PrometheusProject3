@@ -32,6 +32,8 @@ public class GeneralMenuButtons : MonoBehaviour
     [SerializeField] private GameObject _rightButton = null;
     [SerializeField] private GameObject _leftIndex = null;
     [SerializeField] private GameObject _rightIndex = null;
+    [SerializeField] private GameObject _leftBottomBar = null;
+    [SerializeField] private GameObject _rightBottomBar = null;
     [SerializeField] private Transform _selection = null;
 
     private PlayScreenBase _currentScreen = null;
@@ -208,15 +210,18 @@ public class GeneralMenuButtons : MonoBehaviour
     {
         _leftButton.SetActive(left);
         _leftIndex.SetActive(!left);
+        _leftBottomBar.SetActive(!left);
         if (right)
         {
             _rightButton.SetActive(true);
             _rightIndex.SetActive(false);
+            _rightBottomBar.SetActive(false);
         }
         else
         {
             _rightButton.SetActive(false);
             _rightIndex.SetActive(IsRightButtonAvailable);
+            _rightBottomBar.SetActive(IsRightButtonAvailable);
         }
     }
 
@@ -235,6 +240,8 @@ public class GeneralMenuButtons : MonoBehaviour
         _rightButton.SetActive(IsRightButtonAvailable);
         _leftIndex.SetActive(false);
         _rightIndex.SetActive(false);
+        _leftBottomBar.SetActive(false);
+        _rightBottomBar.SetActive(false);
         CurrentLeftIndex = 1;
         CurrentRightIndex = 0;
 

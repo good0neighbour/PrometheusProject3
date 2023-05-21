@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScreenSociety : PlayScreenBase
 {
@@ -6,6 +7,8 @@ public class ScreenSociety : PlayScreenBase
 
     [SerializeField] private PopUpScreenElementTechTree _popUpElementTechScreen = null;
     [SerializeField] private PopUpViewSociety _societyView = null;
+    [SerializeField] private Image _societyBtnImage = null;
+    [SerializeField] private Sprite[] _societySprites = null;
 
 
 
@@ -14,6 +17,7 @@ public class ScreenSociety : PlayScreenBase
     public void Activate()
     {
         _societyView.Activate();
+        SocietyImageUpdate();
     }
 
 
@@ -25,6 +29,15 @@ public class ScreenSociety : PlayScreenBase
         // 테크트리 창 활성화
         _popUpElementTechScreen.ActiveThis(0);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+    }
+
+
+    /// <summary>
+    /// 사회 이미지 업데이트
+    /// </summary>
+    public void SocietyImageUpdate()
+    {
+        _societyBtnImage.sprite = _societySprites[PlayManager.Instance[VariableByte.Era] - 1];
     }
 
 

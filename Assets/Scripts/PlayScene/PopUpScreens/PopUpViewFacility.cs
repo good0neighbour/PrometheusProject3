@@ -41,17 +41,18 @@ public class PopUpViewFacility : TechTreeViewBase
         // 활성화 정보 전달
         _adopted[CurrentNode] = true;
 
+        // 지지율 상승
+        PlayManager.Instance[VariableFloat.FacilitySupportRate] += Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;
+        if (100.0f < PlayManager.Instance[VariableFloat.FacilitySupportRate])
+        {
+            PlayManager.Instance[VariableFloat.FacilitySupportRate] = 100.0f;
+        }
+
+        // 지지율 상승 이내메이션
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.FacilitySupport);
+
         // 노드 아이콘 변경
         _nodeIcons[CurrentNode].text = Constants.FACILITY_ADOPTED;
-
-        // 승인 버튼 텍스트 변경
-        AdoptBtn.text = Language.Instance["승인 완료"];
-
-        // 상태 메세지
-        StatusText.color = Constants.WHITE;
-        StatusText.text = Language.Instance["정책 성공"];
-
-        // 승인 버튼 사용 불가
         AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 다음 노드 활성화
@@ -64,6 +65,7 @@ public class PopUpViewFacility : TechTreeViewBase
                     {
                         byte index = NodeIndex[nextNodes.NodeName];
                         _enabled[index] = true;
+                        SetIcon(index);
                         NodeBtnObjects[index].SetActive(true);
                     }
                     break;
@@ -79,7 +81,15 @@ public class PopUpViewFacility : TechTreeViewBase
 
     protected override void OnFail()
     {
+        // 지지율 감소
+        PlayManager.Instance[VariableFloat.FacilitySupportRate] -= Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;
+        if (0.0f > PlayManager.Instance[VariableFloat.FacilitySupportRate])
+        {
+            PlayManager.Instance[VariableFloat.FacilitySupportRate] = 0.0f;
+        }
 
+        // 지지율 애니메이션
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.FacilitySupport);
     }
 
 
@@ -130,7 +140,21 @@ public class PopUpViewFacility : TechTreeViewBase
     protected override string GetGainText()
     {
         StringBuilder result = new StringBuilder();
-        result.Append($"[{Language.Instance["획득"]}]\n");
+        result.Append($"[{Language.Instance["수익"]}]\n");
+
+        TechTrees.Node node = NodeData[CurrentNode];
+        if (0 < node.AnnualFund)
+        {
+            result.Append($"{Language.Instance["연간 자금"]} {node.AnnualFund.ToString()}\n");
+        }
+        if (0 < node.AnnualResearch)
+        {
+            result.Append($"{Language.Instance["연간 연구"]} {node.AnnualFund.ToString()}\n");
+        }
+        if (0 < node.AnnualCulture)
+        {
+            result.Append($"{Language.Instance["연간 문화"]} {node.AnnualFund.ToString()}\n");
+        }
 
         // 다음 잠금 해제
         List<TechTrees.SubNode> requirments = NextNodes[CurrentNode];
@@ -163,6 +187,21 @@ public class PopUpViewFacility : TechTreeViewBase
 
 
     /* ==================== Private Methods ==================== */
+
+    /// <summary>
+    /// 노드 승인 완료, 미완료 표시
+    /// </summary>
+    private void SetIcon(byte index)
+    {
+        if (_adopted[index])
+        {
+            _nodeIcons[index].text = Constants.FACILITY_ADOPTED;
+        }
+        else
+        {
+            _nodeIcons[index].text = Constants.FACILITY_UNADOPTED;
+        }
+    }
 
 
     private void Awake()
@@ -205,14 +244,7 @@ public class PopUpViewFacility : TechTreeViewBase
                 NodeBtnObjects[i].SetActive(true);
 
                 // 승인 완료, 미완료
-                if (_adopted[i])
-                {
-                    _nodeIcons[i].text = Constants.FACILITY_ADOPTED;
-                }
-                else
-                {
-                    _nodeIcons[i].text = Constants.FACILITY_UNADOPTED;
-                }
+                SetIcon(i);
             }
             else
             {
@@ -245,8 +277,19 @@ public class PopUpViewFacility : TechTreeViewBase
                     }
                 }
 
-                // 활성화 혹은 비활성화
-                NodeBtnObjects[i].SetActive(enable);
+                if (enable)
+                {
+                    // 승인 완료, 미완료
+                    SetIcon(i);
+
+                    // 활성화
+                    NodeBtnObjects[i].SetActive(true);
+                }
+                else
+                {
+                    //  비활성화
+                    NodeBtnObjects[i].SetActive(false);
+                }
             }
         }
     }

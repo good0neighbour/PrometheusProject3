@@ -9,14 +9,22 @@ public class UIString
 
     private static UIString _instance = null;
 
-    private float[] _currentValues = new float[(int)VariableFloat.EndFloat];
-    private string[] _strings = new string[(int)VariableFloat.EndFloat];
-    private string[] _units = new string[(int)VariableFloat.EndFloat];
+    private float[] _currentUshortValues = new float[(int)VariableUshort.EndUshort];
+    private string[] _ushortStrings = new string[(int)VariableUshort.EndUshort];
+    private float[] _currentUintValues = new float[(int)VariableUint.EndUint];
+    private string[] _uintStrings = new string[(int)VariableUint.EndUint];
+    private float[] _currentFloatValues = new float[(int)VariableFloat.EndFloat];
+    private string[] _floatStrings = new string[(int)VariableFloat.EndFloat];
+    private string[] _floatUnits = new string[(int)VariableFloat.EndFloat];
+    private long[] _currentLongValues = new long[(int)VariableLong.EndLong];
+    private string[] _longStrings = new string[(int)VariableLong.EndLong];
     private float[] _techValues = null;
     private string[] _techRemainString = null;
     private float[] _thoughtValues = null;
     private string[] _thoughtRemainString = null;
     private float[][] _adopted = null;
+    private byte _month = 0;
+    private string _date = null;
 
     public static UIString Instance
     {
@@ -34,36 +42,117 @@ public class UIString
     /// <summary>
     /// 이것이 주 목적이므로 편리한 접근을 위해 만들었다. 문자열을 단위 포함해서 가져온다.
     /// </summary>
+    public string this[VariableUshort variable]
+    {
+        get
+        {
+            // 값이 바뀌었거나 문자열을 생성한 적 없을 때
+            if (_currentUshortValues[(int)variable] != PlayManager.Instance[variable] || null == _ushortStrings[(int)variable])
+            {
+                // 현재 값 저장
+                _currentUshortValues[(int)variable] = PlayManager.Instance[variable];
+
+                // 문자열 저장
+                _ushortStrings[(int)variable] = _currentUshortValues[(int)variable].ToString();
+            }
+
+            // 반환
+            return _ushortStrings[(int)variable];
+        }
+    }
+
+    /// <summary>
+    /// 이것이 주 목적이므로 편리한 접근을 위해 만들었다. 문자열을 단위 포함해서 가져온다.
+    /// </summary>
+    public string this[VariableUint variable]
+    {
+        get
+        {
+            // 값이 바뀌었거나 문자열을 생성한 적 없을 때
+            if (_currentUintValues[(int)variable] != PlayManager.Instance[variable] || null == _uintStrings[(int)variable])
+            {
+                // 현재 값 저장
+                _currentUintValues[(int)variable] = PlayManager.Instance[variable];
+
+                // 문자열 저장
+                _uintStrings[(int)variable] = _currentUintValues[(int)variable].ToString();
+            }
+
+            // 반환
+            return _uintStrings[(int)variable];
+        }
+    }
+
+    /// <summary>
+    /// 이것이 주 목적이므로 편리한 접근을 위해 만들었다. 문자열을 단위 포함해서 가져온다.
+    /// </summary>
     public string this[VariableFloat variable]
     {
         get
         {
             // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-            if (_currentValues[(int)variable] != PlayManager.Instance[variable] || null == _strings[(int)variable])
+            if (_currentFloatValues[(int)variable] != PlayManager.Instance[variable] || null == _floatStrings[(int)variable])
             {
                 // 현재 값 저장
-                _currentValues[(int)variable] = PlayManager.Instance[variable];
+                _currentFloatValues[(int)variable] = PlayManager.Instance[variable];
 
-                // 표시할 단위가 있을 때
-                if (null == _units[(int)variable])
-                {
-                    _strings[(int)variable] = $"{_currentValues[(int)variable].ToString("F2")}";
-                }
                 // 표시할 단위가 없을 때
+                if (null == _floatUnits[(int)variable])
+                {
+                    _floatStrings[(int)variable] = $"{_currentFloatValues[(int)variable].ToString("F2")}";
+                }
+                // 표시할 단위가 있을 때
                 else
                 {
-                    _strings[(int)variable] = $"{_currentValues[(int)variable].ToString("F2")}{_units[(int)variable]}";
+                    _floatStrings[(int)variable] = $"{_currentFloatValues[(int)variable].ToString("F2")}{_floatUnits[(int)variable]}";
                 }
             }
 
             // 반환
-            return _strings[(int)variable];
+            return _floatStrings[(int)variable];
+        }
+    }
+
+    /// <summary>
+    /// 이것이 주 목적이므로 편리한 접근을 위해 만들었다. 문자열을 단위 포함해서 가져온다.
+    /// </summary>
+    public string this[VariableLong variable]
+    {
+        get
+        {
+            // 값이 바뀌었거나 문자열을 생성한 적 없을 때
+            if (_currentLongValues[(int)variable] != PlayManager.Instance[variable] || null == _longStrings[(int)variable])
+            {
+                // 현재 값 저장
+                _currentLongValues[(int)variable] = PlayManager.Instance[variable];
+
+                // 문자열 저장
+                _longStrings[(int)variable] = _currentLongValues[(int)variable].ToString();
+            }
+
+            // 반환
+            return _longStrings[(int)variable];
         }
     }
 
 
 
     /* ==================== Public Methods ==================== */
+
+    /// <summary>
+    /// 날짜 문자열 반환
+    /// </summary>
+    public string GetDateString()
+    {
+        if (_month != PlayManager.Instance[VariableByte.Month] || null == _date)
+        {
+            _month = PlayManager.Instance[VariableByte.Month];
+            _date = $"{PlayManager.Instance[VariableUshort.Year].ToString()}{Language.Instance["년"]} {PlayManager.Instance[VariableByte.Month].ToString()}{Language.Instance["월"]}";
+        }
+
+        return _date;
+    }
+
 
     public void TechInitialize(byte length)
     {
@@ -126,33 +215,40 @@ public class UIString
 
     private UIString()
     {
-        _units[(int)VariableFloat.TotalAirPressure_hPa] = "hPa";
-        _units[(int)VariableFloat.TotalAirMass_Tt] = "Tt";
-        _units[(int)VariableFloat.EtcAirMass_Tt] = "Tt";
-        _units[(int)VariableFloat.TotalTemperature_C] = "℃";
-        _units[(int)VariableFloat.IncomeEnergy] = "E";
-        _units[(int)VariableFloat.AbsorbEnergy] = "E";
-        _units[(int)VariableFloat.WaterGreenHouse_C] = "℃";
-        _units[(int)VariableFloat.CarbonGreenHouse_C] = "℃";
-        _units[(int)VariableFloat.EtcGreenHouse_C] = "℃";
-        _units[(int)VariableFloat.TotalWater_PL] = "PL";
-        _units[(int)VariableFloat.WaterGas_PL] = "PL";
-        _units[(int)VariableFloat.WaterLiquid_PL] = "PL";
-        _units[(int)VariableFloat.WaterSolid_PL] = "PL";
-        _units[(int)VariableFloat.TotalCarbonRatio_ppm] = "ppm";
-        _units[(int)VariableFloat.CarbonGasMass_Tt] = "Tt";
-        _units[(int)VariableFloat.CarbonLiquidMass_Tt] = "Tt";
-        _units[(int)VariableFloat.CarbonSolidMass_Tt] = "Tt";
-        _units[(int)VariableFloat.CarbonLifeMass_Tt] = "Tt";
-        _units[(int)VariableFloat.PhotoLifePosibility] = "%";
-        _units[(int)VariableFloat.BreathLifePosibility] = "%";
-        _units[(int)VariableFloat.OxygenRatio] = "%";
-        _units[(int)VariableFloat.GravityAccelation_m_s2] = "m/s²";
-        _units[(int)VariableFloat.PlanetRadius_km] = "km";
-        _units[(int)VariableFloat.PlanetDensity_g_cm3] = "g/cm³";
-        _units[(int)VariableFloat.PlanetMass_Tt] = "Zt";
-        _units[(int)VariableFloat.PlanetDistance_AU] = "AU";
-        _units[(int)VariableFloat.PlanetArea_km2] = "Mm2";
+        // SI 단위
+        _floatUnits[(int)VariableFloat.TotalAirPressure_hPa] = "hPa";
+        _floatUnits[(int)VariableFloat.TotalAirMass_Tt] = "Tt";
+        _floatUnits[(int)VariableFloat.EtcAirMass_Tt] = "Tt";
+        _floatUnits[(int)VariableFloat.TotalTemperature_C] = "℃";
+        _floatUnits[(int)VariableFloat.IncomeEnergy] = "E";
+        _floatUnits[(int)VariableFloat.AbsorbEnergy] = "E";
+        _floatUnits[(int)VariableFloat.WaterGreenHouse_C] = "℃";
+        _floatUnits[(int)VariableFloat.CarbonGreenHouse_C] = "℃";
+        _floatUnits[(int)VariableFloat.EtcGreenHouse_C] = "℃";
+        _floatUnits[(int)VariableFloat.TotalWater_PL] = "PL";
+        _floatUnits[(int)VariableFloat.WaterGas_PL] = "PL";
+        _floatUnits[(int)VariableFloat.WaterLiquid_PL] = "PL";
+        _floatUnits[(int)VariableFloat.WaterSolid_PL] = "PL";
+        _floatUnits[(int)VariableFloat.TotalCarbonRatio_ppm] = "ppm";
+        _floatUnits[(int)VariableFloat.CarbonGasMass_Tt] = "Tt";
+        _floatUnits[(int)VariableFloat.CarbonLiquidMass_Tt] = "Tt";
+        _floatUnits[(int)VariableFloat.CarbonSolidMass_Tt] = "Tt";
+        _floatUnits[(int)VariableFloat.CarbonLifeMass_Tt] = "Tt";
+        _floatUnits[(int)VariableFloat.PhotoLifePosibility] = "%";
+        _floatUnits[(int)VariableFloat.BreathLifePosibility] = "%";
+        _floatUnits[(int)VariableFloat.OxygenRatio] = "%";
+        _floatUnits[(int)VariableFloat.GravityAccelation_m_s2] = "m/s²";
+        _floatUnits[(int)VariableFloat.PlanetRadius_km] = "km";
+        _floatUnits[(int)VariableFloat.PlanetDensity_g_cm3] = "g/cm³";
+        _floatUnits[(int)VariableFloat.PlanetMass_Tt] = "Zt";
+        _floatUnits[(int)VariableFloat.PlanetDistance_AU] = "AU";
+        _floatUnits[(int)VariableFloat.PlanetArea_km2] = "Mm2";
+
+        // 지지율 단위
+        _floatUnits[(int)VariableFloat.FacilitySupportRate] = "%";
+        _floatUnits[(int)VariableFloat.ResearchSupportRate] = "%";
+        _floatUnits[(int)VariableFloat.SocietySupportRate] = "%";
+        _floatUnits[(int)VariableFloat.DiplomacySupportRate] = "%";
 
         _adopted = PlayManager.Instance.GetAdoptedData();
     }

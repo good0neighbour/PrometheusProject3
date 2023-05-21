@@ -13,12 +13,20 @@ public class NodeSociety : MonoBehaviour
     [SerializeField] private TechTrees.SubNode[] _requirements = null;
     [SerializeField] private NodeElementSociety[] _elements = null;
 
+    [Header("비용")]
+    [SerializeField] private ushort _cultureCost = 1;
+
     [Header("참조")]
     [SerializeField] private TMP_Text _titleText = null;
 
     private byte _nodeNum = 0;
-    private bool _isAvailable = false;
     private bool _isEnable = false;
+
+    public bool IsAvailable
+    {
+        get;
+        set;
+    }
 
 
 
@@ -26,16 +34,55 @@ public class NodeSociety : MonoBehaviour
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, _description, _isAvailable);
+        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, _description, IsAvailable);
+    }
+
+
+    /// <summary>
+    /// 승인 버튼 클릭 시
+    /// </summary>
+    public void BtnAdopt()
+    {
+        PlayManager.Instance[VariableUint.Culture] -= _cultureCost;
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Culture);
     }
 
 
     /// <summary>
     /// 승인 시 동작
     /// </summary>
-    public void OnAdopt()
+    public void OnAdopt(float[] adopted, NodeSociety[] nodes)
     {
+        // 다음 시대
         PlayManager.Instance[VariableByte.Era] = (byte)(_eraNum + 1);
+
+        // 사회 채택
+        adopted[_nodeNum] = 1.0f;
+
+        // 용도는 다른 함수이나 같은 동작을 할 것이라서 호출했다.
+        AlreadyAdopted(nodes);
+    }
+
+
+    /// <summary>
+    /// 저장된 데이타를 불러왔을 때 이미 승인 된 경우
+    /// </summary>
+    public void AlreadyAdopted(NodeSociety[] nodes)
+    {
+        // 하위 요소 사용 가능
+        for (byte i = 0; i < _elements.Length; ++i)
+        {
+            _elements[i].IsAvailable = true;
+        }
+
+        // 같은 시대 사회 사용 불가
+        for (byte i = 0; i < nodes.Length; ++i)
+        {
+            if (_nodeNum != i)
+            {
+                nodes[i].SetAvaiable(_eraNum, false);
+            }
+        }
     }
 
 
@@ -46,6 +93,9 @@ public class NodeSociety : MonoBehaviour
     {
         // 노드 번호 설정
         _nodeNum = nodeNum;
+
+        // 노드는 기본적으로 사용 가능 상태로 시작
+        IsAvailable = true;
 
         // 요구조건에 해당하는 노드에 다음 노드를 업데이트
         for (byte i = 0; i < _requirements.Length; ++i)
@@ -109,8 +159,25 @@ public class NodeSociety : MonoBehaviour
     {
         if (_eraNum == eraNum)
         {
-            _isAvailable = avaiable;
+            IsAvailable = avaiable;
+            if (IsAvailable)
+            {
+                _titleText.color = Constants.WHITE;
+            }
+            else
+            {
+                _titleText.color = Constants.TEXT_BUTTON_DISABLE;
+            }
         }
+    }
+
+
+    /// <summary>
+    /// 비용 확인
+    /// </summary>
+    public bool CostAvailable()
+    {
+        return _cultureCost <= PlayManager.Instance[VariableUint.Culture];
     }
 
 

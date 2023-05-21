@@ -63,8 +63,8 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         // 상태 메세지 제거
         StatusText.text = null;
 
-        // 자금 비용 지출
-        PlayManager.Instance[VariableLong.Funds] -= NodeData[CurrentNode].FundCost;
+        // 비용 지출
+        FirstSpendCost();
     }
 
 
@@ -98,7 +98,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         // 비용 텍스트 업데이트
         _costsText.text = GetCostText();
 
-        // 획득 텍스트 업데이트
+        // 수익 텍스트 업데이트
         GainsText.text = GetGainText();
 
         // 상태 메세지 제거
@@ -181,14 +181,14 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
             float posY = (NodeData[i].NodePosition.y + 0.5f) * _height;
 
             // 노드 생성 후 위치 조정
-            NodeBtns[i] = Instantiate(NodeObject, _techTreeContentArea).GetComponent<TechTreeNode>();
-            NodeBtns[i].transform.localPosition = new Vector3(posX, posY, 0.0f);
+            NodeBtnObjects[i] = Instantiate(NodeObject, _techTreeContentArea);
+            NodeBtnObjects[i].transform.localPosition = new Vector3(posX, posY, 0.0f);
+
+            // 노드 참조
+            NodeBtns[i] = NodeBtnObjects[i].GetComponent<TechTreeNode>();
             
             // 노드 초기화
             NodeBtns[i].SetTechTree(this, i);
-            
-            // 노드 참조
-            NodeBtnObjects[i] = NodeBtns[i].gameObject;
 
             // x, y 최대 값
             if (posX > sizeX)
@@ -245,7 +245,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
 
 
     /// <summary>
-    /// 획득 텍스트 생성한다.
+    /// 수익 텍스트 생성한다.
     /// </summary>
     protected abstract string GetGainText();
 
@@ -281,14 +281,22 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         {
             return false;
         }
-        //if (NodeData[CurrentNode].IronCost > PlayManager.Instance[VariableLong.Funds])
-        //{
-        //    return false;
-        //}
-        //if (NodeData[CurrentNode].NukeCost > PlayManager.Instance[VariableLong.Funds])
-        //{
-        //    return false;
-        //}
+        if (NodeData[CurrentNode].ResearchCost > PlayManager.Instance[VariableUint.Research])
+        {
+            return false;
+        }
+        if (NodeData[CurrentNode].CultureCost > PlayManager.Instance[VariableUint.Culture])
+        {
+            return false;
+        }
+        if (NodeData[CurrentNode].IronCost > PlayManager.Instance[VariableUshort.CurrentIron])
+        {
+            return false;
+        }
+        if (NodeData[CurrentNode].NukeCost > PlayManager.Instance[VariableUshort.CurrentNuke])
+        {
+            return false;
+        }
 
         // 사용 가능
         return true;
@@ -328,6 +336,14 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         {
             result.Append($"{Language.Instance["자금"]} {NodeData[CurrentNode].FundCost}\n");
         }
+        if (0 < NodeData[CurrentNode].ResearchCost)
+        {
+            result.Append($"{Language.Instance["연구"]} {NodeData[CurrentNode].ResearchCost}\n");
+        }
+        if (0 < NodeData[CurrentNode].CultureCost)
+        {
+            result.Append($"{Language.Instance["문화"]} {NodeData[CurrentNode].CultureCost}\n");
+        }
         if (0 < NodeData[CurrentNode].IronCost)
         {
             result.Append($"{Language.Instance["철"]} {NodeData[CurrentNode].IronCost}\n");
@@ -336,9 +352,78 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         {
             result.Append($"{Language.Instance["핵물질"]} {NodeData[CurrentNode].NukeCost}\n");
         }
+        if (0 < NodeData[CurrentNode].Maintenance)
+        {
+            result.Append($"{Language.Instance["유지비용"]} {NodeData[CurrentNode].Maintenance}\n");
+        }
 
         // 반환. 마지막 \n은 제거한다.
         return result.Remove(result.Length - 1, 1).ToString();
+    }
+
+
+    /// <summary>
+    /// 승인 버튼 클릭 시 지출
+    /// </summary>
+    private void FirstSpendCost()
+    {
+        // 자금 비용 지출
+        if (0 < NodeData[CurrentNode].FundCost)
+        {
+            PlayManager.Instance[VariableLong.Funds] -= NodeData[CurrentNode].FundCost;
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Fund);
+        }
+
+        // 연구 비용 지출
+        if (0 < NodeData[CurrentNode].ResearchCost)
+        {
+            PlayManager.Instance[VariableUint.Research] -= NodeData[CurrentNode].ResearchCost;
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Research);
+        }
+
+        // 문화 비용 지출
+        if (0 < NodeData[CurrentNode].CultureCost)
+        {
+            PlayManager.Instance[VariableUint.Culture] -= NodeData[CurrentNode].CultureCost;
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Culture);
+        }
+    }
+
+
+    /// <summary>
+    /// 승인 성공 시 지출
+    /// </summary>
+    private void LastSpendCost()
+    {
+        // 철 비용 지출
+        if (0 < NodeData[CurrentNode].IronCost)
+        {
+            PlayManager.Instance[VariableUshort.CurrentIron] -= NodeData[CurrentNode].IronCost;
+            PlayManager.Instance[VariableUshort.IronUsage] += NodeData[CurrentNode].IronCost;
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Iron);
+        }
+
+        // 핵물질 비용 지출
+        if (0 < NodeData[CurrentNode].NukeCost)
+        {
+            PlayManager.Instance[VariableUshort.CurrentNuke] -= NodeData[CurrentNode].NukeCost;
+            PlayManager.Instance[VariableUshort.NukeUsage] += NodeData[CurrentNode].NukeCost;
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Nuke);
+        }
+    }
+
+
+    /// <summary>
+    /// 수익
+    /// </summary>
+    private void Gains()
+    {
+        TechTrees.Node node = NodeData[CurrentNode];
+
+        PlayManager.Instance[VariableUshort.AnnualFund] += node.AnnualFund;
+        PlayManager.Instance[VariableUshort.AnnualResearch] += node.AnnualResearch;
+        PlayManager.Instance[VariableUshort.AnnualCulture] += node.AnnualCulture;
+        PlayManager.Instance[VariableUint.Maintenance] += node.Maintenance;
     }
 
 
@@ -353,13 +438,29 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
             // 애니메이션 완료
             if (1.0f <= _timer)
             {
-                if (_supportRate >= Random.Range(0.0f, 100.0f))
+                if (_supportRate >= Random.Range(0.0f, Constants.MAX_SUPPORT_RATE_ADOPTION))
                 {
                     // 소리 재생
                     AudioManager.Instance.PlayAuido(AudioType.Select);
 
                     // 성공 시 동작
                     OnAdopt();
+
+                    // 승인 버튼 텍스트 변경
+                    AdoptBtn.text = Language.Instance["승인 완료"];
+
+                    // 상태 메세지
+                    StatusText.color = Constants.WHITE;
+                    StatusText.text = Language.Instance["정책 성공"];
+
+                    // 승인 버튼 사용 불가
+                    AdoptBtn.color = Constants.TEXT_BUTTON_DISABLE;
+
+                    // 비용 지출
+                    LastSpendCost();
+
+                    // 수익
+                    Gains();
                 }
                 else
                 {

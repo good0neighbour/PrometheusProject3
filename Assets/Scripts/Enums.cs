@@ -20,6 +20,7 @@ public enum LanguageType
 /// </summary>
 public enum VariableByte
 {
+    Month,
     ExploreDevice,
     AirPressureInfra,
     TemperatureInfra,
@@ -46,8 +47,21 @@ public enum VariableShort
 /// </summary>
 public enum VariableUshort
 {
+    Year,
     LandNum,
     CityNum,
+    CurrentIron,
+    CurrentNuke,
+    CurrentJewel,
+    TotalIron,
+    TotalNuke,
+    TotalJewel,
+    IronUsage,
+    NukeUsage,
+    JewelUsage,
+    AnnualFund,
+    AnnualResearch,
+    AnnualCulture,
     EndUshort
 }
 
@@ -57,6 +71,17 @@ public enum VariableUshort
 public enum VariableInt
 {
     EndInt
+}
+
+/// <summary>
+/// JsonData의 IntArray 인덱스 접근을 위한 열거형
+/// </summary>
+public enum VariableUint
+{
+    Research,
+    Culture,
+    Maintenance,
+    EndUint
 }
 
 /// <summary>
@@ -113,6 +138,8 @@ public enum VariableFloat
     ResearchSupportRate,
     SocietySupportRate,
     DiplomacySupportRate,
+    GovAsset,
+    GovAffection,
     EndFloat
 }
 

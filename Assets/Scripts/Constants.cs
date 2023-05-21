@@ -53,6 +53,13 @@ public static class Constants
     public const float TECHTREE_AREA_HEIGHT_CENTER = 0.375f;
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
+    public const float SPEND_ANIMATION_DURATION = 0.2f;
+    public const float SUPPORT_RATE_DECREASEMENT = 0.05f;
+    public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
+    public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
+    public const float MAX_SUPPORT_RATE_ADOPTION = 90.0f;
+    public const float GOV_ASSET_MULTIPLY = 0.02f;
+    public const float GOV_AFFECTION_MULTIPLY = 0.1f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";
@@ -72,6 +79,7 @@ public static class Constants
     public static readonly Color BUTTON_UNSELECTED = new Color(50.0f / 255.0f, 50.0f / 255.0f, 50.0f / 255.0f);
     public static readonly Color BUTTON_SELECTED = new Color(150.0f / 255.0f, 150.0f / 255.0f, 150.0f / 255.0f);
     public static readonly Color FAIL_TEXT = new Color(1.0f, 100.0f / 255.0f, 0.0f);
+    public static readonly Color BOTTOM_TEXT_DEFAULT = new Color(220.0f / 255.0f, 220.0f / 255.0f, 220.0f / 255.0f);
 
     // 수정이 필요 없는 값
     public const float HALF_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.5f;

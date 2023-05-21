@@ -127,6 +127,14 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
 
         // 우측 메뉴 사용 가능
         GeneralMenuButtons.Instance.IsRightButtonAvailable = true;
+
+        // 자원 수익
+        PlayManager.Instance[VariableUshort.TotalIron] += _currentLand.Resources[(int)ResourceType.Iron];
+        PlayManager.Instance[VariableUshort.CurrentIron] += _currentLand.Resources[(int)ResourceType.Iron];
+        PlayManager.Instance[VariableUshort.TotalNuke] += _currentLand.Resources[(int)ResourceType.Nuke];
+        PlayManager.Instance[VariableUshort.CurrentNuke] += _currentLand.Resources[(int)ResourceType.Nuke];
+        PlayManager.Instance[VariableUshort.TotalJewel] += _currentLand.Resources[(int)ResourceType.Jewel];
+        PlayManager.Instance[VariableUshort.CurrentJewel] += _currentLand.Resources[(int)ResourceType.Jewel];
     }
 
 

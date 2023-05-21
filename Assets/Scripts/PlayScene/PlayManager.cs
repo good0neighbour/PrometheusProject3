@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,6 +10,7 @@ public class PlayManager : MonoBehaviour
 
     public static OnChangeDelegate OnPlayUpdate = null;
     public static OnChangeDelegate OnMonthCahnge = null;
+    public static OnChangeDelegate OnYearCahnge = null;
 
     [Header("참조")]
     [SerializeField] private GameObject _audioManagerPrefab = null;
@@ -28,8 +30,12 @@ public class PlayManager : MonoBehaviour
     private float _etcAirMassGoal = 0.0f;
     private float _temperatureMovement = 0.0f;
     private float _totalWaterVolumeGoal = 0.0f;
-    private float _totalCarboneRatioGoal = 0.0f;
     private float _incomeEnergy_C = 0.0f;
+    private float _facilitySupportGoal = 0.0f;
+    private float _researchSupportGoal = 0.0f;
+    private float _societySupportGoal = 0.0f;
+    private float _diplomacySupportGoal = 0.0f;
+    private float _totalCarboneRatioGoal = 0.0f;
     private float _carbonRatio = 1.0f / Constants.EARTH_CARBON_RATIO;
     private double _cloudReflectionMultiply = 0.0d;
 
@@ -67,6 +73,86 @@ public class PlayManager : MonoBehaviour
     {
         get;
         private set;
+    }
+
+    public float FacilitySupportGoal
+    {
+        get
+        {
+            return _facilitySupportGoal;
+        }
+        set
+        {
+            _facilitySupportGoal = value;
+            if (100.0f < _facilitySupportGoal)
+            {
+                _facilitySupportGoal = 100.0f;
+            }
+            else if (0.0f > _facilitySupportGoal)
+            {
+                _facilitySupportGoal = 0.0f;
+            }
+        }
+    }
+
+    public float ResearchSupportGoal
+    {
+        get
+        {
+            return _researchSupportGoal;
+        }
+        set
+        {
+            _researchSupportGoal = value;
+            if (100.0f < _researchSupportGoal)
+            {
+                _researchSupportGoal = 100.0f;
+            }
+            else if (0.0f > _researchSupportGoal)
+            {
+                _researchSupportGoal = 0.0f;
+            }
+        }
+    }
+
+    public float SocietySupportGoal
+    {
+        get
+        {
+            return _societySupportGoal;
+        }
+        set
+        {
+            _societySupportGoal = value;
+            if (100.0f < _societySupportGoal)
+            {
+                _societySupportGoal = 100.0f;
+            }
+            else if (0.0f > _societySupportGoal)
+            {
+                _societySupportGoal = 0.0f;
+            }
+        }
+    }
+
+    public float DiplomacySupportGoal
+    {
+        get
+        {
+            return _diplomacySupportGoal;
+        }
+        set
+        {
+            _diplomacySupportGoal = value;
+            if (100.0f < _diplomacySupportGoal)
+            {
+                _diplomacySupportGoal = 100.0f;
+            }
+            else if (0.0f > _diplomacySupportGoal)
+            {
+                _diplomacySupportGoal = 0.0f;
+            }
+        }
     }
 
     #region JsonData의 배열에 접근
@@ -127,6 +213,21 @@ public class PlayManager : MonoBehaviour
         set
         {
             _data.IntArray[(int)variable] = value;
+        }
+    }
+
+    /// <summary>
+    /// 편리한 접근을 위해 만들었다. uint.
+    /// </summary>
+    public uint this[VariableUint variable]
+    {
+        get
+        {
+            return _data.UintArray[(int)variable];
+        }
+        set
+        {
+            _data.UintArray[(int)variable] = value;
         }
     }
 
@@ -251,6 +352,14 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public float[] GetSocietyElementProgression()
     {
+        return _data.SocietyElementProgression;
+    }
+    /// <summary>
+    /// 배열 생성 후 반환
+    /// </summary>
+    public float[] GetSocietyElementProgression(byte length)
+    {
+        _data.SocietyElementProgression = new float[length];
         return _data.SocietyElementProgression;
     }
 
@@ -610,11 +719,43 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
+    /// 지지율 변화
+    /// </summary>
+    private void SupportRateMovement()
+    {
+        float speedmult = GameSpeed * Time.deltaTime;
+
+        // 목표 지지율. 프로퍼티의 함수를 이용하기 위해 프로퍼티를 사용한다.
+        FacilitySupportGoal -= Constants.SUPPORT_RATE_DECREASEMENT * speedmult;
+        ResearchSupportGoal -= Constants.SUPPORT_RATE_DECREASEMENT * speedmult;
+        SocietySupportGoal -= Constants.SUPPORT_RATE_DECREASEMENT * speedmult;
+        DiplomacySupportGoal -= Constants.SUPPORT_RATE_DECREASEMENT * speedmult;
+
+        // 실제 지지율
+        this[VariableFloat.FacilitySupportRate] += (_facilitySupportGoal - this[VariableFloat.FacilitySupportRate]) * speedmult;
+        this[VariableFloat.ResearchSupportRate] += (_researchSupportGoal - this[VariableFloat.ResearchSupportRate]) * speedmult;
+        this[VariableFloat.SocietySupportRate] += (_societySupportGoal - this[VariableFloat.SocietySupportRate]) * speedmult;
+        this[VariableFloat.DiplomacySupportRate] += (_diplomacySupportGoal - this[VariableFloat.DiplomacySupportRate]) * speedmult;
+    }
+
+
+    /// <summary>
     /// 월간 비용
     /// </summary>
     private long MonthlyCost()
     {
         return this[VariableShort.AirMassMovement] + this[VariableShort.WaterMovement] + this[VariableShort.TemperatureMovement] + this[VariableShort.CarbonMovement]; 
+    }
+
+
+    /// <summary>
+    /// 연간 수익
+    /// </summary>
+    private void AnnualGains()
+    {
+        this[VariableLong.Funds] += this[VariableUshort.AnnualFund] - this[VariableUint.Maintenance];
+        this[VariableUint.Research] += this[VariableUshort.AnnualResearch];
+        this[VariableUint.Culture] += this[VariableUshort.AnnualCulture];
     }
 
 
@@ -627,6 +768,12 @@ public class PlayManager : MonoBehaviour
         _data = new JsonData(true);
         this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
         this[VariableLong.Funds] = 500000;
+        this[VariableByte.Era] = 1;
+        this[VariableFloat.FacilitySupportRate] = 100.0f;
+        this[VariableFloat.ResearchSupportRate] = 100.0f;
+        this[VariableFloat.SocietySupportRate] = 100.0f;
+        this[VariableFloat.DiplomacySupportRate] = 100.0f;
+
         this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
         this[VariableFloat.TotalWater_PL] = Constants.EARTH_WATER_VOLUME;
         this[VariableFloat.PlanetRadius_km] = Constants.EARTH_RADIUS;
@@ -704,10 +851,15 @@ public class PlayManager : MonoBehaviour
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
 
         // 저장된 값
+        _data.Adopted[(int)TechTreeType.Society][0] = 1.0f;
         _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
         _temperatureMovement = this[VariableShort.TemperatureMovement];
         _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
         _totalCarboneRatioGoal = this[VariableFloat.TotalCarbonRatio_ppm];
+        _facilitySupportGoal = this[VariableFloat.FacilitySupportRate];
+        _researchSupportGoal = this[VariableFloat.ResearchSupportRate];
+        _societySupportGoal = this[VariableFloat.SocietySupportRate];
+        _diplomacySupportGoal = this[VariableFloat.DiplomacySupportRate];
     }
 
 
@@ -731,14 +883,12 @@ public class PlayManager : MonoBehaviour
         // 탐사 진행
         ExploreProgress();
 
-        // 매 프레임 호출
-        OnPlayUpdate?.Invoke();
+        // 지지율 변화
+        SupportRateMovement();
 
         // 한 달 간격
         if (_timer >= Constants.MONTH_TIMER)
         {
-            _timer -= Constants.MONTH_TIMER;
-
             // 자금이 있을 때
             if (this[VariableLong.Funds] > 0)
             {
@@ -749,9 +899,29 @@ public class PlayManager : MonoBehaviour
                 this[VariableLong.Funds] -= MonthlyCost();
             }
 
+            // 날짜 변경
+            _timer -= Constants.MONTH_TIMER;
+            switch (this[VariableByte.Month])
+            {
+                case 12:
+                    // 새해
+                    ++this[VariableUshort.Year];
+                    this[VariableByte.Month] = 1;
+                    AnnualGains();
+                    OnYearCahnge?.Invoke();
+                    break;
+                default:
+                    // 다음 달
+                    ++this[VariableByte.Month];
+                    break;
+            }
+
             // 매달 호출
             OnMonthCahnge?.Invoke();
         }
+
+        // 매 프레임 호출
+        OnPlayUpdate?.Invoke();
     }
 
 
@@ -764,6 +934,7 @@ public class PlayManager : MonoBehaviour
         public short[] ShortArray;
         public ushort[] UshortArray;
         public int[] IntArray;
+        public uint[] UintArray;
         public long[] LongArray;
         public float[] FloatArray;
         public double[] DoubleArray;
@@ -778,6 +949,7 @@ public class PlayManager : MonoBehaviour
                 ShortArray = new short[(int)VariableShort.EndShort];
                 UshortArray = new ushort[(int)VariableUshort.EndUshort];
                 IntArray = new int[(int)VariableInt.EndInt];
+                UintArray = new uint[(int)VariableUint.EndUint];
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
@@ -789,6 +961,7 @@ public class PlayManager : MonoBehaviour
                 ShortArray = null;
                 UshortArray = null;
                 IntArray = null;
+                UintArray = null;
                 LongArray = null;
                 FloatArray = null;
                 DoubleArray = null;

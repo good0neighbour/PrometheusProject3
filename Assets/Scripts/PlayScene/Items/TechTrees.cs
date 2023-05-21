@@ -16,8 +16,15 @@ public class TechTrees : ScriptableObject
         public float ProgressionValue;
         [Header("비용")]
         public ushort FundCost;
+        public ushort ResearchCost;
+        public ushort CultureCost;
+        public ushort Maintenance;
         public byte IronCost;
         public byte NukeCost;
+        [Header("수익")]
+        public ushort AnnualFund;
+        public ushort AnnualResearch;
+        public ushort AnnualCulture;
         [Header("요구사항")]
         public SubNode[] Requirments;
     }
@@ -150,7 +157,7 @@ public class TechTrees : ScriptableObject
         {
             Node node = techTreeNodes[i];
 
-            for (int j = 0; j < node.Requirments.Length; j++)
+            for (byte j = 0; j < node.Requirments.Length; ++j)
             {
                 SubNode subNode = node.Requirments[j];
                 byte type = (byte)subNode.Type;

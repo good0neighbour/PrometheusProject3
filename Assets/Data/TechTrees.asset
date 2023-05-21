@@ -18,9 +18,14 @@ MonoBehaviour:
     NodePosition: {x: 0, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC6D0\uC790\uB860"
       Type: 1
@@ -29,9 +34,14 @@ MonoBehaviour:
     NodePosition: {x: 0, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
-    NukeCost: 0
+    NukeCost: 1
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
       Type: 0
@@ -42,9 +52,14 @@ MonoBehaviour:
     NodePosition: {x: 0, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
-    NukeCost: 0
+    NukeCost: 5
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
@@ -55,18 +70,28 @@ MonoBehaviour:
     NodePosition: {x: 1, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uB18D\uC5C5\uB2E8\uC9C0"
     Type: 0
     NodePosition: {x: 1, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uACE1\uCC3D"
       Type: 0
@@ -77,9 +102,14 @@ MonoBehaviour:
     NodePosition: {x: 1, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uB18D\uC5C5\uB2E8\uC9C0"
       Type: 0
@@ -90,9 +120,14 @@ MonoBehaviour:
     NodePosition: {x: 1, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBAA9\uCD95\uC5C5\uB2E8\uC9C0"
       Type: 0
@@ -101,9 +136,14 @@ MonoBehaviour:
     NodePosition: {x: 1, y: 4}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC2DD\uD45C\uD488\uC810"
       Type: 0
@@ -114,9 +154,14 @@ MonoBehaviour:
     NodePosition: {x: 1, y: 5}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBE44\uB8CC\uACF5\uC7A5"
       Type: 0
@@ -125,18 +170,28 @@ MonoBehaviour:
     NodePosition: {x: 2, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uBCF4\uAC74\uAD50\uC721"
     Type: 0
     NodePosition: {x: 2, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBCF4\uAC74\uC18C"
       Type: 0
@@ -148,8 +203,13 @@ MonoBehaviour:
     Description: 
     ProgressionValue: 0
     FundCost: 0
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBCF4\uAC74\uAD50\uC721"
       Type: 0
@@ -161,8 +221,13 @@ MonoBehaviour:
     Description: 
     ProgressionValue: 0
     FundCost: 0
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC678\uACFC\uC13C\uD0C0"
       Type: 0
@@ -172,8 +237,13 @@ MonoBehaviour:
     Description: 
     ProgressionValue: 0
     FundCost: 0
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC751\uAE09\uC2E4"
       Type: 0
@@ -185,8 +255,13 @@ MonoBehaviour:
     Description: 
     ProgressionValue: 0
     FundCost: 0
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBCD1\uC6D0"
       Type: 0
@@ -195,18 +270,28 @@ MonoBehaviour:
     NodePosition: {x: 3, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uC548\uC804\uAD50\uC721"
     Type: 0
     NodePosition: {x: 3, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC18C\uBC29\uC11C"
       Type: 0
@@ -217,9 +302,14 @@ MonoBehaviour:
     NodePosition: {x: 3, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC548\uC804\uAD50\uC721"
       Type: 0
@@ -230,9 +320,14 @@ MonoBehaviour:
     NodePosition: {x: 3, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC18C\uBC29\uB4DC\uB860"
       Type: 0
@@ -241,9 +336,14 @@ MonoBehaviour:
     NodePosition: {x: 3, y: 4}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC7AC\uD574\uACBD\uBCF4"
       Type: 0
@@ -254,18 +354,28 @@ MonoBehaviour:
     NodePosition: {x: 4, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uBC94\uC8C4\uC608\uBC29\uAD50\uC721"
     Type: 0
     NodePosition: {x: 4, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD30C\uCD9C\uC18C"
       Type: 0
@@ -276,9 +386,14 @@ MonoBehaviour:
     NodePosition: {x: 4, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBC94\uC8C4\uC608\uBC29\uAD50\uC721"
       Type: 0
@@ -289,9 +404,14 @@ MonoBehaviour:
     NodePosition: {x: 4, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uACBD\uCC30\uC11C"
       Type: 0
@@ -300,9 +420,14 @@ MonoBehaviour:
     NodePosition: {x: 4, y: 4}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAD50\uB3C4\uC18C"
       Type: 0
@@ -314,8 +439,13 @@ MonoBehaviour:
     Description: 
     ProgressionValue: 0
     FundCost: 0
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD615\uC0AC"
       Type: 0
@@ -324,18 +454,28 @@ MonoBehaviour:
     NodePosition: {x: 5, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uC815\uC218\uCC98\uB9AC\uC2DC\uC124"
     Type: 0
     NodePosition: {x: 5, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC0C1\uC218\uB3C4"
       Type: 0
@@ -348,9 +488,14 @@ MonoBehaviour:
     NodePosition: {x: 5, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC815\uC218\uCC98\uB9AC\uC2DC\uC124"
       Type: 0
@@ -361,9 +506,14 @@ MonoBehaviour:
     NodePosition: {x: 5, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAD00\uB85C \uAC1C\uC120"
       Type: 0
@@ -374,9 +524,14 @@ MonoBehaviour:
     NodePosition: {x: 6, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC0C1\uC218\uB3C4"
       Type: 0
@@ -389,9 +544,14 @@ MonoBehaviour:
     NodePosition: {x: 6, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD558\uC218\uB3C4"
       Type: 0
@@ -404,9 +564,14 @@ MonoBehaviour:
     NodePosition: {x: 6, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD558\uC218\uCC98\uB9AC\uC2DC\uC124"
       Type: 0
@@ -415,9 +580,14 @@ MonoBehaviour:
     NodePosition: {x: 6, y: 4}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAD00\uAC70 \uAC1C\uC120"
       Type: 0
@@ -430,18 +600,28 @@ MonoBehaviour:
     NodePosition: {x: 7, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uACF5\uC7A5"
     Type: 0
     NodePosition: {x: 7, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC791\uC5C5\uC7A5"
       Type: 0
@@ -454,9 +634,14 @@ MonoBehaviour:
     NodePosition: {x: 7, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uACF5\uC7A5"
       Type: 0
@@ -469,9 +654,14 @@ MonoBehaviour:
     NodePosition: {x: 7, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAE30\uACC4\uD654\uACF5\uC7A5"
       Type: 0
@@ -482,9 +672,14 @@ MonoBehaviour:
     NodePosition: {x: 7, y: 4}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC0B0\uC5C5\uB2E8\uC9C0"
       Type: 0
@@ -497,9 +692,14 @@ MonoBehaviour:
     NodePosition: {x: 7, y: 5}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uCCA8\uB2E8\uC0B0\uC5C5"
       Type: 0
@@ -510,18 +710,28 @@ MonoBehaviour:
     NodePosition: {x: 8, y: 0}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 1
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uC815\uBCF4\uC13C\uD0C0"
     Type: 0
     NodePosition: {x: 8, y: 1}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 1
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAD50\uC721\uC2DC\uC124"
       Type: 0
@@ -532,9 +742,14 @@ MonoBehaviour:
     NodePosition: {x: 8, y: 2}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 1
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC815\uBCF4\uC13C\uD0C0"
       Type: 0
@@ -545,9 +760,14 @@ MonoBehaviour:
     NodePosition: {x: 8, y: 3}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 1
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uACE0\uB4F1\uAD50\uC721\uC2DC\uC124"
       Type: 0
@@ -558,9 +778,14 @@ MonoBehaviour:
     NodePosition: {x: 8, y: 4}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 1
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uB300\uD559"
       Type: 0
@@ -573,9 +798,14 @@ MonoBehaviour:
     NodePosition: {x: 8, y: 5}
     Description: 
     ProgressionValue: 0
-    FundCost: 0
+    FundCost: 10
+    ResearchCost: 0
+    CultureCost: 0
     IronCost: 0
-    NukeCost: 0
+    NukeCost: 1
+    AnnualFund: 0
+    AnnualResearch: 1
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC5F0\uAD6C\uC2DC\uC124"
       Type: 0
@@ -586,19 +816,29 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 0, y: 0}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uD575\uBD84\uC5F4"
     Type: 1
     NodePosition: {x: 1, y: 0}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC6D0\uC790\uB860"
       Type: 1
@@ -606,10 +846,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 2, y: 0}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD575\uBD84\uC5F4"
       Type: 1
@@ -617,10 +862,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 3, y: 0}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAC15\uB825"
       Type: 1
@@ -628,10 +878,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 4, y: 0}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC591\uC790"
       Type: 1
@@ -639,10 +894,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 5, y: 0}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD575\uC735\uD569"
       Type: 1
@@ -650,10 +910,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 6, y: 0}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC591\uC790\uB9E4\uD2B8\uB9AD\uC2A4"
       Type: 1
@@ -661,10 +926,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 7, y: 0}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC911\uB825\uC7A5"
       Type: 1
@@ -672,19 +942,29 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 0, y: 1}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
     Type: 1
     NodePosition: {x: 1, y: 1}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uBBF8\uC0DD\uBB3C\uD559"
       Type: 1
@@ -692,10 +972,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 2, y: 1}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
       Type: 1
@@ -703,10 +988,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 3, y: 1}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uD610\uAE30\uC131\uBBF8\uC0DD\uBB3C"
       Type: 1
@@ -714,19 +1004,29 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 0, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments: []
   - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
     Type: 1
     NodePosition: {x: 1, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uAE30\uACC4"
       Type: 1
@@ -734,10 +1034,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 2, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
       Type: 1
@@ -745,10 +1050,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 3, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC804\uC790\uC7A5\uBE44"
       Type: 1
@@ -756,10 +1066,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 4, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC815\uBCF4\uD1B5\uC2E0"
       Type: 1
@@ -767,10 +1082,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 5, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC18C\uD504\uD2B8\uC6E8\uC5B4"
       Type: 1
@@ -778,10 +1098,15 @@ MonoBehaviour:
     Type: 1
     NodePosition: {x: 6, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 0
     Requirments:
     - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
       Type: 1
@@ -790,28 +1115,43 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 0, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments: []
   - NodeName: "\uACBD\uD5D8\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 0, y: 3}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments: []
   - NodeName: "\uC808\uB300\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 1, y: 2.5}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uBC95\uCE58\uC8FC\uC758"
       Type: 2
@@ -821,10 +1161,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 2, y: 1}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
@@ -832,10 +1177,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 2, y: 2}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
@@ -843,10 +1193,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 2, y: 3}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
@@ -854,10 +1209,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 2, y: 4}
     Description: 
-    ProgressionValue: 0.1
-    FundCost: 0
+    ProgressionValue: 0.3
+    FundCost: 10
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
@@ -865,10 +1225,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 3, y: 1.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uD68C\uC758\uC8FC\uC758"
       Type: 2
@@ -882,10 +1247,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 3, y: 2.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uD68C\uC758\uC8FC\uC758"
       Type: 2
@@ -899,10 +1269,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 3, y: 3.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uD68C\uC758\uC8FC\uC758"
       Type: 2
@@ -916,10 +1291,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 4, y: 0.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
       Type: 2
@@ -931,10 +1311,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 4, y: 1.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
       Type: 2
@@ -946,10 +1331,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 4, y: 2.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
       Type: 2
@@ -961,10 +1351,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 4, y: 3.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
       Type: 2
@@ -976,10 +1371,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 4, y: 4.5}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
       Type: 2
@@ -991,10 +1391,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 5, y: 1}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uBBFC\uC871\uC8FC\uC758"
       Type: 2
@@ -1010,10 +1415,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 5, y: 2}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uBBFC\uC871\uC8FC\uC758"
       Type: 2
@@ -1029,10 +1439,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 5, y: 3}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uBBFC\uC871\uC8FC\uC758"
       Type: 2
@@ -1048,10 +1463,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 5, y: 4}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uBBFC\uC871\uC8FC\uC758"
       Type: 2
@@ -1067,10 +1487,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 6, y: 0}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC804\uCCB4\uC8FC\uC758"
       Type: 2
@@ -1084,10 +1509,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 6, y: 1}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC804\uCCB4\uC8FC\uC758"
       Type: 2
@@ -1101,10 +1531,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 6, y: 2}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC804\uCCB4\uC8FC\uC758"
       Type: 2
@@ -1118,10 +1553,15 @@ MonoBehaviour:
     Type: 2
     NodePosition: {x: 6, y: 3}
     Description: 
-    ProgressionValue: 0.1
+    ProgressionValue: 0.3
     FundCost: 0
+    ResearchCost: 1
+    CultureCost: 0
     IronCost: 0
     NukeCost: 0
+    AnnualFund: 0
+    AnnualResearch: 0
+    AnnualCulture: 1
     Requirments:
     - NodeName: "\uC804\uCCB4\uC8FC\uC758"
       Type: 2
