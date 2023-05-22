@@ -34,7 +34,7 @@ public class NodeSociety : MonoBehaviour
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, Language.Instance[_description], IsAvailable);
+        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, Language.Instance[_nodeName], Language.Instance[_description], IsAvailable);
     }
 
 

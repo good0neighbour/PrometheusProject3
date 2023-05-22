@@ -169,7 +169,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
     }
 
 
-    public virtual void NodeSelect(short currentNode, short currentElement, string description, bool isAvailable)
+    public virtual void NodeSelect(short currentNode, short currentElement, string nodeName, string description, bool isAvailable)
     {
         // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Touch);
@@ -241,7 +241,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         }
 
         // 텍스트 업데이트
-        _descriptionText.text = description;
+        _descriptionText.text = $"[{nodeName}]\n{description}";
     }
 
 

@@ -30,6 +30,9 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private float _selectionMinBrightness = 0.5f;
     [SerializeField] private Color _selectionColor = Color.white;
 
+    [Header("메세지 상자 이동 속도")]
+    [SerializeField] private float _messageBoxSpeedmult = 2.0f;
+
     [Header("3D 애니메이션")]
     [SerializeField] private float _spinSpeedmult = 1.0f;
 
@@ -42,6 +45,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private Transform _sun = null;
     [SerializeField] private RectTransform _planetImage = null;
     [SerializeField] private RectTransform _spaceImage = null;
+    [SerializeField] private RectTransform _messageBoxTransform = null;
 
     private RectTransform _backgroundTransform = null;
     private RectTransform _messageBoxBackgroundTransform = null;
@@ -82,9 +86,9 @@ public class AnimationManager : MonoBehaviour
         switch (position)
         {
             case PlanetImagePosition.Left:
-                _planetImageTargetPos = -Constants.HALF_CANVAS_WIDTH;
-                _spaceImageTargetPos = -Constants.SPACE_IMAGE_TARGET_POSITION;
-                _messageBoxTargetPos = -Constants.QUARTER_CANVAS_HEIGHT;
+                _planetImageTargetPos = Constants.HALF_CANVAS_WIDTH;
+                _spaceImageTargetPos = Constants.SPACE_IMAGE_TARGET_POSITION;
+                _messageBoxTargetPos = -Constants.QUARTER_CANVAS_WIDTH;
                 break;
             case PlanetImagePosition.Middle:
                 _planetImageTargetPos = 0.0f;
@@ -92,9 +96,9 @@ public class AnimationManager : MonoBehaviour
                 _messageBoxTargetPos = 0.0f;
                 break;
             case PlanetImagePosition.Right:
-                _planetImageTargetPos = Constants.HALF_CANVAS_WIDTH;
-                _spaceImageTargetPos = Constants.SPACE_IMAGE_TARGET_POSITION;
-                _messageBoxTargetPos = Constants.QUARTER_CANVAS_HEIGHT;
+                _planetImageTargetPos = -Constants.HALF_CANVAS_WIDTH;
+                _spaceImageTargetPos = -Constants.SPACE_IMAGE_TARGET_POSITION;
+                _messageBoxTargetPos = Constants.QUARTER_CANVAS_WIDTH;
                 break;
         }
     }
@@ -174,7 +178,7 @@ public class AnimationManager : MonoBehaviour
         #region 행성 이미지, 우주 배경, 메세지 상자의 위치
         _planetImage.localPosition += new Vector3((_planetImageTargetPos - _planetImage.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
         _spaceImage.localPosition += new Vector3((_spaceImageTargetPos - _spaceImage.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
-        _messageBoxBackgroundTransform.localPosition += new Vector3((_messageBoxTargetPos - _messageBoxBackgroundTransform.localPosition.x) * Time.deltaTime, 0.0f, 0.0f);
+        _messageBoxTransform.localPosition += new Vector3((_messageBoxTargetPos - _messageBoxTransform.localPosition.x) * _messageBoxSpeedmult * Time.deltaTime, 0.0f, 0.0f);
         #endregion
 
         #region 3D 애니메이션

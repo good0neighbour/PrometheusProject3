@@ -50,7 +50,7 @@ public class NodeElementSociety : MonoBehaviour
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(-1, _elementNum, Language.Instance[_description], IsAvailable);
+        PopUpViewSociety.Instance.NodeSelect(-1, _elementNum, Language.Instance[_elementName], Language.Instance[_description], IsAvailable);
     }
 
 

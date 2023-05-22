@@ -13,6 +13,7 @@ public class ScreenExplore : PlayScreenBase
     [SerializeField] private Image _progressImage = null;
     [SerializeField] private TMP_Text _addDeviceBtn = null;
     [SerializeField] private TMP_Text _deviceNum = null;
+    [SerializeField] private TMP_Text _costNum = null;
     [SerializeField] private GameObject _landScreen = null;
 
     private bool _addDeviceAvailable = true;
@@ -91,6 +92,9 @@ public class ScreenExplore : PlayScreenBase
 
         // 장비 개수 표시
         _deviceNum.text = PlayManager.Instance[VariableByte.ExploreDevice].ToString();
+
+        // 비용 표시
+        _costNum.text = _deviceCost.ToString();
     }
 
 

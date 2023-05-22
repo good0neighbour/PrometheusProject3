@@ -94,7 +94,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         SetAdoptButtonAvailable(IsUnadopted() && CostAvailable());
 
         // 설명 텍스트 업데이트
-        _descriptionText.text = Language.Instance[NodeData[CurrentNode].Description];
+        _descriptionText.text = $"[{Language.Instance[NodeData[CurrentNode].NodeName]}]\n{Language.Instance[NodeData[CurrentNode].Description]}";
 
         // 비용 텍스트 업데이트
         _costsText.text = GetCostText();

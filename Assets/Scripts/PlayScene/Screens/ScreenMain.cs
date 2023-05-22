@@ -36,14 +36,14 @@ public class ScreenMain : PlayScreenBase
         // 화면 변경
         if (openPopUpScreen)
         {
-            _popUpMenuScreen.SetActive(true);
+            _popMessageLogScreen.SetActive(true);
             gameObject.SetActive(false);
             GeneralMenuButtons.Instance.EnableThis(false);
             PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
         }
         else
         {
-            _popUpMenuScreen.SetActive(false);
+            _popMessageLogScreen.SetActive(false);
             gameObject.SetActive(true);
             GeneralMenuButtons.Instance.EnableThis(true);
             PlayManager.Instance.GameResume = Constants.GAME_RESUME;
@@ -68,5 +68,10 @@ public class ScreenMain : PlayScreenBase
             GeneralMenuButtons.Instance.BtnLeftRight(false);
         }
 #endif
+        // 공통 동작
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            BtnPopUpMenu();
+        }
     }
 }

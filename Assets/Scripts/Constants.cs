@@ -90,7 +90,7 @@ public static class Constants
     // 수정이 필요 없는 값
     public const float MONTHLY_MULTIPLY = 1.0f / MONTH_TIMER;
     public const float HALF_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.5f;
-    public const float QUARTER_CANVAS_HEIGHT = CANVAS_HEIGHT * 0.25f;
+    public const float QUARTER_CANVAS_WIDTH = CANVAS_WIDTH * 0.25f;
     public const float HALF_CANVAS_WIDTH = CANVAS_WIDTH * 0.5f;
     public const float HALF_METAIMAGE_WIDTH = CANVAS_WIDTH * METERIMAGE_WIDTH_RATIO * 0.5f;
     public const double MAX_ICE_TEMP_LOG = MAX_ICE_TEMP + 1.0d;

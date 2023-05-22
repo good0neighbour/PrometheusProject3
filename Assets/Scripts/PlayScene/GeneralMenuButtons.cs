@@ -135,7 +135,7 @@ public class GeneralMenuButtons : MonoBehaviour
         {
             case 0:
                 SetLeftRightButtonsActive(false, true);
-                AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Right);
+                AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Left);
                 _selectionRectTransform.anchorMax = new Vector2(1.2f, 0.75f);
                 _selectionRectTransform.anchorMin = new Vector2(-1.2f, 0.25f);
                 break;
@@ -145,7 +145,7 @@ public class GeneralMenuButtons : MonoBehaviour
                 break;
             case 2:
                 SetLeftRightButtonsActive(true, false);
-                AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Left);
+                AnimationManager.Instance.SetPlanetImagePosition(PlanetImagePosition.Right);
                 _selectionRectTransform.anchorMax = new Vector2(2.2f, 0.75f);
                 _selectionRectTransform.anchorMin = new Vector2(-0.2f, 0.25f);
                 break;

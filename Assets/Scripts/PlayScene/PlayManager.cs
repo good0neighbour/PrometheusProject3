@@ -18,6 +18,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private GameObject _citySlot = null;
     [SerializeField] private Transform _landListContentArea = null;
     [SerializeField] private Transform _cityListContentArea = null;
+    [SerializeField] private Transform _nationListContentArea = null;
     [SerializeField] private TechTrees _techTreeData = null;
     [SerializeField] private ScreenResearch _researchScreen = null;
     [SerializeField] private ScreenSociety _societyScreen = null;

@@ -163,7 +163,7 @@ public class PopUpViewFacility : TechTreeViewBase
         }
         if (0 < node.PopulationMovement)
         {
-            result.Append($"{Language.Instance["인구 변화"]}\n");
+            result.Append($"{Language.Instance["인구 증가"]}\n");
         }
         if (0 < node.Police)
         {
