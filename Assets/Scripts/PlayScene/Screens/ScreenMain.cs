@@ -6,6 +6,7 @@ public class ScreenMain : PlayScreenBase
 
     [Header("참조")]
     [SerializeField] private GameObject _popUpMenuScreen = null;
+    [SerializeField] private GameObject _popMessageLogScreen = null;
 
 
 
@@ -24,6 +25,29 @@ public class ScreenMain : PlayScreenBase
         gameObject.SetActive(false);
         GeneralMenuButtons.Instance.EnableThis(false);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+    }
+
+
+    public void BtnMessageLog(bool openPopUpScreen)
+    {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
+        // 화면 변경
+        if (openPopUpScreen)
+        {
+            _popUpMenuScreen.SetActive(true);
+            gameObject.SetActive(false);
+            GeneralMenuButtons.Instance.EnableThis(false);
+            PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+        }
+        else
+        {
+            _popUpMenuScreen.SetActive(false);
+            gameObject.SetActive(true);
+            GeneralMenuButtons.Instance.EnableThis(true);
+            PlayManager.Instance.GameResume = Constants.GAME_RESUME;
+        }
     }
 
 

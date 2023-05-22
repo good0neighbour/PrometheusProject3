@@ -64,9 +64,12 @@ public class ScreenCity : PlayScreenBase
         // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
-        // 창 열기
+        // 창 연다.
         _popUpTechTreeScreen.ActiveThis(TechTreeType.Facility);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+
+        // 이 창 닫는다.
+        gameObject.SetActive(false);
     }
 
 

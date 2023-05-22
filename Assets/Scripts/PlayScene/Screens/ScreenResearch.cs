@@ -37,6 +37,9 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
         // 테크트리 창 활성화
         _popUpTechScreen.ActiveThis(TechTreeType.Tech);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+
+        // 이 창 닫는다.
+        gameObject.SetActive(false);
     }
 
 
@@ -48,6 +51,9 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
         // 테크트리 창 활성화
         _popUpTechScreen.ActiveThis(TechTreeType.Thought);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+
+        // 이 창 닫는다.
+        gameObject.SetActive(false);
     }
 
 

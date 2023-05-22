@@ -34,7 +34,7 @@ public class NodeSociety : MonoBehaviour
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, _description, IsAvailable);
+        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, Language.Instance[_description], IsAvailable);
     }
 
 
@@ -183,6 +183,12 @@ public class NodeSociety : MonoBehaviour
 
 
     /* ==================== Private Methods ==================== */
+
+    //private string GetCostText()
+    //{
+    //
+    //}
+
 
     private void OnLanguageChange()
     {

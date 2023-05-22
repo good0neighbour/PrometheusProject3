@@ -29,6 +29,9 @@ public class ScreenSociety : PlayScreenBase
         // 테크트리 창 활성화
         _popUpElementTechScreen.ActiveThis(0);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+
+        // 이 창 닫는다.
+        gameObject.SetActive(false);
     }
 
 

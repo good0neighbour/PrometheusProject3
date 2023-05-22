@@ -15,6 +15,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
     [SerializeField] private TMP_Text _gainText = null;
     [SerializeField] private Image _adoptProgressionImage = null;
     [SerializeField] private ScreenSociety _societyScreen = null;
+    [SerializeField] private GameObject _previousScreen = null;
 
     private List<NodeElementSociety> _elements = new List<NodeElementSociety>();
     Dictionary<string, byte> _nodeIndex = null;
@@ -94,7 +95,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         _costText.text = null;
         _gainText.text = null;
 
-        // 이전 노드는 비활성화
+        // 이전 선택은 비활성화
         if (-1 < _currentNode)
         {
             _nodeImages[_currentNode].color = Constants.BUTTON_UNSELECTED;
@@ -106,6 +107,9 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
 
         // 게임 재개
         PlayManager.Instance.GameResume = Constants.GAME_RESUME;
+
+        // 이전 창 활성화
+        _previousScreen.SetActive(true);
     }
     
 

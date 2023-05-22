@@ -37,6 +37,7 @@ public static class Constants
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
     // 게임 플레이 관련 값, 일반
+    public const byte MEET_OPORTUNITY = 1;
     public const ushort INITIAL_POPULATION = 10;
     public const float INITIAL_POPULATION_MOVEMENT = 0.0001f;
     public const float MONTH_TIMER = 2.0f;

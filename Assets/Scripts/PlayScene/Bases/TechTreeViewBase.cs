@@ -25,6 +25,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
     [SerializeField] private Image _progressionImage = null;
     [SerializeField] private Transform _techTreeContentArea = null;
     [SerializeField] private GameObject _cursor = null;
+    [SerializeField] private GameObject _previousScreen = null;
 
     protected List<TechTrees.SubNode>[] NextNodes = null;
     protected Dictionary<string, byte> NodeIndex = null;
@@ -138,6 +139,9 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         GainsText.text = null;
         _costsText.text = null;
         StatusText.text = null;
+
+        // 이전 화면 활성화
+        _previousScreen.SetActive(true);
     }
 
 

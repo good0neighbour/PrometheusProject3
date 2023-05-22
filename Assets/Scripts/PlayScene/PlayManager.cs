@@ -378,25 +378,32 @@ public class PlayManager : MonoBehaviour
             // 탐사 완료 시
             if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
             {
-                // 가변배열에 토지 추가
-                _lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
+                if (Constants.MEET_OPORTUNITY > Random.Range(0, 10))
+                {
+                    
+                }
+                else
+                {
+                    // 가변배열에 토지 추가
+                    _lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
 
-                // 토지 슬롯 추가
-                AddLandSlot(this[VariableUshort.LandNum]);
+                    // 토지 슬롯 추가
+                    AddLandSlot(this[VariableUshort.LandNum]);
 
-                // 토지 개수 추가
-                ++this[VariableUshort.LandNum];
+                    // 토지 개수 추가
+                    ++this[VariableUshort.LandNum];
+
+                    // 메세지
+                    MessageBox.Instance.EnqueueMessage(Language.Instance[
+                        "새로운 토지를 발견했습니다."
+                        ]);
+                }
 
                 // 탐사 진행 초기화
                 this[VariableFloat.ExploreProgress] = 0.0f;
 
                 // 탐사 목표 증가
                 this[VariableFloat.ExploreGoal] *= Constants.EXPLORE_GOAL_INCREASEMENT;
-
-                // 메세지
-                MessageBox.Instance.EnqueueMessage(Language.Instance[
-                    "새로운 토지를 발견했습니다."
-                    ]);
             }
             // 진행 중일 때
             else

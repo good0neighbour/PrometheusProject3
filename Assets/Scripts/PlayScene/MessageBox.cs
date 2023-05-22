@@ -9,7 +9,9 @@ public class MessageBox : MonoBehaviour
 
     [SerializeField] private float _messageGap = 2.0f;
     [SerializeField] private GameObject _messageBoxObject = null;
-    [SerializeField]  private TMP_Text _messageText = null;
+    [SerializeField] private GameObject _logObject = null;
+    [SerializeField] private TMP_Text _messageText = null;
+    [SerializeField] private Transform _logArea = null;
 
     private Queue<string> _messageQueue = new Queue<string>();
     private float _timer = 0.0f;
@@ -122,8 +124,13 @@ public class MessageBox : MonoBehaviour
                 AudioManager.Instance.PlayAuido(AudioType.Alert);
 
                 // 메세지 표시
-                _messageText.text = $"{PlayManager.Instance[VariableUshort.Year].ToString()}{Language.Instance["년"]} {PlayManager.Instance[VariableByte.Month].ToString()}{Language.Instance["월"]}\n{_messageQueue.Dequeue()}";
+                _messageText.text = _messageQueue.Peek();
                 _messageBoxObject.SetActive(true);
+
+                // 로그 추가
+                TMP_Text newLog = Instantiate(_logObject, _logArea).GetComponent<TMP_Text>();
+                newLog.font = Language.Instance.GetFontAsset();
+                newLog.text = _messageQueue.Dequeue();
                 _timer = 0.0f;
                 return;
         }
