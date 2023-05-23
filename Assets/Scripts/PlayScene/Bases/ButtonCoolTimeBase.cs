@@ -54,9 +54,6 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
         IsCoolTimeRunning = true;
         _availableImage.fillAmount = _availableImageAmount;
         _titleText.color = Constants.TEXT_BUTTON_DISABLE;
-
-        // 비용 확인 후  버튼 활성화
-        OnMonthChange();
     }
 
 
@@ -81,55 +78,60 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
     protected abstract bool CostAvailable();
 
 
-
-    /* ==================== Private Methods ==================== */
-
-    private void CoolTimeRunning()
+    /// <summary>
+    /// 대기 종료 시 동작
+    /// </summary>
+    protected virtual void OnCoolTimeEnd()
     {
-        // 사용 불가
-        if (!IsCoolTimeRunning)
-        {
-            return;
-        }
-
-        // 재사용 대기 중
-        _availableImageAmount += _coolTimeSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
-
-        //대기 완료
-        if (1.0f <= _availableImageAmount)
-        {
-            // 애니메이션 종료
-            _availableImage.fillAmount = 1.0f;
-            IsCoolTimeRunning = false;
-
-            // 비용 확인 후  버튼 활성화
-            OnMonthChange();
-        }
-        else
-        {
-            _availableImage.fillAmount = _availableImageAmount;
-        }
+        _availableImage.fillAmount = 1.0f;
+        IsCoolTimeRunning = false;
     }
 
 
-    private void OnMonthChange()
-    {
-        // 애니메이션 진행 중이거나 활성화 상태가 아니면 반환한다.
-        if (IsCoolTimeRunning || !gameObject.activeSelf)
-        {
-            return;
-        }
 
-        // 비용 확인
-        if (CostAvailable())
+    /* ==================== Private Methods ==================== */
+
+    private void OnPlayUpdate()
+    {
+        // 애니메이션 사용 중
+        if (IsCoolTimeRunning)
         {
-            IsAvailable = true;
-            _titleText.color = Constants.WHITE;
+            switch (PlayManager.Instance.GameSpeed)
+            {
+                case 0:
+                    // 일시정지 상태에서는 동작하지 않는다.
+                    return;
+                default:
+                    // 재사용 대기 중
+                    _availableImageAmount += _coolTimeSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;
+
+                    //대기 완료
+                    if (1.0f <= _availableImageAmount)
+                    {
+                        // 대기 종료
+                        OnCoolTimeEnd();
+                    }
+                    else
+                    {
+                        _availableImage.fillAmount = _availableImageAmount;
+                    }
+                    return;
+            }
         }
-        else
+        // 활성화일 때
+        else if (gameObject.activeSelf)
         {
-            IsAvailable = false;
-            _titleText.color = Constants.TEXT_BUTTON_DISABLE;
+            // 비용 확인
+            if (CostAvailable())
+            {
+                IsAvailable = true;
+                _titleText.color = Constants.WHITE;
+            }
+            else
+            {
+                IsAvailable = false;
+                _titleText.color = Constants.TEXT_BUTTON_DISABLE;
+            }
         }
     }
 
@@ -137,14 +139,6 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
     private void Awake()
     {
         // 대리자 등록
-        PlayManager.OnMonthCahnge += OnMonthChange;
-        PlayManager.OnPlayUpdate += CoolTimeRunning;
-    }
-
-
-    private void OnEnable()
-    {
-        // 비용 확인
-        OnMonthChange();
+        PlayManager.OnPlayUpdate += OnPlayUpdate;
     }
 }

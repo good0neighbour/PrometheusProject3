@@ -783,6 +783,7 @@ public class PlayManager : MonoBehaviour
         this[VariableByte.Month] = 1;
         this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
         this[VariableLong.Funds] = 500000;
+        this[VariableUint.Culture] = 10;
         this[VariableByte.Era] = 1;
         this[VariableFloat.FacilitySupportRate] = 100.0f;
         this[VariableFloat.ResearchSupportRate] = 100.0f;

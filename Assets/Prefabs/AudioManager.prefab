@@ -53,6 +53,8 @@ MonoBehaviour:
   _selectVolume: 0.6
   _failedClip: {fileID: 8300000, guid: 8525c45037cb65b4c8fc7fb459f8bb1b, type: 3}
   _failedVolume: 0.8
+  _alertClip: {fileID: 8300000, guid: 49c33c437e7006b40973ff2dde2eef5c, type: 3}
+  _alertVolume: 0.8
   _audioSource: {fileID: 130908450216294753}
 --- !u!82 &4622122684644119703
 AudioSource:

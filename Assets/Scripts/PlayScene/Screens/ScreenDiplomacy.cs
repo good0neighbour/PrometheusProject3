@@ -12,6 +12,9 @@ public class ScreenDiplomacy : PlayScreenBase
     [SerializeField] private Image _conquestImage = null;
     [SerializeField] private GameObject _true = null;
     [SerializeField] private GameObject _false = null;
+    [SerializeField] private GameObject _popUpDiplomacy = null;
+    [SerializeField] private GameObject _popUpTrade = null;
+    [SerializeField] private GameObject _popUpConquest = null;
 
     private byte _current = 0;
 
@@ -58,24 +61,50 @@ public class ScreenDiplomacy : PlayScreenBase
 
     public void BtnDiplomacy()
     {
+        // 현재 창 닫는다.
+        CloseScreen();
 
+        //화면 전환
+        _popUpDiplomacy.SetActive(true);
     }
 
 
     public void BtnTrade()
     {
+        // 현재 창 닫는다.
+        CloseScreen();
 
+        //화면 전환
+        _popUpTrade.SetActive(true);
     }
 
 
     public void BtnConquest()
     {
+        // 현재 창 닫는다.
+        CloseScreen();
 
+        //화면 전환
+        _popUpConquest.SetActive(true);
     }
 
 
 
     /* ==================== Private Methods ==================== */
+
+    /// <summary>
+    /// 현재 창 닫는다.
+    /// </summary>
+    private void CloseScreen()
+    {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
+        // 화면 닫는다.
+        gameObject.SetActive(false);
+        PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+    }
+
 
     private void Awake()
     {
