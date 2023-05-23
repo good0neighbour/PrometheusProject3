@@ -15226,7 +15226,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 360541388}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -15246,16 +15246,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 360541383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d55feb9bfc966147abadfb50e654010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 1
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 1785277763}
   _availableImage: {fileID: 1935321925}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _adoptIndexNumber: 1
 --- !u!1 &365857285
 GameObject:
   m_ObjectHideFlags: 0
@@ -21745,7 +21743,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 543025585}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -21765,16 +21763,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 543025580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b04b29f2765d474098da2a22b41f00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 5
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 506613385}
   _availableImage: {fileID: 412930376}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _whichOne: 1
 --- !u!1 &543264472
 GameObject:
   m_ObjectHideFlags: 0
@@ -23200,7 +23196,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 571752044}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -23220,16 +23216,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 571752039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b04b29f2765d474098da2a22b41f00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 7
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 1326003237}
   _availableImage: {fileID: 2091420205}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _whichOne: 3
 --- !u!1 &572905178
 GameObject:
   m_ObjectHideFlags: 0
@@ -26269,7 +26263,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 635401730}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -26289,16 +26283,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 635401725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b04b29f2765d474098da2a22b41f00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 4
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 250918421}
   _availableImage: {fileID: 1388354263}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _whichOne: 0
 --- !u!1 &636206568
 GameObject:
   m_ObjectHideFlags: 0
@@ -28712,7 +28704,6 @@ GameObject:
   m_Component:
   - component: {fileID: 698549042}
   - component: {fileID: 698549044}
-  - component: {fileID: 698549043}
   - component: {fileID: 698549041}
   - component: {fileID: 698549040}
   - component: {fileID: 698549039}
@@ -28814,18 +28805,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &698549043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698549038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e89936821e56944b8dfc5719203eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &698549044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28838,6 +28817,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136e10cb191e7ae44b4c0c49e481c7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttons: []
+  _buttonDescriptions: []
+  _dexcriptionText: {fileID: 390579196}
+  _adoptBtnText: {fileID: 1858736054}
+  _statusText: {fileID: 1109687221}
+  _backBtnText: {fileID: 2015039282}
+  _progressionImage: {fileID: 1326328541}
+  _previousScreen: {fileID: 2018163149}
 --- !u!1 &699082229
 GameObject:
   m_ObjectHideFlags: 0
@@ -33555,7 +33542,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 798281135}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -33575,16 +33562,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 798281130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a9be7056762f5c4d8929465a5567858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 0
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 1443897197}
   _availableImage: {fileID: 1044236290}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _adoptIndexNumber: 0
 --- !u!1 &802204971
 GameObject:
   m_ObjectHideFlags: 0
@@ -35472,7 +35457,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 846971045}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
@@ -35493,16 +35478,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 846971040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: a5400a6f6c91fea41aa7acf43c4ea7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 2
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 404138449}
   _availableImage: {fileID: 724149826}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _increase: 1
 --- !u!1 &848966629
 GameObject:
   m_ObjectHideFlags: 0
@@ -39013,7 +38996,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 916543867}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -39033,16 +39016,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 916543862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d55feb9bfc966147abadfb50e654010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 1
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 858245256}
   _availableImage: {fileID: 268957832}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _adoptIndexNumber: 1
 --- !u!1 &918021558
 GameObject:
   m_ObjectHideFlags: 0
@@ -43907,7 +43888,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1071647239}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
@@ -43928,16 +43909,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071647234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: a5400a6f6c91fea41aa7acf43c4ea7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 3
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 809102998}
   _availableImage: {fileID: 1335003682}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _increase: 0
 --- !u!1 &1072258246
 GameObject:
   m_ObjectHideFlags: 0
@@ -58608,7 +58587,7 @@ GameObject:
   - component: {fileID: 1417420206}
   - component: {fileID: 1417420208}
   - component: {fileID: 1417420207}
-  - component: {fileID: 1417420209}
+  - component: {fileID: 1417420211}
   - component: {fileID: 1417420210}
   m_Layer: 5
   m_Name: Btn1
@@ -58677,25 +58656,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417420205}
   m_CullTransparentMesh: 1
---- !u!114 &1417420209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417420205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fundCost: 10
-  _cultureCost: 0
-  _coolTimeSpeedmult: 0.1
-  _adoptIndexNumber: 0
-  _titleText: {fileID: 605245413}
-  _availableImage: {fileID: 2103079220}
-  _screen: {fileID: 698549043}
 --- !u!114 &1417420210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58740,8 +58700,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1417420209}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+      - m_Target: {fileID: 698549044}
+        m_TargetAssemblyTypeName: PopUpScreenDiplomacy, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -58752,6 +58712,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1417420211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417420205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e33e6435b64ea4a9294c14bd3cb838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coolTimeSpeedmult: 0.1
+  _titleText: {fileID: 605245413}
+  _availableImage: {fileID: 2103079220}
+  _fundCost: 10
 --- !u!1 &1419016514
 GameObject:
   m_ObjectHideFlags: 0
@@ -71950,7 +71926,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1783009729}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -71970,16 +71946,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1783009724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d55feb9bfc966147abadfb50e654010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 1
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 1220808755}
   _availableImage: {fileID: 1160413785}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _adoptIndexNumber: 1
 --- !u!1 &1784335699
 GameObject:
   m_ObjectHideFlags: 0
@@ -80675,7 +80649,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1975664747}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -80695,16 +80669,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1975664742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a9be7056762f5c4d8929465a5567858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 0
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 290929544}
   _availableImage: {fileID: 222444508}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _adoptIndexNumber: 0
 --- !u!1 &1976265343
 GameObject:
   m_ObjectHideFlags: 0
@@ -82001,7 +81973,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2006016443}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -82021,16 +81993,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006016438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a9be7056762f5c4d8929465a5567858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 0
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 1895916183}
   _availableImage: {fileID: 658296987}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _adoptIndexNumber: 0
 --- !u!1 &2010703643
 GameObject:
   m_ObjectHideFlags: 0
@@ -82960,7 +82930,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2024310354}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -82980,16 +82950,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2024310349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ee1381e3e70145ae12645db9b77e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b04b29f2765d474098da2a22b41f00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fundCost: 0
-  _cultureCost: 1
-  _coolTimeSpeedmult: 0.05
-  _adoptIndexNumber: 6
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 1375489488}
   _availableImage: {fileID: 741235074}
-  _screen: {fileID: 2126740154}
+  _cultureCost: 1
+  _whichOne: 2
 --- !u!1 &2041996370
 GameObject:
   m_ObjectHideFlags: 0
@@ -85760,7 +85728,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2126740152}
   - component: {fileID: 2126740153}
-  - component: {fileID: 2126740154}
   - component: {fileID: 2126740151}
   - component: {fileID: 2126740150}
   - component: {fileID: 2126740149}
@@ -85886,18 +85853,6 @@ MonoBehaviour:
   _menuButton: {fileID: 1658198269}
   _assetImage: {fileID: 767578258}
   _affectionImage: {fileID: 1566156551}
---- !u!114 &2126740154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126740148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c124a97ea63cc46abf1fe36394a61e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2127671283
 GameObject:
   m_ObjectHideFlags: 0

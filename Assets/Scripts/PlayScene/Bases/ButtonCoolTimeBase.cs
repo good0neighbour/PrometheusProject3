@@ -2,24 +2,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ButtonCoolTime : MonoBehaviour
+public abstract class ButtonCoolTimeBase : MonoBehaviour
 {
     /* ==================== Variables ==================== */
 
+    [Header("부모 클래스")]
     [Header("설정")]
-    [SerializeField] private byte _fundCost = 0;
-    [SerializeField] private byte _cultureCost = 0;
     [SerializeField] private float _coolTimeSpeedmult = 0.1f;
-    [SerializeField] private byte _adoptIndexNumber = 0;
 
     [Header("참조")]
     [SerializeField] private TMP_Text _titleText = null;
     [SerializeField] private Image _availableImage = null;
-    [SerializeField] private CoolTimeBtnScreenBase _screen = null;
 
     private float _availableImageAmount = 0.0f;
-    private bool _isCoolTimeRunning = false;
-    private bool _isAvailable = false;
+
+    public bool IsCoolTimeRunning
+    {
+        get;
+        private set;
+    }
+
+    public bool IsAvailable
+    {
+        get;
+        private set;
+    }
 
 
 
@@ -28,7 +35,7 @@ public class ButtonCoolTime : MonoBehaviour
     public void BtnAdopt()
     {
         // 사용 불가
-        if (_isCoolTimeRunning || !_isAvailable)
+        if (IsCoolTimeRunning || !IsAvailable)
         {
             return;
         }
@@ -37,20 +44,41 @@ public class ButtonCoolTime : MonoBehaviour
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 비용 지출
-        PlayManager.Instance[VariableUint.Culture] -= _cultureCost;
+        Cost();
 
         // 승인 동작
-        _screen.OnAdopt(_adoptIndexNumber);
+        OnAdopt();
 
         // 재사용 대기
         _availableImageAmount = 0.0f;
-        _isCoolTimeRunning = true;
+        IsCoolTimeRunning = true;
         _availableImage.fillAmount = _availableImageAmount;
         _titleText.color = Constants.TEXT_BUTTON_DISABLE;
 
-        // 비용 확인
+        // 비용 확인 후  버튼 활성화
         OnMonthChange();
     }
+
+
+
+    /* ==================== Protected Methods ==================== */
+
+    /// <summary>
+    /// 승인 시 동작
+    /// </summary>
+    protected abstract void OnAdopt();
+
+
+    /// <summary>
+    /// 비용 지출
+    /// </summary>
+    protected abstract void Cost();
+
+
+    /// <summary>
+    /// 비용 확인
+    /// </summary>
+    protected abstract bool CostAvailable();
 
 
 
@@ -59,7 +87,7 @@ public class ButtonCoolTime : MonoBehaviour
     private void CoolTimeRunning()
     {
         // 사용 불가
-        if (!_isCoolTimeRunning)
+        if (!IsCoolTimeRunning)
         {
             return;
         }
@@ -72,9 +100,9 @@ public class ButtonCoolTime : MonoBehaviour
         {
             // 애니메이션 종료
             _availableImage.fillAmount = 1.0f;
-            _isCoolTimeRunning = false;
+            IsCoolTimeRunning = false;
 
-            // 비용 확인 후 활성화
+            // 비용 확인 후  버튼 활성화
             OnMonthChange();
         }
         else
@@ -84,38 +112,23 @@ public class ButtonCoolTime : MonoBehaviour
     }
 
 
-    private bool CostAvaiable()
-    {
-        if (_cultureCost > PlayManager.Instance[VariableUint.Culture])
-        {
-            return false;
-        }
-        if (_fundCost > PlayManager.Instance[VariableLong.Funds])
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-
     private void OnMonthChange()
     {
         // 애니메이션 진행 중이거나 활성화 상태가 아니면 반환한다.
-        if (_isCoolTimeRunning || !gameObject.activeSelf)
+        if (IsCoolTimeRunning || !gameObject.activeSelf)
         {
             return;
         }
 
         // 비용 확인
-        if (CostAvaiable())
+        if (CostAvailable())
         {
-            _isAvailable = true;
+            IsAvailable = true;
             _titleText.color = Constants.WHITE;
         }
         else
         {
-            _isAvailable = false;
+            IsAvailable = false;
             _titleText.color = Constants.TEXT_BUTTON_DISABLE;
         }
     }

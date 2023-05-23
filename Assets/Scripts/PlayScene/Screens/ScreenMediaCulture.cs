@@ -13,59 +13,27 @@ public class ScreenMediaCulture : PlayScreenBase
     private float _animationAmount = 0.0f;
     private bool _animationProceed = false;
 
+    public static ScreenMediaCulture Instance
+    {
+        get;
+        private set;
+    }
+
 
 
     /* ==================== Public Methods ==================== */
 
-    public void OnAdopt(byte index)
+    public void OnAdoptAnimation(byte index)
     {
         switch (index)
         {
             case 0:
-                // 자산화
-                if (1.0f > PlayManager.Instance[VariableFloat.GovAsset])
-                {
-                    PlayManager.Instance[VariableFloat.GovAsset] += (1.0f - PlayManager.Instance[VariableFloat.GovAsset]) * Constants.GOV_ASSET_MULTIPLY;
-                    IncreaseAnimation(_assetImage, PlayManager.Instance[VariableFloat.GovAsset]);
-                }
+                // 자산화 애니메이션
+                IncreaseAnimation(_assetImage, PlayManager.Instance[VariableFloat.GovAsset]);
                 return;
             case 1:
-                // 영향력
-                if (PlayManager.Instance[VariableFloat.GovAsset] > PlayManager.Instance[VariableFloat.GovAffection])
-                {
-                    PlayManager.Instance[VariableFloat.GovAffection] += (PlayManager.Instance[VariableFloat.GovAsset] - PlayManager.Instance[VariableFloat.GovAffection]) * Constants.GOV_AFFECTION_MULTIPLY;
-                    IncreaseAnimation(_affectionImage, PlayManager.Instance[VariableFloat.GovAffection]);
-                }
-                return;
-            case 2:
-                // 인구 증가
-                return;
-            case 3:
-                // 인구 감소
-                return;
-            case 4:
-                // 시설 지지율
-                SupportRateIncrease(VariableFloat.FacilitySupportRate);
-                PlayManager.Instance.FacilitySupportGoal = PlayManager.Instance[VariableFloat.FacilitySupportRate];
-                BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.FacilitySupport);
-                return;
-            case 5:
-                // 연구 지지율
-                SupportRateIncrease(VariableFloat.ResearchSupportRate);
-                PlayManager.Instance.ResearchSupportGoal = PlayManager.Instance[VariableFloat.ResearchSupportRate];
-                BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.ResearchSupport);
-                return;
-            case 6:
-                // 사회 지지율
-                SupportRateIncrease(VariableFloat.SocietySupportRate);
-                PlayManager.Instance.SocietySupportGoal = PlayManager.Instance[VariableFloat.SocietySupportRate];
-                BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.SocietySupport);
-                return;
-            case 7:
-                // 외교 지지율
-                SupportRateIncrease(VariableFloat.DiplomacySupportRate);
-                PlayManager.Instance.DiplomacySupportGoal = PlayManager.Instance[VariableFloat.DiplomacySupportRate];
-                BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.DiplomacySupport);
+                // 영향력 애니메이션
+                IncreaseAnimation(_affectionImage, PlayManager.Instance[VariableFloat.GovAffection]);
                 return;
             default:
                 Debug.LogError("잘못된 인덱스 - ScreenMediaCulture");
@@ -76,15 +44,6 @@ public class ScreenMediaCulture : PlayScreenBase
 
 
     /* ==================== Private Methods ==================== */
-
-    private void SupportRateIncrease(VariableFloat supportRate)
-    {
-        PlayManager.Instance[supportRate] += Constants.SUPPORT_RATE_INCREASEMENT * PlayManager.Instance[VariableFloat.GovAffection];
-        if (100.0f < PlayManager.Instance[supportRate])
-        {
-            PlayManager.Instance[supportRate] = 100.0f;
-        }
-    }
 
 
     private void IncreaseAnimation(Image target, float goal)
@@ -98,6 +57,10 @@ public class ScreenMediaCulture : PlayScreenBase
 
     private void Awake()
     {
+        // 유니티식 싱글턴패턴
+        Instance = this;
+
+        // 초기 정보
         _assetImage.fillAmount = PlayManager.Instance[VariableFloat.GovAsset];
         _affectionImage.fillAmount = PlayManager.Instance[VariableFloat.GovAffection];
     }

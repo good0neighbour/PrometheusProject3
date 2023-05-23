@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen, ICoolTimeScreen
+public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
 {
     /* ==================== Variables ==================== */
 
-    [SerializeField] private ButtonCoolTime[] _buttons = null;
+    [SerializeField] private CoolTimeBtnDiplomacySemiBase[] _buttons = null;
     [SerializeField] private string[] _buttonDescriptions = null;
     [SerializeField] private TMP_Text _dexcriptionText = null;
+    [SerializeField] private TMP_Text _adoptBtnText = null;
     [SerializeField] private TMP_Text _statusText = null;
     [SerializeField] private TMP_Text _backBtnText = null;
     [SerializeField] private Image _progressionImage = null;
@@ -16,6 +17,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen, ICoolTimeScreen
 
     private byte _currentBtn = 0;
     private float _supportRate = 0.0f;
+    private float _timer = 0.0f;
     private bool _isAdoptAvailable = false;
     private bool _isBackBtnAvailable = true;
     private bool _adoptAnimationProceed = false;
@@ -26,10 +28,21 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen, ICoolTimeScreen
 
     public void BtnBack()
     {
+        // 사용 불가
+        if (!_isBackBtnAvailable)
+        {
+            return;
+        }
+
+        // 화면 전환
         gameObject.SetActive(false);
         _previousScreen.SetActive(true);
 
+        // 처음 상태로
+        _adoptBtnText.text = Language.Instance["승인"];
+        SetAdoptAvailable(false);
         _dexcriptionText.text = null;
+        _statusText.text = null;
     }
 
 
@@ -60,15 +73,16 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen, ICoolTimeScreen
     {
         _currentBtn = (byte)index;
         _dexcriptionText.text = _buttonDescriptions[_currentBtn];
-    }
 
-
-    public void OnAdopt(byte index)
-    {
-        switch (index)
+        if (_buttons[_currentBtn].IsCoolTimeRunning)
         {
-            case 0:
-                return;
+            _adoptBtnText.text = Language.Instance["대기 중"];
+            SetAdoptAvailable(false);
+        }
+        else
+        {
+            _adoptBtnText.text = Language.Instance["승인"];
+            SetAdoptAvailable(_buttons[_currentBtn].IsAvailable);
         }
     }
 
@@ -80,5 +94,53 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen, ICoolTimeScreen
     {
         _adoptAnimationProceed = true;
         _supportRate = supportRate;
+    }
+
+
+    private void SetAdoptAvailable(bool available)
+    {
+        _isAdoptAvailable = available;
+        if (_isAdoptAvailable)
+        {
+            _adoptBtnText.color = Constants.WHITE;
+            _isAdoptAvailable = true;
+        }
+        else
+        {
+            _adoptBtnText.color = Constants.TEXT_BUTTON_DISABLE;
+            _isAdoptAvailable = false;
+        }
+    }
+
+
+    private void Update()
+    {
+        if (_adoptAnimationProceed)
+        {
+            _timer += Time.deltaTime;
+            _progressionImage.fillAmount = _timer;
+            if (1.0f <= _timer)
+            {
+                if (_supportRate >= Random.Range(0.0f, Constants.MAX_SUPPORT_RATE_ADOPTION))
+                {
+                    _buttons[_currentBtn].BtnAdopt();
+                }
+                else
+                {
+                    _buttons[_currentBtn].OnFail();
+                }
+
+                // 비용 확인 후 승인 버튼 활성화
+                SetAdoptAvailable(_buttons[_currentBtn].IsAvailable);
+
+                // 뒤로가기 가능
+                _isBackBtnAvailable = true;
+                _backBtnText.color = Constants.WHITE;
+
+                _adoptAnimationProceed = false;
+                _progressionImage.fillAmount = 0.0f;
+                _timer = 0.0f;
+            }
+        }
     }
 }

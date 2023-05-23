@@ -210,7 +210,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
                 else
                 {
                     _adoptBtnText.text = Language.Instance["½ÂÀÎ"];
-                    SetAdoptAvailable(true);
+                    SetAdoptAvailable(CostAvailable());
                 }
             }
         }
@@ -235,7 +235,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
                 else
                 {
                     _adoptBtnText.text = Language.Instance["½ÂÀÎ"];
-                    SetAdoptAvailable(true);
+                    SetAdoptAvailable(CostAvailable());
                 }
             }
         }
