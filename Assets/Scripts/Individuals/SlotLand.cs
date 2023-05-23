@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Text;
 
-public class SlotLand : MonoBehaviour
+public class SlotLand : MonoBehaviour, ISlot
 {
     /* ==================== Variables ==================== */
 

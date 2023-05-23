@@ -371,7 +371,14 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         // 단축키 동작
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            ScreenExplore.Instance.OpenLandScreen(false);
+            if (_cityBuildScreen.activeSelf)
+            {
+                BtnPopUpBack();
+            }
+            else
+            {
+                BtnBack();
+            }
         }
     }
 }

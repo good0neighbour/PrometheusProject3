@@ -38,6 +38,7 @@ public static class Constants
 
     // 게임 플레이 관련 값, 일반
     public const byte MEET_OPORTUNITY = 1;
+    public const byte NUMBER_OF_FORCES = 4;
     public const ushort INITIAL_POPULATION = 10;
     public const float INITIAL_POPULATION_MOVEMENT = 0.0001f;
     public const float MONTH_TIMER = 2.0f;

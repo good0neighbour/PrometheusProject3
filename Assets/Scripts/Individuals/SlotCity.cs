@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class SlotCity : MonoBehaviour
+public class SlotCity : MonoBehaviour, ISlot
 {
     /* ==================== Variables ==================== */
 

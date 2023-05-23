@@ -154,8 +154,12 @@ public class Language
                     "부상 감소",
                     "부상 증가",
                     "공공외교",
-                    "거래",
+                    "무역",
                     "공작활동",
+                    "대사 파견",
+                    "속국화 진행",
+                    "우호도",
+                    "지구",
                     "탐사를 시작하면 채굴할 광물이 매장된 토지를 획득할 수 있습니다. 혹은 당신의 경쟁 기업이 세운 또다른 국가와 조우할 수도 있습니다.",
                     "행성의 대기량을 조절하여 적합한 대기압을 만드십시오. 자금을 투자하여 대기량을 증가시키거나 감소시킬 수 있습니다. 기압은 행성의 온도와 물 순환, 탄소 순환에 영향을 줍니다. 이상적인 기압은 1013.25hPa입니다.",
                     "생명이 정착하기 적절한 온도를 형성하십시오. 행성의 온도는 물 순환에 영향을 줍니다. 행성으로 유입되는 열과 방출되는 열은 평형을 이루기 때문에 자금 투자에 의한 온도 변화는 일시적입니다. 이상적인 온도는 15℃입니다.",
@@ -503,14 +507,9 @@ public class Language
     {
         // 준비 단계
         string[] path = Directory.GetFiles($"{Application.dataPath}/Translations/", "*.txt", SearchOption.AllDirectories);
-        ushort num = (ushort)new JsonLanguage(true).Texts.Length;
         string jsonForm = Resources.Load("Korean").ToString();
-        StringBuilder[] words = new StringBuilder[num];
+        List<StringBuilder> words = new List<StringBuilder>();
         StringBuilder result = new StringBuilder();
-        for (int j = 0; j < words.Length; ++j)
-        {
-            words[j] = new StringBuilder();
-        }
 
         // 존재하는 모든 번역본 생성
         for (byte i = 0; i < path.Length; ++i)
@@ -518,21 +517,26 @@ public class Language
             // 언어 하나 준비 단계
             string text = File.ReadAllText(path[i]);
             ushort index = 0;
-            for (int j = 0; j < words.Length; ++j)
-            {
-                words[j].Clear();
-            }
+            words.Clear();
 
             // 단어 추출
             for (int j = 0; j < text.Length; ++j)
             {
                 if (';' == text[j])
                 {
+                    // 다음 단어
                     j += 2;
                     ++index;
                 }
                 else
                 {
+                    // 가변배열에 추가 안 됐으면 추가
+                    if (index == words.Count)
+                    {
+                        words.Add(new StringBuilder());
+                    }
+
+                    // 단어 기록
                     words[index].Append(text[j]);
                 }
             }

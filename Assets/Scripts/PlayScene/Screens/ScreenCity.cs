@@ -102,6 +102,12 @@ public class ScreenCity : PlayScreenBase
 
     private void OnMonthChange()
     {
+        // 활성화 상태가 아니면 반환
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         _populationText.text = _currentCity.Population.ToString("0");
         _populationMovementText.text = (_currentCity.PopulationMovement * 12.0f).ToString("0");
         _annualFundText.text = _currentCity.AnnualFund.ToString();
@@ -126,8 +132,33 @@ public class ScreenCity : PlayScreenBase
     }
 
 
+    private void OnEnable()
+    {
+        CityImageUpdate();
+        OnMonthChange();
+    }
+
+
     private void Update()
     {
         _supportRateImage.fillAmount = PlayManager.Instance[VariableFloat.FacilitySupportRate] * 0.01f;
+
+        // 단축키 동작
+#if PLATFORM_STANDALONE_WIN
+        // 키보드 동작
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            GeneralMenuButtons.Instance.BtnScreenIndex(GeneralMenuButtons.Instance.CurrentRightIndex + 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(true);
+        }
+#endif
+        // PC, 모바일 공용
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            GeneralMenuButtons.Instance.BtnLeftRight(true);
+        }
     }
 }

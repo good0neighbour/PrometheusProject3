@@ -7,6 +7,7 @@ public class ButtonCoolTime : MonoBehaviour
     /* ==================== Variables ==================== */
 
     [Header("¼³Á¤")]
+    [SerializeField] private byte _fundCost = 0;
     [SerializeField] private byte _cultureCost = 0;
     [SerializeField] private float _coolTimeSpeedmult = 0.1f;
     [SerializeField] private byte _adoptIndexNumber = 0;
@@ -86,6 +87,10 @@ public class ButtonCoolTime : MonoBehaviour
     private bool CostAvaiable()
     {
         if (_cultureCost > PlayManager.Instance[VariableUint.Culture])
+        {
+            return false;
+        }
+        if (_fundCost > PlayManager.Instance[VariableLong.Funds])
         {
             return false;
         }

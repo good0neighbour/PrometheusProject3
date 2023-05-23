@@ -18,14 +18,11 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private GameObject _citySlot = null;
     [SerializeField] private Transform _landListContentArea = null;
     [SerializeField] private Transform _cityListContentArea = null;
-    [SerializeField] private Transform _nationListContentArea = null;
     [SerializeField] private TechTrees _techTreeData = null;
     [SerializeField] private ScreenResearch _researchScreen = null;
     [SerializeField] private ScreenSociety _societyScreen = null;
 
     private JsonData _data;
-    private List<Land> _lands = new List<Land>();
-    private List<City> _cities = new List<City>();
     private float _timer = 0.0f;
     private float _gameSpeed = 1.0f;
     private float _etcAirMassGoal = 0.0f;
@@ -287,7 +284,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public Land GetLand(ushort index)
     {
-        return _lands[index];
+        return _data.Lands[index];
     }
 
 
@@ -296,7 +293,16 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public City GetCity(ushort index)
     {
-        return _cities[index];
+        return _data.Cities[index];
+    }
+
+
+    /// <summary>
+    /// 세력 정보를 가져온다.
+    /// </summary>
+    public Force GetForce(ushort index)
+    {
+        return _data.Forces[index];
     }
 
 
@@ -316,7 +322,7 @@ public class PlayManager : MonoBehaviour
     public void AddCity(string cityName, ushort capacity)
     {
         // 가변배열에 토지 추가
-        _cities.Add(new City(this[VariableUshort.CityNum], cityName, capacity));
+        _data.Cities.Add(new City(this[VariableUshort.CityNum], cityName, capacity));
     }
 
 
@@ -355,6 +361,8 @@ public class PlayManager : MonoBehaviour
     {
         return _data.SocietyElementProgression;
     }
+
+
     /// <summary>
     /// 배열 생성 후 반환
     /// </summary>
@@ -379,26 +387,19 @@ public class PlayManager : MonoBehaviour
             // 탐사 완료 시
             if (this[VariableFloat.ExploreProgress] >= this[VariableFloat.ExploreGoal])
             {
-                if (Constants.MEET_OPORTUNITY > Random.Range(0, 10))
-                {
-                    
-                }
-                else
-                {
-                    // 가변배열에 토지 추가
-                    _lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
+                // 가변배열에 토지 추가
+                _data.Lands.Add(new Land(this[VariableUshort.LandNum], RandomResources()));
 
-                    // 토지 슬롯 추가
-                    AddLandSlot(this[VariableUshort.LandNum]);
+                // 토지 슬롯 추가
+                AddLandSlot(this[VariableUshort.LandNum]);
 
-                    // 토지 개수 추가
-                    ++this[VariableUshort.LandNum];
+                // 토지 개수 추가
+                ++this[VariableUshort.LandNum];
 
-                    // 메세지
-                    MessageBox.Instance.EnqueueMessage(Language.Instance[
-                        "새로운 토지를 발견했습니다."
-                        ]);
-                }
+                // 메세지
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "새로운 토지를 발견했습니다."
+                    ]);
 
                 // 탐사 진행 초기화
                 this[VariableFloat.ExploreProgress] = 0.0f;
@@ -788,6 +789,12 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.SocietySupportRate] = 100.0f;
         this[VariableFloat.DiplomacySupportRate] = 100.0f;
 
+        // 세력 이름 직접 입력
+        _data.Forces[0] = new Force("지구");
+        _data.Forces[1] = new Force("세력1");
+        _data.Forces[2] = new Force("세력2");
+        _data.Forces[3] = new Force("세력3");
+
         this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
         this[VariableFloat.TotalWater_PL] = Constants.EARTH_WATER_VOLUME;
         this[VariableFloat.PlanetRadius_km] = Constants.EARTH_RADIUS;
@@ -954,6 +961,9 @@ public class PlayManager : MonoBehaviour
         public double[] DoubleArray;
         public float[][] Adopted;
         public float[] SocietyElementProgression;
+        public Force[] Forces;
+        public List<Land> Lands;
+        public List<City> Cities;
 
         public JsonData(bool initialize)
         {
@@ -968,6 +978,9 @@ public class PlayManager : MonoBehaviour
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
                 Adopted = new float[(int)TechTreeType.TechTreeEnd][];
+                Forces = new Force[Constants.NUMBER_OF_FORCES];
+                Lands = new List<Land>();
+                Cities = new List<City>();
             }
             else
             {
@@ -980,9 +993,12 @@ public class PlayManager : MonoBehaviour
                 FloatArray = null;
                 DoubleArray = null;
                 Adopted = null;
+                Forces = null;
+                Lands = null;
+                Cities = null;
             }
 
             SocietyElementProgression = null;
-        }
+    }
     }
 }

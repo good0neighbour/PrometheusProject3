@@ -47,4 +47,13 @@ public class PopUpScreenTechTree : MonoBehaviour
 
 
     /* ==================== Private Methods ==================== */
+
+    private void Update()
+    {
+        // 단축키 동작
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            BtnBack();
+        }
+    }
 }

@@ -52,7 +52,6 @@ public class PopUpViewFacility : TechTreeViewBase
 
         // 시설 수 증가
         ++_currentCity.NumOfFacility;
-        ScreenCity.Instance.CityImageUpdate();
 
         // 시설 수익
         FacilityGains();

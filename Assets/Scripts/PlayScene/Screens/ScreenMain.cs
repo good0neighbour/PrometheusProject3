@@ -8,6 +8,8 @@ public class ScreenMain : PlayScreenBase
     [SerializeField] private GameObject _popUpMenuScreen = null;
     [SerializeField] private GameObject _popMessageLogScreen = null;
 
+    private bool _isMessageLogOpened = false;
+
 
 
     /* ==================== Public Methods ==================== */
@@ -48,6 +50,8 @@ public class ScreenMain : PlayScreenBase
             GeneralMenuButtons.Instance.EnableThis(true);
             PlayManager.Instance.GameResume = Constants.GAME_RESUME;
         }
+
+        _isMessageLogOpened = openPopUpScreen;
     }
 
 
@@ -57,21 +61,34 @@ public class ScreenMain : PlayScreenBase
     private void Update()
     {
         // 단축키 동작
+        // 메세지 로그 열렸을 때
+        if (_isMessageLogOpened)
+        {
+            // 공통 동작
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                BtnMessageLog(false);
+            }
+        }
+        // 중앙 화면일 때
+        else
+        {
 #if PLATFORM_STANDALONE_WIN
-        // 키보드 동작
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            GeneralMenuButtons.Instance.BtnLeftRight(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.D))
-        {
-            GeneralMenuButtons.Instance.BtnLeftRight(false);
-        }
+            // 키보드 동작
+            if (Input.GetKeyUp(KeyCode.A))
+            {
+                GeneralMenuButtons.Instance.BtnLeftRight(true);
+            }
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                GeneralMenuButtons.Instance.BtnLeftRight(false);
+            }
 #endif
-        // 공통 동작
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            BtnPopUpMenu();
+            // 공통 동작
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                BtnPopUpMenu();
+            }
         }
     }
 }
