@@ -37,7 +37,7 @@ public class ScreenBreath : PlayScreenBase, IRequest
     public void BtnRequestSeed()
     {
         // 사용 불가
-        if (_requestCost > PlayManager.Instance[VariableLong.Funds])
+        if (_requestAvailable)
         {
             return;
         }

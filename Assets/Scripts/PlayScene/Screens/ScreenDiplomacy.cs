@@ -6,7 +6,10 @@ public class ScreenDiplomacy : PlayScreenBase
 {
     /* ==================== Variables ==================== */
 
+    [SerializeField] private byte _trueCost = 10;
     [SerializeField] private TMP_Text _forceNameText = null;
+    [SerializeField] private TMP_Text _trueCostText = null;
+    [SerializeField] private TMP_Text _trueBtnText = null;
     [SerializeField] private Image _friendlyImage = null;
     [SerializeField] private Image _hostileImage = null;
     [SerializeField] private Image _conquestImage = null;
@@ -17,6 +20,7 @@ public class ScreenDiplomacy : PlayScreenBase
     [SerializeField] private GameObject _popUpConquest = null;
 
     private byte _current = 0;
+    private bool _isTrueBtnAvailable = false;
 
     public static Force CurrentForce
     {
@@ -53,6 +57,16 @@ public class ScreenDiplomacy : PlayScreenBase
 
     public void BtnTrue()
     {
+        // 사용 불가
+        if (!_isTrueBtnAvailable)
+        {
+            return;
+        }
+
+        // 비용 지출
+        PlayManager.Instance[VariableLong.Funds] -= _trueCost;
+
+        // 화면 전환
         CurrentForce.Info = true;
         _true.SetActive(true);
         _false.SetActive(false);
@@ -109,6 +123,14 @@ public class ScreenDiplomacy : PlayScreenBase
     private void Awake()
     {
         CurrentForce = PlayManager.Instance.GetForce(_current);
+
+        // 비용 표시
+        _trueCostText.text = _trueCost.ToString();
+
+        // 표시할 화면
+        bool isTrue = CurrentForce.Info;
+        _true.SetActive(isTrue);
+        _false.SetActive(!isTrue);
     }
 
 
@@ -117,6 +139,23 @@ public class ScreenDiplomacy : PlayScreenBase
         _friendlyImage.fillAmount = CurrentForce.Friendly;
         _hostileImage.fillAmount = CurrentForce.Hostile;
         _conquestImage.fillAmount = CurrentForce.Conquest;
+
+        // 요청 가능 여부
+        if (_isTrueBtnAvailable)
+        {
+            // 요청 비용이 없됐을 때
+            if (_trueCost > PlayManager.Instance[VariableLong.Funds])
+            {
+                _isTrueBtnAvailable = false;
+                _trueBtnText.color = Constants.TEXT_BUTTON_DISABLE;
+            }
+        }
+        // 요청 비용이 생겼을 때
+        else if (_trueCost <= PlayManager.Instance[VariableLong.Funds])
+        {
+            _isTrueBtnAvailable = true;
+            _trueBtnText.color = Constants.WHITE;
+        }
 
         // 단축키 동작
 #if PLATFORM_STANDALONE_WIN

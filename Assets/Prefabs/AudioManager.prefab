@@ -55,6 +55,12 @@ MonoBehaviour:
   _failedVolume: 0.8
   _alertClip: {fileID: 8300000, guid: 49c33c437e7006b40973ff2dde2eef5c, type: 3}
   _alertVolume: 0.8
+  _unableClip: {fileID: 8300000, guid: 4a9faf07d45b25f4e8e74f3cf7c24846, type: 3}
+  _unableVolume: 0.8
+  _incomeClip: {fileID: 8300000, guid: e334b6a6671dbb5458ae7dcc5744e198, type: 3}
+  _incomeVolume: 0.8
+  _showClip: {fileID: 8300000, guid: 019bec6ec4093864eb92936a7e79f3e5, type: 3}
+  _showVolume: 0.8
   _audioSource: {fileID: 130908450216294753}
 --- !u!82 &4622122684644119703
 AudioSource:

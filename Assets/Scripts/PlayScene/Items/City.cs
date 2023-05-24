@@ -115,27 +115,33 @@ public class City
     /// </summary>
     public void BeginCityRunning()
     {
-        PlayManager.OnMonthCahnge += OnMonthChange;
-        PlayManager.OnPlayUpdate += OnPlayUpdate;
+        PlayManager.OnMonthChange += OnMonthChange;
     }
 
 
 
     /* ==================== Private Methods ==================== */
 
-    private void OnMonthChange()
+    /// <summary>
+    /// 치안과 보건
+    /// </summary>
+    private void SafetyAndHealth()
     {
+        // 계산용 지역 변수
+        float float0;
+
+        // 범죄 빛 역병 발생
         if (Constants.MIN_EVEN_POPULATION < Population)
         {
-            float chance = Random.Range(0.0f, 100.0f);
-            if (4.0f > chance && 24.0f > CrimePosibility)
+            float0 = Random.Range(0.0f, 100.0f);
+            if (4.0f > float0 && 24.0f > CrimePosibility)
             {
                 CrimePosibility += Random.Range(1.0f, 5.0f);
                 MessageBox.Instance.EnqueueMessage(Language.Instance[
                     "{도시}에서 범죄 조직이 발생했습니다."
                 ], CityName);
             }
-            else if (8.0f > chance && 60.0f > DiseasePosibility)
+            else if (8.0f > float0 && 60.0f > DiseasePosibility)
             {
                 DiseasePosibility += Random.Range(1.0f, 10.0f);
                 MessageBox.Instance.EnqueueMessage(Language.Instance[
@@ -143,16 +149,6 @@ public class City
                 ], CityName);
             }
         }
-    }
-
-
-    private void OnPlayUpdate()
-    {
-        // 계산용 지역 변수
-        float float0;
-
-        // 업데이트 속도
-        float speedmult = PlayManager.Instance.GameSpeed * Constants.MONTHLY_MULTIPLY * Time.deltaTime;
 
         // 범죄율
         float0 = CrimePosibility - Police;
@@ -160,7 +156,7 @@ public class City
         {
             float0 = 0.0f;
         }
-        Crime += (float0 - Crime) * Constants.CRIME_RATE_SPEEDMULT * speedmult;
+        Crime += (float0 - Crime) * Constants.CRIME_RATE_SPEEDMULT;
 
         // 질병
         float0 = DiseasePosibility - Health;
@@ -168,7 +164,7 @@ public class City
         {
             float0 = 0.0f;
         }
-        Disease += (float0 - Disease) * Constants.DEATH_RATE_SPEEDMULT * speedmult;
+        Disease += (float0 - Disease) * Constants.DEATH_RATE_SPEEDMULT;
 
         // 부상
         float0 = InjurePosibility - Safety;
@@ -176,10 +172,23 @@ public class City
         {
             float0 = 0.0f;
         }
-        Injure += (float0 - Injure) * Constants.DEATH_RATE_SPEEDMULT * speedmult;
+        Injure += (float0 - Injure) * Constants.DEATH_RATE_SPEEDMULT;
+    }
 
-        // 인구
+
+    /// <summary>
+    /// 인구 변화
+    /// </summary>
+    private void PopulationMove()
+    {
         PopulationMovement = (Capacity - Population) * PopulationMovementMultiply - (Disease + Injure) * Population * 0.01f;
-        Population += PopulationMovement * speedmult;
+        Population += PopulationMovement * Constants.YEAR_TO_MONTH;
+    }
+
+
+    private void OnMonthChange()
+    {
+        SafetyAndHealth();
+        PopulationMove();
     }
 }

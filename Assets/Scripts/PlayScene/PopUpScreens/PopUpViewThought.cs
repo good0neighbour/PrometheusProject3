@@ -231,14 +231,16 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
     {
         for (byte i = 0; i < _onProgress.Count; ++i)
         {
+            byte nodeNum = _onProgress[i];
+
             // 연구 진행
-            Adopted[(int)TechTreeType.Thought][_onProgress[i]] += NodeData[_onProgress[i]].ProgressionValue * Constants.MONTHLY_MULTIPLY * PlayManager.Instance.GameSpeed * Time.deltaTime;
+            Adopted[(int)TechTreeType.Thought][nodeNum] += NodeData[nodeNum].ProgressionValue * Constants.MONTHLY_MULTIPLY * PlayManager.Instance.GameSpeed * Time.deltaTime;
 
             // 연구 완료
-            if (1.0f <= Adopted[(int)TechTreeType.Thought][_onProgress[i]])
+            if (1.0f <= Adopted[(int)TechTreeType.Thought][nodeNum])
             {
                 // 다음 노드 활성화
-                List<TechTrees.SubNode> nextNodes = NextNodes[_onProgress[i]];
+                List<TechTrees.SubNode> nextNodes = NextNodes[nodeNum];
                 for (byte j = 0; j < nextNodes.Count; ++j)
                 {
                     switch (nextNodes[j].Type)
@@ -259,7 +261,12 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
                 }
 
                 // 진행 중인 연구 리스트에서 제외
-                _onProgress.Remove(_onProgress[i]);
+                _onProgress.Remove(nodeNum);
+
+                // 메세지
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{기술} 연구가 완료됐습니다."
+                    ], Language.Instance[NodeData[nodeNum].NodeName]);
 
                 // 수정된 가변 배열 인덱스에 맞춘다.
                 --i;

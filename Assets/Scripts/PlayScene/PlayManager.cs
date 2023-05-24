@@ -9,8 +9,8 @@ public class PlayManager : MonoBehaviour
     /* ==================== Variables ==================== */
 
     public static OnChangeDelegate OnPlayUpdate = null;
-    public static OnChangeDelegate OnMonthCahnge = null;
-    public static OnChangeDelegate OnYearCahnge = null;
+    public static OnChangeDelegate OnMonthChange = null;
+    public static OnChangeDelegate OnYearChange = null;
 
     [Header("참조")]
     [SerializeField] private GameObject _audioManagerPrefab = null;
@@ -782,8 +782,9 @@ public class PlayManager : MonoBehaviour
         _data = new JsonData(true);
         this[VariableByte.Month] = 1;
         this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
-        this[VariableLong.Funds] = 500000;
+        this[VariableLong.Funds] = 50000;
         this[VariableUint.Culture] = 10;
+        this[VariableUint.Research] = 10;
         this[VariableByte.Era] = 1;
         this[VariableFloat.FacilitySupportRate] = 100.0f;
         this[VariableFloat.ResearchSupportRate] = 100.0f;
@@ -792,6 +793,7 @@ public class PlayManager : MonoBehaviour
 
         // 세력 이름 직접 입력
         _data.Forces[0] = new Force("지구");
+        _data.Forces[0].Culture = 100;
         _data.Forces[1] = new Force("세력1");
         _data.Forces[2] = new Force("세력2");
         _data.Forces[3] = new Force("세력3");
@@ -930,7 +932,7 @@ public class PlayManager : MonoBehaviour
                     ++this[VariableUshort.Year];
                     this[VariableByte.Month] = 1;
                     AnnualGains();
-                    OnYearCahnge?.Invoke();
+                    OnYearChange?.Invoke();
                     break;
                 default:
                     // 다음 달
@@ -939,7 +941,7 @@ public class PlayManager : MonoBehaviour
             }
 
             // 매달 호출
-            OnMonthCahnge?.Invoke();
+            OnMonthChange?.Invoke();
         }
 
         // 매 프레임 호출

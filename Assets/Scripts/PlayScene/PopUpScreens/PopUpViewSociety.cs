@@ -88,13 +88,6 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         // 이 창 비활성화
         gameObject.SetActive(false);
 
-        // 처음 상태로 되돌린다.
-        SetAdoptAvailable(false);
-        _adoptBtnText.text = Language.Instance["승인"];
-        _descriptionText.text = null;
-        _costText.text = null;
-        _gainText.text = null;
-
         // 이전 선택은 비활성화
         if (-1 < _currentNode)
         {
@@ -115,6 +108,13 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
 
     public void Execute()
     {
+        // 처음 상태로 되돌린다.
+        SetAdoptAvailable(false);
+        _adoptBtnText.text = Language.Instance["승인"];
+        _descriptionText.text = null;
+        _costText.text = null;
+        _gainText.text = null;
+
         // 이 창 활성화
         gameObject.SetActive(true);
     }

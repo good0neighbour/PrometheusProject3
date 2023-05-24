@@ -161,8 +161,8 @@ public class BottomBarRight : MonoBehaviour
         Instance = this;
 
         // 대리자 등록
-        PlayManager.OnMonthCahnge += OnMonthChange;
-        PlayManager.OnYearCahnge += OnYearChange;
+        PlayManager.OnMonthChange += OnMonthChange;
+        PlayManager.OnYearChange += OnYearChange;
     }
 
 

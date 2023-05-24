@@ -6,10 +6,10 @@ public class CoolTimeBtnDiplomacyCategory0 : CoolTimeBtnDiplomacySemiBase
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 우호도 증가
-        ScreenDiplomacy.CurrentForce.Friendly += (1.0f - ScreenDiplomacy.CurrentForce.Friendly - ScreenDiplomacy.CurrentForce.Hostile) * Constants.FRIENDLY_INCREASEMENT0;
+        ScreenDiplomacy.CurrentForce.Friendly += (1.0f - ScreenDiplomacy.CurrentForce.Friendly - ScreenDiplomacy.CurrentForce.Hostile) * Constants.FRIENDLY_INCREASEMENT_BY_DIPLOMACY0;
 
         // UI 업데이트
         PopUpScreenDiplomacy.Instance.FillSlot(Name, out SlotNumber);
-        PopUpScreenDiplomacy.Instance.SetStatusText("우호도 증가", Constants.WHITE);
+        PopUpScreenDiplomacy.Instance.SetStatusText(Language.Instance["우호도 증가"], Constants.WHITE);
     }
 }

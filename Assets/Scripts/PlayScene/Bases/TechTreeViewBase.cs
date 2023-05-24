@@ -109,6 +109,15 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
 
     public void Execute()
     {
+        // 처음 상태로 되돌린다.
+        _cursor.SetActive(false);
+        SetAdoptButtonAvailable(false);
+        AdoptBtn.text = Language.Instance["승인"];
+        _descriptionText.text = null;
+        GainsText.text = null;
+        _costsText.text = null;
+        StatusText.text = null;
+
         // 이 테크트리 활성화
         gameObject.SetActive(true);
     }
@@ -130,15 +139,6 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
 
         // 게임 재개
         PlayManager.Instance.GameResume = Constants.GAME_RESUME;
-
-        // 처음 상태로 되돌린다.
-        _cursor.SetActive(false);
-        SetAdoptButtonAvailable(false);
-        AdoptBtn.text = Language.Instance["승인"];
-        _descriptionText.text = null;
-        GainsText.text = null;
-        _costsText.text = null;
-        StatusText.text = null;
 
         // 이전 화면 활성화
         _previousScreen.SetActive(true);

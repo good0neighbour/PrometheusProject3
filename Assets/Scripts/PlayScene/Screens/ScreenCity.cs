@@ -128,7 +128,7 @@ public class ScreenCity : PlayScreenBase
         CurrentCity = PlayManager.Instance.GetCity(0);
 
         // 대리자 등록
-        PlayManager.OnMonthCahnge += OnMonthChange;
+        PlayManager.OnMonthChange += OnMonthChange;
     }
 
 

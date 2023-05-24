@@ -7,6 +7,7 @@ public static class Constants
     public const float HALF_PI = Mathf.PI * 0.5f;
     public const float DOUBLE_PI = Mathf.PI * 2.0f;
     public const float TRIPLE_PI = Mathf.PI * 3.0f;
+    public const float YEAR_TO_MONTH = 1.0f / 12.0f;
 
     // 단위 조정용 값
     public const float E_2 = 0.01f;
@@ -57,20 +58,22 @@ public static class Constants
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
     public const float SPEND_ANIMATION_DURATION = 0.3f;
-    public const float SUPPORT_RATE_DECREASEMENT = 0.35f;
+    public const float SUPPORT_RATE_DECREASEMENT = 0.4f;
     public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
     public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
     public const float SUPPORT_RATE_SPEEDMULT = 0.05f;
     public const float MAX_SUPPORT_RATE_ADOPTION = 90.0f;
     public const float GOV_ASSET_MULTIPLY = 0.02f;
     public const float GOV_AFFECTION_MULTIPLY = 0.1f;
-    public const float CRIME_RATE_SPEEDMULT = 0.05f;
-    public const float DEATH_RATE_SPEEDMULT = 0.07f;
+    public const float CRIME_RATE_SPEEDMULT = 0.02f;
+    public const float DEATH_RATE_SPEEDMULT = 0.05f;
     public const float MIN_EVEN_POPULATION = 100.0f;
-    public const float FRIENDLY_INCREASEMENT0 = 0.05f;
-    public const float FRIENDLY_INCREASEMENT1 = 0.2f;
-    public const float FRIENDLY_INCREASEMENT2 = 0.4f;
-    public const float HOSTILE_DECREASEMENT1 = 0.9f;
+    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY0 = 0.01f;
+    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY1 = 0.05f;
+    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY2 = 0.1f;
+    public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY1 = 0.01f;
+    public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY2 = 0.03f;
+    public const float GENERAL_DECREASEMENT_MULTIPLY = 0.95f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";
@@ -91,6 +94,8 @@ public static class Constants
     public static readonly Color BUTTON_SELECTED = new Color(150.0f / 255.0f, 150.0f / 255.0f, 150.0f / 255.0f);
     public static readonly Color FAIL_TEXT = new Color(1.0f, 100.0f / 255.0f, 0.0f);
     public static readonly Color BOTTOM_TEXT_DEFAULT = new Color(220.0f / 255.0f, 220.0f / 255.0f, 220.0f / 255.0f);
+    public static readonly Color SLOT_DISABLED = new Color(25.0f / 255.0f, 25.0f / 255.0f, 25.0f / 255.0f);
+    public static readonly Color SLOT_ENABLED = new Color(50.0f / 255.0f, 50.0f / 255.0f, 50.0f / 255.0f);
 
     // 수정이 필요 없는 값
     public const float MONTHLY_MULTIPLY = 1.0f / MONTH_TIMER;

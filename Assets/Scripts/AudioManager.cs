@@ -5,7 +5,10 @@ public enum AudioType
     Touch,
     Select,
     Failed,
-    Alert
+    Alert,
+    Unable,
+    Income,
+    Show
 }
 
 public class AudioManager : MonoBehaviour
@@ -34,6 +37,18 @@ public class AudioManager : MonoBehaviour
     [Header("Alert")]
     [SerializeField] private AudioClip _alertClip = null;
     [SerializeField] private float _alertVolume = 1.0f;
+
+    [Header("Unable")]
+    [SerializeField] private AudioClip _unableClip = null;
+    [SerializeField] private float _unableVolume = 1.0f;
+
+    [Header("Income")]
+    [SerializeField] private AudioClip _incomeClip = null;
+    [SerializeField] private float _incomeVolume = 1.0f;
+
+    [Header("Show")]
+    [SerializeField] private AudioClip _showClip = null;
+    [SerializeField] private float _showVolume = 1.0f;
 
     [Header("ÂüÁ¶")]
     [SerializeField] private AudioSource _audioSource = null;
@@ -83,6 +98,15 @@ public class AudioManager : MonoBehaviour
                 return;
             case AudioType.Alert:
                 UseChannel(_alertClip, _alertVolume);
+                return;
+            case AudioType.Unable:
+                UseChannel(_unableClip, _unableVolume);
+                return;
+            case AudioType.Income:
+                UseChannel(_incomeClip, _incomeVolume);
+                return;
+            case AudioType.Show:
+                UseChannel(_showClip, _showVolume);
                 return;
         }
     }

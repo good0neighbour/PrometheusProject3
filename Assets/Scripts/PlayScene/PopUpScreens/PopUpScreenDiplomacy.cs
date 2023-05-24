@@ -10,6 +10,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     [SerializeField] private GameObject[] _categories = null;
     [SerializeField] private Image[] _slotImages = null;
     [SerializeField] private Image[] _connectionImages = null;
+    [SerializeField] private TMP_Text _forceNameText = null;
     [SerializeField] private TMP_Text _dexcriptionText = null;
     [SerializeField] private TMP_Text _adoptBtnText = null;
     [SerializeField] private TMP_Text _statusText = null;
@@ -157,13 +158,13 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         }
         _slotTexts[i].text = name;
         _slotTexts[i].color = Constants.WHITE;
-        _slotImages[i].color = Constants.BUTTON_SELECTED;
+        _slotImages[i].color = Constants.SLOT_ENABLED;
         _isSlotOccupied[i] = true;
 
         index = i;
         _currentSlot = i;
         _connectionAnimationProceed = true;
-        if (i == _slotLength)
+        if (i == _slotLength - 1)
         {
             _isSlotAvailable = false;
         }
@@ -175,7 +176,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /// </summary>
     public void EmptySlot(byte index)
     {
-        _slotImages[index].color = Constants.BUTTON_UNSELECTED;
+        _slotImages[index].color = Constants.SLOT_DISABLED;
         _slotTexts[index].text = Language.Instance["사용 가능"];
         _slotTexts[index].color = Constants.TEXT_BUTTON_DISABLE;
         _isSlotOccupied[index] = false;
@@ -296,13 +297,15 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         for (byte i = 0; i < _slotLength; ++i)
         {
             _slotTexts[i] = _slotImages[i].GetComponentInChildren<TMP_Text>();
+            _slotTexts[i].text = Language.Instance["사용 가능"];
         }
     }
 
 
     private void OnEnable()
     {
-        PlayerSoftPower = (float)PlayManager.Instance[VariableUint.Culture] / (PlayManager.Instance[VariableUshort.AnnualCulture] + ScreenDiplomacy.CurrentForce.Culture);
+        _forceNameText.text = ScreenDiplomacy.CurrentForce.ForceName;
+        PlayerSoftPower = (float)PlayManager.Instance[VariableUint.Culture] / (PlayManager.Instance[VariableUint.Culture] + ScreenDiplomacy.CurrentForce.Culture);
         _playerSoftpowerImage.fillAmount = PlayerSoftPower;
         FriendlyImageUpdate();
     }
