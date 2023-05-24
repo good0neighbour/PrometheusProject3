@@ -7,7 +7,6 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /* ==================== Variables ==================== */
 
     [SerializeField] private CoolTimeBtnDiplomacySemiBase[] _buttons = null;
-    [SerializeField] private string[] _buttonDescriptions = null;
     [SerializeField] private GameObject[] _categories = null;
     [SerializeField] private Image[] _slotImages = null;
     [SerializeField] private Image[] _connectionImages = null;
@@ -15,6 +14,9 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     [SerializeField] private TMP_Text _adoptBtnText = null;
     [SerializeField] private TMP_Text _statusText = null;
     [SerializeField] private TMP_Text _backBtnText = null;
+    [SerializeField] private Image _playerSoftpowerImage = null;
+    [SerializeField] private Image _forceFriendlyImage = null;
+    [SerializeField] private Image _forceHostileImage = null;
     [SerializeField] private Image _progressionImage = null;
     [SerializeField] private GameObject _previousScreen = null;
 
@@ -33,6 +35,12 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     private bool _connectionAnimationProceed = false;
 
     public static PopUpScreenDiplomacy Instance
+    {
+        get;
+        private set;
+    }
+
+    public float PlayerSoftPower
     {
         get;
         private set;
@@ -98,7 +106,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         AudioManager.Instance.PlayAuido(AudioType.Touch);
 
         _currentBtn = (byte)index;
-        _dexcriptionText.text = _buttonDescriptions[_currentBtn];
+        _dexcriptionText.text = _buttons[_currentBtn].GetDescription();
 
         if (_buttons[_currentBtn].IsCoolTimeRunning)
         {
@@ -110,6 +118,8 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
             _adoptBtnText.text = Language.Instance["승인"];
             SetAdoptAvailable(_buttons[_currentBtn].IsAvailable && _isSlotAvailable);
         }
+
+        _statusText.text = null;
     }
 
 
@@ -174,6 +184,16 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     }
 
 
+    /// <summary>
+    /// 상태 텍스트 업데이트
+    /// </summary>
+    public void SetStatusText(string text, Color colour)
+    {
+        _statusText.text = text;
+        _statusText.color = colour;
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -216,16 +236,22 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
             }
             else
             {
-                _buttons[_currentBtn].OnFail();
+                // 승인 실패
+                _statusText.text = Language.Instance["정책 실패"];
+                _statusText.color = Constants.FAIL_TEXT;
 
                 // 비용 확인 후 승인 버튼 활성화
                 SetAdoptAvailable(_buttons[_currentBtn].IsAvailable);
             }
 
+            // 우호도 그래프 업데이트
+            FriendlyImageUpdate();
+
             // 뒤로가기 가능
             _isBackBtnAvailable = true;
             _backBtnText.color = Constants.WHITE;
 
+            // 애니메이션 끝
             _adoptAnimationProceed = false;
             _progressionImage.fillAmount = 0.0f;
             _timer = 0.0f;
@@ -248,6 +274,16 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     }
 
 
+    /// <summary>
+    /// 우호도 그래프 업데이트
+    /// </summary>
+    private void FriendlyImageUpdate()
+    {
+        _forceFriendlyImage.fillAmount = ScreenDiplomacy.CurrentForce.Friendly;
+        _forceHostileImage.fillAmount = ScreenDiplomacy.CurrentForce.Hostile;
+    }
+
+
     private void Awake()
     {
         // 유니티식 싱글턴패턴
@@ -261,6 +297,14 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         {
             _slotTexts[i] = _slotImages[i].GetComponentInChildren<TMP_Text>();
         }
+    }
+
+
+    private void OnEnable()
+    {
+        PlayerSoftPower = (float)PlayManager.Instance[VariableUint.Culture] / (PlayManager.Instance[VariableUshort.AnnualCulture] + ScreenDiplomacy.CurrentForce.Culture);
+        _playerSoftpowerImage.fillAmount = PlayerSoftPower;
+        FriendlyImageUpdate();
     }
 
 

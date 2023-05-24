@@ -6338,7 +6338,7 @@ GameObject:
   - component: {fileID: 117916423}
   - component: {fileID: 117916422}
   m_Layer: 5
-  m_Name: Btn0
+  m_Name: Btn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6438,7 +6438,7 @@ MonoBehaviour:
   _titleText: {fileID: 294562497}
   _availableImage: {fileID: 413260438}
   _fundCost: 10
-  _name: 
+  Name: "\uC601\uD654 \uC218\uCD9C"
 --- !u!114 &117916424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16306,7 +16306,7 @@ GameObject:
   - component: {fileID: 354718855}
   - component: {fileID: 354718854}
   m_Layer: 5
-  m_Name: Btn2
+  m_Name: Btn8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16406,7 +16406,7 @@ MonoBehaviour:
   _titleText: {fileID: 667531502}
   _availableImage: {fileID: 304442890}
   _fundCost: 10
-  _name: 
+  Name: "\uC815\uCE58\uC778 \uC555\uBC15"
 --- !u!114 &354718856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20827,7 +20827,7 @@ MonoBehaviour:
   _titleText: {fileID: 658370378}
   _availableImage: {fileID: 1809859114}
   _fundCost: 10
-  _name: "\uC74C\uC545 \uACF5\uC5F0"
+  Name: "\uC74C\uC545 \uACF5\uC5F0"
 --- !u!114 &478091486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26231,7 +26231,7 @@ GameObject:
   - component: {fileID: 585224649}
   - component: {fileID: 585224648}
   m_Layer: 5
-  m_Name: Btn2
+  m_Name: Btn5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26331,7 +26331,7 @@ MonoBehaviour:
   _titleText: {fileID: 2079952200}
   _availableImage: {fileID: 1626134637}
   _fundCost: 10
-  _name: 
+  Name: "\uC790\uAD6D \uC601\uC6C5\uD654"
 --- !u!114 &585224650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31271,7 +31271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &698549039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31396,10 +31396,22 @@ MonoBehaviour:
   - {fileID: 478091485}
   - {fileID: 1116585854}
   - {fileID: 1581632088}
+  - {fileID: 117916423}
+  - {fileID: 1036854051}
+  - {fileID: 585224649}
+  - {fileID: 1351008084}
+  - {fileID: 739361288}
+  - {fileID: 354718855}
   _buttonDescriptions:
   - "\uC74C\uC545\uACF5\uC5F0"
   - "\uB3D9\uC591\uD654"
   - "\uC758\uBCF5 \uC720\uD589"
+  - "\uC601\uD654 \uC218\uCD9C"
+  - "\uBB38\uD654 \uD3B8\uACAC"
+  - "\uC790\uAD6D \uC601\uC6C5\uD654"
+  - "\uC5ED\uC0AC \uAE30\uC6D0"
+  - "\uC5ED\uC0AC \uBE44\uD558"
+  - "\uC815\uCE58\uC778 \uC555\uBC15"
   _categories:
   - {fileID: 781770613}
   - {fileID: 1401398503}
@@ -33635,7 +33647,7 @@ GameObject:
   - component: {fileID: 739361288}
   - component: {fileID: 739361287}
   m_Layer: 5
-  m_Name: Btn1
+  m_Name: Btn7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33735,7 +33747,7 @@ MonoBehaviour:
   _titleText: {fileID: 2132367975}
   _availableImage: {fileID: 360557454}
   _fundCost: 10
-  _name: 
+  Name: "\uC5ED\uC0AC \uBE44\uD558"
 --- !u!114 &739361289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45886,7 +45898,7 @@ GameObject:
   - component: {fileID: 1036854051}
   - component: {fileID: 1036854050}
   m_Layer: 5
-  m_Name: Btn1
+  m_Name: Btn4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45986,7 +45998,7 @@ MonoBehaviour:
   _titleText: {fileID: 213953746}
   _availableImage: {fileID: 1004833721}
   _fundCost: 10
-  _name: 
+  Name: "\uBB38\uD654 \uD3B8\uACAC"
 --- !u!114 &1036854052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48843,7 +48855,7 @@ MonoBehaviour:
   _titleText: {fileID: 1600383801}
   _availableImage: {fileID: 581795118}
   _fundCost: 10
-  _name: "\uB3D9\uC591\uD654"
+  Name: "\uB3D9\uC591\uD654"
 --- !u!114 &1116585855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58428,7 +58440,7 @@ GameObject:
   - component: {fileID: 1351008084}
   - component: {fileID: 1351008083}
   m_Layer: 5
-  m_Name: Btn0
+  m_Name: Btn6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58528,7 +58540,7 @@ MonoBehaviour:
   _titleText: {fileID: 488694714}
   _availableImage: {fileID: 685723663}
   _fundCost: 10
-  _name: 
+  Name: "\uC5ED\uC0AC \uAE30\uC6D0"
 --- !u!114 &1351008085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69771,7 +69783,7 @@ MonoBehaviour:
   _titleText: {fileID: 1447395019}
   _availableImage: {fileID: 1701885462}
   _fundCost: 10
-  _name: "\uC758\uBCF5 \uC720\uD589"
+  Name: "\uC758\uBCF5 \uC720\uD589"
 --- !u!114 &1581632089
 MonoBehaviour:
   m_ObjectHideFlags: 0

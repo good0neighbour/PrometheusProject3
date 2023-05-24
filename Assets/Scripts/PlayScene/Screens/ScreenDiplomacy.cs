@@ -18,7 +18,7 @@ public class ScreenDiplomacy : PlayScreenBase
 
     private byte _current = 0;
 
-    public Force CurrentForce
+    public static Force CurrentForce
     {
         get;
         private set;

@@ -67,6 +67,10 @@ public static class Constants
     public const float CRIME_RATE_SPEEDMULT = 0.05f;
     public const float DEATH_RATE_SPEEDMULT = 0.07f;
     public const float MIN_EVEN_POPULATION = 100.0f;
+    public const float FRIENDLY_INCREASEMENT0 = 0.05f;
+    public const float FRIENDLY_INCREASEMENT1 = 0.2f;
+    public const float FRIENDLY_INCREASEMENT2 = 0.4f;
+    public const float HOSTILE_DECREASEMENT1 = 0.9f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "¡Û";

@@ -2,9 +2,19 @@ using UnityEngine;
 
 public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
 {
-    [SerializeField] ushort _fundCost = 0;
+    [SerializeField] private ushort _fundCost = 0;
+    [SerializeField] protected string Name = null;
+    [SerializeField] private string _description = null;
 
-    public abstract void OnFail();
+    protected byte SlotNumber = 0;
+
+    /// <summary>
+    /// 설명 글 반환
+    /// </summary>
+    public string GetDescription()
+    {
+        return $"[{Name}]\n{_description}";
+    }
 
     protected override void Cost()
     {
@@ -19,5 +29,11 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
         }
 
         return true;
+    }
+
+    protected override void OnCoolTimeEnd()
+    {
+        base.OnCoolTimeEnd();
+        PopUpScreenDiplomacy.Instance.EmptySlot(SlotNumber);
     }
 }
