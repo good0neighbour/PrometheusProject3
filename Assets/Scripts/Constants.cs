@@ -40,6 +40,7 @@ public static class Constants
     // 게임 플레이 관련 값, 일반
     public const byte MEET_OPORTUNITY = 1;
     public const byte NUMBER_OF_FORCES = 4;
+    public const byte NUMBER_OF_SLOTS = 5;
     public const ushort INITIAL_POPULATION = 10;
     public const float INITIAL_POPULATION_MOVEMENT = 0.0001f;
     public const float MONTH_TIMER = 2.0f;
@@ -73,18 +74,26 @@ public static class Constants
     public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY2 = 0.1f;
     public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY1 = 0.01f;
     public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY2 = 0.03f;
-    public const float GENERAL_DECREASEMENT_MULTIPLY = 0.95f;
+    public const float CONQUEST_MOVEMENT = 0.1f;
+    public const float GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY = 0.98f;
+    public const float TRADE_HOSTILE_AFFECTION = 0.5f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";
     public const string FACILITY_ADOPTED = "●";
 
     // 게임 플레이 관련 값, 자원
-    public static readonly int[,] RESOURCE_MIN_MAX = new int[(int)ResourceType.End, 2]
+    public static readonly short[,] RESOURCE_MIN_MAX = new short[(int)ResourceType.End, 2]
     {
-        { -2, 5 },  //철
-        { -4, 2 },  //핵물질
-        { -5, 3 },  //보석
+        { -2, 5 },  // 철
+        { -4, 2 },  // 핵물질
+        { -5, 3 },  // 보석
+    };
+    public static readonly ushort[] RESOURCES_BASE_PRICE = new ushort[(int)ResourceType.End]
+    {
+        5,  // 철
+        7,  // 핵물질
+        10  // 보석
     };
 
     // 색상

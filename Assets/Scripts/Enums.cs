@@ -59,7 +59,6 @@ public enum VariableUshort
     IronUsage,
     NukeUsage,
     JewelUsage,
-    AnnualFund,
     AnnualResearch,
     AnnualCulture,
     EndUshort
@@ -70,6 +69,7 @@ public enum VariableUshort
 /// </summary>
 public enum VariableInt
 {
+    AnnualFund,
     EndInt
 }
 

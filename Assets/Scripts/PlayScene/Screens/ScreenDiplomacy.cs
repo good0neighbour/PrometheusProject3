@@ -63,6 +63,9 @@ public class ScreenDiplomacy : PlayScreenBase
             return;
         }
 
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Select);
+
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _trueCost;
 
@@ -75,6 +78,9 @@ public class ScreenDiplomacy : PlayScreenBase
 
     public void BtnDiplomacy()
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 현재 창 닫는다.
         CloseScreen();
 
@@ -85,6 +91,9 @@ public class ScreenDiplomacy : PlayScreenBase
 
     public void BtnTrade()
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 현재 창 닫는다.
         CloseScreen();
 
@@ -95,6 +104,9 @@ public class ScreenDiplomacy : PlayScreenBase
 
     public void BtnConquest()
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 현재 창 닫는다.
         CloseScreen();
 

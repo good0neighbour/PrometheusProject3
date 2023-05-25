@@ -307,6 +307,24 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
+    /// 무역 정보를 가져온다.
+    /// </summary>
+    public Trade GetTrade(ushort index)
+    {
+        return _data.Trade[index];
+    }
+
+
+    /// <summary>
+    /// 무역 정보를 제거한다.
+    /// </summary>
+    public void RemoveTrade(Trade trade)
+    {
+        _data.Trade.Remove(trade);
+    }
+
+
+    /// <summary>
     /// 토지 슬롯 추가
     /// </summary>
     public void AddLandSlot(ushort landNum)
@@ -767,7 +785,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     private void AnnualGains()
     {
-        this[VariableLong.Funds] += this[VariableUshort.AnnualFund] - this[VariableUint.Maintenance];
+        this[VariableLong.Funds] += this[VariableInt.AnnualFund] - this[VariableUint.Maintenance];
         this[VariableUint.Research] += this[VariableUshort.AnnualResearch];
         this[VariableUint.Culture] += this[VariableUshort.AnnualCulture];
     }
@@ -785,6 +803,12 @@ public class PlayManager : MonoBehaviour
         this[VariableLong.Funds] = 50000;
         this[VariableUint.Culture] = 10;
         this[VariableUint.Research] = 10;
+        this[VariableUshort.TotalIron] = 10;
+        this[VariableUshort.CurrentIron] = 10;
+        this[VariableUshort.TotalNuke] = 10;
+        this[VariableUshort.CurrentNuke] = 10;
+        this[VariableUshort.TotalJewel] = 10;
+        this[VariableUshort.CurrentJewel] = 10;
         this[VariableByte.Era] = 1;
         this[VariableFloat.FacilitySupportRate] = 100.0f;
         this[VariableFloat.ResearchSupportRate] = 100.0f;
@@ -967,6 +991,7 @@ public class PlayManager : MonoBehaviour
         public Force[] Forces;
         public List<Land> Lands;
         public List<City> Cities;
+        public List<Trade> Trade;
 
         public JsonData(bool initialize)
         {
@@ -984,6 +1009,7 @@ public class PlayManager : MonoBehaviour
                 Forces = new Force[Constants.NUMBER_OF_FORCES];
                 Lands = new List<Land>();
                 Cities = new List<City>();
+                Trade = new List<Trade>();
             }
             else
             {
@@ -999,6 +1025,7 @@ public class PlayManager : MonoBehaviour
                 Forces = null;
                 Lands = null;
                 Cities = null;
+                Trade = null;
             }
 
             SocietyElementProgression = null;

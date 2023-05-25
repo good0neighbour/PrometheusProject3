@@ -9,7 +9,7 @@ public class CoolTimeBtnDiplomacyCategory0 : CoolTimeBtnDiplomacySemiBase
         ScreenDiplomacy.CurrentForce.Friendly += (1.0f - ScreenDiplomacy.CurrentForce.Friendly - ScreenDiplomacy.CurrentForce.Hostile) * Constants.FRIENDLY_INCREASEMENT_BY_DIPLOMACY0;
 
         // UI 업데이트
-        PopUpScreenDiplomacy.Instance.FillSlot(Name, out SlotNumber);
+        PopUpScreenDiplomacy.Instance.FillSlot(Name, out CurrentForce, out SlotNumber);
         PopUpScreenDiplomacy.Instance.SetStatusText(Language.Instance["우호도 증가"], Constants.WHITE);
     }
 }

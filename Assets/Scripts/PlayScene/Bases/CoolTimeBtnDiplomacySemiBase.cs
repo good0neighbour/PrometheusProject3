@@ -6,6 +6,7 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
     [SerializeField] protected string Name = null;
     [SerializeField] private string _description = null;
 
+    protected Force CurrentForce = null;
     protected byte SlotNumber = 0;
 
     /// <summary>
@@ -18,7 +19,11 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
 
     protected override void Cost()
     {
-        PlayManager.Instance[VariableLong.Funds] -= _fundCost;
+        if (0 < _fundCost)
+        {
+            PlayManager.Instance[VariableLong.Funds] -= _fundCost;
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Fund);
+        }
     }
 
     protected override bool CostAvailable()
@@ -34,6 +39,6 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
     protected override void OnCoolTimeEnd()
     {
         base.OnCoolTimeEnd();
-        PopUpScreenDiplomacy.Instance.EmptySlot(SlotNumber);
+        PopUpScreenDiplomacy.Instance.EmptySlot(CurrentForce, SlotNumber);
     }
 }

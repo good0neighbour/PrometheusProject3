@@ -8,6 +8,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
 
     [SerializeField] private CoolTimeBtnDiplomacySemiBase[] _buttons = null;
     [SerializeField] private GameObject[] _categories = null;
+    [SerializeField] private Transform[] _categoryBtnAreas = null;
     [SerializeField] private Image[] _slotImages = null;
     [SerializeField] private Image[] _connectionImages = null;
     [SerializeField] private TMP_Text _forceNameText = null;
@@ -15,14 +16,15 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     [SerializeField] private TMP_Text _adoptBtnText = null;
     [SerializeField] private TMP_Text _statusText = null;
     [SerializeField] private TMP_Text _backBtnText = null;
+    [SerializeField] private TMP_Text _friendlyText = null;
     [SerializeField] private Image _playerSoftpowerImage = null;
     [SerializeField] private Image _forceFriendlyImage = null;
     [SerializeField] private Image _forceHostileImage = null;
     [SerializeField] private Image _progressionImage = null;
     [SerializeField] private GameObject _previousScreen = null;
+    [SerializeField] private Transform _cursor = null;
 
     private TMP_Text[] _slotTexts = null;
-    private bool[] _isSlotOccupied = null;
     private byte _currentBtn = 255;
     private byte _currentCategory = 0;
     private byte _currentSlot = 0;
@@ -32,7 +34,6 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     private bool _isAdoptAvailable = false;
     private bool _isBackBtnAvailable = true;
     private bool _adoptAnimationProceed = false;
-    private bool _isSlotAvailable = true;
     private bool _connectionAnimationProceed = false;
 
     public static PopUpScreenDiplomacy Instance
@@ -59,16 +60,13 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
             return;
         }
 
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 화면 전환
         gameObject.SetActive(false);
         _previousScreen.SetActive(true);
         PlayManager.Instance.GameResume = Constants.GAME_RESUME;
-
-        // 처음 상태로
-        _adoptBtnText.text = Language.Instance["승인"];
-        SetAdoptAvailable(false);
-        _dexcriptionText.text = null;
-        _statusText.text = null;
     }
 
 
@@ -91,7 +89,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         _backBtnText.color = Constants.TEXT_BUTTON_DISABLE;
 
         // 애니메이션 실행
-        AdoptAnimation(PlayManager.Instance[VariableFloat.SocietySupportRate]);
+        AdoptAnimation(PlayManager.Instance[VariableFloat.DiplomacySupportRate]);
     }
 
 
@@ -117,7 +115,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         else
         {
             _adoptBtnText.text = Language.Instance["승인"];
-            SetAdoptAvailable(_buttons[_currentBtn].IsAvailable && _isSlotAvailable);
+            SetAdoptAvailable(_buttons[_currentBtn].IsAvailable && ScreenDiplomacy.CurrentForce.IsDiplomacySlotAvailable);
         }
 
         _statusText.text = null;
@@ -139,19 +137,22 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         _categories[_currentCategory].SetActive(false);
         _currentCategory = (byte)index;
         _categories[_currentCategory].SetActive(true);
+
+        // 커서 이동
+        _cursor.SetParent(_categoryBtnAreas[index], false);
     }
 
 
     /// <summary>
     /// 슬롯에 이름 추가
     /// </summary>
-    public void FillSlot(string name, out byte index)
+    public void FillSlot(string name, out Force force, out byte index)
     {
         // 빈 슬롯 찾는다.
         byte i;
         for (i = 0; i < _slotLength; ++i)
         {
-            if (!_isSlotOccupied[i])
+            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.DiplomacySlotText(i)))
             {
                 break;
             }
@@ -159,14 +160,15 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         _slotTexts[i].text = name;
         _slotTexts[i].color = Constants.WHITE;
         _slotImages[i].color = Constants.SLOT_ENABLED;
-        _isSlotOccupied[i] = true;
+        ScreenDiplomacy.CurrentForce.DiplomacySlotText(i, name);
 
         index = i;
+        force = ScreenDiplomacy.CurrentForce;
         _currentSlot = i;
         _connectionAnimationProceed = true;
         if (i == _slotLength - 1)
         {
-            _isSlotAvailable = false;
+            ScreenDiplomacy.CurrentForce.IsDiplomacySlotAvailable = true;
         }
     }
 
@@ -174,13 +176,10 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /// <summary>
     /// 슬롯 비운다.
     /// </summary>
-    public void EmptySlot(byte index)
+    public void EmptySlot(Force force, byte index)
     {
-        _slotImages[index].color = Constants.SLOT_DISABLED;
-        _slotTexts[index].text = Language.Instance["사용 가능"];
-        _slotTexts[index].color = Constants.TEXT_BUTTON_DISABLE;
-        _isSlotOccupied[index] = false;
-        _isSlotAvailable = true;
+        force.DiplomacySlotText(index, null);
+        force.IsDiplomacySlotAvailable = true;
         _connectionImages[index].fillAmount = 0.0f;
     }
 
@@ -280,6 +279,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /// </summary>
     private void FriendlyImageUpdate()
     {
+        _friendlyText.text = $"{(ScreenDiplomacy.CurrentForce.Friendly * 100.0f).ToString("0")}%";
         _forceFriendlyImage.fillAmount = ScreenDiplomacy.CurrentForce.Friendly;
         _forceHostileImage.fillAmount = ScreenDiplomacy.CurrentForce.Hostile;
     }
@@ -293,7 +293,6 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         // 참조
         _slotLength = (byte)_slotImages.Length;
         _slotTexts = new TMP_Text[_slotLength];
-        _isSlotOccupied = new bool[_slotLength];
         for (byte i = 0; i < _slotLength; ++i)
         {
             _slotTexts[i] = _slotImages[i].GetComponentInChildren<TMP_Text>();
@@ -304,10 +303,36 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
 
     private void OnEnable()
     {
+        // 세력 정보
         _forceNameText.text = ScreenDiplomacy.CurrentForce.ForceName;
         PlayerSoftPower = (float)PlayManager.Instance[VariableUint.Culture] / (PlayManager.Instance[VariableUint.Culture] + ScreenDiplomacy.CurrentForce.Culture);
         _playerSoftpowerImage.fillAmount = PlayerSoftPower;
         FriendlyImageUpdate();
+
+        // 슬롯
+        for (byte i = 0; i < 5; ++i)
+        {
+            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.DiplomacySlotText(i)))
+            {
+                _slotImages[i].color = Constants.SLOT_DISABLED;
+                _slotTexts[i].text = Language.Instance["사용 가능"];
+                _slotTexts[i].color = Constants.TEXT_BUTTON_DISABLE;
+                _connectionImages[i].fillAmount = 0.0f;
+            }
+            else
+            {
+                _slotImages[i].color = Constants.TEXT_BUTTON_DISABLE;
+                _slotTexts[i].text = Language.Instance[ScreenDiplomacy.CurrentForce.DiplomacySlotText(i)];
+                _slotTexts[i].color = Constants.WHITE;
+                _connectionImages[i].fillAmount = 1.0f;
+            }
+        }
+
+        // 처음 상태로
+        _adoptBtnText.text = Language.Instance["승인"];
+        SetAdoptAvailable(false);
+        _dexcriptionText.text = null;
+        _statusText.text = null;
     }
 
 

@@ -428,7 +428,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
     {
         TechTrees.Node node = NodeData[CurrentNode];
 
-        PlayManager.Instance[VariableUshort.AnnualFund] += node.AnnualFund;
+        PlayManager.Instance[VariableInt.AnnualFund] += node.AnnualFund;
         PlayManager.Instance[VariableUshort.AnnualResearch] += node.AnnualResearch;
         PlayManager.Instance[VariableUshort.AnnualCulture] += node.AnnualCulture;
         PlayManager.Instance[VariableUint.Maintenance] += node.Maintenance;
