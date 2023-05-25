@@ -14,7 +14,7 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
     /// </summary>
     public string GetDescription()
     {
-        return $"[{Name}]\n{_description}";
+        return $"[{Language.Instance[Name]}]\n{Language.Instance[_description]}";
     }
 
     protected override void Cost()

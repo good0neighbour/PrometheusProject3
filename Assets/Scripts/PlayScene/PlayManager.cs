@@ -16,8 +16,10 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private GameObject _audioManagerPrefab = null;
     [SerializeField] private GameObject _landSlot = null;
     [SerializeField] private GameObject _citySlot = null;
+    [SerializeField] private GameObject _tradeSlot = null;
     [SerializeField] private Transform _landListContentArea = null;
     [SerializeField] private Transform _cityListContentArea = null;
+    [SerializeField] private Transform _tradeListContentArea = null;
     [SerializeField] private TechTrees _techTreeData = null;
     [SerializeField] private ScreenResearch _researchScreen = null;
     [SerializeField] private ScreenSociety _societyScreen = null;
@@ -311,7 +313,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public Trade GetTrade(ushort index)
     {
-        return _data.Trade[index];
+        return _data.Trades[index];
     }
 
 
@@ -320,7 +322,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public void RemoveTrade(Trade trade)
     {
-        _data.Trade.Remove(trade);
+        _data.Trades.Remove(trade);
     }
 
 
@@ -339,7 +341,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public void AddCity(string cityName, ushort capacity)
     {
-        // 가변배열에 토지 추가
+        // 가변배열에 도시 추가
         _data.Cities.Add(new City(this[VariableUshort.CityNum], cityName, capacity));
     }
 
@@ -349,8 +351,35 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public void AddCitySlot(ushort cityNum)
     {
-        // 토지 버튼 추가 및 초기화
+        // 도시 버튼 추가 및 초기화
         Instantiate(_citySlot, _cityListContentArea).GetComponent<SlotCity>().SlotInitialize(cityNum);
+    }
+
+
+    /// <summary>
+    /// 거래 추가
+    /// </summary>
+    public void AddTrade(Trade trade)
+    {
+        // 가변배열에 거래 추가
+        _data.Trades.Add(trade);
+    }
+
+
+    /// <summary>
+    /// 거래 슬롯 추가
+    /// </summary>
+    public void AddTradeSlot(ushort tradeNum, bool firstAdd)
+    {
+        // 거래 버튼 추가 및 초기화
+        SlotTrade slot = Instantiate(_tradeSlot, _tradeListContentArea).GetComponent<SlotTrade>();
+        slot.SlotInitialize(tradeNum);
+
+        // 저장된 데이타 불러오는 경우가 아닐 때
+        if (firstAdd)
+        {
+            slot.RunTrade(1);
+        }
     }
 
 
@@ -785,7 +814,7 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     private void AnnualGains()
     {
-        this[VariableLong.Funds] += this[VariableInt.AnnualFund] - this[VariableUint.Maintenance];
+        this[VariableLong.Funds] += this[VariableInt.AnnualFund] + this[VariableInt.TradeIncome] - this[VariableUint.Maintenance];
         this[VariableUint.Research] += this[VariableUshort.AnnualResearch];
         this[VariableUint.Culture] += this[VariableUshort.AnnualCulture];
     }
@@ -991,7 +1020,7 @@ public class PlayManager : MonoBehaviour
         public Force[] Forces;
         public List<Land> Lands;
         public List<City> Cities;
-        public List<Trade> Trade;
+        public List<Trade> Trades;
 
         public JsonData(bool initialize)
         {
@@ -1009,7 +1038,7 @@ public class PlayManager : MonoBehaviour
                 Forces = new Force[Constants.NUMBER_OF_FORCES];
                 Lands = new List<Land>();
                 Cities = new List<City>();
-                Trade = new List<Trade>();
+                Trades = new List<Trade>();
             }
             else
             {
@@ -1025,7 +1054,7 @@ public class PlayManager : MonoBehaviour
                 Forces = null;
                 Lands = null;
                 Cities = null;
-                Trade = null;
+                Trades = null;
             }
 
             SocietyElementProgression = null;

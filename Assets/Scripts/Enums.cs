@@ -50,6 +50,7 @@ public enum VariableUshort
     Year,
     LandNum,
     CityNum,
+    TradeNum,
     CurrentIron,
     CurrentNuke,
     CurrentJewel,
@@ -70,6 +71,7 @@ public enum VariableUshort
 public enum VariableInt
 {
     AnnualFund,
+    TradeIncome,
     EndInt
 }
 

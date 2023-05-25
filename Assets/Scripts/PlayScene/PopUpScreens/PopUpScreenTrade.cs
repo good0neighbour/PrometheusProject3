@@ -21,7 +21,7 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
 
     private short[] _amount = null;
     private short[,] _price = null;
-    private short _year = 0;
+    private byte _year = 0;
     private int _totalIncome = 0;
     private bool _isTradeAvailable = false;
 
@@ -163,6 +163,15 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
 
         // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Select);
+
+        // 거래 생성
+        PlayManager.Instance.AddTrade(new Trade(ScreenDiplomacy.CurrentForce.ForceName, (ushort)(_year * 12), _amount[0], _amount[1], _amount[2], _totalIncome));
+
+        // 거래 목록 생성
+        PlayManager.Instance.AddTradeSlot(PlayManager.Instance[VariableUshort.TradeNum], true);
+
+        // 거래 수 증가
+        ++PlayManager.Instance[VariableUshort.TradeNum];
 
         // 화면 전환
         gameObject.SetActive(false);
