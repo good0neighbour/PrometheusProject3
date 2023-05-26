@@ -3,14 +3,13 @@ using System;
 [Serializable]
 public class Land
 {
-    public ushort LandNum { get; private set; }
-    public string CityName { get; set; }
-    public byte[] Resources { get; private set; }
+    public ushort LandNum = 0;
+    public string CityName = null;
+    public byte[] Resources = null;
 
     public Land(ushort landNum, byte[] resources)
     {
         LandNum = landNum;
         Resources = resources;
-        CityName = null;
     }
 }

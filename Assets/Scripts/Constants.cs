@@ -58,7 +58,7 @@ public static class Constants
     public const float TECHTREE_AREA_HEIGHT_CENTER = 0.375f;
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
-    public const float SPEND_ANIMATION_DURATION = 0.3f;
+    public const float SPEND_ANIMATION_DURATION = 0.2f;
     public const float SUPPORT_RATE_DECREASEMENT = 0.4f;
     public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
     public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
@@ -77,6 +77,7 @@ public static class Constants
     public const float CONQUEST_MOVEMENT = 0.1f;
     public const float GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY = 0.98f;
     public const float TRADE_HOSTILE_AFFECTION = 0.5f;
+    public const float TRADE_FRIENDLY_INCREASEMENT = 0.0001f;
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "¡Û";

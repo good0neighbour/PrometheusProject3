@@ -6,17 +6,17 @@ public class Force
 {
     /* ==================== Variables ==================== */
 
-    private string[] _diplomacySlots = new string[Constants.NUMBER_OF_SLOTS];
-    private string[] _conquestSlots = new string[Constants.NUMBER_OF_SLOTS];
-    public string ForceName { get; set; }
-    public ushort Culture { get; set; }
-    public float Friendly { get; set; }
-    public float Hostile { get; set; }
-    public float Conquest { get; set; }
-    public float Chaos { get; set; }
-    public bool Info { get; set; }
-    public bool IsDiplomacySlotAvailable { get; set; }
-    public bool IsConquestSlotAvailable { get; set; }
+    public string[] DiplomacySlots = new string[Constants.NUMBER_OF_SLOTS];
+    public string[] ConquestSlots = new string[Constants.NUMBER_OF_SLOTS];
+    public string ForceName = null;
+    public ushort Culture = 0;
+    public float Friendly = 0.0f;
+    public float Hostile = 0.0f;
+    public float Conquest = 0.0f;
+    public float Chaos = 0.0f;
+    public bool Info = false;
+    public bool IsDiplomacySlotAvailable = true;
+    public bool IsConquestSlotAvailable = true;
 
 
 
@@ -25,7 +25,6 @@ public class Force
     public Force(string nationName)
     {
         ForceName = nationName;
-        IsDiplomacySlotAvailable = true;
 
         // 세력 활성화
         BeginForceRunning();
@@ -40,28 +39,28 @@ public class Force
     }
 
 
-    public string DiplomacySlotText(byte index)
-    {
-        return _diplomacySlots[index];
-    }
+    //public string DiplomacySlotText(byte index)
+    //{
+    //    return DiplomacySlots[index];
+    //}
 
 
-    public void DiplomacySlotText(byte index, string text)
-    {
-        _diplomacySlots[index] = text;
-    }
+    //public void DiplomacySlotText(byte index, string text)
+    //{
+    //    DiplomacySlots[index] = text;
+    //}
 
 
-    public string ConquestSlotText(byte index)
-    {
-        return _conquestSlots[index];
-    }
+    //public string ConquestSlotText(byte index)
+    //{
+    //    return ConquestSlots[index];
+    //}
 
 
-    public void ConquestSlotText(byte index, string text)
-    {
-        _conquestSlots[index] = text;
-    }
+    //public void ConquestSlotText(byte index, string text)
+    //{
+    //    ConquestSlots[index] = text;
+    //}
 
 
 

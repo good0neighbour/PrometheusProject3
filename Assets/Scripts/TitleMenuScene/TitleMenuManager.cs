@@ -5,10 +5,31 @@ public class TitleMenuManager : MonoBehaviour
     /* ==================== Variables ==================== */
 
     [SerializeField] private GameObject _audioMamagerPrefab = null;
+    [SerializeField] private GameObject _mainScreen = null;
+    [SerializeField] private GameObject _loadingScreen = null;
 
 
 
     /* ==================== Public Methods ==================== */
+
+    public void BtnStartGame()
+    {
+        GameManager.Instance.IsNewGame = true;
+        Language.OnLanguageChange = null;
+        _mainScreen.SetActive(false);
+        _loadingScreen.SetActive(true);
+    }
+
+
+    public void BtnLoadGame()
+    {
+        GameManager.Instance.IsNewGame = false;
+        Language.OnLanguageChange = null;
+        _mainScreen.SetActive(false);
+        _loadingScreen.SetActive(true);
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 

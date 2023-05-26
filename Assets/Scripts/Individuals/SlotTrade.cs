@@ -8,9 +8,12 @@ public class SlotTrade : MonoBehaviour
 
     [SerializeField] private TMP_Text _name = null;
     [SerializeField] private TMP_Text _tradeText = null;
+    [SerializeField] private TMP_Text _incomeText = null;
     [SerializeField] private TMP_Text _timeRemainText = null;
 
     private Trade _trade = null;
+    private Force _force = null;
+    private float _friendlyMultiply = 0.0f;
 
 
 
@@ -23,6 +26,8 @@ public class SlotTrade : MonoBehaviour
     {
         // 거래 정보
         _trade = PlayManager.Instance.GetTrade(tradeNum);
+        _force = _trade.CurrentForce;
+        _friendlyMultiply = _trade.AnnualIncome * Constants.TRADE_FRIENDLY_INCREASEMENT;
 
         // 텍스트 표시
         OnLanguageChange();
@@ -39,12 +44,27 @@ public class SlotTrade : MonoBehaviour
     public void RunTrade(short run)
     {
         //자원 변화
-        PlayManager.Instance[VariableUshort.TotalIron] = (ushort)(PlayManager.Instance[VariableUshort.TotalIron] - _trade.Iron * run);
-        PlayManager.Instance[VariableUshort.CurrentIron] = (ushort)(PlayManager.Instance[VariableUshort.CurrentIron] - _trade.Iron * run);
-        PlayManager.Instance[VariableUshort.TotalNuke] = (ushort)(PlayManager.Instance[VariableUshort.TotalNuke] - _trade.Nuke * run);
-        PlayManager.Instance[VariableUshort.CurrentNuke] = (ushort)(PlayManager.Instance[VariableUshort.CurrentNuke] - _trade.Nuke * run);
-        PlayManager.Instance[VariableUshort.TotalJewel] = (ushort)(PlayManager.Instance[VariableUshort.TotalJewel] - _trade.Jewel * run);
-        PlayManager.Instance[VariableUshort.CurrentJewel] = (ushort)(PlayManager.Instance[VariableUshort.CurrentJewel] + _trade.Jewel * run);
+        if (0 != _trade.Iron)
+        {
+            PlayManager.Instance[VariableUshort.CurrentIron] = (ushort)(PlayManager.Instance[VariableUshort.CurrentIron] - _trade.Iron * run);
+            PlayManager.Instance[VariableUshort.IronUsage] = (ushort)(PlayManager.Instance[VariableUshort.IronUsage] + _trade.Iron * run);
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Iron);
+            BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Iron);
+        }
+        if (0 != _trade.Nuke)
+        {
+            PlayManager.Instance[VariableUshort.CurrentNuke] = (ushort)(PlayManager.Instance[VariableUshort.CurrentNuke] - _trade.Nuke * run);
+            PlayManager.Instance[VariableUshort.NukeUsage] = (ushort)(PlayManager.Instance[VariableUshort.NukeUsage] + _trade.Nuke * run);
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Nuke);
+            BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Nuke);
+        }
+        if (0 != _trade.Jewel)
+        {
+            PlayManager.Instance[VariableUshort.CurrentJewel] = (ushort)(PlayManager.Instance[VariableUshort.CurrentJewel] - _trade.Jewel * run);
+            PlayManager.Instance[VariableUshort.JewelUsage] = (ushort)(PlayManager.Instance[VariableUshort.JewelUsage] + _trade.Jewel * run);
+            BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Jewel);
+            BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Jewel);
+        }
 
         // 연간 수익
         PlayManager.Instance[VariableInt.TradeIncome] += _trade.AnnualIncome * run;
@@ -61,6 +81,9 @@ public class SlotTrade : MonoBehaviour
 
         // 남은 개월 수
         _timeRemainText.text = $"{_trade.TimeRemain.ToString()}{Language.Instance["개월"]}";
+
+        // 우호도 변화
+        _force.Friendly += (1.0f - _force.Friendly - _force.Hostile) * _friendlyMultiply;
 
         // 시간 종료
         if (0 >= _trade.TimeRemain)
@@ -80,14 +103,37 @@ public class SlotTrade : MonoBehaviour
 
             // 슬롯 제거
             Destroy(gameObject);
+
+            // 메세지
+            MessageBox.Instance.EnqueueMessage(Language.Instance[
+                "{세력}(와)과의 거래가 만료됐습니다."
+                ], Language.Instance[_trade.CurrentForce.ForceName]);
         }
     }
 
 
     private void OnLanguageChange()
     {
+        TMP_FontAsset font = Language.Instance.GetFontAsset();
+
         // 세력 이름
-        _name.text = Language.Instance[_trade.ForceName];
+        _name.text = Language.Instance[_trade.CurrentForce.ForceName];
+        _name.font = font;
+
+        // 연간 수익
+        if (0 < _trade.AnnualIncome)
+        {
+            _incomeText.text = $"{Language.Instance["연간 수익"]} {_trade.AnnualIncome.ToString()}\n";
+        }
+        else
+        {
+            _incomeText.text = $"{Language.Instance["연간 지출"]} {(-_trade.AnnualIncome).ToString()}\n";
+        }
+        _incomeText.font = font;
+
+        // 남은 개월 수
+        _timeRemainText.text = $"{_trade.TimeRemain.ToString()}{Language.Instance["개월"]}";
+        _timeRemainText.font = font;
 
         // 거래 내역
         StringBuilder tradeText = new StringBuilder();
@@ -122,20 +168,8 @@ public class SlotTrade : MonoBehaviour
             tradeText.Append($"{Language.Instance["보석"]} {Language.Instance["수입"]} {(-_trade.Jewel).ToString()}\n");
         }
 
-        // 연간 수익
-        if (0 < _trade.AnnualIncome)
-        {
-            tradeText.Append($"{Language.Instance["연간 수익"]} {_trade.AnnualIncome.ToString()}\n");
-        }
-        else
-        {
-            tradeText.Append($"{Language.Instance["연간 지출"]} {(-_trade.AnnualIncome).ToString()}\n");
-        }
-
         // 거래 표시. 마지막 \n은 제거한다.
         _tradeText.text = tradeText.Remove(tradeText.Length - 1, 1).ToString();
-
-        // 남은 개월 수
-        _timeRemainText.text = $"{_trade.TimeRemain.ToString()}{Language.Instance["개월"]}";
+        _tradeText.font = font;
     }
 }

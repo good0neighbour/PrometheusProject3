@@ -7,41 +7,36 @@ public class City
 {
     /* ==================== Variables ==================== */
 
-    private bool[] _facilityAdopted = null;
-    private bool[] _facilityEnabled = null;
-
-    public string CityName { get; private set; }
-    public byte NumOfFacility { get; set; }
-    public ushort CityNum { get; private set; }
-    public ushort Capacity { get; private set; }
-    public short AnnualFund { get; set; }
-    public ushort AnnualResearch { get; set; }
-    public float Stability { get; set; }
-    public float Population { get; private set; }
-    public float PopulationMovement { get; private set; }
-    public float PopulationMovementMultiply { get; set; }
-    public float Crime { get; private set; }
-    public float Disease { get; private set; }
-    public float Injure { get; private set; }
-    public float CrimePosibility { get; private set; }
-    public float DiseasePosibility { get; private set; }
-    public float InjurePosibility { get; set; }
-    public float Police { get; set; }
-    public float Health { get; set; }
-    public float Safety { get; set; }
+    public bool[] FacilityAdopted = null;
+    public bool[] FacilityEnabled = null;
+    public string CityName = null;
+    public byte NumOfFacility = 0;
+    public ushort Capacity = 0;
+    public short AnnualFund = 0;
+    public ushort AnnualResearch = 0;
+    public float Stability = 0.0f;
+    public float Population = Constants.INITIAL_POPULATION;    
+    public float PopulationMovement = 0.0f;
+    public float PopulationMovementMultiply = Constants.INITIAL_POPULATION_MOVEMENT;
+    public float Crime = 0.0f;
+    public float Disease = 0.0f;
+    public float Injure = 0.0f;
+    public float CrimePosibility = 0.0f;
+    public float DiseasePosibility = 0.0f;
+    public float InjurePosibility = 0.0f;
+    public float Police = 0.0f;
+    public float Health = 0.0f;
+    public float Safety = 0.0f;
 
 
 
     /* ==================== Public Methods ==================== */
 
-    public City(ushort cityNum, string cityName, ushort capacity)
+    public City(string cityName, ushort capacity)
     {
         // 수치
-        CityNum = cityNum;
         CityName = cityName;
         Capacity = capacity;
-        Population = Constants.INITIAL_POPULATION;
-        PopulationMovementMultiply = Constants.INITIAL_POPULATION_MOVEMENT;
 
         // 지역변수로 참조
         TechTrees.Node[] data = PlayManager.Instance.GetTechTreeData().GetNodes(TechTreeType.Facility);
@@ -50,14 +45,14 @@ public class City
 
         // 배열 생성
         byte length = PlayManager.Instance.FacilityLength;
-        _facilityAdopted = new bool[length];
-        _facilityEnabled = new bool[length];
+        FacilityAdopted = new bool[length];
+        FacilityEnabled = new bool[length];
 
         // 시설 사용 가능 여부
         for (byte i = 0; i < data.Length; ++i)
         {
             // 일단 true
-            _facilityEnabled[i] = true;
+            FacilityEnabled[i] = true;
 
             // 사용 가능 여부 확인
             for (byte j = 0; j < data[i].Requirments.Length; ++j)
@@ -67,19 +62,19 @@ public class City
                 {
                     case TechTreeType.Facility:
                         // 시설을 필요로 하면 반드시 false
-                        _facilityEnabled[i] = false;
+                        FacilityEnabled[i] = false;
                         break;
                     default:
                         // 한 개라도 활성화가 안 됐으면 false
                         if (1.0f > adoptedData[(int)node.Type][nodeIndex[node.NodeName]])
                         {
-                            _facilityEnabled[i] = false;
+                            FacilityEnabled[i] = false;
                         }
                         break;
                 }
 
                 // false면 바로 탈출
-                if (!_facilityEnabled[i])
+                if (!FacilityEnabled[i])
                 {
                     break;
                 }
@@ -88,24 +83,6 @@ public class City
 
         // 도시 활성화
         BeginCityRunning();
-    }
-
-
-    /// <summary>
-    /// 시설 승인 여부 가져온다.
-    /// </summary>
-    public bool[] GetFacilityAdopted()
-    {
-        return _facilityAdopted;
-    }
-
-
-    /// <summary>
-    /// 시설 사용 가능 여부 가져온다.
-    /// </summary>
-    public bool[] GetFacilityEnabled()
-    {
-        return _facilityEnabled;
     }
 
 

@@ -45,7 +45,7 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
         }
         _totalIncomeText.text = _totalIncome.ToString();
 
-        // 수입 증가
+        // 수출 증가
         ++_amount[resourceIndex];
         AmountTextUpdate((byte)resourceIndex);
         _amountDownBtn[resourceIndex].SetActive(true);
@@ -94,7 +94,7 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
         }
         _totalIncomeText.text = _totalIncome.ToString();
 
-        // 수출 증가
+        // 수입 증가
         --_amount[resourceIndex];
         AmountTextUpdate((byte)resourceIndex);
         _amountDownBtn[resourceIndex].SetActive(true);
@@ -165,7 +165,7 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 거래 생성
-        PlayManager.Instance.AddTrade(new Trade(ScreenDiplomacy.CurrentForce.ForceName, (ushort)(_year * 12), _amount[0], _amount[1], _amount[2], _totalIncome));
+        PlayManager.Instance.AddTrade(new Trade(ScreenDiplomacy.CurrentForce, (ushort)(_year * 12), _amount[0], _amount[1], _amount[2], _totalIncome));
 
         // 거래 목록 생성
         PlayManager.Instance.AddTradeSlot(PlayManager.Instance[VariableUshort.TradeNum], true);
@@ -177,6 +177,11 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
         gameObject.SetActive(false);
         _previousScreen.SetActive(true);
         PlayManager.Instance.GameResume = Constants.GAME_RESUME;
+
+        // 메세지
+        MessageBox.Instance.EnqueueMessage(Language.Instance[
+            "{세력}(와)과의 거래를 개시합니다."
+            ], Language.Instance[ScreenDiplomacy.CurrentForce.ForceName]);
     }
 
 

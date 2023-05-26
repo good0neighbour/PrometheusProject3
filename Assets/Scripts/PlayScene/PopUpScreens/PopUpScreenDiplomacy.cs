@@ -152,7 +152,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         byte i;
         for (i = 0; i < _slotLength; ++i)
         {
-            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.DiplomacySlotText(i)))
+            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.DiplomacySlots[i]))
             {
                 break;
             }
@@ -160,7 +160,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         _slotTexts[i].text = name;
         _slotTexts[i].color = Constants.WHITE;
         _slotImages[i].color = Constants.SLOT_ENABLED;
-        ScreenDiplomacy.CurrentForce.DiplomacySlotText(i, name);
+        ScreenDiplomacy.CurrentForce.DiplomacySlots[i] = name;
 
         index = i;
         force = ScreenDiplomacy.CurrentForce;
@@ -178,7 +178,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /// </summary>
     public void EmptySlot(Force force, byte index)
     {
-        force.DiplomacySlotText(index, null);
+        force.DiplomacySlots[index] = null;
         force.IsDiplomacySlotAvailable = true;
         _connectionImages[index].fillAmount = 0.0f;
     }
@@ -312,7 +312,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         // 슬롯
         for (byte i = 0; i < 5; ++i)
         {
-            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.DiplomacySlotText(i)))
+            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.DiplomacySlots[i]))
             {
                 _slotImages[i].color = Constants.SLOT_DISABLED;
                 _slotTexts[i].text = Language.Instance["사용 가능"];
@@ -322,7 +322,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
             else
             {
                 _slotImages[i].color = Constants.TEXT_BUTTON_DISABLE;
-                _slotTexts[i].text = Language.Instance[ScreenDiplomacy.CurrentForce.DiplomacySlotText(i)];
+                _slotTexts[i].text = Language.Instance[ScreenDiplomacy.CurrentForce.DiplomacySlots[i]];
                 _slotTexts[i].color = Constants.WHITE;
                 _connectionImages[i].fillAmount = 1.0f;
             }

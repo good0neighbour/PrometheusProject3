@@ -31,6 +31,12 @@ public class GameManager
         set;
     }
 
+    public bool IsNewGame
+    {
+        get;
+        set;
+    }
+
 
 
     /* ==================== Public Methods ==================== */

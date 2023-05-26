@@ -68,6 +68,8 @@ public class SlotLand : MonoBehaviour, ISlot
 
     private void OnLanguageChange()
     {
+        TMP_FontAsset font = Language.Instance.GetFontAsset();
+
         // 도시가 없을 때만
         if (!_isCityExists)
         {
@@ -78,6 +80,7 @@ public class SlotLand : MonoBehaviour, ISlot
         {
             _name.text = PlayManager.Instance.GetLand(SlotNum).CityName;
         }
+        _name.font = font;
 
         // 자원 목록 업데이트를 위한 준비
         StringBuilder resourceString = new StringBuilder(null);
@@ -118,5 +121,6 @@ public class SlotLand : MonoBehaviour, ISlot
 
         // 자원 정보 표시
         _resourcesField.text = resourceString.ToString();
+        _resourcesField.font = font;
     }
 }

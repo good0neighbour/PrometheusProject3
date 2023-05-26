@@ -55,11 +55,22 @@ public class SlotCity : MonoBehaviour, ISlot
 
         // 인구수 저장
         _population = Constants.INITIAL_POPULATION;
+
+        // 대리자 등록
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 
 
     /* ==================== Private Methods ==================== */
+
+    private void OnLanguageChange()
+    {
+        TMP_FontAsset font = Language.Instance.GetFontAsset();
+        _name.font = font;
+        _populationText.font = font;
+    }
+
 
     private void Update()
     {

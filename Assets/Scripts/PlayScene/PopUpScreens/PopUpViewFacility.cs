@@ -267,8 +267,8 @@ public class PopUpViewFacility : TechTreeViewBase
         _currentCity = ScreenCity.Instance.CurrentCity;
 
         // 배열 참조
-        _enabled = _currentCity.GetFacilityEnabled();
-        _adopted = _currentCity.GetFacilityAdopted();
+        _enabled = _currentCity.FacilityEnabled;
+        _adopted = _currentCity.FacilityAdopted;
 
         // 활성화, 비활성화
         for (byte i = 0; i < NodeBtnObjects.Length; ++i)

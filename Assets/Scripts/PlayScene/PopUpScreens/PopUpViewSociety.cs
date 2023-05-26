@@ -132,7 +132,10 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
 
         // 배열 생성
         byte length = (byte)_nodes.Length;
-        _adopted[(int)TechTreeType.Society] = new float[length];
+        if (null == _adopted[(int)TechTreeType.Society])
+        {
+            _adopted[(int)TechTreeType.Society] = new float[length];
+        }
         _nodeImages = new Image[length];
 
         for (byte i = 0; i < length; ++i)

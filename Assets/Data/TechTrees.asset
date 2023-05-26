@@ -987,7 +987,7 @@ MonoBehaviour:
     Type: 0
     NodePosition: {x: 8, y: 0}
     Description: "\uAE30\uBCF8 \uD559\uBB38\uACFC \uC0DD\uD65C\uC5D0 \uD544\uC694\uD55C
-      \uAD50\uC721\uC744 \uC2E4\uC2DC\uD569\uB2C8\uB2E4."
+      \uAD50\uC721\uC744 \uD589\uD569\uB2C8\uB2E4."
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -1085,7 +1085,7 @@ MonoBehaviour:
     NodePosition: {x: 8, y: 4}
     Description: "\uACF5\uD559\uACFC \uACFC\uD559, \uC0AC\uD68C\uD559, \uACBD\uC81C\uD559
       \uB4F1\uC758 \uD559\uBB38\uC744 \uC2EC\uB3C4\uC788\uAC8C \uC0B4\uD544 \uC218
-      \uC788\uB294 \uD658\uACBD\uC744 \uC870\uC131\uD569\uB2C8\uB2E4."
+      \uC788\uB294 \uD658\uACBD\uC744 \uB9C8\uB828\uD569\uB2C8\uB2E4."
     ProgressionValue: 0
     FundCost: 70
     ResearchCost: 0

@@ -152,7 +152,7 @@ public class PopUpScreenConquest : MonoBehaviour, IPopUpScreen
         byte i;
         for (i = 0; i < _slotLength; ++i)
         {
-            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.ConquestSlotText(i)))
+            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.ConquestSlots[i]))
             {
                 break;
             }
@@ -160,7 +160,7 @@ public class PopUpScreenConquest : MonoBehaviour, IPopUpScreen
         _slotTexts[i].text = name;
         _slotTexts[i].color = Constants.WHITE;
         _slotImages[i].color = Constants.SLOT_ENABLED;
-        ScreenDiplomacy.CurrentForce.ConquestSlotText(i, name);
+        ScreenDiplomacy.CurrentForce.ConquestSlots[i] = name;
 
         index = i;
         force = ScreenDiplomacy.CurrentForce;
@@ -178,7 +178,7 @@ public class PopUpScreenConquest : MonoBehaviour, IPopUpScreen
     /// </summary>
     public void EmptySlot(Force force, byte index)
     {
-        force.ConquestSlotText(index, null);
+        force.ConquestSlots[index] = null;
         force.IsConquestSlotAvailable = true;
         _connectionImages[index].fillAmount = 0.0f;
     }
@@ -311,7 +311,7 @@ public class PopUpScreenConquest : MonoBehaviour, IPopUpScreen
         // 슬롯
         for (byte i = 0; i < 5; ++i)
         {
-            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.ConquestSlotText(i)))
+            if (string.IsNullOrEmpty(ScreenDiplomacy.CurrentForce.ConquestSlots[i]))
             {
                 _slotImages[i].color = Constants.SLOT_DISABLED;
                 _slotTexts[i].text = Language.Instance["사용 가능"];
@@ -321,7 +321,7 @@ public class PopUpScreenConquest : MonoBehaviour, IPopUpScreen
             else
             {
                 _slotImages[i].color = Constants.TEXT_BUTTON_DISABLE;
-                _slotTexts[i].text = Language.Instance[ScreenDiplomacy.CurrentForce.ConquestSlotText(i)];
+                _slotTexts[i].text = Language.Instance[ScreenDiplomacy.CurrentForce.ConquestSlots[i]];
                 _slotTexts[i].color = Constants.WHITE;
                 _connectionImages[i].fillAmount = 1.0f;
             }

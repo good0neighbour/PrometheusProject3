@@ -899,7 +899,7 @@ MonoBehaviour:
   _audioManagerPrefab: {fileID: 1740189419928018576, guid: dba8a32a5ec38cc4286597c883177d7d, type: 3}
   _landSlot: {fileID: 8737974967665892015, guid: 2a19a9da85d612a4d9598dbd47b25e27, type: 3}
   _citySlot: {fileID: 8737974967665892015, guid: e094e553b94fb9f4cbe682aeb46d32da, type: 3}
-  _tradeSlot: {fileID: 6923556909530702779, guid: 572428aebe50b6b4eb054bf49d89f86f, type: 3}
+  _tradeSlot: {fileID: 6729634334971598903, guid: 572428aebe50b6b4eb054bf49d89f86f, type: 3}
   _landListContentArea: {fileID: 2132670846}
   _cityListContentArea: {fileID: 565042571}
   _tradeListContentArea: {fileID: 1757287518}
@@ -22456,7 +22456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &406448832
 RectTransform:
   m_ObjectHideFlags: 0
