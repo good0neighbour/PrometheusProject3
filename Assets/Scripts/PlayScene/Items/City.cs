@@ -158,7 +158,7 @@ public class City
     private void PopulationMove()
     {
         PopulationMovement = (Capacity - Population) * PopulationMovementMultiply - (Disease + Injure) * Population * 0.01f;
-        Population += PopulationMovement * Constants.YEAR_TO_MONTH;
+        Population += PopulationMovement;
     }
 
 

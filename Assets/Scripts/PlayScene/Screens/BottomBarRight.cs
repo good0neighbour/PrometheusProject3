@@ -135,8 +135,9 @@ public class BottomBarRight : MonoBehaviour
             return;
         }
 
-        // 날짜
+        // 표시
         _date.text = UIString.Instance.GetDateString();
+        _fundNum.text = UIString.Instance[VariableLong.Funds];
     }
 
 
@@ -149,7 +150,6 @@ public class BottomBarRight : MonoBehaviour
         }
 
         // 표시
-        _fundNum.text = UIString.Instance[VariableLong.Funds];
         _researchNum.text = UIString.Instance[VariableUint.Research];
         _cultureNum.text = UIString.Instance[VariableUint.Culture];
     }

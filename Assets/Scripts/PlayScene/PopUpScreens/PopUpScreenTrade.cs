@@ -165,7 +165,7 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 芭贰 积己
-        PlayManager.Instance.AddTrade(new Trade(ScreenDiplomacy.CurrentForce, (ushort)(_year * 12), _amount[0], _amount[1], _amount[2], _totalIncome));
+        PlayManager.Instance.AddTrade(new Trade(ScreenDiplomacy.CurrentForce.ForcrNum, (ushort)(_year * 12), _amount[0], _amount[1], _amount[2], _totalIncome));
 
         // 芭贰 格废 积己
         PlayManager.Instance.AddTradeSlot(PlayManager.Instance[VariableUshort.TradeNum], true);

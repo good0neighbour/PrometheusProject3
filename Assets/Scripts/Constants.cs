@@ -19,12 +19,13 @@ public static class Constants
     public const float MIN_KELVIN = -273.0f;
     public const float MAX_ICE_TEMP = 20.0f;
     public const float EARTH_AIR_PRESSURE = 1013.25f;
+    public const float EARTH_AIR_MASS_Tt = 5134.58f;
     public const float EARTH_TEMPERATURE = 15.0f;
-    public const float EARTH_WATER_VOLUME = 1408718.0f;
+    public const float EARTH_WATER_VOLUME_PL = 1408718.0f;
     public const float EARTH_WATER_LIQUID = 1379705.3f;
-    public const float EARTH_RADIUS = 6378.14f;
-    public const float EARTH_DENSITY = 5.51f;
-    public const float EARTH_CARBON_RATIO = 480.0f;
+    public const float EARTH_RADIUS_km = 6378.14f;
+    public const float EARTH_DENSITY_g_cm3 = 5.51f;
+    public const float EARTH_CARBON_RATIO_ppm = 480.0f;
     public const double GRAVITY_COEFICIENT = 0.0000000000667428d;
     public const double PLANET_GRAVITY_ADJUST = 1000517274389.2647640484152314488d;
     public const double PLANET_MASS_ADJUST = 0.00000099760221803384511479248479118797d;

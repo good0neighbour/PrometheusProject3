@@ -26,8 +26,8 @@ public class SlotTrade : MonoBehaviour
     {
         // 거래 정보
         _trade = PlayManager.Instance.GetTrade(tradeNum);
-        _force = _trade.CurrentForce;
-        _friendlyMultiply = _trade.AnnualIncome * Constants.TRADE_FRIENDLY_INCREASEMENT;
+        _force = PlayManager.Instance.GetForce(_trade.ForceNum);
+        _friendlyMultiply = Mathf.Abs(_trade.AnnualIncome) * Constants.TRADE_FRIENDLY_INCREASEMENT;
 
         // 텍스트 표시
         OnLanguageChange();
@@ -107,7 +107,7 @@ public class SlotTrade : MonoBehaviour
             // 메세지
             MessageBox.Instance.EnqueueMessage(Language.Instance[
                 "{세력}(와)과의 거래가 만료됐습니다."
-                ], Language.Instance[_trade.CurrentForce.ForceName]);
+                ], Language.Instance[_force.ForceName]);
         }
     }
 
@@ -117,7 +117,7 @@ public class SlotTrade : MonoBehaviour
         TMP_FontAsset font = Language.Instance.GetFontAsset();
 
         // 세력 이름
-        _name.text = Language.Instance[_trade.CurrentForce.ForceName];
+        _name.text = Language.Instance[_force.ForceName];
         _name.font = font;
 
         // 연간 수익

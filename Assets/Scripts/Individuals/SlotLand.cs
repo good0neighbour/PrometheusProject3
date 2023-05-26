@@ -43,7 +43,7 @@ public class SlotLand : MonoBehaviour, ISlot
         SlotNum = landNum;
 
         // 도시 건설 여부 확인. 저장된 게임을 불러온 경우 필요.
-        _isCityExists = (null != PlayManager.Instance.GetLand(SlotNum).CityName);
+        _isCityExists = !string.IsNullOrEmpty(PlayManager.Instance.GetLand(SlotNum).CityName);
 
         // 텍스트 관련 업데이트
         OnLanguageChange();
@@ -70,15 +70,15 @@ public class SlotLand : MonoBehaviour, ISlot
     {
         TMP_FontAsset font = Language.Instance.GetFontAsset();
 
-        // 도시가 없을 때만
-        if (!_isCityExists)
-        {
-            _name.text = $"{Language.Instance["토지"]}{(SlotNum + 1).ToString()}";
-        }
         // 도시 있으면 도시 이름으로 업데이트
-        else
+        if (_isCityExists)
         {
             _name.text = PlayManager.Instance.GetLand(SlotNum).CityName;
+        }
+        // 도시가 없으면 토지라고 이름 붙인다.
+        else
+        {
+            _name.text = $"{Language.Instance["토지"]}{(SlotNum + 1).ToString()}";
         }
         _name.font = font;
 

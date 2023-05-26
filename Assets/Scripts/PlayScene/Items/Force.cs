@@ -9,6 +9,7 @@ public class Force
     public string[] DiplomacySlots = new string[Constants.NUMBER_OF_SLOTS];
     public string[] ConquestSlots = new string[Constants.NUMBER_OF_SLOTS];
     public string ForceName = null;
+    public byte ForcrNum = 0;
     public ushort Culture = 0;
     public float Friendly = 0.0f;
     public float Hostile = 0.0f;
@@ -22,12 +23,14 @@ public class Force
 
     /* ==================== Public Methods ==================== */
 
-    public Force(string nationName)
+    public Force(string nationName, byte forcrNum)
     {
         ForceName = nationName;
+        ForcrNum = forcrNum;
 
         // 세력 활성화
         BeginForceRunning();
+        ForcrNum = forcrNum;
     }
 
 

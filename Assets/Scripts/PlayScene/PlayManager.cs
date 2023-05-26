@@ -37,7 +37,7 @@ public class PlayManager : MonoBehaviour
     private float _societySupportGoal = 0.0f;
     private float _diplomacySupportGoal = 0.0f;
     private float _totalCarboneRatioGoal = 0.0f;
-    private float _carbonRatio = 1.0f / Constants.EARTH_CARBON_RATIO;
+    private float _carbonRatio = 1.0f / Constants.EARTH_CARBON_RATIO_ppm;
     private double _cloudReflectionMultiply = 0.0d;
     private bool _autoSave = false;
 
@@ -837,117 +837,90 @@ public class PlayManager : MonoBehaviour
 
 
     /// <summary>
-    /// 변수 값 초기화
+    /// 게임 새로 생성
     /// </summary>
-    private void GameDataInitialize()
+    private void CreateGame()
     {
-        if (GameManager.Instance.IsNewGame)
+        _data = new JsonData(true);
+        this[VariableByte.Month] = 1;
+        this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
+        this[VariableLong.Funds] = 50000;
+        this[VariableUint.Culture] = 10;
+        this[VariableUint.Research] = 10;
+        this[VariableUshort.TotalIron] = 10;
+        this[VariableUshort.CurrentIron] = 10;
+        this[VariableUshort.TotalNuke] = 10;
+        this[VariableUshort.CurrentNuke] = 10;
+        this[VariableUshort.TotalJewel] = 10;
+        this[VariableUshort.CurrentJewel] = 10;
+        this[VariableByte.Era] = 1;
+        this[VariableFloat.FacilitySupportRate] = 100.0f;
+        this[VariableFloat.ResearchSupportRate] = 100.0f;
+        this[VariableFloat.SocietySupportRate] = 100.0f;
+        this[VariableFloat.DiplomacySupportRate] = 100.0f;
+
+        // 테크트리 정보 준비
+        _techTreeData.GetReady();
+        FacilityLength = (byte)_techTreeData.GetNodes(TechTreeType.Facility).Length;
+        _data.TechAdopted = new float[_techTreeData.GetNodes(TechTreeType.Tech).Length];
+        _data.ThoughtAdopted = new float[_techTreeData.GetNodes(TechTreeType.Thought).Length];
+
+        // 세력 이름 직접 입력
+        _data.Forces[0] = new Force("지구", 0);
+        _data.Forces[0].Culture = 100;
+        _data.Forces[1] = new Force("세력1", 1);
+        _data.Forces[2] = new Force("세력2", 2);
+        _data.Forces[3] = new Force("세력3", 3);
+
+        this[VariableFloat.EtcAirMass_Tt] = Random.Range(100.0f, 500.0f);
+        this[VariableFloat.TotalWater_PL] = Random.Range(5000.0f, 40000.0f);
+        this[VariableFloat.PlanetRadius_km] = Random.Range(5000.0f, 7000.0f);
+        this[VariableFloat.PlanetDensity_g_cm3] = Random.Range(5.0f, 6.0f);
+        this[VariableFloat.TotalCarbonRatio_ppm] = Random.Range(100.0f, 900.0f);
+        this[VariableFloat.PlanetDistance_AU] = Random.Range(0.8f, 1.2f);
+    }
+
+
+    /// <summary>
+    /// 게임 불러온다.
+    /// </summary>
+    private void LoadGame()
+    {
+        try
         {
-            _data = new JsonData(true);
-            this[VariableByte.Month] = 1;
-            this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
-            this[VariableLong.Funds] = 50000;
-            this[VariableUint.Culture] = 10;
-            this[VariableUint.Research] = 10;
-            this[VariableUshort.TotalIron] = 10;
-            this[VariableUshort.CurrentIron] = 10;
-            this[VariableUshort.TotalNuke] = 10;
-            this[VariableUshort.CurrentNuke] = 10;
-            this[VariableUshort.TotalJewel] = 10;
-            this[VariableUshort.CurrentJewel] = 10;
-            this[VariableByte.Era] = 1;
-            this[VariableFloat.FacilitySupportRate] = 100.0f;
-            this[VariableFloat.ResearchSupportRate] = 100.0f;
-            this[VariableFloat.SocietySupportRate] = 100.0f;
-            this[VariableFloat.DiplomacySupportRate] = 100.0f;
-
-            // 테크트리 정보 준비
-            _techTreeData.GetReady();
-            FacilityLength = (byte)_techTreeData.GetNodes(TechTreeType.Facility).Length;
-            _data.TechAdopted = new float[_techTreeData.GetNodes(TechTreeType.Tech).Length];
-            _data.ThoughtAdopted = new float[_techTreeData.GetNodes(TechTreeType.Thought).Length];
-
-            // 세력 이름 직접 입력
-            _data.Forces[0] = new Force("지구");
-            _data.Forces[0].Culture = 100;
-            _data.Forces[1] = new Force("세력1");
-            _data.Forces[2] = new Force("세력2");
-            _data.Forces[3] = new Force("세력3");
-
-            this[VariableFloat.EtcAirMass_Tt] = 5134.58f;
-            this[VariableFloat.TotalWater_PL] = Constants.EARTH_WATER_VOLUME;
-            this[VariableFloat.PlanetRadius_km] = Constants.EARTH_RADIUS;
-            this[VariableFloat.PlanetDensity_g_cm3] = Constants.EARTH_DENSITY;
-            this[VariableFloat.TotalCarbonRatio_ppm] = Constants.EARTH_CARBON_RATIO;
-
-            this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
-
-            this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
-
-            this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
-
-            this[VariableFloat.IncomeEnergy] = 1.0f;
+            // 저장된 게임 불러온다.
+            _data = JsonUtility.FromJson<JsonData>(Resources.Load("Saved").ToString());
         }
-        else
+        catch
         {
-            try
-            {
-                // 저장된 게임 불러온다.
-                _data = JsonUtility.FromJson<JsonData>(Resources.Load("Saved").ToString());
-            }
-            catch
-            {
-                // 불러오기 실패하면.
-                GameManager.Instance.IsNewGame = true;
-                GameDataInitialize();
-                return;
-            }
+            // 불러오기 실패하면.
+            CreateGame();
+            return;
+        }
 
-            // 테크트리 정보 준비
-            _techTreeData.GetReady();
-            FacilityLength = (byte)_techTreeData.GetNodes(TechTreeType.Facility).Length;
+        // 테크트리 정보 준비
+        _techTreeData.GetReady();
+        FacilityLength = (byte)_techTreeData.GetNodes(TechTreeType.Facility).Length;
 
-            // 토지 슬롯 추가
-            if (null == _data.Lands)
-            {
-                _data.Lands = new List<Land>();
-            }
-            else
-            {
-                for (ushort i = 0; i < _data.Lands.Count; ++i)
-                {
-                    AddLandSlot(i);
-                }
-            }
+        // 토지
+        for (ushort i = 0; i < _data.Lands.Count; ++i)
+        {
+            AddLandSlot(i);
+        }
 
-            // 도시 슬롯 추가
-            if (null == _data.Cities)
-            {
-                _data.Cities = new List<City>();
-            }
-            else
-            {
-                for (ushort i = 0; i < _data.Cities.Count; ++i)
-                {
-                    AddCitySlot(i);
+        // 도시
+        for (ushort i = 0; i < _data.Cities.Count; ++i)
+        {
+            AddCitySlot(i);
 
-                    // 도시 활성화
-                    _data.Cities[i].BeginCityRunning();
-                }
-            }
+            // 도시 활성화
+            _data.Cities[i].BeginCityRunning();
+        }
 
-            // 거래 슬롯 추가
-            if (null == _data.Trades)
-            {
-                _data.Trades = new List<Trade>();
-            }
-            else
-            {
-                for (byte i = 0; i < _data.Trades.Count; ++i)
-                {
-                    AddTradeSlot(i, false);
-                }
-            }
+        // 무역
+        for (byte i = 0; i < _data.Trades.Count; ++i)
+        {
+            AddTradeSlot(i, false);
         }
     }
 
@@ -990,8 +963,16 @@ public class PlayManager : MonoBehaviour
         Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
         #endregion
 
-        // 변수 값 초기화
-        GameDataInitialize();
+        if (GameManager.Instance.IsNewGame)
+        {
+            // 새 게임
+            CreateGame();
+        }
+        else
+        {
+            // 불러온 게임
+            LoadGame();
+        }
 
         // 배열 참조
         _adoptedData[(int)TechTreeType.Tech] = _data.TechAdopted;
@@ -1005,7 +986,11 @@ public class PlayManager : MonoBehaviour
         _data.SocietyAdopted = _adoptedData[(int)TechTreeType.Society];
 
         #region 값 설정
-        // 고정 값. Update 함수에서 연산을 줄이기 위해 반복되는 값은 변수로 저장한다.
+        // 고정 값. Update 함수에서 연산을 줄이기 위해 반복해서 사용하는 값은 변수로 저장한다.
+        this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
+        this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
+        this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
+        this[VariableFloat.IncomeEnergy] = Mathf.Pow(1.0f / this[VariableFloat.PlanetDistance_AU], 2.0f);
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
 
