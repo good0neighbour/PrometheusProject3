@@ -40,9 +40,6 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
             return;
         }
 
-        // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Select);
-
         // 비용 지출
         Cost();
 

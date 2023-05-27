@@ -70,7 +70,7 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
             for (byte j = 0; j < requiredNodes.Length; ++j)
             {
                 // 한 개라도 승인됐으면 활성화
-                if (0.0f < Adopted[(int)requiredNodes[j].Type][NodeIndex[requiredNodes[j].NodeName]])
+                if (0.0f < Adopted[(int)requiredNodes[j].Type][NodeIndex[requiredNodes[j].NodeName]] && 1.0f > Adopted[(int)requiredNodes[j].Type][NodeIndex[requiredNodes[j].NodeName]])
                 {
                     NodeBtnObjects[i].SetActive(true);
                     break;

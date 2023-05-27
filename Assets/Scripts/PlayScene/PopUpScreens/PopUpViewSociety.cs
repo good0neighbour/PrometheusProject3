@@ -296,7 +296,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
     private void OnAdopt()
     {
         // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
+        AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 지지율 상승
         PlayManager.Instance[VariableFloat.SocietySupportRate] += Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;

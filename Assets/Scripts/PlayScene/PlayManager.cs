@@ -13,7 +13,6 @@ public class PlayManager : MonoBehaviour
     public static OnChangeDelegate OnYearChange = null;
 
     [Header("참조")]
-    [SerializeField] private GameObject _audioManagerPrefab = null;
     [SerializeField] private GameObject _landSlot = null;
     [SerializeField] private GameObject _citySlot = null;
     [SerializeField] private GameObject _tradeSlot = null;
@@ -829,10 +828,9 @@ public class PlayManager : MonoBehaviour
     /// <summary>
     /// 게임 저장
     /// </summary>
-    private void SaveData()
+    private void SaveGame()
     {
-        // json 파일을 저장한다.
-        File.WriteAllText($"{Application.dataPath}/Resources/Saved.Json", JsonUtility.ToJson(_data, false));
+        File.WriteAllText($"{Application.dataPath}/Resources/Saves.Json", JsonUtility.ToJson(_data, true));
     }
 
 
@@ -872,12 +870,12 @@ public class PlayManager : MonoBehaviour
         _data.Forces[2] = new Force("세력2", 2);
         _data.Forces[3] = new Force("세력3", 3);
 
-        this[VariableFloat.EtcAirMass_Tt] = Random.Range(100.0f, 500.0f);
-        this[VariableFloat.TotalWater_PL] = Random.Range(5000.0f, 40000.0f);
-        this[VariableFloat.PlanetRadius_km] = Random.Range(5000.0f, 7000.0f);
-        this[VariableFloat.PlanetDensity_g_cm3] = Random.Range(5.0f, 6.0f);
-        this[VariableFloat.TotalCarbonRatio_ppm] = Random.Range(100.0f, 900.0f);
-        this[VariableFloat.PlanetDistance_AU] = Random.Range(0.8f, 1.2f);
+        this[VariableFloat.EtcAirMass_Tt] = GameManager.Instance.AirMass;
+        this[VariableFloat.TotalWater_PL] = GameManager.Instance.WaterVolume;
+        this[VariableFloat.TotalCarbonRatio_ppm] = GameManager.Instance.CarbonRatio;
+        this[VariableFloat.PlanetRadius_km] = GameManager.Instance.Radius;
+        this[VariableFloat.PlanetDensity_g_cm3] = GameManager.Instance.Density;
+        this[VariableFloat.PlanetDistance_AU] = GameManager.Instance.Distance;
     }
 
 
@@ -889,7 +887,7 @@ public class PlayManager : MonoBehaviour
         try
         {
             // 저장된 게임 불러온다.
-            _data = JsonUtility.FromJson<JsonData>(Resources.Load("Saved").ToString());
+            _data = JsonUtility.FromJson<JsonData>(Resources.Load("Saves").ToString());
         }
         catch
         {
@@ -930,16 +928,6 @@ public class PlayManager : MonoBehaviour
         // 유니티식 싱글턴패턴
         Instance = this;
 
-        #region AudioManager 생성
-        // 개발 중 테스트 시 에러 방지
-        if (null == AudioManager.Instance)
-        {
-            GameObject audioManager = Instantiate(_audioManagerPrefab);
-            AudioManager.Instance = audioManager.GetComponent<AudioManager>();
-            DontDestroyOnLoad(audioManager);
-        }
-        #endregion
-
         #region 번역 준비
         // 현재 씬에서 모든 AutoTranslation을 찾는다.
         AutoTranslation[] autoTranslations = FindObjectsOfType<AutoTranslation>(true);
@@ -958,9 +946,6 @@ public class PlayManager : MonoBehaviour
         {
             inputFieldFontChange[i].GetReady();
         }
-
-        // 언어 불러온다.
-        Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
         #endregion
 
         if (GameManager.Instance.IsNewGame)
@@ -1059,7 +1044,7 @@ public class PlayManager : MonoBehaviour
                     // 매해 호출
                     OnYearChange?.Invoke();
 
-                    // 자동 저장 사용
+                    // 자동 저장
                     _autoSave = true;
 
                     break;
@@ -1077,10 +1062,10 @@ public class PlayManager : MonoBehaviour
         // 매 프레임 호출
         OnPlayUpdate?.Invoke();
 
-        // 자동 저장
+        // 게임 저장
         if (_autoSave)
         {
-            SaveData();
+            SaveGame();
             _autoSave = false;
         }
     }
@@ -1089,7 +1074,8 @@ public class PlayManager : MonoBehaviour
 
     /* ==================== Struct ==================== */
 
-    private struct JsonData
+    [Serializable]
+    public struct JsonData
     {
         public byte[] ByteArray;
         public short[] ShortArray;

@@ -60,7 +60,7 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
             _progreesionImages[i] = node.transform.Find("ImageProgressionBackground").Find("ImageProgression").GetComponent<Image>();
 
             // 연구 진행 중이었던 것 가변 배열에 추가
-            if (0.0f < Adopted[(int)TechTreeType.Tech][i])
+            if (0.0f < Adopted[(int)TechTreeType.Tech][i] && 1.0f > Adopted[(int)TechTreeType.Tech][i])
             {
                 _onProgress.Add(i);
             }

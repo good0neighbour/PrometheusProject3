@@ -12,6 +12,7 @@ public class StartScreenAnimation : MonoBehaviour
     [SerializeField] private GameObject _startButton = null;
     [SerializeField] private GameObject[] _enableOnStart = null;
 
+    private TMP_Text _startText = null;
     private Image _startScreen = null;
     private float _backBarHeightRatio = 0.3f;
     private float _backBarCos = 0.0f;
@@ -46,9 +47,18 @@ public class StartScreenAnimation : MonoBehaviour
         PlayManager.Instance.GameResume = Constants.GAME_RESUME;
 
         // 메세지
-        MessageBox.Instance.EnqueueMessage(Language.Instance[
-            "당신은 테라포밍 프로젝트의 총괄을 목적으로 개발된 한 기업의 인공지능 모델입니다. 행성의 환경과 문명을 안정화하거나 다른 경쟁 기업을 잠식하는 것이 당신의 목표입니다."
-            ]);
+        if (GameManager.Instance.IsNewGame)
+        {
+            MessageBox.Instance.EnqueueMessage(Language.Instance[
+                "당신은 테라포밍 프로젝트의 총괄을 목적으로 개발된 한 기업의 인공지능 모델입니다. 행성의 환경과 문명을 안정화하거나 다른 경쟁 기업을 잠식하는 것이 당신의 목표입니다."
+                ]);
+        }
+        else
+        {
+            MessageBox.Instance.EnqueueMessage(Language.Instance[
+                "프로젝트를 재개합니다."
+                ]);
+        }
     }
 
 
@@ -68,6 +78,12 @@ public class StartScreenAnimation : MonoBehaviour
         {
             _enableOnStart[i].SetActive(false);
         }
+
+        // 참조
+        _startText = _startButton.GetComponentInChildren<TMP_Text>();
+
+        // 폰트 변경
+        _startText.font = Language.Instance.GetFontAsset();
     }
 
     private void Update()
@@ -108,6 +124,14 @@ public class StartScreenAnimation : MonoBehaviour
         // 시작 버튼 활성화
         else
         {
+            if (GameManager.Instance.IsNewGame)
+            {
+                _startText.text = Language.Instance["시작"];
+            }
+            else
+            {
+                _startText.text = Language.Instance["계속"];
+            }
             _startButton.SetActive(true);
 
             // 애니메이션 끝

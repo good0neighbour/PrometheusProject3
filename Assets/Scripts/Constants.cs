@@ -38,6 +38,10 @@ public static class Constants
     public const float METERIMAGE_WIDTH_RATIO = 0.3f;
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
+    // 주메뉴 관련 값
+    public const float TEXT_SCREEN_SPEEDMULT = 0.1f;
+    public const float START_SCREEN_SPEEDMULT = 2.0f;
+
     // 게임 플레이 관련 값, 일반
     public const byte MEET_OPORTUNITY = 1;
     public const byte NUMBER_OF_FORCES = 4;
@@ -60,7 +64,7 @@ public static class Constants
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
     public const float SPEND_ANIMATION_DURATION = 0.2f;
-    public const float SUPPORT_RATE_DECREASEMENT = 0.4f;
+    public const float SUPPORT_RATE_DECREASEMENT = 1.0f;
     public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
     public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
     public const float SUPPORT_RATE_SPEEDMULT = 0.05f;

@@ -6,6 +6,9 @@ public class CoolTimeBtnGovAsset : CoolTimeBtnMediaCultureSemiBase
 
     protected override void OnAdopt()
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Select);
+
         if (1.0f > PlayManager.Instance[VariableFloat.GovAsset])
         {
             PlayManager.Instance[VariableFloat.GovAsset] += (1.0f - PlayManager.Instance[VariableFloat.GovAsset]) * Constants.GOV_ASSET_MULTIPLY;

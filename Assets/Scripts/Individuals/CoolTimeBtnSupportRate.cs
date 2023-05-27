@@ -6,6 +6,9 @@ public class CoolTimeBtnSupportRate : CoolTimeBtnMediaCultureSemiBase
 
     protected override void OnAdopt()
     {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Select);
+
         switch (_whichOne)
         {
             case 0:

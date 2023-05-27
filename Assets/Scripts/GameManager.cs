@@ -37,6 +37,43 @@ public class GameManager
         set;
     }
 
+    public float AirMass
+    {
+        get;
+        set;
+    }
+
+    public float WaterVolume
+    {
+        get;
+        set;
+    }
+
+    public float CarbonRatio
+    {
+        get;
+        set;
+    }
+
+    public float Radius
+    {
+        get;
+        set;
+    }
+
+    public float Density
+    {
+        get;
+        set;
+    }
+
+    public float Distance
+    {
+        get;
+        set;
+    }
+
+
 
 
     /* ==================== Public Methods ==================== */

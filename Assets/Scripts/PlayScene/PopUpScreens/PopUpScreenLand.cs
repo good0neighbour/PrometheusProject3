@@ -347,7 +347,7 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         _currentLand = PlayManager.Instance.GetLand(_currentSlot.SlotNum);
 
         // 도시 존재 여부
-        BuildCityBtnDisplay(null == _currentLand.CityName);
+        BuildCityBtnDisplay(string.IsNullOrEmpty(_currentLand.CityName));
 
         // 자원 정보 표시한다.
         ResourceDisplayUpdate();

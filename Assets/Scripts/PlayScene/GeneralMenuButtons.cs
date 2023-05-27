@@ -18,7 +18,6 @@ public class GeneralMenuButtons : MonoBehaviour
         Research,
         Society,
         Diplomacy,
-        OwnCulture,
         MediaCulture,
         RightEnd
     }
