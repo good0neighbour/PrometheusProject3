@@ -28,6 +28,9 @@ public class StartScreenAnimation : MonoBehaviour
         // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
+        // 배경 음악 재생
+        AudioManager.Instance.PlayThemeMusic(ThemeType.Play);
+
         // 시작 화면은 더이상 사용하지 않기 때문에 파괴한다.
         Destroy(gameObject);
 
@@ -56,7 +59,7 @@ public class StartScreenAnimation : MonoBehaviour
         else
         {
             MessageBox.Instance.EnqueueMessage(Language.Instance[
-                "프로젝트를 재개합니다."
+                "임무를 재개합니다."
                 ]);
         }
     }

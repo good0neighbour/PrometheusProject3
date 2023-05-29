@@ -64,7 +64,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     private string GetAirPressure()
     {
         // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-        if (_airPressure != PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] || null == _airPressureString)
+        if (_airPressure != PlayManager.Instance[VariableFloat.TotalAirPressure_hPa] || string.IsNullOrEmpty(_airPressureString))
         {
             // 현재 값 저장
             _airPressure = PlayManager.Instance[VariableFloat.TotalAirPressure_hPa];
@@ -81,7 +81,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     private string GetTemperature()
     {
         // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-        if (_temperature != PlayManager.Instance[VariableFloat.TotalTemperature_C] || null == _temperatureString)
+        if (_temperature != PlayManager.Instance[VariableFloat.TotalTemperature_C] || string.IsNullOrEmpty(_temperatureString))
         {
             // 현재 값 저장
             _temperature = PlayManager.Instance[VariableFloat.TotalTemperature_C];
@@ -98,7 +98,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     private string GetPosibility()
     {
         // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-        if (_posibility != PlayManager.Instance[VariableFloat.PhotoLifePosibility] || null == _posibilityString)
+        if (_posibility != PlayManager.Instance[VariableFloat.PhotoLifePosibility] || string.IsNullOrEmpty(_posibilityString))
         {
             if (0.0f < PlayManager.Instance[VariableFloat.PhotoLifePosibility])
             {
@@ -123,7 +123,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     private string GetStability()
     {
         // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-        if (_stability != PlayManager.Instance[VariableFloat.PhotoLifeStability] || null == _stabilityString)
+        if (_stability != PlayManager.Instance[VariableFloat.PhotoLifeStability] || string.IsNullOrEmpty(_stabilityString))
         {
             // 현재 값 저장
             _stability = PlayManager.Instance[VariableFloat.PhotoLifeStability];
@@ -140,7 +140,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     private string GetWater()
     {
         // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-        if (_water != PlayManager.Instance[VariableFloat.WaterLiquid_PL] || null == _waterString)
+        if (_water != PlayManager.Instance[VariableFloat.WaterLiquid_PL] || string.IsNullOrEmpty(_waterString))
         {
             // 현재 값 저장
             _water = PlayManager.Instance[VariableFloat.WaterLiquid_PL];

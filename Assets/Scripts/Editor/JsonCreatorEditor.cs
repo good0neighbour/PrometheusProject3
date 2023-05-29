@@ -26,28 +26,15 @@ public class JsonCreatorEditor : Editor
         GUILayout.Label("\njson 파일 생성", EditorStyles.boldLabel);
         if (GUILayout.Button("한국어 json 및 번역용 파일 생성"))
         {
-            try
-            {
-                ((JsonCreator)target).LanSave();
-                _status = "한국어 json 저장됨.";
-            }
-            catch
-            {
-                _status = "실패.";
-            }
+            ((JsonCreator)target).LanSave();
+            _status = "한국어 json 저장됨.";
         }
         if (GUILayout.Button("다른 언어 json 생성"))
         {
-            try
-            {
-                ((JsonCreator)target).OhterLanSave();
-                _status = "다른 언어 json 저장됨.";
-            }
-            catch
-            {
-                _status = "실패.";
-            }
+            ((JsonCreator)target).OhterLanSave();
+            _status = "다른 언어 json 저장됨.";
         }
+
         GUILayout.Label(_status, EditorStyles.boldLabel);
 
         // 언어 테스트

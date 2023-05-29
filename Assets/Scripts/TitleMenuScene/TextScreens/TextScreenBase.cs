@@ -18,4 +18,6 @@ public abstract class TextScreenBase : IState
     /// 버튼 동작
     /// </summary>
     public abstract void ButtonAct(byte index);
+
+    public abstract void OnEscapeBtn();
 }

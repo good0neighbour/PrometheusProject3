@@ -160,6 +160,10 @@ public class PopUpViewFacility : TechTreeViewBase
         {
             result.Append($"{Language.Instance["연간 문화"]} {node.AnnualCulture.ToString()}\n");
         }
+        if (0 < node.Stability)
+        {
+            result.Append($"{Language.Instance["안정도 증가"]} {node.AnnualCulture.ToString()}\n");
+        }
         if (0 < node.PopulationMovement)
         {
             result.Append($"{Language.Instance["인구 증가"]}\n");
@@ -237,6 +241,7 @@ public class PopUpViewFacility : TechTreeViewBase
         _currentCity.Police += NodeData[CurrentNode].Police;
         _currentCity.Health += NodeData[CurrentNode].Health;
         _currentCity.Safety += NodeData[CurrentNode].Safety;
+        _currentCity.StabilityAdd += NodeData[CurrentNode].Stability;
     }
 
 

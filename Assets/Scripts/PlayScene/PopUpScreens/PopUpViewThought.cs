@@ -172,11 +172,11 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
         }
         if (0 < node.AnnualResearch)
         {
-            result.Append($"{Language.Instance["연간 연구"]} {node.AnnualFund.ToString()}\n");
+            result.Append($"{Language.Instance["연간 연구"]} {node.AnnualResearch.ToString()}\n");
         }
         if (0 < node.AnnualCulture)
         {
-            result.Append($"{Language.Instance["연간 문화"]} {node.AnnualFund.ToString()}\n");
+            result.Append($"{Language.Instance["연간 문화"]} {node.AnnualCulture.ToString()}\n");
         }
 
         // 다음 잠금 해제

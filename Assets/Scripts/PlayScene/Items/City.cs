@@ -11,10 +11,12 @@ public class City
     public bool[] FacilityEnabled = null;
     public string CityName = null;
     public byte NumOfFacility = 0;
-    public ushort Capacity = 0;
     public short AnnualFund = 0;
+    public ushort Capacity = 0;
     public ushort AnnualResearch = 0;
+    public ushort TaxIncome = 0;
     public float Stability = 0.0f;
+    public float StabilityAdd = 0.0f;
     public float Population = Constants.INITIAL_POPULATION;    
     public float PopulationMovement = 0.0f;
     public float PopulationMovementMultiply = Constants.INITIAL_POPULATION_MOVEMENT;
@@ -107,19 +109,19 @@ public class City
         float float0;
 
         // 범죄 빛 역병 발생
-        if (Constants.MIN_EVEN_POPULATION < Population)
+        if (Constants.MIN_EVENT_POPULATION < Population)
         {
             float0 = Random.Range(0.0f, 100.0f);
-            if (4.0f > float0 && 24.0f > CrimePosibility)
+            if (Constants.CRIME_POSIBILITY > float0 && 24.0f > CrimePosibility)
             {
                 CrimePosibility += Random.Range(1.0f, 5.0f);
                 MessageBox.Instance.EnqueueMessage(Language.Instance[
                     "{도시}에서 범죄 조직이 발생했습니다."
                 ], CityName);
             }
-            else if (8.0f > float0 && 60.0f > DiseasePosibility)
+            else if (Constants.DISEASE_POSIBILITY > float0 && 60.0f > DiseasePosibility)
             {
-                DiseasePosibility += Random.Range(1.0f, 10.0f);
+                DiseasePosibility += Random.Range(1.0f, 5.0f);
                 MessageBox.Instance.EnqueueMessage(Language.Instance[
                     "{도시}에서 역병이 창궐했습니다."
                 ], CityName);
@@ -153,12 +155,19 @@ public class City
 
 
     /// <summary>
-    /// 인구 변화
+    /// 인구, 세금 변화
     /// </summary>
     private void PopulationMove()
     {
-        PopulationMovement = (Capacity - Population) * PopulationMovementMultiply - (Disease + Injure) * Population * 0.01f;
+        // 인구 변화
+        PopulationMovement = (Capacity - Population) * PopulationMovementMultiply * PlayManager.Instance[VariableFloat.PopulationAdjustment] - (Disease + Injure) * Population * 0.01f;
         Population += PopulationMovement;
+
+        // 세금 수익
+        TaxIncome = (ushort)(Population * Stability * 0.01f * Constants.TAX_PER_POPULATION);
+
+        // 안정도
+        Stability = 50.0f + StabilityAdd - Crime - Disease - Injure;
     }
 
 

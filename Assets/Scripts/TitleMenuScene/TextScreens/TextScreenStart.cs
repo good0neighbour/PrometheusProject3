@@ -3,20 +3,30 @@
     public override void Execute()
     {
         TitleMenuManager.Instance.SetTextScreen(
-            "------------------------------------------------------------\n",
-            "시작 화면\n",
-            "------------------------------------------------------------"
-            );
+        "------------------------------------------------------------\n",
+        $"{Language.Instance["시작"]}\n",
+        "------------------------------------------------------------"
+        );
     }
 
 
     public override void SetButtons()
     {
-        TitleMenuManager.Instance.SetButtons(
+        if (GameManager.Instance.IsThereSavedGame)
+        {
+            TitleMenuManager.Instance.SetButtons(
             $">>{Language.Instance["뒤로"]}",
             $">>{Language.Instance["새로 시작"]}",
             $">>{Language.Instance["불러오기"]}"
             );
+        }
+        else
+        {
+            TitleMenuManager.Instance.SetButtons(
+            $">>{Language.Instance["뒤로"]}",
+            $">>{Language.Instance["새로 시작"]}"
+            );
+        }
     }
 
 
@@ -31,17 +41,35 @@
 
             case 1:
                 AudioManager.Instance.PlayAuido(AudioType.Touch);
-                TitleMenuManager.Instance.PlanetScreenEnable();
+                if (GameManager.Instance.IsThereSavedGame)
+                {
+                    NextScreen = TitleMenuManager.TextScreens.NewStartConfirm;
+                    ChangeState();
+                }
+                else
+                {
+                    TitleMenuManager.Instance.PlanetScreenEnable();
+                }
                 return;
 
             case 2:
-                AudioManager.Instance.PlayAuido(AudioType.Select);
-                GameManager.Instance.IsNewGame = false;
-                TitleMenuManager.Instance.GameStart();
+                if (GameManager.Instance.IsThereSavedGame)
+                {
+                    AudioManager.Instance.PlayAuido(AudioType.Select);
+                    AudioManager.Instance.FadeOutThemeMusic();
+                    GameManager.Instance.IsNewGame = false;
+                    TitleMenuManager.Instance.GameStart();
+                }
                 return;
 
             default:
                 return;
         }
+    }
+
+    public override void OnEscapeBtn()
+    {
+        NextScreen = TitleMenuManager.TextScreens.Main;
+        ChangeState();
     }
 }

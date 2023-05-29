@@ -25,6 +25,7 @@ public class TechTrees : ScriptableObject
         public ushort AnnualFund;
         public ushort AnnualResearch;
         public ushort AnnualCulture;
+        public byte Stability;
         public float PopulationMovement;
         public float Police;
         public float Health;
@@ -65,6 +66,11 @@ public class TechTrees : ScriptableObject
     /// </summary>
     public void GetReady()
     {
+        if (GameManager.Instance.IsTechTreeInitialized)
+        {
+            return;
+        }
+
         // 노드 등록
         AddDictionary(_facilityNodes, TechTreeType.Facility);
         AddDictionary(_techNodes, TechTreeType.Tech);
@@ -74,6 +80,8 @@ public class TechTrees : ScriptableObject
         SetNextNodes(_facilityNodes);
         SetNextNodes(_techNodes);
         SetNextNodes(_thoughtNodes);
+
+        GameManager.Instance.IsTechTreeInitialized = true;
     }
 
 

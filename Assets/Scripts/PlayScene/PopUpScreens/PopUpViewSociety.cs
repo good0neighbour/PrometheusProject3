@@ -315,7 +315,8 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
             _adoptBtnText.text = Language.Instance["승인 완료"];
             SetAdoptAvailable(false);
 
-            // 사회 화면 버튼 이미지 업데이트
+            // 시대 표시 업데이트
+            UIString.Instance.UpdateEraString();
             _societyScreen.SocietyImageUpdate();
         }
         else

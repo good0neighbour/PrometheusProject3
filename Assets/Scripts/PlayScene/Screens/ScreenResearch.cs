@@ -15,6 +15,7 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
     [SerializeField] private TMP_Text _thoughtResearchTitleText = null;
     [SerializeField] private TMP_Text _thoughtResearchRemainText = null;
     [SerializeField] private Image _thoughtResearchProgreesionImage = null;
+    [SerializeField] private Image _supportRateImage = null;
     [SerializeField] private PopUpViewTech _techView = null;
     [SerializeField] private PopUpViewThought _thoughtView = null;
 
@@ -130,6 +131,9 @@ public class ScreenResearch : PlayScreenBase, IActivateFirst
             _thoughtResearchRemainText.text = null;
             _thoughtResearchProgreesionImage.fillAmount = 0.0f;
         }
+
+        // 지지율 이미지
+        _supportRateImage.fillAmount = PlayManager.Instance[VariableFloat.ResearchSupportRate] * 0.01f;
 
         // 단축키 동작
 #if PLATFORM_STANDALONE_WIN

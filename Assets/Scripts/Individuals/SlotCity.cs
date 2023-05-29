@@ -72,7 +72,7 @@ public class SlotCity : MonoBehaviour, ISlot
     }
 
 
-    private void Update()
+    private void OnMonthChange()
     {
         ushort newPopulation = (ushort)Mathf.Round(_city.Population);
 
@@ -83,5 +83,11 @@ public class SlotCity : MonoBehaviour, ISlot
             PopulationString = _population.ToString("0");
             _populationText.text = PopulationString;
         }
+    }
+
+
+    private void Awake()
+    {
+        PlayManager.OnMonthChange += OnMonthChange;
     }
 }

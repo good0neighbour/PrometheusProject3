@@ -142,6 +142,7 @@ public enum VariableFloat
     DiplomacySupportRate,
     GovAsset,
     GovAffection,
+    PopulationAdjustment,
     EndFloat
 }
 

@@ -8,6 +8,10 @@ public class TitleMenuManager : MonoBehaviour
     {
         Main,
         Start,
+        Settings,
+        FPS,
+        SoundVolume,
+        NewStartConfirm,
         TextScreenEnd
     }
 
@@ -18,6 +22,7 @@ public class TitleMenuManager : MonoBehaviour
     [SerializeField] private GameObject _audioMamagerPrefab = null;
     [SerializeField] private GameObject _planetScreen = null;
     [SerializeField] private GameObject _loadingScreen = null;
+    [SerializeField] private GameObject _languageScreen = null;
     [SerializeField] private TMP_Text _textScreen = null;
     [SerializeField] private TMP_Text[] _btnTexts = null;
 
@@ -101,6 +106,7 @@ public class TitleMenuManager : MonoBehaviour
     /// </summary>
     public void GameStart()
     {
+        Language.OnLanguageChange = null;
         Destroy(gameObject);
         _loadingScreen.SetActive(true);
     }
@@ -109,6 +115,34 @@ public class TitleMenuManager : MonoBehaviour
     public void BtnMenuButton(int index)
     {
         _currentScreen.ButtonAct((byte)index);
+    }
+
+
+    /// <summary>
+    /// 언어 선택 화면 활성화
+    /// </summary>
+    public void LanguageScreenEnable()
+    {
+        gameObject.SetActive(false);
+        _languageScreen.SetActive(true);
+    }
+
+
+    public void BtnLanguageSelect(int index)
+    {
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
+        // 언어 불러오기
+        Language.Instance.LoadLangeage((LanguageType)index);
+
+        // 언어 선택 창 닫기
+        _languageScreen.SetActive(false);
+        gameObject.SetActive(true);
+        MoveScreen(TextScreens.Settings);
+
+        // 설정 저장
+        GameManager.Instance.SaveSettings();
     }
 
 
@@ -140,14 +174,20 @@ public class TitleMenuManager : MonoBehaviour
         // 언어 불러온다.
         Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
 
+        // 초당 프레임 수 제한
+        Application.targetFrameRate = GameManager.Instance.TargetFrameRate;
+
         // 화면 참조
         _states[(int)TextScreens.Main] = new TextScreenMain();
         _states[(int)TextScreens.Start] = new TextScreenStart();
-    }
+        _states[(int)TextScreens.Settings] = new TextScreenSettings();
+        _states[(int)TextScreens.FPS] = new TextScreenFPS();
+        _states[(int)TextScreens.SoundVolume] = new TextScreenSoundVolume();
+        _states[(int)TextScreens.NewStartConfirm] = new TextScreenNewStartConfirm();
 
+        // 배경 음악 재생
+        AudioManager.Instance.PlayThemeMusic(ThemeType.TitleMenu);
 
-    private void OnEnable()
-    {
         // 처음 화면
         MoveScreen(TextScreens.Main);
     }
@@ -180,6 +220,12 @@ public class TitleMenuManager : MonoBehaviour
             {
                 _timer += Time.deltaTime;
             }
+        }
+
+        // 단축키 동작
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            _currentScreen.OnEscapeBtn();
         }
     }
 }

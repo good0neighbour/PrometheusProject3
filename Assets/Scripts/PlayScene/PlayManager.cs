@@ -421,6 +421,15 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 게임 저장
+    /// </summary>
+    public void SaveGame()
+    {
+        File.WriteAllText($"{Application.dataPath}/Resources/Saves.Json", JsonUtility.ToJson(_data, false));
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -818,19 +827,17 @@ public class PlayManager : MonoBehaviour
         // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Income);
 
+        // 세금 수익
+        uint taxIncome = 0;
+        foreach (City city in _data.Cities)
+        {
+            taxIncome += city.TaxIncome;
+        }
+
         // 연간 수익
-        this[VariableLong.Funds] += this[VariableInt.AnnualFund] + this[VariableInt.TradeIncome] - this[VariableUint.Maintenance];
+        this[VariableLong.Funds] += this[VariableInt.AnnualFund] + this[VariableInt.TradeIncome] - this[VariableUint.Maintenance] + taxIncome;
         this[VariableUint.Research] += this[VariableUshort.AnnualResearch];
         this[VariableUint.Culture] += this[VariableUshort.AnnualCulture];
-    }
-
-
-    /// <summary>
-    /// 게임 저장
-    /// </summary>
-    private void SaveGame()
-    {
-        File.WriteAllText($"{Application.dataPath}/Resources/Saves.Json", JsonUtility.ToJson(_data, true));
     }
 
 
@@ -840,24 +847,33 @@ public class PlayManager : MonoBehaviour
     private void CreateGame()
     {
         _data = new JsonData(true);
+        this[VariableLong.Funds] = GameManager.Instance.StartFund;
+        this[VariableUint.Research] = GameManager.Instance.StartResearch;
+        this[VariableUshort.TotalIron] = GameManager.Instance.StartResources;
+        this[VariableUshort.TotalNuke] = GameManager.Instance.StartResources;
+        this[VariableUshort.TotalJewel] = GameManager.Instance.StartResources;
+
+        this[VariableFloat.EtcAirMass_Tt] = GameManager.Instance.AirMass;
+        this[VariableFloat.TotalWater_PL] = GameManager.Instance.WaterVolume;
+        this[VariableFloat.TotalCarbonRatio_ppm] = GameManager.Instance.CarbonRatio;
+        this[VariableFloat.PlanetRadius_km] = GameManager.Instance.Radius;
+        this[VariableFloat.PlanetDensity_g_cm3] = GameManager.Instance.Density;
+        this[VariableFloat.PlanetDistance_AU] = GameManager.Instance.Distance;
+
+        this[VariableUshort.CurrentIron] = this[VariableUshort.TotalIron];
+        this[VariableUshort.CurrentNuke] = this[VariableUshort.TotalNuke];
+        this[VariableUshort.CurrentJewel] = this[VariableUshort.TotalJewel];
+
+        this[VariableByte.Era] = 1;
         this[VariableByte.Month] = 1;
         this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
-        this[VariableLong.Funds] = 50000;
-        this[VariableUint.Culture] = 10;
-        this[VariableUint.Research] = 10;
-        this[VariableUshort.TotalIron] = 10;
-        this[VariableUshort.CurrentIron] = 10;
-        this[VariableUshort.TotalNuke] = 10;
-        this[VariableUshort.CurrentNuke] = 10;
-        this[VariableUshort.TotalJewel] = 10;
-        this[VariableUshort.CurrentJewel] = 10;
-        this[VariableByte.Era] = 1;
+        this[VariableFloat.PopulationAdjustment] = 1.0f;
         this[VariableFloat.FacilitySupportRate] = 100.0f;
         this[VariableFloat.ResearchSupportRate] = 100.0f;
         this[VariableFloat.SocietySupportRate] = 100.0f;
         this[VariableFloat.DiplomacySupportRate] = 100.0f;
 
-        // 테크트리 정보 준비
+        // 테크트리 정보
         _techTreeData.GetReady();
         FacilityLength = (byte)_techTreeData.GetNodes(TechTreeType.Facility).Length;
         _data.TechAdopted = new float[_techTreeData.GetNodes(TechTreeType.Tech).Length];
@@ -869,13 +885,6 @@ public class PlayManager : MonoBehaviour
         _data.Forces[1] = new Force("세력1", 1);
         _data.Forces[2] = new Force("세력2", 2);
         _data.Forces[3] = new Force("세력3", 3);
-
-        this[VariableFloat.EtcAirMass_Tt] = GameManager.Instance.AirMass;
-        this[VariableFloat.TotalWater_PL] = GameManager.Instance.WaterVolume;
-        this[VariableFloat.TotalCarbonRatio_ppm] = GameManager.Instance.CarbonRatio;
-        this[VariableFloat.PlanetRadius_km] = GameManager.Instance.Radius;
-        this[VariableFloat.PlanetDensity_g_cm3] = GameManager.Instance.Density;
-        this[VariableFloat.PlanetDistance_AU] = GameManager.Instance.Distance;
     }
 
 

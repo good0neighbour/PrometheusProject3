@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScreenSociety : PlayScreenBase
 {
@@ -7,7 +8,9 @@ public class ScreenSociety : PlayScreenBase
 
     [SerializeField] private PopUpScreenElementTechTree _popUpElementTechScreen = null;
     [SerializeField] private PopUpViewSociety _societyView = null;
+    [SerializeField] private TMP_Text _eraText = null;
     [SerializeField] private Image _societyBtnImage = null;
+    [SerializeField] private Image _supportRateImage = null;
     [SerializeField] private Sprite[] _societySprites = null;
 
 
@@ -41,6 +44,7 @@ public class ScreenSociety : PlayScreenBase
     public void SocietyImageUpdate()
     {
         _societyBtnImage.sprite = _societySprites[PlayManager.Instance[VariableByte.Era] - 1];
+        _eraText.text = UIString.Instance.GetEraString();
     }
 
 

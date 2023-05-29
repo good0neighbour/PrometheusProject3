@@ -1,3 +1,6 @@
+using System.IO;
+using UnityEngine;
+
 /// <summary>
 /// 변경이 있을 때 호출할 대리자.
 /// </summary>
@@ -8,9 +11,9 @@ public delegate void OnChangeDelegate();
 /// </summary>
 public class GameManager
 {
-    /* ==================== Variables ==================== */
+    private static GameManager _instance = null;
 
-    private static GameManager _instance;
+    private JsonSettings _userSettings;
 
     public static GameManager Instance
     {
@@ -27,14 +30,62 @@ public class GameManager
 
     public LanguageType CurrentLanguage
     {
-        get;
-        set;
+        get
+        {
+            return _userSettings.UserLanguage;
+        }
+        set
+        {
+            _userSettings.UserLanguage = value;
+        }
+    }
+
+    public bool IsThereSavedGame
+    {
+        get
+        {
+            return _userSettings.IsGameSaved;
+        }
+        set
+        {
+            _userSettings.IsGameSaved = value;
+        }
     }
 
     public bool IsNewGame
     {
         get;
         set;
+    }
+
+    public bool IsTechTreeInitialized
+    {
+        get;
+        set;
+    }
+
+    public int TargetFrameRate
+    {
+        get
+        {
+            return _userSettings.TargetFrameRate;
+        }
+        set
+        {
+            _userSettings.TargetFrameRate = value;
+        }
+    }
+
+    public float SoundVolume
+    {
+        get
+        {
+            return _userSettings.SoundVolume;
+        }
+        set
+        {
+            _userSettings.SoundVolume = value;
+        }
     }
 
     public float AirMass
@@ -73,10 +124,61 @@ public class GameManager
         set;
     }
 
+    public ushort StartFund
+    {
+        get;
+        set;
+    }
+
+    public byte StartResearch
+    {
+        get;
+        set;
+    }
+
+    public byte StartResources
+    {
+        get;
+        set;
+    }
+
+
+    public void SaveSettings()
+    {
+        File.WriteAllText($"{Application.dataPath}/Resources/Settings.Json", JsonUtility.ToJson(_userSettings, false));
+    }
+
+
+    private GameManager()
+    {
+        try
+        {
+            _userSettings = JsonUtility.FromJson<JsonSettings>(Resources.Load("Settings").ToString());
+        }
+        catch
+        {
+            _userSettings = new JsonSettings(true);
+            SaveSettings();
+        }
+    }
 
 
 
-    /* ==================== Public Methods ==================== */
+    /* ==================== Struct ==================== */
 
-    /* ==================== Private Methods ==================== */
+    private struct JsonSettings
+    {
+        public LanguageType UserLanguage;
+        public int TargetFrameRate;
+        public float SoundVolume;
+        public bool IsGameSaved;
+
+        public JsonSettings(bool initialize)
+        {
+            UserLanguage = LanguageType.End;
+            TargetFrameRate = 60;
+            SoundVolume = 1.0f;
+            IsGameSaved = false;
+        }
+    }
 }

@@ -38,6 +38,10 @@ public static class Constants
     public const float METERIMAGE_WIDTH_RATIO = 0.3f;
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
 
+    // 소리 관련 값
+    public const float THEME_VOLUME = 0.3f;
+    public const float THEME_FADE_OUT_SPEEDMULT = 0.2f;
+
     // 주메뉴 관련 값
     public const float TEXT_SCREEN_SPEEDMULT = 0.1f;
     public const float START_SCREEN_SPEEDMULT = 2.0f;
@@ -46,6 +50,8 @@ public static class Constants
     public const byte MEET_OPORTUNITY = 1;
     public const byte NUMBER_OF_FORCES = 4;
     public const byte NUMBER_OF_SLOTS = 5;
+    public const byte START_FUND = 120;
+    public const byte FUND_AGENDA = 10;
     public const ushort INITIAL_POPULATION = 10;
     public const float INITIAL_POPULATION_MOVEMENT = 0.0001f;
     public const float MONTH_TIMER = 2.0f;
@@ -64,16 +70,21 @@ public static class Constants
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
     public const float SPEND_ANIMATION_DURATION = 0.2f;
-    public const float SUPPORT_RATE_DECREASEMENT = 1.0f;
+    public const float SUPPORT_RATE_DECREASEMENT = 1.2f;
     public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
     public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
     public const float SUPPORT_RATE_SPEEDMULT = 0.05f;
     public const float MAX_SUPPORT_RATE_ADOPTION = 90.0f;
     public const float GOV_ASSET_MULTIPLY = 0.02f;
     public const float GOV_AFFECTION_MULTIPLY = 0.1f;
-    public const float CRIME_RATE_SPEEDMULT = 0.02f;
-    public const float DEATH_RATE_SPEEDMULT = 0.05f;
-    public const float MIN_EVEN_POPULATION = 100.0f;
+    public const float POPULATION_ADJUSTMENT_INCREASE = 1.1f;
+    public const float POPULATION_ADJUSTMENT_DECREASE = 0.9f;
+    public const float CRIME_RATE_SPEEDMULT = 0.05f;
+    public const float DEATH_RATE_SPEEDMULT = 0.02f;
+    public const float MIN_EVENT_POPULATION = 100.0f;
+    public const float CRIME_POSIBILITY = 0.4f;
+    public const float DISEASE_POSIBILITY = 0.8f;
+    public const float TAX_PER_POPULATION = 0.025f;
     public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY0 = 0.01f;
     public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY1 = 0.05f;
     public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY2 = 0.1f;
@@ -87,6 +98,10 @@ public static class Constants
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";
     public const string FACILITY_ADOPTED = "●";
+    public const string GAME_SPEED_PHASE_1 = "▶";
+    public const string GAME_SPEED_PHASE_2 = "▶▶";
+    public const string GAME_SPEED_PHASE_3 = "▶▶▶";
+    public const string GAME_SPEED_PHASE_4 = "▶▶▶▶";
 
     // 게임 플레이 관련 값, 자원
     public static readonly short[,] RESOURCE_MIN_MAX = new short[(int)ResourceType.End, 2]

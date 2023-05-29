@@ -46,6 +46,7 @@ public class ScreenPlanet : MonoBehaviour
         // 화면 전환
         gameObject.SetActive(false);
         _previousScreen.SetActive(true);
+        TitleMenuManager.Instance.MoveScreen(TitleMenuManager.TextScreens.Main);
     }
 
 

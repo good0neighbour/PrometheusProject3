@@ -110,7 +110,7 @@ public class ScreenCity : PlayScreenBase
 
         _populationText.text = _currentCity.Population.ToString("0");
         _populationMovementText.text = (_currentCity.PopulationMovement * 12.0f).ToString("0");
-        _annualFundText.text = _currentCity.AnnualFund.ToString();
+        _annualFundText.text = (_currentCity.AnnualFund + _currentCity.TaxIncome).ToString();
         _annualResearchText.text = _currentCity.AnnualResearch.ToString();
         _crimeText.text = $"{_currentCity.Crime.ToString("F2")}%";
         _diseaseText.text = $"{_currentCity.Disease.ToString("F2")}%";

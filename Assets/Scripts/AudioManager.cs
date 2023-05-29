@@ -8,7 +8,15 @@ public enum AudioType
     Alert,
     Unable,
     Income,
-    Show
+    Show,
+    TakeOff
+}
+
+public enum ThemeType
+{
+    TitleMenu,
+    Play,
+    None
 }
 
 public class AudioManager : MonoBehaviour
@@ -19,7 +27,7 @@ public class AudioManager : MonoBehaviour
     private static AudioManager _instance = null;
 
     [Header("설정")]
-    [Range(2, byte.MaxValue)]
+    [Range(1, byte.MaxValue)]
     [SerializeField] private byte _numberOfChannel = 8;
 
     [Header("Touch")]
@@ -50,11 +58,22 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _showClip = null;
     [SerializeField] private float _showVolume = 1.0f;
 
+    [Header("TakeOff")]
+    [SerializeField] private AudioClip _takeOffClip = null;
+    [SerializeField] private float _takeOffVolume = 1.0f;
+
+    [Header("Theme")]
+    [SerializeField] private AudioClip _titleMenuTheme = null;
+    [SerializeField] private AudioClip _playTheme = null;
+
     [Header("참조")]
     [SerializeField] private AudioSource _audioSource = null;
 
     private AudioSource[] _channels = null;
+    private AudioSource _themeChanel = null;
+    private ThemeType _reserve = ThemeType.None;
     private byte _currentChannel = 0;
+    private bool _themeMusicFadeOut = false;
 
     public static AudioManager Instance
     {
@@ -90,25 +109,91 @@ public class AudioManager : MonoBehaviour
             case AudioType.Touch:
                 UseChannel(_touchClip, _touchVolume);
                 return;
+
             case AudioType.Select:
                 UseChannel(_selectClip, _selectVolume);
                 return;
+
             case AudioType.Failed:
                 UseChannel(_failedClip, _failedVolume);
                 return;
+
             case AudioType.Alert:
                 UseChannel(_alertClip, _alertVolume);
                 return;
+
             case AudioType.Unable:
                 UseChannel(_unableClip, _unableVolume);
                 return;
+
             case AudioType.Income:
                 UseChannel(_incomeClip, _incomeVolume);
                 return;
+
             case AudioType.Show:
                 UseChannel(_showClip, _showVolume);
                 return;
+
+            case AudioType.TakeOff:
+                UseChannel(_takeOffClip, _takeOffVolume);
+                return;
         }
+    }
+
+
+    /// <summary>
+    /// 배경 음악 재생
+    /// </summary>
+    public void PlayThemeMusic(ThemeType theme)
+    {
+        // 재생 중일 때 예약
+        if (_themeChanel.isPlaying)
+        {
+            _reserve = theme;
+            return;
+        }
+
+        switch (theme)
+        {
+            case ThemeType.TitleMenu:
+                _themeChanel.clip = _titleMenuTheme;
+                break;
+
+            case ThemeType.Play:
+                _themeChanel.clip = _playTheme;
+                break;
+        }
+
+        _themeChanel.volume = Constants.THEME_VOLUME * GameManager.Instance.SoundVolume;
+        _themeChanel.Play();
+        _reserve = ThemeType.None;
+    }
+
+
+    /// <summary>
+    /// 배경 음악 서서히 종료
+    /// </summary>
+    public void FadeOutThemeMusic()
+    {
+        _themeMusicFadeOut = true;
+    }
+
+
+    /// <summary>
+    /// 배경 음악 즉시 종료
+    /// </summary>
+    public void ForceStopThemeMusic()
+    {
+        _themeChanel.Stop();
+    }
+
+
+    /// <summary>
+    /// 음량 설정이 변경됐을 때
+    /// </summary>
+    public void OnSoundVolumeChanged()
+    {
+        _themeChanel.volume = Constants.THEME_VOLUME * GameManager.Instance.SoundVolume;
     }
 
 
@@ -122,7 +207,7 @@ public class AudioManager : MonoBehaviour
     {
         // 오디오 채널에 소리 등록하고 재생
         _channels[_currentChannel].clip = clip;
-        _channels[_currentChannel].volume = volume;
+        _channels[_currentChannel].volume = volume * GameManager.Instance.SoundVolume;
         _channels[_currentChannel].Play();
 
         // 사용할 채널 인덱스 증가
@@ -142,14 +227,32 @@ public class AudioManager : MonoBehaviour
         _channels = new AudioSource[_numberOfChannel];
 
         // 1개는 기본
-        _channels[0] = GetComponent<AudioSource>();
-        _channels[1] = _audioSource;
+        _themeChanel = GetComponent<AudioSource>();
+        _channels[0] = _audioSource;
 
         // 나머지는 추가 생성
-        for (byte i = 2; i < _numberOfChannel; ++i)
+        for (byte i = 1; i < _numberOfChannel; ++i)
         {
             AudioSource aS = Instantiate(_audioSource.gameObject, transform).GetComponent<AudioSource>();
             _channels[i] = aS;
+        }
+    }
+
+
+    private void Update()
+    {
+        if (_themeMusicFadeOut)
+        {
+            _themeChanel.volume -= Time.deltaTime * Constants.THEME_FADE_OUT_SPEEDMULT;
+            if (0.0f >= _themeChanel.volume)
+            {
+                _themeChanel.Stop();
+                _themeMusicFadeOut = false;
+                if (ThemeType.None != _reserve)
+                {
+                    PlayThemeMusic(_reserve);
+                }
+            }
         }
     }
 }

@@ -61,6 +61,10 @@ MonoBehaviour:
   _incomeVolume: 0.8
   _showClip: {fileID: 8300000, guid: 019bec6ec4093864eb92936a7e79f3e5, type: 3}
   _showVolume: 0.8
+  _takeOffClip: {fileID: 8300000, guid: 6242ebc71deeebe409b5e41ee100e83c, type: 3}
+  _takeOffVolume: 0.3
+  _titleMenuTheme: {fileID: 8300000, guid: 79d147bb4fbb264469b5b69f9f5ec7b5, type: 3}
+  _playTheme: {fileID: 8300000, guid: 6d8ea452cc88d504586dd286fb15df80, type: 3}
   _audioSource: {fileID: 130908450216294753}
 --- !u!82 &4622122684644119703
 AudioSource:
@@ -76,7 +80,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

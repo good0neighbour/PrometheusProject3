@@ -13,6 +13,8 @@ public class UIString
     private string[] _ushortStrings = new string[(int)VariableUshort.EndUshort];
     private float[] _currentUintValues = new float[(int)VariableUint.EndUint];
     private string[] _uintStrings = new string[(int)VariableUint.EndUint];
+    private float[] _currentIntValues = new float[(int)VariableInt.EndInt];
+    private string[] _intStrings = new string[(int)VariableInt.EndInt];
     private float[] _currentFloatValues = new float[(int)VariableFloat.EndFloat];
     private string[] _floatStrings = new string[(int)VariableFloat.EndFloat];
     private string[] _floatUnits = new string[(int)VariableFloat.EndFloat];
@@ -25,6 +27,7 @@ public class UIString
     private float[][] _adopted = null;
     private byte _month = 0;
     private string _date = null;
+    private string _era = null;
 
     public static UIString Instance
     {
@@ -80,6 +83,28 @@ public class UIString
 
             // 반환
             return _uintStrings[(int)variable];
+        }
+    }
+
+    /// <summary>
+    /// 이것이 주 목적이므로 편리한 접근을 위해 만들었다. 문자열을 단위 포함해서 가져온다.
+    /// </summary>
+    public string this[VariableInt variable]
+    {
+        get
+        {
+            // 값이 바뀌었거나 문자열을 생성한 적 없을 때
+            if (_currentIntValues[(int)variable] != PlayManager.Instance[variable] || null == _intStrings[(int)variable])
+            {
+                // 현재 값 저장
+                _currentIntValues[(int)variable] = PlayManager.Instance[variable];
+
+                // 문자열 저장
+                _intStrings[(int)variable] = _currentIntValues[(int)variable].ToString();
+            }
+
+            // 반환
+            return _intStrings[(int)variable];
         }
     }
 
@@ -151,6 +176,24 @@ public class UIString
         }
 
         return _date;
+    }
+
+
+    /// <summary>
+    /// 시대 문자열 반환
+    /// </summary>
+    public string GetEraString()
+    {
+        return _era;
+    }
+
+
+    /// <summary>
+    /// 시대 문자열 업데이트
+    /// </summary>
+    public void UpdateEraString()
+    {
+        _era = $"{Language.Instance["제 1시대"].Replace("1", PlayManager.Instance[VariableByte.Era].ToString())}";
     }
 
 

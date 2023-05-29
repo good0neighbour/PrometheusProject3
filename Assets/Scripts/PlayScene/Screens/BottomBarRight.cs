@@ -70,43 +70,52 @@ public class BottomBarRight : MonoBehaviour
                 _spendAnimationTargets.Add(_fundNum);
                 _fundNum.text = UIString.Instance[VariableLong.Funds];
                 break;
+
             case Displays.Research:
                 _spendAnimationTargets.Add(_researchText);
                 _spendAnimationTargets.Add(_researchNum);
                 _researchNum.text = UIString.Instance[VariableUint.Research];
                 break;
+
             case Displays.Culture:
                 _spendAnimationTargets.Add(_cultureText);
                 _spendAnimationTargets.Add(_cultureNum);
                 _cultureNum.text = UIString.Instance[VariableUint.Culture];
                 break;
+
             case Displays.Iron:
                 _spendAnimationTargets.Add(_ironText);
                 _spendAnimationTargets.Add(_ironNum);
                 _ironNum.text = UIString.Instance[VariableUshort.CurrentIron];
                 break;
+
             case Displays.Nuke:
                 _spendAnimationTargets.Add(_nukeText);
                 _spendAnimationTargets.Add(_nukeNum);
                 _nukeNum.text = UIString.Instance[VariableUshort.CurrentNuke];
                 break;
+
             case Displays.Jewel:
                 _spendAnimationTargets.Add(_jewelText);
                 _spendAnimationTargets.Add(_jewelNum);
                 _jewelNum.text = UIString.Instance[VariableUshort.CurrentJewel];
                 break;
+
             case Displays.FacilitySupport:
                 _spendAnimationTargets.Add(_facilitySupportText);
                 _spendAnimationTargets.Add(_facilitySupportNum);
                 break;
+
             case Displays.ResearchSupport:
                 _spendAnimationTargets.Add(_researchSupportText);
                 _spendAnimationTargets.Add(_researchSupportNum);
                 break;
+
             case Displays.SocietySupport:
                 _spendAnimationTargets.Add(_societySupportText);
                 _spendAnimationTargets.Add(_societySupportNum);
                 break;
+
             case Displays.DiplomacySupport:
                 _spendAnimationTargets.Add(_diplomacySupportText);
                 _spendAnimationTargets.Add(_diplomacySupportNum);

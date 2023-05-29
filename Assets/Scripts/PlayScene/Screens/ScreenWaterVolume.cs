@@ -118,7 +118,7 @@ public class ScreenWaterVolume : PlayScreenBase, IUpDownAdjust
     private string GetTotalWaterVolume()
     {
         // 값이 바뀌었거나 문자열을 생성한 적 없을 때
-        if (_totalWaterVolume != PlayManager.Instance[VariableFloat.TotalWater_PL] || null == _totalWaterVolumeString)
+        if (_totalWaterVolume != PlayManager.Instance[VariableFloat.TotalWater_PL] || string.IsNullOrEmpty(_totalWaterVolumeString))
         {
             // 현재 값 저장
             _totalWaterVolume = PlayManager.Instance[VariableFloat.TotalWater_PL];

@@ -8,5 +8,14 @@ public class CoolTimeBtnPopulation : CoolTimeBtnMediaCultureSemiBase
     {
         // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Select);
+
+        if (_increase)
+        {
+            PlayManager.Instance[VariableFloat.PopulationAdjustment] *= Constants.POPULATION_ADJUSTMENT_INCREASE;
+        }
+        else
+        {
+            PlayManager.Instance[VariableFloat.PopulationAdjustment] *= Constants.POPULATION_ADJUSTMENT_DECREASE;
+        }
     }
 }
