@@ -46,6 +46,8 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private RectTransform _planetImage = null;
     [SerializeField] private RectTransform _spaceImage = null;
     [SerializeField] private RectTransform _messageBoxTransform = null;
+    [SerializeField] private MeshRenderer _planetOcean = null;
+    [SerializeField] private Material[] _oceans = null;
 
     private RectTransform _backgroundTransform = null;
     private RectTransform _messageBoxBackgroundTransform = null;
@@ -187,6 +189,13 @@ public class AnimationManager : MonoBehaviour
         {
             _planet.Rotate(0.0f, -_spinSpeedmult * Time.deltaTime, 0.0f);
             _sun.Rotate(0.0f, _spinSpeedmult * Time.deltaTime, 0.0f);
+        }
+        #endregion
+
+        #region 행성 색상
+        if (1000.0f < PlayManager.Instance[VariableFloat.WaterLiquid_PL])
+        {
+            _planetOcean.material = _oceans[0];
         }
         #endregion
     }
