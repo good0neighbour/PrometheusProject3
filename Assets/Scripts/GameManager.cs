@@ -70,6 +70,12 @@ public class GameManager
         set;
     }
 
+    public string LatestSocietyName
+    {
+        get;
+        set;
+    }
+
     public int TargetFrameRate
     {
         get

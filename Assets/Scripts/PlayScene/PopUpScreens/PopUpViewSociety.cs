@@ -161,6 +161,9 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         // 승인 불가 상태로 시작한다.
         SetAdoptAvailable(false);
 
+        // 팀장제는 이미 승인 완료
+        _adopted[(int)TechTreeType.Society][0] = 1.0f;
+
         // 사용 가능 확인
         for (byte i = 0; i < _adopted[(int)TechTreeType.Society].Length; ++i)
         {
@@ -169,6 +172,9 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
                 _nodes[i].AlreadyAdopted(_nodes);
             }
         }
+
+        // 새대 문자열 업데이트
+        UIString.Instance.UpdateEraString();
     }
 
 

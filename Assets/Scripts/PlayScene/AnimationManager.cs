@@ -238,12 +238,12 @@ public class AnimationManager : MonoBehaviour
         _selectionMultiply = (_selectionMaxBrightness - _selectionMinBrightness) * 0.5f;
         _selectionAdd = _selectionMinBrightness + _selectionMultiply;
 
-        // 행성 색상 초기 상태
-        PlanetColour();
-
         // 고정 값
         _landColourGap = _landMin - _landMax;
         _oceanGap = _oceanMin - _oceanMiddle;
+
+        // 처음 시작 시 0.5초 후 업데이트
+        _timer = _planetColourUpdateTimer - 0.5f;
     }
 
 

@@ -25,6 +25,10 @@ public class SceneEndGame : MonoBehaviour
             AudioManager.Instance.FadeOutThemeMusic();
         }
 
+        // 저장 해제
+        GameManager.Instance.IsThereSavedGame = false;
+        GameManager.Instance.SaveSettings();
+
         // 주 화면으로
         SceneManager.LoadScene(0);
     }
@@ -59,17 +63,17 @@ public class SceneEndGame : MonoBehaviour
         if (_showTimer <= _timer)
         {
             AudioManager.Instance.PlayAuido(AudioType.Show);
-            _dateText.text = "";
+            _dateText.text = UIString.Instance.GetDateString();
         }
         else if (_showTimer * 2 <= _timer)
         {
             AudioManager.Instance.PlayAuido(AudioType.Show);
-            _societyText.text = "";
+            _societyText.text = GameManager.Instance.LatestSocietyName;
         }
         else if (_showTimer * 3 <= _timer)
         {
             AudioManager.Instance.PlayAuido(AudioType.Show);
-            _situationText.text = "";
+            _situationText.text = "여기에 텍스트 입력";
         }
         else if (_showTimer * 4 <= _timer)
         {

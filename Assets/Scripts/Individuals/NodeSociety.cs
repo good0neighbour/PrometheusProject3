@@ -83,6 +83,9 @@ public class NodeSociety : MonoBehaviour
                 nodes[i].SetAvaiable(_eraNum, false);
             }
         }
+
+        // 최신 사회 이름으로 등록
+        GameManager.Instance.LatestSocietyName = _nodeName;
     }
 
 

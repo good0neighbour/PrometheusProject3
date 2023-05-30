@@ -1007,7 +1007,6 @@ public class PlayManager : MonoBehaviour
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
 
         // 저장된 값
-        _data.SocietyAdopted[0] = 1.0f;
         _etcAirMassGoal = this[VariableFloat.EtcAirMass_Tt];
         _temperatureMovement = this[VariableShort.TemperatureMovement];
         _totalWaterVolumeGoal = this[VariableFloat.TotalWater_PL];
