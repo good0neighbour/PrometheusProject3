@@ -12,6 +12,7 @@ public class SceneEndGame : MonoBehaviour
     [SerializeField] private GameObject _backButton = null;
 
     private float _timer = 0.0f;
+    private byte _phase = 0;
 
 
     public void BtnBack()
@@ -60,25 +61,46 @@ public class SceneEndGame : MonoBehaviour
 
     private void Update()
     {
-        if (_showTimer <= _timer)
+        if (4 <= _phase)
         {
-            AudioManager.Instance.PlayAuido(AudioType.Show);
-            _dateText.text = UIString.Instance.GetDateString();
+            // 단축키 동작
+            if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Return))
+            {
+                BtnBack();
+            }
+            return;
         }
-        else if (_showTimer * 2 <= _timer)
+        else if (_showTimer <= _timer)
         {
-            AudioManager.Instance.PlayAuido(AudioType.Show);
-            _societyText.text = GameManager.Instance.LatestSocietyName;
-        }
-        else if (_showTimer * 3 <= _timer)
-        {
-            AudioManager.Instance.PlayAuido(AudioType.Show);
-            _situationText.text = "여기에 텍스트 입력";
-        }
-        else if (_showTimer * 4 <= _timer)
-        {
-            AudioManager.Instance.PlayAuido(AudioType.Show);
-            _backButton.SetActive(true);
+            switch (_phase)
+            {
+                case 0:
+                    AudioManager.Instance.PlayAuido(AudioType.Show);
+                    _dateText.text = UIString.Instance.GetDateString();
+                    _timer -= _showTimer;
+                    ++_phase;
+                    break;
+
+                case 1:
+                    AudioManager.Instance.PlayAuido(AudioType.Show);
+                    _societyText.text = Language.Instance[GameManager.Instance.LatestSocietyName];
+                    _timer -= _showTimer;
+                    ++_phase;
+                    break;
+
+                case 2:
+                    AudioManager.Instance.PlayAuido(AudioType.Show);
+                    _situationText.text = Language.Instance[GameManager.Instance.EndGameMessage];
+                    _timer -= _showTimer;
+                    ++_phase;
+                    break;
+
+                case 3:
+                    AudioManager.Instance.PlayAuido(AudioType.Show);
+                    _backButton.SetActive(true);
+                    ++_phase;
+                    break;
+            }
         }
 
         _timer += Time.deltaTime;

@@ -43,6 +43,7 @@
                 return;
 
             case 3:
+                AudioManager.Instance.PlayAuido(AudioType.Touch);
                 TitleMenuManager.Instance.LanguageScreenEnable();
                 return;
 

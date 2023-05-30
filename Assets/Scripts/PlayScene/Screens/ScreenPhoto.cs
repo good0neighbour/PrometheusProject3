@@ -50,8 +50,26 @@ public class ScreenPhoto : PlayScreenBase, IRequest
         // 지출 애니메이션
         BottomBarLeft.Instance.SpendAnimation(BottomBarLeft.Displays.Fund);
 
-        // 안정도 1만큼 증가
-        ++PlayManager.Instance[VariableFloat.PhotoLifeStability];
+        // 종자 도착 카운트 다운
+        PlayManager.Instance[VariableByte.PhotoRequest] = Constants.REQUEST_TIME;
+
+        // 요청 진행
+        RequestCountDown();
+
+        // 메세지
+        MessageBox.Instance.EnqueueMessage(Language.Instance[
+            "{생물} 종자를 요청했습니다. {0}개월 후에 지구로부터 도착 예정입니다."
+            ], Language.Instance["광합성 생물"], Constants.REQUEST_TIME.ToString());
+    }
+
+
+    /// <summary>
+    /// 요청 진행
+    /// </summary>
+    public void RequestCountDown()
+    {
+        // 대리자 등록
+        PlayManager.OnMonthChange += SeedDelivery;
     }
 
 
@@ -70,7 +88,12 @@ public class ScreenPhoto : PlayScreenBase, IRequest
             _airPressure = PlayManager.Instance[VariableFloat.TotalAirPressure_hPa];
 
             // 단위 표시
-            _airPressureString = $"{((1.0f - Mathf.Abs(_airPressure / Constants.EARTH_AIR_PRESSURE - 1.0f)) * 100.0f).ToString("0")}%";
+            float result = ((1.0f - Mathf.Abs(_airPressure / Constants.EARTH_AIR_PRESSURE - 1.0f)) * 100.0f);
+            if (0.0f > result)
+            {
+                result = 0.0f;
+            }
+            _airPressureString = $"{result.ToString("0")}%";
         }
 
         // 반환
@@ -87,7 +110,12 @@ public class ScreenPhoto : PlayScreenBase, IRequest
             _temperature = PlayManager.Instance[VariableFloat.TotalTemperature_C];
 
             // 단위 표시
-            _temperatureString = $"{((1.0f - Mathf.Abs(_temperature / Constants.EARTH_TEMPERATURE - 1.0f)) * 100.0f).ToString("0")}%";
+            float result = ((1.0f - Mathf.Abs(_temperature / Constants.EARTH_TEMPERATURE - 1.0f)) * 100.0f);
+            if (0.0f > result)
+            {
+                result = 0.0f;
+            }
+            _temperatureString = $"{result.ToString("0")}%";
         }
 
         // 반환
@@ -151,6 +179,34 @@ public class ScreenPhoto : PlayScreenBase, IRequest
 
         // 반환
         return _waterString;
+    }
+
+
+    /// <summary>
+    /// 종자 배달 중
+    /// </summary>
+    private void SeedDelivery()
+    {
+        --PlayManager.Instance[VariableByte.PhotoRequest];
+
+        switch (PlayManager.Instance[VariableByte.PhotoRequest])
+        {
+            case 0:
+                // 안정도 1만큼 증가
+                ++PlayManager.Instance[VariableFloat.PhotoLifeStability];
+
+                // 대리자에서 제거
+                PlayManager.OnMonthChange -= SeedDelivery;
+
+                // 메세지
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "지구로부터 {생물} 종자가 도착했습니다. 증식을 시작합니다."
+                    ], Language.Instance["광합성 생물"]);
+                return;
+
+            default:
+                return;
+        }
     }
 
 

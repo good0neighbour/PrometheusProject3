@@ -141,7 +141,7 @@ public class TitleMenuManager : MonoBehaviour
         // 언어 선택 창 닫기
         _languageScreen.SetActive(false);
         gameObject.SetActive(true);
-        MoveScreen(TextScreens.Settings);
+        MoveScreen(TextScreens.Main);
 
         // 설정 저장
         GameManager.Instance.SaveSettings();
@@ -173,9 +173,6 @@ public class TitleMenuManager : MonoBehaviour
             autoTranslations[i].TranslationReady();
         }
 
-        // 언어 불러온다.
-        Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
-
         // 초당 프레임 수 제한
         Application.targetFrameRate = GameManager.Instance.TargetFrameRate;
 
@@ -191,7 +188,19 @@ public class TitleMenuManager : MonoBehaviour
         AudioManager.Instance.PlayThemeMusic(ThemeType.TitleMenu);
 
         // 처음 화면
-        MoveScreen(TextScreens.Main);
+        switch (GameManager.Instance.CurrentLanguage)
+        {
+            // 언어 설정한 적 없을 때
+            case LanguageType.End:
+                LanguageScreenEnable();
+                break;
+
+            // 언어 설정 돼있을 때
+            default:
+                Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
+                MoveScreen(TextScreens.Main);
+                break;
+        }
     }
 
 

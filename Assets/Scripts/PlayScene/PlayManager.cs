@@ -23,6 +23,8 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private TechTrees _techTreeData = null;
     [SerializeField] private ScreenResearch _researchScreen = null;
     [SerializeField] private ScreenSociety _societyScreen = null;
+    [SerializeField] private ScreenPhoto _photoScreen = null;
+    [SerializeField] private ScreenBreath _breathScreen = null;
 
     private float[][] _adoptedData = new float[(int)TechTreeType.TechTreeEnd][];
     private JsonData _data;
@@ -276,6 +278,21 @@ public class PlayManager : MonoBehaviour
         set
         {
             _data.DoubleArray[(int)variable] = value;
+        }
+    }
+
+    /// <summary>
+    /// 편리한 접근을 위해 만들었다. bool.
+    /// </summary>
+    public bool this[VariableBool variable]
+    {
+        get
+        {
+            return _data.BoolArray[(int)variable];
+        }
+        set
+        {
+            _data.BoolArray[(int)variable] = value;
         }
     }
     #endregion
@@ -536,17 +553,6 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     private void PhysicsCalculate()
     {
-        /*
-        불변의 물리량
-
-        가속도 = (중력상수 * 행성질량) / 적도반경^2 * 가속도보정
-        행성질량 = 4 / 3 * pi * 적도반경^3 * 밀도 * 질량보정
-        면적 = 4 * pi * 적도반경^2 * 면적보정
-
-        입사에너지 = 거리비율^2
-        거리비율 = 1(AU) / 거리(AU)
-        */
-
         // 계산용 지역변수
         double double0;
         double double1;
@@ -876,6 +882,17 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.SocietySupportRate] = 100.0f;
         this[VariableFloat.DiplomacySupportRate] = 100.0f;
 
+        this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
+        this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
+        this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
+        this[VariableFloat.IncomeEnergy] = Mathf.Atan(1.0f / this[VariableFloat.PlanetDistance_AU]) * 4.0f / Constants.PI;
+
+        // bool 배열은 메세지 출력을 위한 것.
+        for (byte i = 0; i < _data.BoolArray.Length; ++i)
+        {
+            _data.BoolArray[i] = true;
+        }
+
         // 테크트리 정보
         _techTreeData.GetReady();
         FacilityLength = (byte)_techTreeData.GetNodes(TechTreeType.Facility).Length;
@@ -932,6 +949,16 @@ public class PlayManager : MonoBehaviour
         {
             AddTradeSlot(i, false);
         }
+
+        // 종자 요청 진행
+        if (0 < this[VariableByte.PhotoRequest])
+        {
+            _photoScreen.RequestCountDown();
+        }
+        if (0 < this[VariableByte.BreathRequest])
+        {
+            _breathScreen.RequestCountDown();
+        }
     }
 
 
@@ -950,12 +977,134 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 메세지 생성
+    /// </summary>
+    private void MessageEnqueue()
+    {
+        #region 대기압
+        if (this[VariableBool.AirPressure])
+        {
+            if (900.0f < this[VariableFloat.TotalAirPressure_hPa] && 1100.0f > this[VariableFloat.TotalAirPressure_hPa])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "이상적인 {물리량}에 가까워지고 있습니다."
+                    ], Language.Instance["대기압"]);
+                this[VariableBool.AirPressure] = false;
+            }
+        }
+        else
+        {
+            if (900.0f > this[VariableFloat.TotalAirPressure_hPa] || 1100.0f < this[VariableFloat.TotalAirPressure_hPa])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "이상적인 {물리량}에서 멀어지고 있습니다."
+                    ], Language.Instance["대기압"]);
+                this[VariableBool.AirPressure] = true;
+            }
+        }
+        #endregion
+
+        #region 온도
+        if (this[VariableBool.Temperature])
+        {
+            if (10.0f < this[VariableFloat.TotalTemperature_C] && 20.0f > this[VariableFloat.TotalTemperature_C])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "이상적인 {물리량}에 가까워지고 있습니다."
+                    ], Language.Instance["기온"]);
+                this[VariableBool.Temperature] = false;
+            }
+        }
+        else
+        {
+            if (10.0f > this[VariableFloat.TotalTemperature_C] || 20.0f < this[VariableFloat.TotalTemperature_C])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "이상적인 {물리량}에서 멀어지고 있습니다."
+                    ], Language.Instance["기온"]);
+                this[VariableBool.Temperature] = true;
+            }
+        }
+        #endregion
+
+        #region 광합성 생물
+        if (this[VariableBool.Photo])
+        {
+            if (0.0f < this[VariableFloat.PhotoLifePosibility])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{생물}의 생존률이 올라갑니다."
+                    ], Language.Instance["광합성 생물"]);
+                this[VariableBool.Photo] = false;
+            }
+        }
+        else
+        {
+            if (0.0f >= this[VariableFloat.PhotoLifePosibility])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{생물}이 생존할 수 없습니다."
+                    ], Language.Instance["광합성 생물"]);
+                this[VariableBool.Photo] = true;
+            }
+        }
+        #endregion
+
+        #region 호흡 생물
+        if (this[VariableBool.Breath])
+        {
+            if (0.0f < this[VariableFloat.BreathLifePosibility])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{생물}의 생존률이 올라갑니다."
+                    ], Language.Instance["호흡 생물"]);
+                this[VariableBool.Breath] = false;
+            }
+        }
+        else
+        {
+            if (0.0f >= this[VariableFloat.BreathLifePosibility])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{생물}이 생존할 수 없습니다."
+                    ], Language.Instance["호흡 생물"]);
+                this[VariableBool.Breath] = true;
+            }
+        }
+        #endregion
+
+        #region 산소 농도
+        if (this[VariableBool.OxygenRatio])
+        {
+            if (30.0f < this[VariableFloat.OxygenRatio])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "산소 농도가 너무 높습니다. 호흡 생물의 생존률에 악영향을 줍니다."
+                    ]);
+                this[VariableBool.OxygenRatio] = false;
+            }
+        }
+        else
+        {
+            if (25.0f > this[VariableFloat.OxygenRatio])
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "산소 농도가 낮아지고 있습니다."
+                    ]);
+                this[VariableBool.OxygenRatio] = true;
+            }
+        }
+        #endregion
+    }
+
+
     private void Awake()
     {
         // 유니티식 싱글턴패턴
         Instance = this;
 
-        #region 번역 준비
+        #region 번역 관련
         // 현재 씬에서 모든 AutoTranslation을 찾는다.
         AutoTranslation[] autoTranslations = FindObjectsOfType<AutoTranslation>(true);
 
@@ -997,12 +1146,7 @@ public class PlayManager : MonoBehaviour
         // 새로 생성된 배열 참조
         _data.SocietyAdopted = _adoptedData[(int)TechTreeType.Society];
 
-        #region 값 설정
         // 고정 값. Update 함수에서 연산을 줄이기 위해 반복해서 사용하는 값은 변수로 저장한다.
-        this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
-        this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
-        this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
-        this[VariableFloat.IncomeEnergy] = Mathf.Atan(1.0f / this[VariableFloat.PlanetDistance_AU]) * 4.0f / Constants.PI;
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
 
@@ -1015,7 +1159,6 @@ public class PlayManager : MonoBehaviour
         _researchSupportGoal = this[VariableFloat.ResearchSupportRate];
         _societySupportGoal = this[VariableFloat.SocietySupportRate];
         _diplomacySupportGoal = this[VariableFloat.DiplomacySupportRate];
-        #endregion
     }
 
 
@@ -1027,13 +1170,13 @@ public class PlayManager : MonoBehaviour
         // 인위적 환경조정 적용
         EnvironmentMovementAdopt();
 
-        // 시작 전이면 함수 종료.
+        // 플레이 중이 아닐 때
         if (!IsPlaying)
         {
             if (_isGameEnded)
             {
                 _timer += Time.deltaTime;
-                if (_timer >= 2.0f)
+                if (_timer >= 3.0f)
                 {
                     if (!GameManager.Instance.IsGameWin)
                     {
@@ -1107,19 +1250,23 @@ public class PlayManager : MonoBehaviour
                         {
                             EndGame(true);
                             MessageBox.Instance.EnqueueMessage(Language.Instance[
-                                ""
+                                "생물 안정도가 일정 수준 이상에 도달했습니다. 이 우주에 생명이 살아가는 또다른 행성이 탄생한 순간입니다. 당신은 임무를 완료했습니다."
                                 ]);
+                            GameManager.Instance.EndGameMessage = "당신의 세력은 행성 테라포밍의 최다 공로를 인정받았습니다.";
                         }
                         else if (4 <= this[VariableByte.Conquested])
                         {
                             EndGame(true);
                             MessageBox.Instance.EnqueueMessage(Language.Instance[
-                                ""
+                                "모든 세력을 당신의 속국으로 만들었습니다. 이제 전 행성의 주권은 당신의 세력에게 있습니다. 당신은 임무를 완료했습니다."
                                 ]);
+                            GameManager.Instance.EndGameMessage = "당신의 세력은 행성을 정복하여 그 강력함을 인정받았습니다.";
                         }
 
                         // 패배 조건
 
+                        // 메세지 생성
+                        MessageEnqueue();
                     }
                     break;
             }
@@ -1154,6 +1301,7 @@ public class PlayManager : MonoBehaviour
         public long[] LongArray;
         public float[] FloatArray;
         public double[] DoubleArray;
+        public bool[] BoolArray;
         public float[] TechAdopted;
         public float[] ThoughtAdopted;
         public float[] SocietyAdopted;
@@ -1175,6 +1323,7 @@ public class PlayManager : MonoBehaviour
                 LongArray = new long[(int)VariableLong.EndLong];
                 FloatArray = new float[(int)VariableFloat.EndFloat];
                 DoubleArray = new double[(int)VariableDouble.EndDouble];
+                BoolArray = new bool[(int)VariableBool.EndBool];
                 Forces = new Force[Constants.NUMBER_OF_FORCES];
                 Lands = new List<Land>();
                 Cities = new List<City>();
@@ -1190,6 +1339,7 @@ public class PlayManager : MonoBehaviour
                 LongArray = null;
                 FloatArray = null;
                 DoubleArray = null;
+                BoolArray = null;
                 Forces = null;
                 Lands = null;
                 Cities = null;

@@ -5,10 +5,21 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class City
 {
+    private enum MessageType
+    {
+        Crime,
+        Disease,
+        Stability,
+        EndType
+    }
+
+
+
     /* ==================== Variables ==================== */
 
     public bool[] FacilityAdopted = null;
     public bool[] FacilityEnabled = null;
+    public bool[] Messages = new bool[(int)MessageType.EndType];
     public string CityName = null;
     public byte NumOfFacility = 0;
     public short AnnualFund = 0;
@@ -39,6 +50,11 @@ public class City
         // 수치
         CityName = cityName;
         Capacity = capacity;
+
+        for (byte i = 0; i < Messages.Length; ++i)
+        {
+            Messages[i] = true;
+        }
 
         // 지역변수로 참조
         TechTrees.Node[] data = PlayManager.Instance.GetTechTreeData().GetNodes(TechTreeType.Facility);
@@ -171,9 +187,86 @@ public class City
     }
 
 
+    /// <summary>
+    /// 메세지 생성
+    /// </summary>
+    private void MessageEnqueue()
+    {
+        #region 범죄율
+        if (Messages[(int)MessageType.Crime])
+        {
+            if (10.0f < Crime)
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{도시}에 범죄율이 높습니다. 치안 시설을 승인해 범죄를 통제하십시오."
+                    ], CityName);
+                Messages[(int)MessageType.Crime] = false;
+            }
+        }
+        else
+        {
+            if (5.0f > Crime)
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{도시}에 범죄율이 안정되고 있습니다."
+                    ], CityName);
+                Messages[(int)MessageType.Crime] = true;
+            }
+        }
+        #endregion
+
+        #region 질병
+        if (Messages[(int)MessageType.Disease])
+        {
+            if (10.0f < Disease)
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{도시}에 사망률이 높습니다. 의료 시설을 승인해 질병을 통제하십시오."
+                    ], CityName);
+                Messages[(int)MessageType.Disease] = false;
+            }
+        }
+        else
+        {
+            if (5.0f > Disease)
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{도시}에 사망률이 낮아지고 있습니다."
+                    ], CityName);
+                Messages[(int)MessageType.Disease] = true;
+            }
+        }
+        #endregion
+
+        #region 안정도
+        if (Messages[(int)MessageType.Stability])
+        {
+            if (25.0f > Stability)
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{도시}의 안정도가 낮습니다. 안정도가 낮으면 세금 수입이 적어집니다."
+                    ], CityName);
+                Messages[(int)MessageType.Stability] = false;
+            }
+        }
+        else
+        {
+            if (50.0f < Stability)
+            {
+                MessageBox.Instance.EnqueueMessage(Language.Instance[
+                    "{도시}의 안정도가 상승합니다. 시민들이 당신의 통치에 만족해합니다."
+                    ], CityName);
+                Messages[(int)MessageType.Stability] = true;
+            }
+        }
+        #endregion
+    }
+
+
     private void OnMonthChange()
     {
         SafetyAndHealth();
         PopulationMove();
+        MessageEnqueue();
     }
 }

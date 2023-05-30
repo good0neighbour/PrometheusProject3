@@ -47,6 +47,8 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private Color _nightColour = new Color();
     [SerializeField] private float _oceanMin = 0.95f;
     [SerializeField] private float _oceanMiddle = 0.5f;
+    [SerializeField] private float _iceMin = 0.95f;
+    [SerializeField] private float _iceMiddle = 0.5f;
     [SerializeField] private float _nightBrightMultiply = 0.00001f;
 
     [Header("참조")]
@@ -66,6 +68,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private Material _cloud = null;
     [SerializeField] private Material _atmosphere = null;
     [SerializeField] private Material _night = null;
+    [SerializeField] private Material _ice = null;
 
     private RectTransform _backgroundTransform = null;
     private RectTransform _messageBoxBackgroundTransform = null;
@@ -80,14 +83,17 @@ public class AnimationManager : MonoBehaviour
     private float _messageBoxTargetPos = 0.0f;
     private float _timer = 0.0f;
     private float _oceanGap = 0.0f;
+    private float _iceGap = 0.0f;
     private float _waterLiquidMultiply = 1.0f / 1379705.3f;
     private float _waterGasMultiply = 1.0f / 2.7f;
-    private float _airPressureMultiply = 1.0f / 1013.25f;
+    private float _airPressureMultiply = 1.0f / 29000f;
+    private float _icePressureMultiply = 1.0f / 1013.25f;
     private int _breathStability = -1;
     private int _waterLiquid = -1;
     private int _waterGas = -1;
     private int _airPressure = -1;
     private int _totalPopulation = -1;
+    private int _waterSolid = -1;
 
     public static AnimationManager Instance
     {
@@ -218,6 +224,19 @@ public class AnimationManager : MonoBehaviour
             }
             _night.SetColor("_EmissionColor", _nightColour * float0);
         }
+
+        // 빙하
+        int0 = Mathf.RoundToInt(PlayManager.Instance[VariableFloat.WaterSolid_PL]);
+        if (_waterSolid != int0)
+        {
+            _waterSolid = int0;
+            float0 = _iceMin - _waterSolid * _iceGap * _icePressureMultiply;
+            if (0.0f > float0)
+            {
+                float0 = 0.0f;
+            }
+            _ice.SetFloat("_Cutoff", float0);
+        }
     }
 
 
@@ -241,6 +260,7 @@ public class AnimationManager : MonoBehaviour
         // 고정 값
         _landColourGap = _landMin - _landMax;
         _oceanGap = _oceanMin - _oceanMiddle;
+        _iceGap = _iceMin - _iceMiddle;
 
         // 처음 시작 시 0.5초 후 업데이트
         _timer = _planetColourUpdateTimer - 0.5f;

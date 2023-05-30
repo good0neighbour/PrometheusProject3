@@ -76,6 +76,12 @@ public class GameManager
         set;
     }
 
+    public string EndGameMessage
+    {
+        get;
+        set;
+    }
+
     public int TargetFrameRate
     {
         get

@@ -52,6 +52,7 @@ public static class Constants
     public const byte NUMBER_OF_SLOTS = 5;
     public const byte START_FUND = 120;
     public const byte FUND_AGENDA = 10;
+    public const byte REQUEST_TIME = 12;
     public const ushort INITIAL_POPULATION = 10;
     public const float INITIAL_POPULATION_MOVEMENT = 0.0001f;
     public const float MONTH_TIMER = 2.0f;

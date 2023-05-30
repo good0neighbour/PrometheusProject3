@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c08656a56b9c340b41bfba8eef4261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showTimer: 0.5
+  _showTimer: 1
   _titleText: {fileID: 844312984}
   _dateText: {fileID: 279127833}
   _societyText: {fileID: 238623637}

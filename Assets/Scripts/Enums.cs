@@ -28,6 +28,8 @@ public enum VariableByte
     CarbonInfra,
     Era,
     Conquested,
+    PhotoRequest,
+    BreathRequest,
     EndByte
 }
 
@@ -154,6 +156,19 @@ public enum VariableFloat
 public enum VariableDouble
 {
     EndDouble
+}
+
+/// <summary>
+/// JsonData의 DoubleArray 인덱스 접근을 위한 열거형
+/// </summary>
+public enum VariableBool
+{
+    AirPressure,
+    Temperature,
+    Photo,
+    Breath,
+    OxygenRatio,
+    EndBool
 }
 #endregion
 

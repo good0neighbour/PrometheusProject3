@@ -324,6 +324,11 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
             // 시대 표시 업데이트
             UIString.Instance.UpdateEraString();
             _societyScreen.SocietyImageUpdate();
+
+            // 메세지
+            MessageBox.Instance.EnqueueMessage(Language.Instance[
+                "시민들이 새로운 사회를 받아들여 다음 시대가 시작됐습니다."
+                ]);
         }
         else
         {
