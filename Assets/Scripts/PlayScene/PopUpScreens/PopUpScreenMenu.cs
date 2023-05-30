@@ -205,6 +205,9 @@ public class PopUpScreenMenu : MonoBehaviour, IPopUpScreen
 
         // 주 화면으로 이동
         Language.OnLanguageChange = null;
+        PlayManager.OnYearChange = null;
+        PlayManager.OnMonthChange = null;
+        PlayManager.OnPlayUpdate = null;
         SceneManager.LoadScene(0);
     }
 
@@ -224,6 +227,9 @@ public class PopUpScreenMenu : MonoBehaviour, IPopUpScreen
 
         // 주 화면으로 이동
         Language.OnLanguageChange = null;
+        PlayManager.OnYearChange = null;
+        PlayManager.OnMonthChange = null;
+        PlayManager.OnPlayUpdate = null;
         SceneManager.LoadScene(0);
     }
 

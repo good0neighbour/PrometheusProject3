@@ -411,4 +411,5 @@ A plague has broken out in {City}.;
 {Technology} research is complete.;
 Initiate a deal with {faction}.;
 The deal with {faction} has expired.;
+Used cheats for developers. Funds +50000.;
 ;

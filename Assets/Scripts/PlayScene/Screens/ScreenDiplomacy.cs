@@ -68,6 +68,7 @@ public class ScreenDiplomacy : PlayScreenBase
 
         // 비용 지출
         PlayManager.Instance[VariableLong.Funds] -= _trueCost;
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Fund);
 
         // 화면 전환
         CurrentForce.Info = true;

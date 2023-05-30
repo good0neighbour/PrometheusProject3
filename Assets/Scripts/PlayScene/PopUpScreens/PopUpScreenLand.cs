@@ -162,6 +162,15 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         MessageBox.Instance.EnqueueMessage(Language.Instance[
             "{도시}(이)가 건설됐습니다."
             ], cityName);
+
+        // 개발자용 치트
+        if (cityName.Equals("good_neighbour"))
+        {
+            PlayManager.Instance[VariableLong.Funds] += 50000;
+            MessageBox.Instance.EnqueueMessage(Language.Instance[
+            "개발자용 치트를 사용했습니다. 자금 +50000"
+            ], cityName);
+        }
     }
 
 

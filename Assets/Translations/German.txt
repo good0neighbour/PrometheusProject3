@@ -411,4 +411,5 @@ In {Stadt} ist eine Seuche ausgebrochen.;
 Die {Technologie}-Forschung ist abgeschlossen.;
 Einen Deal mit {faction} einleiten.;
 Der Deal mit {faction} ist abgelaufen.;
+Gebrauchte Cheats für Entwickler. Mittel +50000.;
 ;

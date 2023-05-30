@@ -27,6 +27,7 @@ public enum VariableByte
     WaterInfra,
     CarbonInfra,
     Era,
+    Conquested,
     EndByte
 }
 
@@ -83,6 +84,7 @@ public enum VariableUint
     Research,
     Culture,
     Maintenance,
+    TotalPopulation,
     EndUint
 }
 

@@ -142,15 +142,15 @@ public class ScreenPlanet : MonoBehaviour
     /// </summary>
     private void RandomValues()
     {
-        _airMass = Random.Range(100.0f, 500.0f);
-        _waterVolume = Random.Range(5000.0f, 40000.0f);
+        _airMass = Random.Range(100.0f, 3000.0f);
+        _waterVolume = Random.Range(10000.0f, 1000000.0f);
         _carbonRatio = Random.Range(100.0f, 900.0f);
         _radius = Random.Range(5000.0f, 7000.0f);
         _density = Random.Range(5.0f, 6.0f);
-        _distance = Random.Range(0.8f, 1.2f);
+        _distance = Random.Range(0.9f, 1.1f);
 
         _airMassText.text = $"{_airMass.ToString("F2")}Tt";
-        _waterVolumeText.text = $"{_waterVolume.ToString("F2")}PL";
+        _waterVolumeText.text = $"{(_waterVolume * Constants.E_3).ToString("F2")}EL";
         _carbonRatioText.text = $"{_carbonRatio.ToString("F2")}ppm";
         _radiusText.text = $"{_radius.ToString("F2")}km";
         _densityText.text = $"{_density.ToString("F2")}g/cm©ø";

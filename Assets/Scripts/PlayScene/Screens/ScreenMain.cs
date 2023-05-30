@@ -224,13 +224,7 @@ public class ScreenMain : PlayScreenBase
         _annualResearch.text = UIString.Instance[VariableUshort.AnnualResearch];
         _culture.text = UIString.Instance[VariableUint.Culture];
         _annualCulture.text = UIString.Instance[VariableUshort.AnnualCulture];
-
-        double totalPopulation = 0.0;
-        for (ushort i = 0; i < PlayManager.Instance[VariableUshort.CityNum]; ++i)
-        {
-            totalPopulation += PlayManager.Instance.GetCity(i).Population;
-        }
-        _population.text = totalPopulation.ToString("0");
+        _population.text = UIString.Instance[VariableUint.TotalPopulation];
 
         _supportRate.text = $"{((PlayManager.Instance[VariableFloat.FacilitySupportRate] + PlayManager.Instance[VariableFloat.ResearchSupportRate] + PlayManager.Instance[VariableFloat.SocietySupportRate] + PlayManager.Instance[VariableFloat.DiplomacySupportRate]) * 0.25).ToString("F2")}%";
     }

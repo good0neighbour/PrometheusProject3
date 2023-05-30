@@ -107,6 +107,8 @@ public class TitleMenuManager : MonoBehaviour
     public void GameStart()
     {
         Language.OnLanguageChange = null;
+        GameManager.Instance.IsThereSavedGame = false;
+        GameManager.Instance.SaveSettings();
         Destroy(gameObject);
         _loadingScreen.SetActive(true);
     }

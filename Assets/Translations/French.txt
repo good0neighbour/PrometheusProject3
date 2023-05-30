@@ -411,4 +411,5 @@ Une peste a éclaté dans {City}.;
 La recherche {Technologie} est terminée.;
 Lancez un accord avec {faction}.;
 L'accord avec {faction} a expiré.;
+Astuces utilisées pour les développeurs. Fonds +50000.;
 ;

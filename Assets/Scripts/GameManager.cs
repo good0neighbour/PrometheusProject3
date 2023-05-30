@@ -64,6 +64,12 @@ public class GameManager
         set;
     }
 
+    public bool IsGameWin
+    {
+        get;
+        set;
+    }
+
     public int TargetFrameRate
     {
         get

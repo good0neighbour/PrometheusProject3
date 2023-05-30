@@ -37,7 +37,7 @@ public class ScreenAgenda : MonoBehaviour
         AudioManager.Instance.FadeOutThemeMusic();
 
         // 기본
-        GameManager.Instance.StartFund = Constants.START_FUND;
+        GameManager.Instance.StartFund = 0;
         GameManager.Instance.StartResearch = 0;
         GameManager.Instance.StartResources = 0;
 
@@ -105,12 +105,15 @@ public class ScreenAgenda : MonoBehaviour
                 case 1:
                     _agendaTexts[_currentSlot].text = Language.Instance["기후 변화"];
                     break;
+
                 case 2:
                     _agendaTexts[_currentSlot].text = Language.Instance["환경 파괴"];
                     break;
+
                 case 3:
                     _agendaTexts[_currentSlot].text = Language.Instance["자원 고갈"];
                     break;
+
                 default:
                     Debug.LogError("잘못된 의제 번호");
                     return;
@@ -128,8 +131,36 @@ public class ScreenAgenda : MonoBehaviour
 
     /* ==================== Private Methods ==================== */
 
+    private void OnLanguageChange()
+    {
+        for (byte i = 0; i < _agendas.Length; ++i)
+        {
+            switch (_agendas[i])
+            {
+                case 0:
+                    _agendaTexts[i].text = Language.Instance["의제 없음"];
+                    break;
+
+                case 1:
+                    _agendaTexts[i].text = Language.Instance["기후 변화"];
+                    break;
+
+                case 2:
+                    _agendaTexts[i].text = Language.Instance["환경 파괴"];
+                    break;
+
+                case 3:
+                    _agendaTexts[i].text = Language.Instance["자원 고갈"];
+                    break;
+            }
+        }
+    }
+
+
     private void Awake()
     {
         _agendas = new byte[_agendaTexts.Length];
+        OnLanguageChange();
+        Language.OnLanguageChange += OnLanguageChange;
     }
 }

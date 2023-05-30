@@ -42,30 +42,6 @@ public class Force
     }
 
 
-    //public string DiplomacySlotText(byte index)
-    //{
-    //    return DiplomacySlots[index];
-    //}
-
-
-    //public void DiplomacySlotText(byte index, string text)
-    //{
-    //    DiplomacySlots[index] = text;
-    //}
-
-
-    //public string ConquestSlotText(byte index)
-    //{
-    //    return ConquestSlots[index];
-    //}
-
-
-    //public void ConquestSlotText(byte index, string text)
-    //{
-    //    ConquestSlots[index] = text;
-    //}
-
-
 
     /* ==================== Private Methods ==================== */
 
@@ -78,6 +54,10 @@ public class Force
         {
             Conquest *= Constants.GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY * Chaos;
             Chaos *= Random.Range(0.8f, 1.0f);
+            if (1.0f <= Conquest)
+            {
+                ++PlayManager.Instance[VariableByte.Conquested];
+            }
         }
     }
 

@@ -59,7 +59,7 @@ public static class Constants
     public const float GAME_PAUSE = 0.0f;
     public const float AIRMASS_MOVEMENT = 1.0f;
     public const float TEMPERATURE_MOVEMENT = 0.2f;
-    public const float WATER_VOLUME_MOVEMENT = 5.0f;
+    public const float WATER_VOLUME_MOVEMENT = 15.0f;
     public const float CARBON_RATIO_MOVEMENT = 0.2f;
     public const float LIFE_STABILITY_SPEEDMULT = 0.05f;
     public const float EXPLORE_SPEEDMULT = 0.001f;

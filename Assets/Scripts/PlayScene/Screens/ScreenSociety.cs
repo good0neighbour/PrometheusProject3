@@ -53,6 +53,9 @@ public class ScreenSociety : PlayScreenBase
 
     private void Update()
     {
+        // 지지율 이미지
+        _supportRateImage.fillAmount = PlayManager.Instance[VariableFloat.SocietySupportRate] * 0.01f;
+
         // 단축키 동작
 #if PLATFORM_STANDALONE_WIN
         // 키보드 동작

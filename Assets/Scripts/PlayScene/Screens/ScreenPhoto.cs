@@ -36,7 +36,7 @@ public class ScreenPhoto : PlayScreenBase, IRequest
     public void BtnRequestSeed()
     {
         // 사용 불가
-        if (_requestAvailable)
+        if (!_requestAvailable)
         {
             return;
         }

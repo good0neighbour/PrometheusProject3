@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PlayManager : MonoBehaviour
@@ -39,6 +40,7 @@ public class PlayManager : MonoBehaviour
     private float _carbonRatio = 1.0f / Constants.EARTH_CARBON_RATIO_ppm;
     private double _cloudReflectionMultiply = 0.0d;
     private bool _autoSave = false;
+    private bool _isGameEnded = false;
 
     public static PlayManager Instance
     {
@@ -669,7 +671,7 @@ public class PlayManager : MonoBehaviour
         }
 
         // 액체
-        this[VariableFloat.WaterLiquid_PL] = this[VariableFloat.TotalWater_PL] - (this[VariableFloat.WaterGas_PL] + this[VariableFloat.WaterSolid_PL]);
+        this[VariableFloat.WaterLiquid_PL] = this[VariableFloat.TotalWater_PL] - (this[VariableFloat.WaterGas_PL] - this[VariableFloat.WaterSolid_PL]);
         #endregion 물의 체적
 
         #region 탄소 순환
@@ -847,7 +849,7 @@ public class PlayManager : MonoBehaviour
     private void CreateGame()
     {
         _data = new JsonData(true);
-        this[VariableLong.Funds] = GameManager.Instance.StartFund;
+        this[VariableInt.AnnualFund] = GameManager.Instance.StartFund;
         this[VariableUint.Research] = GameManager.Instance.StartResearch;
         this[VariableUshort.TotalIron] = GameManager.Instance.StartResources;
         this[VariableUshort.TotalNuke] = GameManager.Instance.StartResources;
@@ -866,6 +868,7 @@ public class PlayManager : MonoBehaviour
 
         this[VariableByte.Era] = 1;
         this[VariableByte.Month] = 1;
+        this[VariableLong.Funds] = Constants.START_FUND;
         this[VariableFloat.ExploreGoal] = Constants.INITIAL_EXPLORE_GOAL;
         this[VariableFloat.PopulationAdjustment] = 1.0f;
         this[VariableFloat.FacilitySupportRate] = 100.0f;
@@ -932,6 +935,21 @@ public class PlayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 게임 완료
+    /// </summary>
+    private void EndGame(bool isWin)
+    {
+        IsPlaying = false;
+        _isGameEnded = true;
+        OnYearChange = null;
+        OnMonthChange = null;
+        OnPlayUpdate = null;
+        _timer = 0.0f;
+        GameManager.Instance.IsGameWin = isWin;
+    }
+
+
     private void Awake()
     {
         // 유니티식 싱글턴패턴
@@ -984,7 +1002,7 @@ public class PlayManager : MonoBehaviour
         this[VariableFloat.PlanetArea_km2] = (float)(4.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_AREA_ADJUST);
         this[VariableFloat.PlanetMass_Tt] = (float)(4.0d / 3.0d * Math.PI * Math.Pow(this[VariableFloat.PlanetRadius_km], 3.0d) * this[VariableFloat.PlanetDensity_g_cm3] * Constants.PLANET_MASS_ADJUST);
         this[VariableFloat.GravityAccelation_m_s2] = (float)(Constants.GRAVITY_COEFICIENT * this[VariableFloat.PlanetMass_Tt] / Math.Pow(this[VariableFloat.PlanetRadius_km], 2.0d) * Constants.PLANET_GRAVITY_ADJUST);
-        this[VariableFloat.IncomeEnergy] = Mathf.Pow(1.0f / this[VariableFloat.PlanetDistance_AU], 2.0f);
+        this[VariableFloat.IncomeEnergy] = Mathf.Atan(1.0f / this[VariableFloat.PlanetDistance_AU]) * 4.0f / Constants.PI;
         _incomeEnergy_C = this[VariableFloat.IncomeEnergy] * 240.0f;
         _cloudReflectionMultiply = 0.25d / 12.7d / 0.35d;
 
@@ -1013,6 +1031,20 @@ public class PlayManager : MonoBehaviour
         // 시작 전이면 함수 종료.
         if (!IsPlaying)
         {
+            if (_isGameEnded)
+            {
+                _timer += Time.deltaTime;
+                if (_timer >= 2.0f)
+                {
+                    if (!GameManager.Instance.IsGameWin)
+                    {
+                        AudioManager.Instance.ForceStopThemeMusic();
+                    }
+                    Language.OnLanguageChange = null;
+                    SceneManager.LoadScene(2);
+                }
+            }
+
             return;
         }
 
@@ -1038,29 +1070,58 @@ public class PlayManager : MonoBehaviour
                 this[VariableLong.Funds] -= MonthlyCost();
             }
 
+            // 전체 인구 계산
+            this[VariableUint.TotalPopulation] = 0;
+            foreach (City city in _data.Cities)
+            {
+                this[VariableUint.TotalPopulation] += (uint)city.Population;
+            }
+
             // 날짜 변경
             _timer -= Constants.MONTH_TIMER;
             switch (this[VariableByte.Month])
             {
                 case 12:
-                    // 새해
-                    ++this[VariableUshort.Year];
-                    this[VariableByte.Month] = 1;
+                    {
+                        // 새해
+                        ++this[VariableUshort.Year];
+                        this[VariableByte.Month] = 1;
 
-                    // 연간 수익
-                    AnnualGains();
+                        // 연간 수익
+                        AnnualGains();
 
-                    // 매해 호출
-                    OnYearChange?.Invoke();
+                        // 매해 호출
+                        OnYearChange?.Invoke();
 
-                    // 자동 저장
-                    _autoSave = true;
-
+                        // 자동 저장
+                        _autoSave = true;
+                    }
                     break;
 
                 default:
-                    // 다음 달
-                    ++this[VariableByte.Month];
+                    {
+                        // 다음 달
+                        ++this[VariableByte.Month];
+
+                        // 승리 조건
+                        if (50.0f < this[VariableFloat.BreathLifeStability])
+                        {
+                            EndGame(true);
+                            MessageBox.Instance.EnqueueMessage(Language.Instance[
+                                ""
+                                ]);
+                        }
+                        else if (4 <= this[VariableByte.Conquested])
+                        {
+                            EndGame(true);
+                            MessageBox.Instance.EnqueueMessage(Language.Instance[
+                                ""
+                                ]);
+                        }
+
+                        // 패배 조건
+
+                    }
                     break;
             }
 
