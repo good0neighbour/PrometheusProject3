@@ -1292,7 +1292,7 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC591\uC790"
       Type: 1
-  - NodeName: "\uC591\uC790\uB9E4\uD2B8\uB9AD\uC2A4"
+  - NodeName: "\uC591\uC790\uC5ED\uD559"
     Type: 1
     NodePosition: {x: 5, y: 0}
     Description: 
