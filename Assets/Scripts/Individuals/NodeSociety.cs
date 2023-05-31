@@ -8,7 +8,6 @@ public class NodeSociety : MonoBehaviour
 
     [Header("기본")]
     [SerializeField] private string _nodeName = null;
-    [SerializeField] private string _description = null;
     [SerializeField] private byte _eraNum = 1;
     [SerializeField] private TechTrees.SubNode[] _requirements = null;
     [SerializeField] private NodeElementSociety[] _elements = null;
@@ -20,6 +19,7 @@ public class NodeSociety : MonoBehaviour
     [SerializeField] private TMP_Text _titleText = null;
 
     private byte _nodeNum = 0;
+    private ushort _descriptionNum = 0;
     private bool _isEnable = false;
 
     public bool IsAvailable
@@ -34,7 +34,7 @@ public class NodeSociety : MonoBehaviour
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, Language.Instance[_nodeName], Language.Instance[_description], IsAvailable);
+        PopUpViewSociety.Instance.NodeSelect(_nodeNum, -1, Language.Instance[_nodeName], Language.Instance[_descriptionNum], IsAvailable);
     }
 
 
@@ -113,6 +113,9 @@ public class NodeSociety : MonoBehaviour
             elementList.Add(_elements[i]);
         }
 
+        // 설명 글 인덱스
+        _descriptionNum = (ushort)(Language.Instance.GetLanguageIndex(_nodeName) + 1);
+
         // 텍스트 업데이트
         OnLanguageChange();
 
@@ -186,12 +189,6 @@ public class NodeSociety : MonoBehaviour
 
 
     /* ==================== Private Methods ==================== */
-
-    //private string GetCostText()
-    //{
-    //
-    //}
-
 
     private void OnLanguageChange()
     {

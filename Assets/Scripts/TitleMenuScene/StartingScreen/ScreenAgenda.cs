@@ -24,6 +24,12 @@ public class ScreenAgenda : MonoBehaviour
         // 화면 전환
         gameObject.SetActive(false);
         _previousScreen.SetActive(true);
+
+        // 의제 버튼 비활성화
+        for (byte i = 0; i < _agendaBtns.Length; ++i)
+        {
+            _agendaBtns[i].SetActive(false);
+        }
     }
 
 

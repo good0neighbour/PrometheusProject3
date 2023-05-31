@@ -11,7 +11,7 @@ public class TechTrees : ScriptableObject
         public string NodeName;
         public TechTreeType Type;
         public Vector2 NodePosition;
-        public string Description;
+        public ushort DescriptionNum;
         public float ProgressionValue;
         [Header("비용")]
         public ushort FundCost;
@@ -151,11 +151,11 @@ public class TechTrees : ScriptableObject
         for (byte i = 0; i < techTreeNodes.Length; ++i)
         {
             _indexDictionary.Add(techTreeNodes[i].NodeName, i);
+            techTreeNodes[i].DescriptionNum = (ushort)(Language.Instance.GetLanguageIndex(techTreeNodes[i].NodeName) + 1);
         }
 
         // 다음 노드 저장을 위한 배열 생성
-        byte length = (byte)techTreeNodes.Length;
-        _nextNodes[(int)techTreeType] = new List<SubNode>[length];
+        _nextNodes[(int)techTreeType] = new List<SubNode>[(byte)techTreeNodes.Length];
     }
 
 

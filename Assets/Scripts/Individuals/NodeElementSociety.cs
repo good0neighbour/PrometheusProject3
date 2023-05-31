@@ -8,7 +8,6 @@ public class NodeElementSociety : MonoBehaviour
 
     [Header("기본")]
     [SerializeField] private string _elementName = null;
-    [SerializeField] private string _description = null;
     [SerializeField] private float _progreesionPerOnce = 0.1f;
 
     [Header("기본")]
@@ -20,6 +19,7 @@ public class NodeElementSociety : MonoBehaviour
 
     private float _animationAmount = 0.0f;
     private float _animationGoalValue = 0.0f;
+    private ushort _descriptionNum = 0;
     private byte _elementNum = 0;
     private bool _isAvailable = false;
     private bool _animationProceed = false;
@@ -50,7 +50,7 @@ public class NodeElementSociety : MonoBehaviour
 
     public void BtnTouch()
     {
-        PopUpViewSociety.Instance.NodeSelect(-1, _elementNum, Language.Instance[_elementName], Language.Instance[_description], IsAvailable);
+        PopUpViewSociety.Instance.NodeSelect(-1, _elementNum, Language.Instance[_elementName], Language.Instance[_descriptionNum], IsAvailable);
     }
 
 
@@ -79,11 +79,15 @@ public class NodeElementSociety : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 노드 초기화
+    /// </summary>
     public void SetElement(byte elementNum)
     {
         _elementNum = elementNum;
         _titleText.text = _elementName;
         _titleText.color = Constants.TEXT_BUTTON_DISABLE;
+        _descriptionNum = (ushort)(Language.Instance.GetLanguageIndex(_elementName) + 1);
     }
 
 

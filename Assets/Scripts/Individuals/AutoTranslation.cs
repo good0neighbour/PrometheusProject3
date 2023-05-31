@@ -56,7 +56,7 @@ public class AutoTranslation : MonoBehaviour
         // 해당 키가 존재하는지 확인
         if (!Language.Instance.GetContainsKey(_koreanKey))
         {
-            Debug.LogError($"\"{_koreanKey}\" - 존재하지 않는 키. 오타 수정 및 삭제 요망.");
+            Debug.LogError($"\"{_koreanKey}\" - 존재하지 않는 키. 오타 수정 및 삭제 요망.\n{transform.parent.name}/{name}");
             Language.OnLanguageChange -= OnLanguageChange;
         }
     }

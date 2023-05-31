@@ -4,17 +4,17 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
 {
     [SerializeField] private ushort _fundCost = 0;
     [SerializeField] protected string Name = null;
-    [SerializeField] private string _description = null;
 
     protected Force CurrentForce = null;
     protected byte SlotNumber = 0;
+    private ushort _descriptionNum = 0;
 
     /// <summary>
     /// 설명 글 반환
     /// </summary>
     public string GetDescription()
     {
-        return $"[{Language.Instance[Name]}]\n{Language.Instance[_description]}";
+        return $"[{Language.Instance[Name]}]\n{Language.Instance[_descriptionNum]}";
     }
 
     protected override void Cost()
@@ -40,5 +40,11 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
     {
         base.OnCoolTimeEnd();
         PopUpScreenDiplomacy.Instance.EmptySlot(CurrentForce, SlotNumber);
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _descriptionNum = (ushort)(Language.Instance.GetLanguageIndex(Name) + 1);
     }
 }

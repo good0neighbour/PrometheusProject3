@@ -3720,7 +3720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!1 &719808464
 GameObject:
@@ -4969,7 +4969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!1 &847681704
 GameObject:
@@ -6780,7 +6780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1074704369
 MonoBehaviour:
@@ -7292,7 +7292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1137193481
 MonoBehaviour:
@@ -11764,7 +11764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1828489366
 MonoBehaviour:

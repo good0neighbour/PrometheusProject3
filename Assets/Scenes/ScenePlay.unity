@@ -2394,7 +2394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uC790\uB3D9\uD654\uC0AC\uD68C"
-  _description: 
   _eraNum: 4
   _requirements:
   - NodeName: "\uC138\uC18D\uC8FC\uC758"
@@ -3573,7 +3572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uBB38\uD654\uB300\uD601\uBA85"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 541501343}
@@ -8138,15 +8136,6 @@ MonoBehaviour:
   _availableImage: {fileID: 413260438}
   _fundCost: 0
   Name: "\uC601\uD654 \uC218\uCD9C"
-  _description: "\uD574\uB2F9 \uAD6D\uAC00\uB97C \uBC30\uACBD\uC73C\uB85C \uD558\uB294
-    \uC601\uD654\uB97C \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00\uC5D0\uC11C \uC81C\uC791\uD569\uB2C8\uB2E4.
-    \uBAA8\uB4E0 \uC81C\uC791\uBB3C\uC740 \uD50C\uB808\uC774\uC5B4\uC758 \uC5B8\uC5B4\uB97C
-    \uC0AC\uC6A9\uD558\uACE0, \uC774\uB7EC\uD55C \uC601\uD654\uC5D0 \uB9E4\uB8CC\uB41C
-    \uC2DC\uBBFC\uB4E4\uC740 \uD574\uB2F9 \uAD6D\uAC00\uB97C \uBC30\uACBD\uC73C\uB85C
-    \uD558\uB294 \uC601\uD654\uB97C \uBCF4\uAE30 \uC704\uD574 \uD50C\uB808\uC774\uC5B4
-    \uAD6D\uAC00\uC758 \uC81C\uC791\uBB3C\uC744 \uCC3E\uC744 \uAC83\uC785\uB2C8\uB2E4.
-    \uD50C\uB808\uC774\uC5B4\uC758 \uBB38\uD654\uAC00 \uD574\uB2F9 \uAD6D\uAC00\uB97C
-    \uC555\uB3C4\uD560 \uC218\uB85D \uD6A8\uACFC\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
 --- !u!1 &120174968
 GameObject:
   m_ObjectHideFlags: 0
@@ -8374,7 +8363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "5\uAC1C\uB144 \uACC4\uD68D"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 679853200}
@@ -11748,7 +11736,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAD8C\uB9AC\uC7A5\uC804"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 855115241}
@@ -12713,7 +12700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1386437170}
@@ -13854,7 +13840,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC758\uD68C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 672797702}
@@ -14372,7 +14357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uAE30\uC5C5\uC0AC\uD68C"
-  _description: 
   _eraNum: 4
   _requirements:
   - NodeName: "\uC2E4\uC6A9\uC8FC\uC758"
@@ -14683,7 +14667,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 684720694}
@@ -14777,7 +14760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &247850258
 MonoBehaviour:
@@ -15213,7 +15196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uB3D9\uC6D0\uB839"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1889142297}
@@ -16874,7 +16856,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1919475278}
@@ -18699,7 +18680,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 541738582}
@@ -20765,7 +20745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 751254543}
@@ -21261,12 +21240,6 @@ MonoBehaviour:
   _availableImage: {fileID: 304442890}
   _fundCost: 0
   Name: "\uC815\uCE58\uC778 \uC555\uBC15"
-  _description: "\uC18D\uAD6D\uD654 \uC791\uC5C5\uC744 \uC704\uD574 \uD574\uB2F9
-    \uAD6D\uAC00\uC758 \uC815\uCE58\uC778\uC744 \uC555\uBC15\uD558\uAC70\uB098 \uB9E4\uC218\uD569\uB2C8\uB2E4.
-    \uC555\uBC15\uB2F9\uD55C \uC815\uCE58\uC778\uC740 \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00\uC5D0
-    \uB300\uD55C \uC801\uB300\uC790 \uC218\uB97C \uC904\uC774\uB824 \uD560 \uAC83\uC785\uB2C8\uB2E4.
-    \uD50C\uB808\uC774\uC5B4\uC758 \uBB38\uD654\uAC00 \uD574\uB2F9 \uAD6D\uAC00\uB97C
-    \uC555\uB3C4\uD558\uC9C0 \uC54A\uC73C\uBA74 \uC5ED\uD6A8\uACFC\uAC00 \uBC1C\uC0DD\uD569\uB2C8\uB2E4."
 --- !u!1 &360144518
 GameObject:
   m_ObjectHideFlags: 0
@@ -23189,7 +23162,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -23652,7 +23625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 803575710}
@@ -24205,7 +24177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAC1C\uC778\uC22D\uBC30"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 228770186}
@@ -24663,8 +24634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uADC0\uC871\uACF5\uD654\uC81C"
-  _description: "\uD2B9\uAD8C\uC774 \uC778\uC815\uB41C \uADC0\uC871\uC774 \uD569\uBC95\uC801
-    \uD1B5\uCE58 \uC9C0\uD718\uB97C \uAC00\uC9C0\uB294 \uACF5\uD654\uC81C\uC785\uB2C8\uB2E4."
   _eraNum: 2
   _requirements:
   - NodeName: "\uC0C1\uB300\uC8FC\uC758"
@@ -25561,7 +25530,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAD8C\uB825\uBD84\uB9BD"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 105161870}
@@ -25852,8 +25820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uB3C5\uC7AC\uC8FC\uC758"
-  _description: "\uC778\uBBFC\uD22C\uD45C \uB4F1\uC758 \uD615\uD0DC\uB85C\uC11C \uB300\uC911\uC758
-    \uC9C0\uC9C0\uB97C \uBC1B\uB294 \uC18C\uC218\uAC00 \uC9C0\uBC30\uD558\uB294 \uC0AC\uD68C\uC785\uB2C8\uB2E4."
   _eraNum: 3
   _requirements:
   - NodeName: "\uC804\uCCB4\uC8FC\uC758"
@@ -26441,15 +26407,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1978367312}
   _fundCost: 10
   Name: "\uC57D\uC790 \uD610\uC624 \uC120\uB3D9"
-  _description: "\uB178\uC778, \uC5EC\uC131, \uC7A5\uC560\uC778 \uB4F1\uC5D0 \uB300\uD55C
-    \uBE44\uD558 \uB2E8\uC5B4\uB97C \uCC3D\uC870\uD574 \uC720\uD589\uC2DC\uD0A4\uACE0
-    \uC774\uB4E4\uC5D0 \uB300\uD55C \uBD88\uCF8C\uD55C \uAC10\uC815\uC744 \uB290\uB07C\uB3C4\uB85D
-    \uC720\uB3C4\uD569\uB2C8\uB2E4. \uC774\uB4E4\uC744 \uBE44\uD558\uD558\uB294 \uC2DC\uBBFC\uC740
-    \uC790\uC2E0\uC758 \uAC10\uC815\uC744 \uAC1D\uAD00\uC801\uC778 \uC9C0\uD45C\uB85C
-    \uC0AC\uC6A9\uD558\uACE0 \uBE44\uD558 \uD589\uC704\uB97C \uC815\uC758\uB85C \uC5EC\uAE30\uBA70
-    \uC790\uC2E0\uC758 \uD589\uB3D9\uC5D0 \uC798\uBABB\uB41C \uC810\uC744 \uC778\uC9C0\uD558\uC9C0
-    \uBABB\uD569\uB2C8\uB2E4. \uC774\uB294 \uD574\uB2F9 \uAD6D\uAC00\uC5D0 \uB0B4\uBD80\uAC08\uB4F1\uC744
-    \uC720\uBC1C\uD569\uB2C8\uB2E4."
 --- !u!1001 &473510506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26671,11 +26628,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1809859114}
   _fundCost: 10
   Name: "\uC74C\uC545 \uACF5\uC5F0"
-  _description: "\uC804\uC124\uC801\uC778 \uB77D \uBC34\uB4DC, \uC5B4\uB450\uC6B4
-    \uB0B4\uBA74\uC744 \uB178\uB798\uD558\uB294 \uD799\uD569, \uC6B0\uC544\uD55C
-    \uC678\uBAA8\uC640 \uCDA4\uB3D9\uC791\uC73C\uB85C \uB300\uC911\uC5D0\uAC8C \uC778\uAE30\uB97C
-    \uB044\uB294 \uB304\uC2A4 \uAC00\uC218 \uB4F1 \uAD6D\uAC00\uC758 \uBB38\uD654\uB97C
-    \uD574\uC678\uC5D0 \uC54C\uB9BD\uB2C8\uB2E4."
 --- !u!114 &478091486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28488,7 +28440,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -28660,9 +28612,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uC804\uC81C\uAD70\uC8FC\uC81C"
-  _description: "\uAD6D\uAC00\uB97C \uD1B5\uCE58\uD558\uB294 \uAD70\uC8FC\uAC00 \uAC00\uC7A5
-    \uAC15\uB825\uD55C \uAD8C\uB825\uC744 \uAC00\uC9C0\uB294 \uC774\uC0C1\uC801\uC778
-    \uD615\uD0DC\uC758 \uC0AC\uD68C\uB97C \uC2E4\uD604\uD569\uB2C8\uB2E4."
   _eraNum: 2
   _requirements:
   - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
@@ -28822,7 +28771,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1696303521}
@@ -28977,8 +28925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uACF5\uD654\uC81C"
-  _description: "\uBAA8\uB4E0 \uC0AC\uD68C \uAD6C\uC131\uC6D0\uC774 \uC8FC\uAD8C\uC744
-    \uAC00\uC9C0\uACE0 \uAD6D\uAC00 \uD1B5\uCE58\uC5D0 \uC784\uD569\uB2C8\uB2E4."
   _eraNum: 1
   _requirements:
   - NodeName: "\uC808\uB300\uC8FC\uC758"
@@ -30487,7 +30433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAD00\uB4F1\uC81C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1112171991}
@@ -31499,7 +31444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uBD09\uAC74\uC81C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1319755114}
@@ -33354,7 +33298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &584251564
 MonoBehaviour:
@@ -33606,14 +33550,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1626134637}
   _fundCost: 0
   Name: "\uC790\uAD6D \uC601\uC6C5\uD654"
-  _description: "\uC804\uC7C1 \uC601\uD654, \uC601\uC6C5 \uC601\uD654 \uB4F1\uC5D0\uC11C
-    \uAC00\uC7A5 \uAC15\uB825\uD558\uACE0 \uC815\uC758\uB85C\uC6B4 \uC778\uBB3C\uC740
-    \uD56D\uC0C1 \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00 \uCD9C\uC2E0\uC785\uB2C8\uB2E4.
-    \uD574\uB2F9 \uAD6D\uAC00\uC758 \uC2DC\uBBFC\uB4E4\uC740 \uD50C\uB808\uC774\uC5B4
-    \uAD6D\uAC00\uB97C \uC815\uC758\uB85C\uC6B4 \uAD6D\uAC00\uB85C \uC778\uC2DD\uD558\uACE0
-    \uC790\uC2E0\uC758 \uAD6D\uAC00\uB97C \uD558\uCC2E\uAC8C \uC5EC\uAE41\uB2C8\uB2E4.
-    \uD50C\uB808\uC774\uC5B4\uC758 \uBB38\uD654\uAC00 \uD574\uB2F9 \uAD6D\uAC00\uB97C
-    \uC555\uB3C4\uD560 \uC218\uB85D \uD6A8\uACFC\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
 --- !u!1 &585924843
 GameObject:
   m_ObjectHideFlags: 0
@@ -33807,7 +33743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 269059965}
@@ -34230,7 +34165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC728\uB839"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 335305706}
@@ -35138,7 +35072,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC6D0\uB85C\uC6D0"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 22221723}
@@ -37938,7 +37871,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1785148509}
@@ -38816,7 +38748,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -39240,12 +39172,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1409238510}
   _fundCost: 10
   Name: "\uC124\uAC70\uC9C0\uB860 \uD22C\uC785"
-  _description: "\uC131\uBE44\uBD88\uADE0\uD615\uC5D0\uC11C \uBE44\uB86F\uB41C \uD604\uC0C1\uC744
-    \uBAA8\uB4E0 \uAD6D\uAC00\uC5D0 \uC801\uC6A9 \uAC00\uB2A5\uD55C \uC774\uC57C\uAE30\uCC98\uB7FC
-    \uAFB8\uBC09\uB2C8\uB2E4. \uC2DC\uBBFC \uAC04\uC758 \uBD88\uC2E0\uC744 \uC57C\uAE30\uD558\uACE0
-    \uD63C\uC778\uB960 \uC800\uD558, \uC800\uCD9C\uC0B0 \uB4F1\uC744 \uC720\uB3C4\uD574
-    \uC7A5\uAE30\uC801\uC73C\uB85C \uD574\uB2F9 \uAD6D\uAC00\uC758 \uAD6D\uB825\uC5D0
-    \uD0C0\uACA9\uC744 \uAC00\uD569\uB2C8\uB2E4."
 --- !u!1 &697409581
 GameObject:
   m_ObjectHideFlags: 0
@@ -41930,12 +41856,6 @@ MonoBehaviour:
   _availableImage: {fileID: 360557454}
   _fundCost: 0
   Name: "\uC5ED\uC0AC \uBE44\uD558"
-  _description: "\uD574\uB2F9 \uAD6D\uAC00\uC758 \uC655\uC871, \uADC0\uC871, \uBB38\uD654
-    \uB4F1\uC744 \uBE44\uD558\uD558\uACE0 \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00\uC758
-    \uC5ED\uC0AC\uB97C \uC6B0\uC0C1\uC73C\uB85C \uC5EC\uAE30\uB294 \uC601\uD654,
-    \uB4DC\uB77C\uB9C8 \uB4F1\uC744 \uBC29\uC601\uD569\uB2C8\uB2E4. \uD50C\uB808\uC774\uC5B4\uC758
-    \uBB38\uD654\uAC00 \uD574\uB2F9 \uAD6D\uAC00\uB97C \uC555\uB3C4\uD558\uC9C0 \uC54A\uC73C\uBA74
-    \uC5ED\uD6A8\uACFC\uAC00 \uBC1C\uC0DD\uD569\uB2C8\uB2E4."
 --- !u!1 &740185018
 GameObject:
   m_ObjectHideFlags: 0
@@ -42857,7 +42777,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1595979182}
@@ -43161,7 +43080,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC790\uBCF8\uC8FC\uC758"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1259088395}
@@ -45901,7 +45819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC911\uC559\uC9D1\uAD8C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 64227716}
@@ -46383,13 +46300,6 @@ MonoBehaviour:
   _availableImage: {fileID: 431189870}
   _fundCost: 10
   Name: "\uCC3D\uC870\uACFC\uD559\uB860 \uD22C\uC785"
-  _description: "\uC2E0\uC758 \uCC3D\uC870\uC640 \uBC95\uCE59\uC744 \uAC70\uBD80\uD558\uACE0
-    \uC624\uC9C1 \uC790\uC2E0\uC758 \uB208\uB9CC\uC774 \uC9C4\uC2E4\uC774\uB77C \uBBFF\uB294
-    \uC774\uAD50\uB3C4 \uC9D1\uB2E8\uC744 \uD615\uC131\uD569\uB2C8\uB2E4. \uC774\uB4E4\uC740
-    \uD559\uACC4\uC5D0 \uBC1C\uD45C\uB41C \uB0B4\uC6A9\uC744 \uC790\uC2E0\uB4E4\uC758
-    \uBAA9\uC801\uC5D0 \uB9DE\uAC8C \uD3B8\uC9D1\uD574 \uC2E0\uC758 \uC9C4\uB9AC\uB97C
-    \uC65C\uACE1\uD569\uB2C8\uB2E4. \uD574\uB2F9 \uAD6D\uAC00\uB294 \uAD6D\uB825\uC744
-    \uB4E4\uC5EC \uC774\uB7EC\uD55C \uC74C\uBAA8\uB860\uC5D0 \uBC29\uC5B4\uD569\uB2C8\uB2E4."
 --- !u!1 &816572708
 GameObject:
   m_ObjectHideFlags: 0
@@ -46801,7 +46711,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC9D5\uBCD1\uC81C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 2125408305}
@@ -47464,7 +47373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &841827884
 MonoBehaviour:
@@ -49786,7 +49695,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uBCD1\uC601\uAD6D\uAC00"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1298060605}
@@ -51055,7 +50963,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 389742719}
@@ -51209,7 +51116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1244773360}
@@ -52251,7 +52157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &931623703
 MonoBehaviour:
@@ -53481,7 +53387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC18C\uB4DD\uC7AC\uBD84\uBC30"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1990665880}
@@ -53938,8 +53843,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uC785\uD5CC\uAD70\uC8FC\uC81C"
-  _description: "\uD5CC\uBC95\uC5D0 \uC758\uD55C \uAD70\uC8FC\uC640 \uC758\uD68C\uC758
-    \uAD8C\uB825 \uBD84\uB9BD\uC744 \uC778\uC815\uD569\uB2C8\uB2E4."
   _eraNum: 2
   _requirements:
   - NodeName: "\uC790\uC720\uC8FC\uC758"
@@ -54920,7 +54823,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -55104,7 +55007,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -55200,7 +55103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &971024027
 MonoBehaviour:
@@ -56341,7 +56244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &996623741
 MonoBehaviour:
@@ -57772,13 +57675,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1004833721}
   _fundCost: 0
   Name: "\uBB38\uD654 \uD3B8\uACAC"
-  _description: "\uBBF8\uB514\uC5B4\uC5D0\uC11C \uD2B9\uC815 \uBBFC\uC871\uC5D0 \uB300\uD574
-    \uBB34\uC220, \uC885\uC774\uC811\uAE30, \uB9C8\uD53C\uC544 \uB4F1 \uD2B9\uC815\uD55C
-    \uC774\uBBF8\uC9C0\uB97C \uAC01\uC778\uC2DC\uD0B5\uB2C8\uB2E4. \uC2DC\uBBFC\uB4E4\uC740
-    \uD574\uB2F9 \uBBFC\uC871\uC5D0 \uB300\uD574 \uAC01\uC778\uB41C \uC774\uBBF8\uC9C0
-    \uC774\uC678\uC5D0 \uB2E4\uB978 \uAC83\uC744 \uBCF4\uC9C0 \uBABB \uD569\uB2C8\uB2E4.
-    \uD50C\uB808\uC774\uC5B4\uC758 \uBB38\uD654\uAC00 \uD574\uB2F9 \uAD6D\uAC00\uB97C
-    \uC555\uB3C4\uD560 \uC218\uB85D \uD6A8\uACFC\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
 --- !u!1 &1040262830
 GameObject:
   m_ObjectHideFlags: 0
@@ -61970,12 +61866,6 @@ MonoBehaviour:
   _availableImage: {fileID: 581795118}
   _fundCost: 10
   Name: "\uB3D9\uC591\uD654"
-  _description: "\uACFC\uAC70 \uC9C0\uAD6C\uC758 \uD55C \uC5F4\uB3C4\uC5D0\uC11C
-    \uC2DC\uC791\uB41C \uB3C5\uD2B9\uD55C \uC791\uD654\uAC00 \uC804\uC138\uACC4 \uACF3\uACF3\uC5D0
-    \uB9C8\uB2C8\uC544\uB97C \uB9CC\uB4E4\uC5B4\uB0C8\uC2B5\uB2C8\uB2E4. \uD574\uB2F9
-    \uBB38\uD654\uC5D0 \uB9E4\uB8CC\uB41C \uC2DC\uBBFC\uB4E4\uC740 \uADF8 \uD2B9\uC720\uD55C
-    \uC791\uD654\uB97C \uC790\uC2E0\uC758 \uAE30\uC220\uB85C \uBC1B\uC544\uB4E4\uC774\uACE0
-    \uB354 \uB9CE\uC740 \uBB38\uD654 \uCF58\uD150\uCE20\uB97C \uB9CC\uB4E4\uC5B4\uB0C5\uB2C8\uB2E4."
 --- !u!114 &1116585855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63018,7 +62908,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBCF4\uC11D \uC124\uBA85"
+  m_text: "=== \uBCF4\uC11D \uC124\uBA85 ==="
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2db59ff5317338244a35614884281f17, type: 2}
   m_sharedMaterial: {fileID: 5909370667944466562, guid: 2db59ff5317338244a35614884281f17, type: 2}
@@ -63999,7 +63889,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 589356125}
@@ -66415,13 +66304,6 @@ MonoBehaviour:
   _availableImage: {fileID: 259957294}
   _fundCost: 10
   Name: "\uC815\uCE58 \uC74C\uBAA8\uB860 \uD22C\uC785"
-  _description: "\uC601\uD654 \uC18C\uC7AC\uB85C \uC0AC\uC6A9\uB420 \uBC95\uD55C
-    \uC815\uBD80 \uC74C\uBAA8\uC5D0 \uB300\uD55C \uC774\uC57C\uAE30\uAC00 \uD604\uC2E4\uC5D0\uC11C
-    \uBC1C\uC0DD\uD55C\uB2E4\uB294 \uBBFF\uC74C\uC744 \uC90D\uB2C8\uB2E4. \uC74C\uBAA8\uB860\uC744
-    \uB4B7\uBC1B\uCE68\uD560 \uADFC\uAC70\uB294 \uD131\uC5C6\uC774 \uBD80\uC871\uD558\uC9C0\uB9CC
-    \uBE44\uC804\uBB38\uAC00\uC5D0\uAC8C\uB294 \uC0C1\uB2F9\uD788 \uC124\uB4DD\uB825\uC788\uAC8C
-    \uB4E4\uB9AC\uB294 \uD0D3\uC5D0 \uBAA8\uB4E0 \uC0C1\uD669\uC5D0\uC11C \uC815\uBD80\uB97C
-    \uBD88\uC2E0\uD558\uBA70 \uD2B9\uC815 \uC138\uB825\uC758 \uAC1C\uC785\uC744 \uC758\uC2EC\uD569\uB2C8\uB2E4."
 --- !u!1 &1199790591
 GameObject:
   m_ObjectHideFlags: 0
@@ -66533,7 +66415,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1399724948}
@@ -66989,7 +66870,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uACFC\uB450\uC81C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 199492696}
@@ -68709,7 +68589,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uB274\uB51C\uC815\uCC45"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 802204974}
@@ -69131,7 +69010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uD3C9\uB4F1\uC0AC\uD68C"
-  _description: 
   _eraNum: 4
   _requirements:
   - NodeName: "\uACC4\uBABD\uC8FC\uC758"
@@ -69627,7 +69505,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uACBD\uCC30\uAD6D\uAC00"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1714844231}
@@ -70179,7 +70056,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uC815\uBCF4\uC0AC\uD68C"
-  _description: 
   _eraNum: 4
   _requirements:
   - NodeName: "\uD569\uB9AC\uC8FC\uC758"
@@ -73288,9 +73164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uD300\uC7A5\uC81C"
-  _description: "\uB300\uBD80\uBD84\uC774 \uC804\uBB38\uAC00\uB85C \uAD6C\uC131\uB41C
-    \uD14C\uB77C\uD3EC\uBC0D \uD300\uC6D0 \uC911 \uCD1D\uAD04 \uC5C5\uBB34\uB97C
-    \uB9E1\uC740 \uC0AC\uB78C\uC774 \uC9C0\uB3C4\uC790 \uC5ED\uD560\uC744 \uC218\uD589\uD569\uB2C8\uB2E4."
   _eraNum: 0
   _requirements: []
   _elements: []
@@ -74279,13 +74152,6 @@ MonoBehaviour:
   _availableImage: {fileID: 685723663}
   _fundCost: 0
   Name: "\uC5ED\uC0AC \uAE30\uC6D0"
-  _description: "\uD574\uB2F9 \uAD6D\uAC00\uC758 \uC5ED\uC0AC\uC801, \uBB38\uD654\uC801
-    \uAE30\uC6D0\uC774 \uBAA8\uB450 \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00\uC5D0 \uC788\uC74C\uC744
-    \uC54C\uB9BD\uB2C8\uB2E4. \uC774\uB294 \uD559\uC220\uC801 \uAC80\uC99D\uC744
-    \uD68C\uD53C\uD558\uAC70\uB098 \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00\uC758 \uB9DE\uCDA4\uD615
-    \uAC80\uC99D\uC744 \uAC70\uCE58\uACE0 \uBBF8\uB514\uC5B4\uC5D0 \uB178\uCD9C\uC2DC\uD0B5\uB2C8\uB2E4.
-    \uD50C\uB808\uC774\uC5B4\uC758 \uBB38\uD654\uAC00 \uD574\uB2F9 \uAD6D\uAC00\uB97C
-    \uC555\uB3C4\uD558\uC9C0 \uC54A\uC73C\uBA74 \uC5ED\uD6A8\uACFC\uAC00 \uBC1C\uC0DD\uD569\uB2C8\uB2E4."
 --- !u!1 &1355607131
 GameObject:
   m_ObjectHideFlags: 0
@@ -79075,7 +78941,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC2E0\uB8B0\uB3C4 \uACF5\uACA9"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 186163947}
@@ -79229,7 +79094,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uD638\uBBFC\uAD00"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1394575139}
@@ -79670,9 +79534,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uAD70\uAD6D\uC8FC\uC758"
-  _description: "\uAD70\uC0AC\uB825\uC5D0 \uC758\uD55C \uB300\uC678\uC801 \uBC1C\uC804\uACFC
-    \uCE58\uC548 \uAC15\uD654\uAC00 \uAD6D\uAC00\uC758 \uAC00\uC7A5 \uC911\uC694\uD55C
-    \uBAA9\uC801\uC774 \uB429\uB2C8\uB2E4."
   _eraNum: 3
   _requirements:
   - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
@@ -87047,7 +86908,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAD70\uC0AC\uD654"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 888469691}
@@ -87340,9 +87200,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1701885462}
   _fundCost: 10
   Name: "\uC758\uBCF5 \uC720\uD589"
-  _description: "\uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00\uC758 \uC720\uD589\uC774 \uC138\uB828\uB410\uB2E4\uACE0
-    \uBBFF\uB294 \uC0AC\uB78C\uC740 \uD50C\uB808\uC774\uC5B4 \uAD6D\uAC00 \uC2DC\uBBFC\uC758
-    \uC637\uCC28\uB9BC\uC744 \uBA4B\uC758 \uAE30\uC900\uC73C\uB85C \uC0BC\uC2B5\uB2C8\uB2E4."
 --- !u!114 &1581632089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89479,7 +89336,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1200748651}
@@ -90210,7 +90066,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1231180930}
@@ -90685,7 +90540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uBCF4\uD1B5\uC120\uAC70"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1358982953}
@@ -90929,7 +90783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1639502814
 MonoBehaviour:
@@ -91785,7 +91639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uB2F9 \uC9C0\uB3C4\uBD80"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 105716870}
@@ -93220,7 +93073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC2DC\uBBFC\uC0AC\uD68C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 2143922491}
@@ -96986,12 +96838,6 @@ MonoBehaviour:
   _availableImage: {fileID: 1154928523}
   _fundCost: 10
   Name: "\uADF9\uB2E8\uC801 \uCC44\uC2DD\uC8FC\uC758 \uC120\uB3D9"
-  _description: "\uC62C\uBC14\uB984\uC774\uB77C\uB294 \uB2E8\uC5B4\uB85C \uC704\uC7A5\uD558\uC5EC
-    \uADF9\uB2E8\uC801\uC778 \uB3D9\uBB3C \uBCF4\uD638\uB97C \uC704\uD574 \uD3C9\uBC94\uD55C
-    \uC2DD\uC695\uC744 \uAC00\uC9C4 \uC778\uAC04\uC744 \uD76C\uC0DD\uD569\uB2C8\uB2E4.
-    \uB3D9\uBB3C\uC5D0 \uB300\uD55C \uD3ED\uB825\uC744 \uB9C9\uAE30 \uC704\uD574
-    \uC778\uAC04\uC5D0\uAC8C \uD3ED\uC5B8, \uD3ED\uD589\uC744 \uAC00\uD558\uBA70
-    \uD574\uB2F9 \uAD6D\uAC00\uC5D0 \uB0B4\uBD80\uAC08\uB4F1\uC744 \uC720\uBC1C\uD569\uB2C8\uB2E4."
 --- !u!1 &1789571026
 GameObject:
   m_ObjectHideFlags: 0
@@ -97655,7 +97501,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -97828,7 +97674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uBB38\uD654\uC0AC\uD68C"
-  _description: 
   _eraNum: 4
   _requirements:
   - NodeName: "\uACC4\uBABD\uC8FC\uC758"
@@ -99847,7 +99692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD575\uBB3C\uC9C8 \uC124\uBA85"
+  m_text: "=== \uD575\uBB3C\uC9C8 \uC124\uBA85 ==="
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2db59ff5317338244a35614884281f17, type: 2}
   m_sharedMaterial: {fileID: 5909370667944466562, guid: 2db59ff5317338244a35614884281f17, type: 2}
@@ -100479,7 +100324,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -100677,13 +100522,6 @@ MonoBehaviour:
   _availableImage: {fileID: 157030447}
   _fundCost: 10
   Name: "\uC804\uC790 \uD398\uBBF8\uB2C8\uC998 \uC120\uB3D9"
-  _description: "\uC815\uCE58\uC801 \uC6B0\uC704\uB97C \uCC28\uC9C0\uD558\uAE30 \uC704\uD574
-    \uD398\uBBF8\uB2C8\uC998\uC758 \uC774\uB984\uC744 \uC0AC\uC6A9\uD558\uB294 \uC9D1\uB2E8\uC744
-    \uCD9C\uD604\uC2DC\uD0B5\uB2C8\uB2E4. \uACE0\uC758\uB85C \uC790\uADF9\uC801\uC778
-    \uBC1C\uC5B8\uC744 \uD558\uBA70 \uC790\uC2E0\uB4E4\uC758 \uC874\uC7AC\uB97C \uC54C\uB9AC\uACE0
-    \uBCF8\uB798 \uD398\uBBF8\uB2C8\uC998\uC758 \uBA85\uC608\uB97C \uC2E4\uCD94\uC2DC\uD0B5\uB2C8\uB2E4.
-    \uC774\uB4E4\uC740 \uD574\uB2F9 \uAD6D\uAC00\uC5D0 \uB0B4\uBD80\uAC08\uB4F1\uC744
-    \uC720\uBC1C\uD569\uB2C8\uB2E4."
 --- !u!1 &1845373000
 GameObject:
   m_ObjectHideFlags: 0
@@ -101550,7 +101388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1856263985
 MonoBehaviour:
@@ -102150,7 +101988,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 30
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -103544,7 +103382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 377619286}
@@ -103698,7 +103535,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAD6D\uBBFC\uC8FC\uAD8C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 713954533}
@@ -105121,7 +104957,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCCA0 \uC124\uBA85"
+  m_text: "=== \uCCA0 \uC124\uBA85 ==="
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2db59ff5317338244a35614884281f17, type: 2}
   m_sharedMaterial: {fileID: 5909370667944466562, guid: 2db59ff5317338244a35614884281f17, type: 2}
@@ -105728,7 +105564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uB300\uC758\uC81C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1139038506}
@@ -105898,7 +105733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1947498119
 MonoBehaviour:
@@ -106543,7 +106378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 320673858}
@@ -107103,8 +106937,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uC0AC\uD68C\uC8FC\uC758"
-  _description: "\uC0AC\uC720 \uC7AC\uC0B0 \uC81C\uB3C4\uB97C \uD3D0\uC9C0\uD558\uACE0
-    \uC0DD\uC0B0 \uC218\uB2E8\uC744 \uC0AC\uD68C\uD654\uD569\uB2C8\uB2E4."
   _eraNum: 3
   _requirements:
   - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
@@ -107682,7 +107514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uAD00\uB8CC\uC81C"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1695649278}
@@ -107873,7 +107704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &1985164067
 MonoBehaviour:
@@ -108597,8 +108428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uBBFC\uC8FC\uC8FC\uC758"
-  _description: "\uAD6D\uBBFC\uC774 \uAD8C\uB825\uC744 \uAC00\uC9C0\uACE0 \uADF8
-    \uAD8C\uB825\uC744 \uC2A4\uC2A4\uB85C \uD589\uC0AC\uD569\uB2C8\uB2E4."
   _eraNum: 3
   _requirements:
   - NodeName: "\uAC1C\uC778\uC8FC\uC758"
@@ -108849,7 +108678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 0
+  _onlyChangeFont: 1
   _shortenLineGap: 1
 --- !u!114 &2000056728
 MonoBehaviour:
@@ -112305,7 +112134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1944096072}
@@ -113540,9 +113368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: "\uAD70\uC8FC\uC81C"
-  _description: "\uD55C \uC0AC\uB78C\uC774 \uAD6D\uAC00 \uC8FC\uAD8C\uC744 \uAC00\uC9C4
-    \uAD70\uC8FC\uAC00 \uB418\uC5B4 \uD6A8\uC728\uC801\uC778 \uACB0\uC815 \uAD8C\uD55C\uC744
-    \uAC00\uC9D1\uB2C8\uB2E4."
   _eraNum: 1
   _requirements:
   - NodeName: "\uC808\uB300\uC8FC\uC758"
@@ -115044,7 +114869,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: "\uC815\uBCF4 \uD3D0\uC1E0"
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 98478987}
@@ -115348,7 +115172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 
-  _description: 
   _progreesionPerOnce: 0.1
   _cultureCost: 1
   _titleText: {fileID: 1387342434}

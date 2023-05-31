@@ -85,6 +85,13 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
     }
 
 
+    protected virtual void Awake()
+    {
+        // 대리자 등록
+        PlayManager.OnPlayUpdate += OnPlayUpdate;
+    }
+
+
 
     /* ==================== Private Methods ==================== */
 
@@ -130,12 +137,5 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
                 _titleText.color = Constants.TEXT_BUTTON_DISABLE;
             }
         }
-    }
-
-
-    private void Awake()
-    {
-        // 대리자 등록
-        PlayManager.OnPlayUpdate += OnPlayUpdate;
     }
 }
