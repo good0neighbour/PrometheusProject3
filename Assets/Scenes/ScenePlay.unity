@@ -24058,7 +24058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa72a5f4e1b61c64da5172caa6c7b5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
   _backgroundBar: {fileID: 1645927655}
   _loadingText: {fileID: 390905606}
   _startButton: {fileID: 1491357442}
@@ -34845,10 +34844,10 @@ RectTransform:
   m_Father: {fileID: 482043797}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &608155781
 MonoBehaviour:
@@ -34862,7 +34861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 1
+  _onlyChangeFont: 0
   _shortenLineGap: 1
 --- !u!114 &608155782
 MonoBehaviour:

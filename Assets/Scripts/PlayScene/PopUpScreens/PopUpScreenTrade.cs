@@ -97,12 +97,12 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
         // 수입 증가
         --_amount[resourceIndex];
         AmountTextUpdate((byte)resourceIndex);
-        _amountDownBtn[resourceIndex].SetActive(true);
+        _amountUpBtn[resourceIndex].SetActive(true);
 
         // 아래 버튼 활성화 여부
         if (byte.MaxValue  <= -_amount[resourceIndex])
         {
-            _amountUpBtn[resourceIndex].SetActive(false);
+            _amountDownBtn[resourceIndex].SetActive(false);
         }
 
         // 거래 가능 확인
@@ -262,7 +262,7 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
     private void OnEnable()
     {
         // 세력 이름
-        _forceName.text = ScreenDiplomacy.CurrentForce.ForceName;
+        _forceName.text = Language.Instance[ScreenDiplomacy.CurrentForce.ForceName];
 
         // 우호도 정보
         _friendlyImage.fillAmount = ScreenDiplomacy.CurrentForce.Friendly;
@@ -282,19 +282,27 @@ public class PopUpScreenTrade : MonoBehaviour, IPopUpScreen
             _amountText[i].text = "0";
             _signText[i].text = null;
             _amount[i] = 0;
-            _amountUpBtn[i].SetActive(true);
             _price[0, i] = (short)Mathf.Round(Constants.RESOURCES_BASE_PRICE[i] * exportMultiply);
             _price[1, i] = (short)Mathf.Round(Constants.RESOURCES_BASE_PRICE[i] * importMultiply);
+            _amountDownBtn[i].SetActive(true);
         }
-        _amountDownBtn[0].SetActive(-_amount[0] < PlayManager.Instance[VariableUshort.CurrentIron]);
-        _amountDownBtn[1].SetActive(-_amount[1] < PlayManager.Instance[VariableUshort.CurrentNuke]);
-        _amountDownBtn[2].SetActive(-_amount[2] < PlayManager.Instance[VariableUshort.CurrentJewel]);
+
+        // 위 버튼 활성화 여부
+        _amountUpBtn[0].SetActive(-_amount[0] < PlayManager.Instance[VariableUshort.CurrentIron]);
+        _amountUpBtn[1].SetActive(-_amount[1] < PlayManager.Instance[VariableUshort.CurrentNuke]);
+        _amountUpBtn[2].SetActive(-_amount[2] < PlayManager.Instance[VariableUshort.CurrentJewel]);
+
+        // 년 초기화
         _year = 0;
         _yearText.text = $"0{Language.Instance["년"]}";
         _yearUpDownBtn[0].SetActive(true);
         _yearUpDownBtn[1].SetActive(false);
+
+        // 총 수익 초기화
         _totalIncome = 0;
         _totalIncomeText.text = "0";
+
+        // 처음 상태
         _isTradeAvailable = false;
         _tradeBtnText.color = Constants.TEXT_BUTTON_DISABLE;
     }
