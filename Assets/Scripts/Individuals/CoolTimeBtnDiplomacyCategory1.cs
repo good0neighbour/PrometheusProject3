@@ -39,4 +39,10 @@ public class CoolTimeBtnDiplomacyCategory1 : CoolTimeBtnDiplomacySemiBase
         // UI 업데이트
         PopUpScreenDiplomacy.Instance.FillSlot(Name, out CurrentForce, out SlotNumber);
     }
+
+    protected override void OnCoolTimeEnd()
+    {
+        base.OnCoolTimeEnd();
+        PopUpScreenDiplomacy.Instance.EmptySlot(CurrentForce, SlotNumber);
+    }
 }

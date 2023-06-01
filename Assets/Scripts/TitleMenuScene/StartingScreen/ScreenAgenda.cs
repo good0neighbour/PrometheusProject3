@@ -66,6 +66,10 @@ public class ScreenAgenda : MonoBehaviour
             }
         }
 
+        // 저장된 게임 제거
+        GameManager.Instance.IsThereSavedGame = false;
+        GameManager.Instance.SaveSettings();
+
         // 게임 시작
         gameObject.SetActive(false);
         GameManager.Instance.IsNewGame = true;

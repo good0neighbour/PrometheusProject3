@@ -22,6 +22,7 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
         // 사용 불가
         if (!IsAdoptAvailable)
         {
+            AudioManager.Instance.PlayAuido(AudioType.Unable);
             return;
         }
 
@@ -207,13 +208,13 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
                 switch (requirments[i].Type)
                 {
                     case TechTreeType.Facility:
-                        result.Append($"{Language.Instance["시설 사용 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["시설 사용 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     case TechTreeType.Thought:
-                        result.Append($"{Language.Instance["사상 연구 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["사상 연구 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     case TechTreeType.Society:
-                        result.Append($"{Language.Instance["사회 채택 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["사회 채택 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     default:
                         // 나머지는 표시하지 않는다.
@@ -278,7 +279,7 @@ public class PopUpViewTech : TechTreeViewBase, IActivateFirst
         for (byte i = 0; i < _titleTexts.Length; ++i)
         {
             // 노드 이름. 
-            _titleTexts[i].text = NodeData[i].NodeName;
+            _titleTexts[i].text = Language.Instance[NodeData[i].NodeName];
         }
     }
 

@@ -6,7 +6,6 @@ public class StartScreenAnimation : MonoBehaviour
 {
     /* ==================== Variables ==================== */
 
-    [SerializeField] private float _speed = 1.0f;
     [SerializeField] private RectTransform _backgroundBar = null;
     [SerializeField] private TMP_Text _loadingText = null;
     [SerializeField] private GameObject _startButton = null;
@@ -70,6 +69,9 @@ public class StartScreenAnimation : MonoBehaviour
 
     private void Awake()
     {
+        // 언어 적용
+        _loadingText.text = Language.Instance["불러오는 중"];
+
         // 이미지 컴포넌트 가져오기
         _startScreen = GetComponent<Image>();
 
@@ -143,6 +145,6 @@ public class StartScreenAnimation : MonoBehaviour
         }
 
         // 시간 경과
-        _timer += Time.deltaTime * _speed;
+        _timer += Time.deltaTime * Constants.STARTING_TEXT_SPEEDMULT;
     }
 }

@@ -88,6 +88,8 @@ public class NodeElementSociety : MonoBehaviour
         _titleText.text = _elementName;
         _titleText.color = Constants.TEXT_BUTTON_DISABLE;
         _descriptionNum = (ushort)(Language.Instance.GetLanguageIndex(_elementName) + 1);
+        OnLanguageChange();
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 
@@ -102,6 +104,12 @@ public class NodeElementSociety : MonoBehaviour
 
 
     /* ==================== Private Methods ==================== */
+
+    private void OnLanguageChange()
+    {
+        _titleText.text = Language.Instance[_elementName];
+    }
+
 
     private void Update()
     {

@@ -24,6 +24,7 @@ public class TitleMenuManager : MonoBehaviour
     [SerializeField] private GameObject _loadingScreen = null;
     [SerializeField] private GameObject _languageScreen = null;
     [SerializeField] private TMP_Text _textScreen = null;
+    [SerializeField] private TMP_Text _warningText = null;
     [SerializeField] private TMP_Text[] _btnTexts = null;
 
     private TextScreenBase[] _states = new TextScreenBase[(int)TextScreens.TextScreenEnd];
@@ -34,6 +35,7 @@ public class TitleMenuManager : MonoBehaviour
     private byte _textLength = 0;
     private float _timer = 0;
     private bool _screenAnimation = false;
+    private bool _firstStart = false;
 
     public static TitleMenuManager Instance
     {
@@ -107,8 +109,6 @@ public class TitleMenuManager : MonoBehaviour
     public void GameStart()
     {
         Language.OnLanguageChange = null;
-        GameManager.Instance.IsThereSavedGame = false;
-        GameManager.Instance.SaveSettings();
         Destroy(gameObject);
         _loadingScreen.SetActive(true);
     }
@@ -141,7 +141,17 @@ public class TitleMenuManager : MonoBehaviour
         // 언어 선택 창 닫기
         _languageScreen.SetActive(false);
         gameObject.SetActive(true);
-        MoveScreen(TextScreens.Main);
+
+        // 처음 실행이어서 언어 선택한 것인지 확인
+        if (GameManager.Instance.IsApplicationFirstStarted)
+        {
+            _firstStart = true;
+            _timer = -Constants.PI;
+        }
+        else
+        {
+            MoveScreen(TextScreens.Main);
+        }
 
         // 설정 저장
         GameManager.Instance.SaveSettings();
@@ -192,13 +202,29 @@ public class TitleMenuManager : MonoBehaviour
         {
             // 언어 설정한 적 없을 때
             case LanguageType.End:
-                LanguageScreenEnable();
+                {
+                    LanguageScreenEnable();
+                }
                 break;
 
             // 언어 설정 돼있을 때
             default:
-                Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
-                MoveScreen(TextScreens.Main);
+                {
+                    // 언어 불러온다.
+                    Language.Instance.LoadLangeage(GameManager.Instance.CurrentLanguage);
+
+                    // 처음 실행한 경우 경고 문구 표시
+                    if (GameManager.Instance.IsApplicationFirstStarted)
+                    {
+                        _firstStart = true;
+                        _timer = -Constants.PI;
+                    }
+                    else
+                    {
+                        Destroy(_warningText.gameObject);
+                        MoveScreen(TextScreens.Main);
+                    }
+                }
                 break;
         }
     }
@@ -224,13 +250,34 @@ public class TitleMenuManager : MonoBehaviour
                 {
                     _currentScreen.SetButtons();
                     _screenAnimation = false;
-                    return;
                 }
             }
             else
             {
                 _timer += Time.deltaTime;
             }
+            return;
+        }
+        else if (_firstStart)
+        {
+            if (0 >= _timer)
+            {
+                _warningText.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Cos(_timer) * 0.5f + 0.5f);
+            }
+            else if (Constants.DOUBLE_PI < _timer)
+            {
+                Destroy(_warningText.gameObject);
+                _firstStart = false;
+                GameManager.Instance.IsApplicationFirstStarted = false;
+                MoveScreen(TextScreens.Main);
+            }
+            else if (Constants.PI < _timer)
+            {
+                _warningText.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Cos(_timer - Constants.PI) * 0.5f + 0.5f);
+            }
+
+            _timer += Time.deltaTime * Constants.STARTING_TEXT_SPEEDMULT;
+            return;
         }
 
         // 단축키 동작

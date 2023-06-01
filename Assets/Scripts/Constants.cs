@@ -37,6 +37,7 @@ public static class Constants
     public const float MASSAGEBOX_HEIGHT_RATIO = 0.15f;
     public const float METERIMAGE_WIDTH_RATIO = 0.3f;
     public const float SPACE_IMAGE_TARGET_POSITION = 192.0f;
+    public const float STARTING_TEXT_SPEEDMULT = 2.0f;
 
     // 소리 관련 값
     public const float THEME_VOLUME = 0.3f;
@@ -47,7 +48,6 @@ public static class Constants
     public const float START_SCREEN_SPEEDMULT = 2.0f;
 
     // 게임 플레이 관련 값, 일반
-    public const byte MEET_OPORTUNITY = 1;
     public const byte NUMBER_OF_FORCES = 4;
     public const byte NUMBER_OF_SLOTS = 5;
     public const byte START_FUND = 120;
@@ -58,11 +58,6 @@ public static class Constants
     public const float MONTH_TIMER = 2.0f;
     public const float GAME_RESUME = 1.0f;
     public const float GAME_PAUSE = 0.0f;
-    public const float AIRMASS_MOVEMENT = 1.0f;
-    public const float TEMPERATURE_MOVEMENT = 0.2f;
-    public const float WATER_VOLUME_MOVEMENT = 15.0f;
-    public const float CARBON_RATIO_MOVEMENT = 0.2f;
-    public const float LIFE_STABILITY_SPEEDMULT = 0.05f;
     public const float EXPLORE_SPEEDMULT = 0.001f;
     public const float INITIAL_EXPLORE_GOAL = 0.01f;
     public const float EXPLORE_GOAL_INCREASEMENT = 3.0f;
@@ -71,6 +66,15 @@ public static class Constants
     public const float TECHTREE_AREA_WIDTH = 1536.0f;
     public const float TECHTREE_AREA_HEIGHT = 864.0f;
     public const float SPEND_ANIMATION_DURATION = 0.2f;
+
+    // 게임 플레이 관련 값, 물리
+    public const float AIRMASS_MOVEMENT = 1.0f;
+    public const float TEMPERATURE_MOVEMENT = 0.2f;
+    public const float WATER_VOLUME_MOVEMENT = 15.0f;
+    public const float CARBON_RATIO_MOVEMENT = 0.2f;
+    public const float LIFE_STABILITY_SPEEDMULT = 0.05f;
+
+    // 게임 플레이 관련 값, 미디어 문화
     public const float SUPPORT_RATE_DECREASEMENT = 1.2f;
     public const float SUPPORT_RATE_INCREASEMENT = 50.0f;
     public const float SUPPORT_RATE_CHANGE_BY_ADOPTION = 1.0f;
@@ -78,6 +82,8 @@ public static class Constants
     public const float MAX_SUPPORT_RATE_ADOPTION = 90.0f;
     public const float GOV_ASSET_MULTIPLY = 0.02f;
     public const float GOV_AFFECTION_MULTIPLY = 0.1f;
+
+    // 게임 플레이 관련 값, 도시
     public const float POPULATION_ADJUSTMENT_INCREASE = 1.1f;
     public const float POPULATION_ADJUSTMENT_DECREASE = 0.9f;
     public const float CRIME_RATE_SPEEDMULT = 0.05f;
@@ -85,16 +91,23 @@ public static class Constants
     public const float MIN_EVENT_POPULATION = 100.0f;
     public const float CRIME_POSIBILITY = 0.4f;
     public const float DISEASE_POSIBILITY = 0.8f;
-    public const float TAX_PER_POPULATION = 0.025f;
+    public const float TAX_PER_POPULATION = 0.05f;
+
+    // 게임 플레이 관련 값, 외교
     public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY0 = 0.01f;
-    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY1 = 0.05f;
-    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY2 = 0.1f;
+    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY1 = 0.08f;
+    public const float FRIENDLY_INCREASEMENT_BY_DIPLOMACY2 = 0.12f;
     public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY1 = 0.01f;
     public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY2 = 0.03f;
     public const float CONQUEST_MOVEMENT = 0.1f;
+    public const float MAX_CHAOS = 1.01f;
     public const float GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY = 0.98f;
+
+    // 게임 플레이 관련 값, 무역
     public const float TRADE_HOSTILE_AFFECTION = 0.5f;
     public const float TRADE_FRIENDLY_INCREASEMENT = 0.0001f;
+
+    // 게임 플레이 관련 값, 텍스트
     public const string ON_EXPANDED = ">";
     public const string ON_COLLAPSED = ">";
     public const string FACILITY_UNADOPTED = "○";

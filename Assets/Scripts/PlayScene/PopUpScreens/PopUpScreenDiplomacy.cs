@@ -30,7 +30,8 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     private byte _currentSlot = 0;
     private byte _slotLength = 0;
     private float _supportRate = 0.0f;
-    private float _timer = 0.0f;
+    private float _adoptTimer = 0.0f;
+    private float _connectionTimer = 0.0f;
     private bool _isAdoptAvailable = false;
     private bool _isBackBtnAvailable = true;
     private bool _adoptAnimationProceed = false;
@@ -75,6 +76,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         // 사용 불가
         if (!_isAdoptAvailable)
         {
+            AudioManager.Instance.PlayAuido(AudioType.Unable);
             return;
         }
 
@@ -115,7 +117,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         else
         {
             _adoptBtnText.text = Language.Instance["승인"];
-            SetAdoptAvailable(_buttons[_currentBtn].IsAvailable && ScreenDiplomacy.CurrentForce.IsDiplomacySlotAvailable);
+            SetAdoptAvailable(_buttons[_currentBtn].IsAvailable && ScreenDiplomacy.CurrentForce.IsDiplomacySlotAvailable());
         }
 
         _statusText.text = null;
@@ -157,7 +159,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
                 break;
             }
         }
-        _slotTexts[i].text = name;
+        _slotTexts[i].text = Language.Instance[name];
         _slotTexts[i].color = Constants.WHITE;
         _slotImages[i].color = Constants.SLOT_ENABLED;
         ScreenDiplomacy.CurrentForce.DiplomacySlots[i] = name;
@@ -166,10 +168,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         force = ScreenDiplomacy.CurrentForce;
         _currentSlot = i;
         _connectionAnimationProceed = true;
-        if (i == _slotLength - 1)
-        {
-            ScreenDiplomacy.CurrentForce.IsDiplomacySlotAvailable = true;
-        }
+        ++ScreenDiplomacy.CurrentForce.DiplomacySlotUsage;
     }
 
 
@@ -179,7 +178,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     public void EmptySlot(Force force, byte index)
     {
         force.DiplomacySlots[index] = null;
-        force.IsDiplomacySlotAvailable = true;
+        --force.DiplomacySlotUsage;
         _connectionImages[index].fillAmount = 0.0f;
     }
 
@@ -223,19 +222,43 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /// </summary>
     private void AdoptAnimationProceed()
     {
-        _timer += Time.deltaTime;
-        _progressionImage.fillAmount = _timer;
-        if (1.0f <= _timer)
+        _adoptTimer += Time.deltaTime;
+        _progressionImage.fillAmount = _adoptTimer;
+        if (1.0f <= _adoptTimer)
         {
             if (_supportRate >= Random.Range(0.0f, Constants.MAX_SUPPORT_RATE_ADOPTION))
             {
+                // 승인 성공 시 동작
                 _buttons[_currentBtn].BtnAdopt();
+
+                // 지지율 상승
+                PlayManager.Instance[VariableFloat.DiplomacySupportRate] += Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;
+                if (100.0f < PlayManager.Instance[VariableFloat.DiplomacySupportRate])
+                {
+                    PlayManager.Instance[VariableFloat.DiplomacySupportRate] = 100.0f;
+                }
+
+                // 지지율 상승 이내메이션
+                BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.DiplomacySupport);
 
                 _adoptBtnText.text = Language.Instance["대기 중"];
                 SetAdoptAvailable(false);
             }
             else
             {
+                //소리 재생
+                AudioManager.Instance.PlayAuido(AudioType.Failed);
+
+                // 지지율 감소
+                PlayManager.Instance[VariableFloat.DiplomacySupportRate] -= Constants.SUPPORT_RATE_CHANGE_BY_ADOPTION;
+                if (0.0f > PlayManager.Instance[VariableFloat.DiplomacySupportRate])
+                {
+                    PlayManager.Instance[VariableFloat.DiplomacySupportRate] = 0.0f;
+                }
+
+                // 지지율 감소 이내메이션
+                BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.DiplomacySupport);
+
                 // 승인 실패
                 _statusText.text = Language.Instance["정책 실패"];
                 _statusText.color = Constants.FAIL_TEXT;
@@ -254,7 +277,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
             // 애니메이션 끝
             _adoptAnimationProceed = false;
             _progressionImage.fillAmount = 0.0f;
-            _timer = 0.0f;
+            _adoptTimer = 0.0f;
         }
     }
 
@@ -264,12 +287,12 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
     /// </summary>
     private void ConnectionAnimantionProceed()
     {
-        _timer += Time.deltaTime;
-        _connectionImages[_currentSlot].fillAmount = _timer;
-        if (1.0f <= _timer)
+        _connectionTimer += Time.deltaTime;
+        _connectionImages[_currentSlot].fillAmount = _connectionTimer;
+        if (1.0f <= _connectionTimer)
         {
             _connectionAnimationProceed = false;
-            _timer = 0.0f;
+            _connectionTimer = 0.0f;
         }
     }
 
@@ -321,7 +344,7 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
             }
             else
             {
-                _slotImages[i].color = Constants.TEXT_BUTTON_DISABLE;
+                _slotImages[i].color = Constants.SLOT_ENABLED;
                 _slotTexts[i].text = Language.Instance[ScreenDiplomacy.CurrentForce.DiplomacySlots[i]];
                 _slotTexts[i].color = Constants.WHITE;
                 _connectionImages[i].fillAmount = 1.0f;
@@ -333,6 +356,8 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         SetAdoptAvailable(false);
         _dexcriptionText.text = null;
         _statusText.text = null;
+        _connectionAnimationProceed = false;
+        _connectionTimer = 0.0f;
     }
 
 
@@ -342,7 +367,8 @@ public class PopUpScreenDiplomacy : MonoBehaviour, IPopUpScreen
         {
             AdoptAnimationProceed();
         }
-        else if (_connectionAnimationProceed)
+
+        if (_connectionAnimationProceed)
         {
             ConnectionAnimantionProceed();
         }

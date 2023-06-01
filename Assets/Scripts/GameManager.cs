@@ -70,6 +70,12 @@ public class GameManager
         set;
     }
 
+    public bool IsApplicationFirstStarted
+    {
+        get;
+        set;
+    }
+
     public string LatestSocietyName
     {
         get;
@@ -163,7 +169,7 @@ public class GameManager
 
     public void SaveSettings()
     {
-        File.WriteAllText($"{Application.dataPath}/Resources/Settings.Json", JsonUtility.ToJson(_userSettings, false));
+        File.WriteAllText($"{Application.dataPath}/Settings.Json", JsonUtility.ToJson(_userSettings, false));
     }
 
 
@@ -171,13 +177,14 @@ public class GameManager
     {
         try
         {
-            _userSettings = JsonUtility.FromJson<JsonSettings>(Resources.Load("Settings").ToString());
+            _userSettings = JsonUtility.FromJson<JsonSettings>(File.ReadAllText($"{Application.dataPath}/Settings.Json"));
         }
         catch
         {
             _userSettings = new JsonSettings(true);
             SaveSettings();
         }
+        IsApplicationFirstStarted = true;
     }
 
 

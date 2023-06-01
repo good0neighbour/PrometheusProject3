@@ -46,6 +46,7 @@ public class PopUpViewSociety : MonoBehaviour, IState, IActivateFirst
         // 사용 불가
         if (!_isAdoptAvailable)
         {
+            AudioManager.Instance.PlayAuido(AudioType.Unable);
             return;
         }
 

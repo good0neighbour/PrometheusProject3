@@ -22,6 +22,7 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
         // 사용 불가
         if (!IsAdoptAvailable)
         {
+            AudioManager.Instance.PlayAuido(AudioType.Unable);
             return;
         }
 
@@ -60,7 +61,7 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
             _progreesionImages[i] = node.transform.Find("ImageProgressionBackground").Find("ImageProgression").GetComponent<Image>();
 
             // 연구 진행 중이었던 것 가변 배열에 추가
-            if (0.0f < Adopted[(int)TechTreeType.Thought][i])
+            if (0.0f < Adopted[(int)TechTreeType.Thought][i] && 1.0f > Adopted[(int)TechTreeType.Thought][i])
             {
                 _onProgress.Add(i);
             }
@@ -69,8 +70,8 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
             TechTrees.SubNode[] requiredNodes = NodeData[i].Requirments;
             for (byte j = 0; j < requiredNodes.Length; ++j)
             {
-                // 한 개라도 승인됐으면 활성화
-                if (0.0f < Adopted[(int)requiredNodes[j].Type][NodeIndex[requiredNodes[j].NodeName]] && 1.0f > Adopted[(int)requiredNodes[j].Type][NodeIndex[requiredNodes[j].NodeName]])
+                // 한 개라도 완료됐으면 활성화
+                if (1.0f <= Adopted[(int)requiredNodes[j].Type][NodeIndex[requiredNodes[j].NodeName]])
                 {
                     NodeBtnObjects[i].SetActive(true);
                     break;
@@ -188,13 +189,13 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
                 switch (requirments[i].Type)
                 {
                     case TechTreeType.Facility:
-                        result.Append($"{Language.Instance["시설 사용 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["시설 사용 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     case TechTreeType.Tech:
-                        result.Append($"{Language.Instance["상용화 연구 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["상용화 연구 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     case TechTreeType.Society:
-                        result.Append($"{Language.Instance["사회 채택 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["사회 채택 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     default:
                         // 나머지는 표시하지 않는다.
@@ -280,7 +281,7 @@ public class PopUpViewThought : TechTreeViewBase, IActivateFirst
         for (byte i = 0; i < _titleTexts.Length; ++i)
         {
             // 노드 이름. 
-            _titleTexts[i].text = NodeData[i].NodeName;
+            _titleTexts[i].text = Language.Instance[NodeData[i].NodeName];
         }
     }
 

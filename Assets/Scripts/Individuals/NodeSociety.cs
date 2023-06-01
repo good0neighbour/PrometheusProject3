@@ -193,6 +193,6 @@ public class NodeSociety : MonoBehaviour
     private void OnLanguageChange()
     {
         // 노드 이름 설정
-        _titleText.text = _nodeName;
+        _titleText.text = Language.Instance[_nodeName];
     }
 }

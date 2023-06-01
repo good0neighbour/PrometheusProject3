@@ -2,7 +2,7 @@ public class CoolTimeBtnDiplomacyCategory0 : CoolTimeBtnDiplomacySemiBase
 {
     protected override void OnAdopt()
     {
-        //소리 재생
+        // 소리 재생
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 우호도 증가
@@ -11,5 +11,11 @@ public class CoolTimeBtnDiplomacyCategory0 : CoolTimeBtnDiplomacySemiBase
         // UI 업데이트
         PopUpScreenDiplomacy.Instance.FillSlot(Name, out CurrentForce, out SlotNumber);
         PopUpScreenDiplomacy.Instance.SetStatusText(Language.Instance["우호도 증가"], Constants.WHITE);
+    }
+
+    protected override void OnCoolTimeEnd()
+    {
+        base.OnCoolTimeEnd();
+        PopUpScreenDiplomacy.Instance.EmptySlot(CurrentForce, SlotNumber);
     }
 }

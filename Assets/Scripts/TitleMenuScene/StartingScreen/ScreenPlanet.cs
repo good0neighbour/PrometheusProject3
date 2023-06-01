@@ -18,7 +18,6 @@ public class ScreenPlanet : MonoBehaviour
     [SerializeField] private TMP_Text[] _btnTexts = null;
     [SerializeField] private TMP_Text[] _infoTexts = null;
 
-    private short _direction = 1;
     private float _timer = 0.0f;
     private float _airMass = 0.0f;
     private float _waterVolume = 0.0f;
@@ -28,6 +27,7 @@ public class ScreenPlanet : MonoBehaviour
     private float _distance = 0.0f;
     private bool _animationPreceed = false;
     private bool _buttonAnimation = false;
+    private bool _fadeIn = false;
 
 
 
@@ -103,8 +103,8 @@ public class ScreenPlanet : MonoBehaviour
     private void FadeIn()
     {
         _animationPreceed = true;
-        _timer = 0.0f;
-        _direction = 1;
+        _fadeIn = true;
+        _timer = Constants.PI;
     }
 
 
@@ -114,8 +114,8 @@ public class ScreenPlanet : MonoBehaviour
     private void FadeOut()
     {
         _animationPreceed = true;
-        _timer = 2.0f;
-        _direction = -1;
+        _fadeIn = false;
+        _timer = 0.0f;
     }
 
 
@@ -185,46 +185,47 @@ public class ScreenPlanet : MonoBehaviour
     {
         if (_animationPreceed)
         {
-            if (1.0f >= _timer)
+            _timer += Time.deltaTime * Constants.STARTING_TEXT_SPEEDMULT;
+
+            if (_fadeIn)
             {
-                _timer += Time.deltaTime * _direction;
-                if (0.0f >= _timer)
+                if (Constants.DOUBLE_PI >= _timer)
                 {
+                    _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Cos(_timer) * 0.5f + 0.5f);
+                }
+                else if (Constants.TRIPLE_PI >= _timer)
+                {
+                    SetTextColour(Mathf.Cos(_timer - Constants.PI) * 0.5f + 0.5f);
+                }
+                else
+                {
+                    SetTextColour(1.0f);
+                    _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                    _animationPreceed = false;
+                    _timer = 0.0f;
+                }
+            }
+            else
+            {
+                if (Constants.PI >= _timer)
+                {
+                    SetTextColour(Mathf.Cos(_timer) * 0.5f + 0.5f);
+                }
+                else if (Constants.DOUBLE_PI >= _timer)
+                {
+                    _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Cos(_timer - Constants.PI) * 0.5f + 0.5f);
+                }
+                else
+                {
+                    SetTextColour(0.0f);
                     _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
 
                     // 새로 고침
                     RandomValues();
 
                     // 다시 페이드 인
-                    _direction = 1;
-                }
-                else if (1.0f <= _timer)
-                {
-                    _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                }
-                else
-                {
-                    _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, _timer);
-                }
-            }
-            else
-            {
-                _timer += Time.deltaTime * _direction;
-                if (1.0f >= _timer)
-                {
-                    SetTextColour(0.0f);
-                }
-                else if (2.0f <= _timer)
-                {
-                    SetTextColour(1.0f);
-                    _sphereWireImage.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-
-                    // 애니메이션 종료
-                    _animationPreceed = false;
-                }
-                else
-                {
-                    SetTextColour(_timer - 1.0f);
+                    _fadeIn = true;
+                    _timer = Constants.PI;
                 }
             }
 
@@ -236,10 +237,10 @@ public class ScreenPlanet : MonoBehaviour
             _timer += Time.deltaTime;
             for (byte i = 0; i < _btnTexts.Length; ++i)
             {
-                _btnTexts[i].color = new Color(1.0f, 1.0f, 1.0f, _timer - 2.0f);
+                _btnTexts[i].color = new Color(1.0f, 1.0f, 1.0f, _timer);
             }
 
-            if (3.0f <= _timer)
+            if (1.0f <= _timer)
             {
                 for (byte i = 0; i < _btnTexts.Length; ++i)
                 {

@@ -2,7 +2,19 @@ public class CoolTimeBtnConquestCategory1 : CoolTimeBtnDiplomacySemiBase
 {
     protected override void OnAdopt()
     {
-        ScreenDiplomacy.CurrentForce.Chaos += (1.0f - ScreenDiplomacy.CurrentForce.Chaos) * ScreenDiplomacy.CurrentForce.Friendly;
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Select);
+
+        // 공작 방어 감소 정도
+        ScreenDiplomacy.CurrentForce.Chaos += (1.0f - ScreenDiplomacy.CurrentForce.Chaos) * ScreenDiplomacy.CurrentForce.Friendly * 2.0f;
+
+        // 혼란 최대치
+        if (Constants.MAX_CHAOS < ScreenDiplomacy.CurrentForce.Chaos)
+        {
+            ScreenDiplomacy.CurrentForce.Chaos = Constants.MAX_CHAOS;
+        }
+
+        // 상태 표시
         if (0.5f < ScreenDiplomacy.CurrentForce.Friendly)
         {
             PopUpScreenConquest.Instance.SetStatusText(Language.Instance["공작 방어 매우 감소"], Constants.WHITE);
@@ -17,5 +29,11 @@ public class CoolTimeBtnConquestCategory1 : CoolTimeBtnDiplomacySemiBase
         }
 
         PopUpScreenConquest.Instance.FillSlot(Name, out CurrentForce, out SlotNumber);
+    }
+
+    protected override void OnCoolTimeEnd()
+    {
+        base.OnCoolTimeEnd();
+        PopUpScreenConquest.Instance.EmptySlot(CurrentForce, SlotNumber);
     }
 }

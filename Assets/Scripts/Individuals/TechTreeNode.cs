@@ -13,9 +13,6 @@ public class TechTreeNode : MonoBehaviour
 
     public void BtnNodeTouch()
     {
-        // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
-
         // 현재 노드 설정
         _techTree.SetCurrentNode(_nodeNum, transform.position);
     }

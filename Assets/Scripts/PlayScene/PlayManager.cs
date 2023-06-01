@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -445,7 +446,15 @@ public class PlayManager : MonoBehaviour
     /// </summary>
     public void SaveGame()
     {
-        File.WriteAllText($"{Application.dataPath}/Resources/Saves.Json", JsonUtility.ToJson(_data, false));
+        // 게임 데이타 저장
+        File.WriteAllText($"{Application.dataPath}/Saves.Json", JsonUtility.ToJson(_data, false));
+
+        // 게임이 저장됐다는 설정이 안 됐을 경우
+        if (!GameManager.Instance.IsThereSavedGame)
+        {
+            GameManager.Instance.IsThereSavedGame = true;
+            GameManager.Instance.SaveSettings();
+        }
     }
 
 
@@ -916,7 +925,7 @@ public class PlayManager : MonoBehaviour
         try
         {
             // 저장된 게임 불러온다.
-            _data = JsonUtility.FromJson<JsonData>(Resources.Load("Saves").ToString());
+            _data = JsonUtility.FromJson<JsonData>(File.ReadAllText($"{Application.dataPath}/Saves.Json"));
         }
         catch
         {
@@ -942,6 +951,12 @@ public class PlayManager : MonoBehaviour
 
             // 도시 활성화
             _data.Cities[i].BeginCityRunning();
+        }
+
+        // 세력
+        for (ushort i = 0; i < _data.Forces.Length; i++)
+        {
+            _data.Forces[i].BeginForceRunning();
         }
 
         // 무역
@@ -1122,6 +1137,9 @@ public class PlayManager : MonoBehaviour
         {
             inputFieldFontChange[i].GetReady();
         }
+
+        // 언어 변경
+        Language.OnLanguageChange?.Invoke();
         #endregion
 
         if (GameManager.Instance.IsNewGame)

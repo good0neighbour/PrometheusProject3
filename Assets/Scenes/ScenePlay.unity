@@ -2047,7 +2047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &29944218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8131,7 +8131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86e38209e269a341a5741503b5d1fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.01
+  _coolTimeSpeedmult: 0.05
   _titleText: {fileID: 294562497}
   _availableImage: {fileID: 413260438}
   _fundCost: 0
@@ -11980,7 +11980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &194432575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13347,7 +13347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &213953746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16729,7 +16729,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ca528bb0ccde8024fbd4afe80cd4edd0, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -17176,7 +17176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &294562497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18395,7 +18395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &307890967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21235,7 +21235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e780a5398646bb3498dbf5d24d505f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.02
+  _coolTimeSpeedmult: 0.04
   _titleText: {fileID: 667531502}
   _availableImage: {fileID: 304442890}
   _fundCost: 0
@@ -23265,7 +23265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBD88\uB7EC\uC624\uB294 \uC911"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2db59ff5317338244a35614884281f17, type: 2}
   m_sharedMaterial: {fileID: 5909370667944466562, guid: 2db59ff5317338244a35614884281f17, type: 2}
@@ -26402,7 +26402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88da9c49f62bb0499fdc79635b2cbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.1
+  _coolTimeSpeedmult: 0.09
   _titleText: {fileID: 1211215197}
   _availableImage: {fileID: 1978367312}
   _fundCost: 10
@@ -26623,7 +26623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e33e6435b64ea4a9294c14bd3cb838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.5
+  _coolTimeSpeedmult: 0.2
   _titleText: {fileID: 658370378}
   _availableImage: {fileID: 1809859114}
   _fundCost: 10
@@ -26793,7 +26793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 1
+  _onlyChangeFont: 0
   _shortenLineGap: 1
 --- !u!114 &481747167
 MonoBehaviour:
@@ -27532,7 +27532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &488694714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33545,7 +33545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86e38209e269a341a5741503b5d1fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.03
+  _coolTimeSpeedmult: 0.06
   _titleText: {fileID: 2079952200}
   _availableImage: {fileID: 1626134637}
   _fundCost: 0
@@ -36912,7 +36912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &658370378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37212,7 +37212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &667531502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39167,7 +39167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b409e915053bca6479e9349e4de91bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.1
+  _coolTimeSpeedmult: 0.06
   _titleText: {fileID: 307890967}
   _availableImage: {fileID: 1409238510}
   _fundCost: 10
@@ -41851,7 +41851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e780a5398646bb3498dbf5d24d505f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.04
+  _coolTimeSpeedmult: 0.08
   _titleText: {fileID: 2132367975}
   _availableImage: {fileID: 360557454}
   _fundCost: 0
@@ -46295,7 +46295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b409e915053bca6479e9349e4de91bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.1
+  _coolTimeSpeedmult: 0.08
   _titleText: {fileID: 1542708656}
   _availableImage: {fileID: 431189870}
   _fundCost: 10
@@ -54210,7 +54210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283c8bf2a62c1bf4a97f26b29ba98b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlyChangeFont: 1
+  _onlyChangeFont: 0
   _shortenLineGap: 1
 --- !u!114 &964697606
 MonoBehaviour:
@@ -57670,7 +57670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86e38209e269a341a5741503b5d1fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.05
+  _coolTimeSpeedmult: 0.1
   _titleText: {fileID: 213953746}
   _availableImage: {fileID: 1004833721}
   _fundCost: 0
@@ -66299,7 +66299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b409e915053bca6479e9349e4de91bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.1
+  _coolTimeSpeedmult: 0.04
   _titleText: {fileID: 1726275598}
   _availableImage: {fileID: 259957294}
   _fundCost: 10
@@ -66964,7 +66964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &1211215197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74147,7 +74147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e780a5398646bb3498dbf5d24d505f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.07
+  _coolTimeSpeedmult: 0.14
   _titleText: {fileID: 488694714}
   _availableImage: {fileID: 685723663}
   _fundCost: 0
@@ -80163,7 +80163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &1447395019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84410,7 +84410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &1542708656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87195,7 +87195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e33e6435b64ea4a9294c14bd3cb838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.3
+  _coolTimeSpeedmult: 0.08
   _titleText: {fileID: 1447395019}
   _availableImage: {fileID: 1701885462}
   _fundCost: 10
@@ -87890,7 +87890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &1600383801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94135,7 +94135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &1726275598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96833,7 +96833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88da9c49f62bb0499fdc79635b2cbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.1
+  _coolTimeSpeedmult: 0.11
   _titleText: {fileID: 29944218}
   _availableImage: {fileID: 1154928523}
   _fundCost: 10
@@ -100517,7 +100517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88da9c49f62bb0499fdc79635b2cbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolTimeSpeedmult: 0.1
+  _coolTimeSpeedmult: 0.07
   _titleText: {fileID: 194432575}
   _availableImage: {fileID: 157030447}
   _fundCost: 10
@@ -112228,7 +112228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &2079952200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114578,7 +114578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onlyChangeFont: 0
-  _shortenLineGap: 0
+  _shortenLineGap: 1
 --- !u!114 &2132367975
 MonoBehaviour:
   m_ObjectHideFlags: 0

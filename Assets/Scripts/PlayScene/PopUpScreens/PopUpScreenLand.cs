@@ -171,6 +171,17 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
             "개발자용 치트를 사용했습니다. 자금 +50000"
             ], cityName);
         }
+        else if (cityName.Equals("one_nation"))
+        {
+            for (byte i = 0; i < Constants.NUMBER_OF_FORCES; ++i)
+            {
+                PlayManager.Instance.GetForce(i).Conquest = 0.9f;
+                PlayManager.Instance.GetForce(i).Chaos = Constants.MAX_CHAOS;
+            }
+            MessageBox.Instance.EnqueueMessage(Language.Instance[
+            "개발자용 치트를 사용했습니다. 속국화 90%"
+            ], cityName);
+        }
     }
 
 

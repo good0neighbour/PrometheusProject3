@@ -21,6 +21,7 @@ public class PopUpViewFacility : TechTreeViewBase
         // 사용 불가
         if (!IsAdoptAvailable)
         {
+            AudioManager.Instance.PlayAuido(AudioType.Unable);
             return;
         }
 
@@ -190,13 +191,13 @@ public class PopUpViewFacility : TechTreeViewBase
                 switch (requirments[i].Type)
                 {
                     case TechTreeType.Tech:
-                        result.Append($"{Language.Instance["상용화 연구 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["상용화 연구 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     case TechTreeType.Thought:
-                        result.Append($"{Language.Instance["사상 연구 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["사상 연구 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     case TechTreeType.Society:
-                        result.Append($"{Language.Instance["사회 채택 가능"]} - {requirments[i].NodeName}\n");
+                        result.Append($"{Language.Instance["사회 채택 가능"]} - {Language.Instance[requirments[i].NodeName]}\n");
                         break;
                     default:
                         // 나머지는 표시하지 않는다.

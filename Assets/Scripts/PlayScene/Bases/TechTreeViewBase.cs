@@ -80,6 +80,9 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
             return;
         }
 
+        // 소리 재생
+        AudioManager.Instance.PlayAuido(AudioType.Touch);
+
         // 현재 노드 정보
         CurrentNode = current;
 

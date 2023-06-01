@@ -105,6 +105,7 @@ public abstract class ButtonCoolTimeBase : MonoBehaviour
                 case 0:
                     // 일시정지 상태에서는 동작하지 않는다.
                     return;
+
                 default:
                     // 재사용 대기 중
                     _availableImageAmount += _coolTimeSpeedmult * PlayManager.Instance.GameSpeed * Time.deltaTime;

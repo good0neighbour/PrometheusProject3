@@ -36,12 +36,6 @@ public abstract class CoolTimeBtnDiplomacySemiBase : ButtonCoolTimeBase
         return true;
     }
 
-    protected override void OnCoolTimeEnd()
-    {
-        base.OnCoolTimeEnd();
-        PopUpScreenDiplomacy.Instance.EmptySlot(CurrentForce, SlotNumber);
-    }
-
     protected override void Awake()
     {
         base.Awake();

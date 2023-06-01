@@ -46,7 +46,7 @@ public class ScreenDiplomacy : PlayScreenBase
         // 세력 변경
         _current = (byte)index;
         CurrentForce = PlayManager.Instance.GetForce(_current);
-        _forceNameText.text = CurrentForce.ForceName;
+        _forceNameText.text = Language.Instance[CurrentForce.ForceName];
 
         // 표시할 화면
         bool isTrue = CurrentForce.Info;
@@ -124,12 +124,14 @@ public class ScreenDiplomacy : PlayScreenBase
     /// </summary>
     private void CloseScreen()
     {
-        // 소리 재생
-        AudioManager.Instance.PlayAuido(AudioType.Touch);
-
-        // 화면 닫는다.
         gameObject.SetActive(false);
         PlayManager.Instance.GameResume = Constants.GAME_PAUSE;
+    }
+
+
+    private void OnLanguageChange()
+    {
+        _forceNameText.text = Language.Instance[CurrentForce.ForceName];
     }
 
 
@@ -144,6 +146,12 @@ public class ScreenDiplomacy : PlayScreenBase
         bool isTrue = CurrentForce.Info;
         _true.SetActive(isTrue);
         _false.SetActive(!isTrue);
+
+        // 텍스트 한 번 업데이트
+        OnLanguageChange();
+
+        // 대리자 등록
+        Language.OnLanguageChange += OnLanguageChange;
     }
 
 
