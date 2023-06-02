@@ -669,52 +669,36 @@ public class Language
     /// </summary>
     public void LoadLangeage(LanguageType language)
     {
-        try
+        // json 파일 명을 담는다.
+        string filename;
+        switch (language)
         {
-            // json 파일 명을 담는다.
-            string filename;
-            switch (language)
-            {
-                case LanguageType.Korean:
-                    filename = "Korean";
-                    break;
-                case LanguageType.English:
-                    filename = "English";
-                    break;
-                case LanguageType.German:
-                    filename = "German";
-                    break;
-                case LanguageType.French:
-                    filename = "French";
-                    break;
-                case LanguageType.Taiwanese:
-                    filename = "Taiwanese";
-                    break;
-                case LanguageType.Japanese:
-                    filename = "Japanese";
-                    break;
-                default:
-                    Debug.LogError("LoadLangeage - LanguageType 수정 요망.");
-                    return;
-            }
-
-            // json 파일을 불러온다.
-            _jsonLanguage = JsonUtility.FromJson<JsonLanguage>(Resources.Load(filename).ToString());
-            _fontAsset = (TMP_FontAsset)Resources.Load($"{filename}Font SDF");
+            case LanguageType.Korean:
+                filename = "Korean";
+                break;
+            case LanguageType.English:
+                filename = "English";
+                break;
+            case LanguageType.German:
+                filename = "German";
+                break;
+            case LanguageType.French:
+                filename = "French";
+                break;
+            case LanguageType.Taiwanese:
+                filename = "Taiwanese";
+                break;
+            case LanguageType.Japanese:
+                filename = "Japanese";
+                break;
+            default:
+                Debug.LogError("LoadLangeage - LanguageType 수정 요망.");
+                return;
         }
-        catch
-        {
-            Debug.Log("언어 파일이 존재하지 않음.");
-        
-            // json 파일이 없으면 새로 저장한다.
-            LanguageSave();
-        
-            // 구조체를 초기화한다.
-            _jsonLanguage = new JsonLanguage(true);
 
-            // 폰트를 가져온다.
-            _fontAsset = (TMP_FontAsset)Resources.Load("KoreanFont SDF");
-        }
+        // json 파일을 불러온다.
+        _jsonLanguage = JsonUtility.FromJson<JsonLanguage>(Resources.Load(filename).ToString());
+        _fontAsset = (TMP_FontAsset)Resources.Load($"{filename}Font SDF");
 
         // 대리자
         OnLanguageChange?.Invoke();
@@ -722,6 +706,34 @@ public class Language
     }
 
 
+
+    /* ==================== Private Methods ==================== */
+
+    private Language()
+    {
+        // 한국어로 초기화
+        JsonLanguage jsonLanguage = new JsonLanguage(true);
+
+        // Dictionary에 추가
+        for (ushort i = 0; i < jsonLanguage.Texts.Length; ++i)
+        {
+            try
+            {
+                // 해당 한국어가 어느 인덱스에 있는지 저장
+                _texts.Add(jsonLanguage.Texts[i], i);
+            }
+            catch
+            {
+                Debug.LogError($"같은 키가 존재 - \"{jsonLanguage.Texts[i]}\"");
+            }
+        }
+    }
+
+
+
+    /* ==================== UNITY_EDITOR ==================== */
+
+#if UNITY_EDITOR
     /// <summary>
     /// 에디터에서 json 파일 생성한다.
     /// </summary>
@@ -835,30 +847,6 @@ public class Language
     }
 
 
-
-    /* ==================== Private Methods ==================== */
-
-    private Language()
-    {
-        // 한국어로 초기화
-        JsonLanguage jsonLanguage = new JsonLanguage(true);
-
-        // Dictionary에 추가
-        for (ushort i = 0; i < jsonLanguage.Texts.Length; ++i)
-        {
-            try
-            {
-                // 해당 한국어가 어느 인덱스에 있는지 저장
-                _texts.Add(jsonLanguage.Texts[i], i);
-            }
-            catch
-            {
-                Debug.LogError($"같은 키가 존재 - \"{jsonLanguage.Texts[i]}\"");
-            }
-        }
-    }
-
-
     /// <summary>
     /// 구글 번역을 위해 텍스트 파일로 저장
     /// </summary>
@@ -874,4 +862,5 @@ public class Language
         // 텍스트 파일로 저장
         File.WriteAllText($"{Application.dataPath}/TranslateThis.txt", text.ToString());
     }
+#endif
 }
