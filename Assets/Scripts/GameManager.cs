@@ -169,7 +169,12 @@ public class GameManager
 
     public void SaveSettings()
     {
+#if PLATFORM_STANDALONE_WIN
         File.WriteAllText($"{Application.dataPath}/Settings.Json", JsonUtility.ToJson(_userSettings, false));
+#endif
+#if PlaTFORM_ANDROID
+        File.WriteAllText($"{Application.persistentDataPath}/Settings.Json", JsonUtility.ToJson(_userSettings, false));
+#endif
     }
 
 
@@ -177,7 +182,12 @@ public class GameManager
     {
         try
         {
+#if PLATFORM_STANDALONE_WIN
             _userSettings = JsonUtility.FromJson<JsonSettings>(File.ReadAllText($"{Application.dataPath}/Settings.Json"));
+#endif
+#if PLATFORM_ANDROID
+            _userSettings = JsonUtility.FromJson<JsonSettings>(File.ReadAllText($"{Application.persistentDataPath}/Settings.Json"));
+#endif
         }
         catch
         {

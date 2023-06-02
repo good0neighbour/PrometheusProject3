@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PopUpScreenElementTechTree : MonoBehaviour
+public class PopUpScreenElementTechTree : MonoBehaviour, IPopUpScreen
 {
     /* ==================== Variables ==================== */
 

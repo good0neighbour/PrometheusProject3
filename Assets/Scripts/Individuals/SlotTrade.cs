@@ -143,7 +143,7 @@ public class SlotTrade : MonoBehaviour
         {
             tradeText.Append($"{Language.Instance["철"]} {Language.Instance["수출"]} {_trade.Iron.ToString()}\n");
         }
-        else
+        else if (0 > _trade.Iron)
         {
             tradeText.Append($"{Language.Instance["철"]} {Language.Instance["수입"]} {(-_trade.Iron).ToString()}\n");
         }
@@ -153,7 +153,7 @@ public class SlotTrade : MonoBehaviour
         {
             tradeText.Append($"{Language.Instance["핵물질"]} {Language.Instance["수출"]} {_trade.Nuke.ToString()}\n");
         }
-        else
+        else if (0 > _trade.Nuke)
         {
             tradeText.Append($"{Language.Instance["핵물질"]} {Language.Instance["수입"]} {(-_trade.Nuke).ToString()}\n");
         }
@@ -163,7 +163,7 @@ public class SlotTrade : MonoBehaviour
         {
             tradeText.Append($"{Language.Instance["보석"]} {Language.Instance["수출"]} {_trade.Jewel.ToString()}\n");
         }
-        else
+        else if (0 > _trade.Jewel)
         {
             tradeText.Append($"{Language.Instance["보석"]} {Language.Instance["수입"]} {(-_trade.Jewel).ToString()}\n");
         }

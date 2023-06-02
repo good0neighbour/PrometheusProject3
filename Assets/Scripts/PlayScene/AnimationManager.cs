@@ -66,6 +66,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private Material _land = null;
     [SerializeField] private Material _ocean = null;
     [SerializeField] private Material _cloud = null;
+    [SerializeField] private Material _overcloudy = null;
     [SerializeField] private Material _atmosphere = null;
     [SerializeField] private Material _night = null;
     [SerializeField] private Material _ice = null;
@@ -187,11 +188,21 @@ public class AnimationManager : MonoBehaviour
         {
             _waterGas = int0;
             float0 = _waterGas * _waterGasMultiply;
-            if (1.0f < float0)
+            if (1.0f > float0)
             {
-                float0 = 1.0f;
+                _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0);
+                _overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f);
             }
-            _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0);
+            else if (3.0f > float0)
+            {
+                _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.5f - float0 * 0.5f);
+                _overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0 * 0.5f - 1.0f);
+            }
+            else
+            {
+                _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f);
+                _overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.0f);
+            }
         }
 
         // ´ë±â

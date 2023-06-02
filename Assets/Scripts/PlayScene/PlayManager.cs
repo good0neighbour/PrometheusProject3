@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -447,7 +446,12 @@ public class PlayManager : MonoBehaviour
     public void SaveGame()
     {
         // 게임 데이타 저장
+#if PLATFORM_STANDALONE_WIN
         File.WriteAllText($"{Application.dataPath}/Saves.Json", JsonUtility.ToJson(_data, false));
+#endif
+#if PlaTFORM_ANDROID
+        File.WriteAllText($"{Application.persistentDataPath}/Saves.Json", JsonUtility.ToJson(_data, false));
+#endif
 
         // 게임이 저장됐다는 설정이 안 됐을 경우
         if (!GameManager.Instance.IsThereSavedGame)
@@ -925,7 +929,12 @@ public class PlayManager : MonoBehaviour
         try
         {
             // 저장된 게임 불러온다.
+#if PLATFORM_STANDALONE_WIN
             _data = JsonUtility.FromJson<JsonData>(File.ReadAllText($"{Application.dataPath}/Saves.Json"));
+#endif
+#if PLATFORM_ANDROID
+            _data = JsonUtility.FromJson<JsonData>(File.ReadAllText($"{Application.persistentDataPath}/Saves.Json"));
+#endif
         }
         catch
         {
