@@ -101,9 +101,12 @@ public class NodeSociety : MonoBehaviour
         IsAvailable = true;
 
         // 요구조건에 해당하는 노드에 다음 노드를 업데이트
-        for (byte i = 0; i < _requirements.Length; ++i)
+        if (!GameManager.Instance.IsTechTreeInitialized)
         {
-            techTreeData.AddNextNode(_requirements[i].Type, nodeIndex[_requirements[i].NodeName], _nodeName, TechTreeType.Society);
+            for (byte i = 0; i < _requirements.Length; ++i)
+            {
+                techTreeData.AddNextNode(_requirements[i].Type, nodeIndex[_requirements[i].NodeName], _nodeName, TechTreeType.Society);
+            }
         }
 
         // 가변 배열에 하위 요소 추가

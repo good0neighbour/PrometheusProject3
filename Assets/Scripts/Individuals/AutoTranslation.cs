@@ -23,12 +23,14 @@ public class AutoTranslation : MonoBehaviour
         // 컴포넌트 가져온다.
         _text = GetComponent<TMP_Text>();
 
+#if UNITY_EDITOR
         // 찾을 수 없으면
         if (null == _text)
         {
             Debug.LogError($"AutoTranslation 잘못된 위치에 부착 - {name}");
             return;
         }
+#endif
 
         // 언어 대리자에 등록한다.
         Language.OnLanguageChange += OnLanguageChange;
@@ -53,12 +55,14 @@ public class AutoTranslation : MonoBehaviour
         // 이것이 한국어 키다.
         _koreanKey = _text.text;
 
+#if UNITY_EDITOR
         // 해당 키가 존재하는지 확인
         if (!Language.Instance.GetContainsKey(_koreanKey))
         {
             Debug.LogError($"\"{_koreanKey}\" - 존재하지 않는 키. 오타 수정 및 삭제 요망.\n{transform.parent.name}/{name}");
             Language.OnLanguageChange -= OnLanguageChange;
         }
+#endif
     }
 
 

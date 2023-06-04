@@ -100,8 +100,9 @@ public static class Constants
     public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY1 = 0.01f;
     public const float HOSTILE_INCREASEMENT_BY_DIPLOMACY2 = 0.03f;
     public const float CONQUEST_MOVEMENT = 0.1f;
-    public const float MAX_CHAOS = 1.01f;
-    public const float GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY = 0.98f;
+    public const float MIN_DEFENCE = -0.005f;
+    public const float MAX_DEFENCE = 0.01f;
+    public const float GENERAL_DIPLOMACY_DECREASEMENT = 0.001f;
 
     // 게임 플레이 관련 값, 무역
     public const float TRADE_HOSTILE_AFFECTION = 0.5f;

@@ -160,6 +160,7 @@ Confusion greatly increases;
 Peacock defence slightly reduced;
 Reduced work defence;
 Work defence greatly reduced;
+Trade;
 Income;
 Export;
 Annual revenue;

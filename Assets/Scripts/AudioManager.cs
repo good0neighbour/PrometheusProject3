@@ -83,15 +83,20 @@ public class AudioManager : MonoBehaviour
         }
         set
         {
+#if UNITY_EDITOR
             if (null == _instance)
             {
+#endif
                 _instance = value;
+#if UNITY_EDITOR
             }
             else if (value != _instance)
             {
                 // 이미 생성돼있는 경우 새로 생성한 것을 파괴한다.
                 Destroy(value.gameObject);
+                Debug.LogError("이미 생성된 AudioManager.");
             }
+#endif
         }
     }
 

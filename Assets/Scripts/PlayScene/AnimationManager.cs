@@ -87,8 +87,8 @@ public class AnimationManager : MonoBehaviour
     private float _iceGap = 0.0f;
     private float _waterLiquidMultiply = 1.0f / 1379705.3f;
     private float _waterGasMultiply = 1.0f / 2.7f;
-    private float _airPressureMultiply = 1.0f / 29000f;
-    private float _icePressureMultiply = 1.0f / 1013.25f;
+    private float _airPressureMultiply = 1.0f / 1013.25f;
+    private float _iceMultiply = 1.0f / 29000f;
     private int _breathStability = -1;
     private int _waterLiquid = -1;
     private int _waterGas = -1;
@@ -241,7 +241,7 @@ public class AnimationManager : MonoBehaviour
         if (_waterSolid != int0)
         {
             _waterSolid = int0;
-            float0 = _iceMin - _waterSolid * _iceGap * _icePressureMultiply;
+            float0 = _iceMin - _waterSolid * _iceGap * _iceMultiply;
             if (0.0f > float0)
             {
                 float0 = 0.0f;
@@ -273,7 +273,7 @@ public class AnimationManager : MonoBehaviour
         _oceanGap = _oceanMin - _oceanMiddle;
         _iceGap = _iceMin - _iceMiddle;
 
-        // 처음 시작 시 0.5초 후 업데이트
+        // 처음 시작 시 0.5초 후 행성 색상 업데이트
         _timer = _planetColourUpdateTimer - 0.5f;
     }
 

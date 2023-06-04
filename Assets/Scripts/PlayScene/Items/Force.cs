@@ -28,7 +28,7 @@ public class Force
     public float Friendly = 0.0f;
     public float Hostile = 0.0f;
     public float Conquest = 0.0f;
-    public float Chaos = Constants.GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY;
+    public float Defence = 0.0f;
     public bool Info = false;
 
 
@@ -185,11 +185,21 @@ public class Force
     private void OnMonthChange()
     {
         // 우호도, 적대자 감소
-        Friendly *= Constants.GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY;
-        Hostile *= Constants.GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY;
+        Friendly -= Constants.GENERAL_DIPLOMACY_DECREASEMENT;
+        Hostile -= Constants.GENERAL_DIPLOMACY_DECREASEMENT;
+        if (0.0f > Friendly)
+        {
+            Friendly = 0.0f;
+        }
+        if (0.0f > Hostile)
+        {
+            Hostile = 0.0f;
+        }
+
+        // 속국화 방어
         if (1.0f > Conquest)
         {
-            Conquest *= Chaos;
+            Conquest -= Defence;
         }
 
         // 메세지 생성
@@ -202,7 +212,7 @@ public class Force
         // 문화 무작위 증가
         Culture += (ushort)Random.Range(0, 3);
 
-        // 혼란 감소
-        Chaos *= Constants.GENERAL_DIPLOMACY_DECREASEMENT_MULTIPLY;
+        // 공작 방어력 증가
+        Defence += Constants.GENERAL_DIPLOMACY_DECREASEMENT * 0.1f;
     }
 }

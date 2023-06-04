@@ -449,7 +449,7 @@ public class PlayManager : MonoBehaviour
 #if PLATFORM_STANDALONE_WIN
         File.WriteAllText($"{Application.dataPath}/Saves.Json", JsonUtility.ToJson(_data, false));
 #endif
-#if PlaTFORM_ANDROID
+#if PLATFORM_ANDROID
         File.WriteAllText($"{Application.persistentDataPath}/Saves.Json", JsonUtility.ToJson(_data, false));
 #endif
 
@@ -1170,6 +1170,12 @@ public class PlayManager : MonoBehaviour
         _researchScreen.Activate();
         _societyScreen.Activate();
 
+        // UIString에 참조 전달
+        UIString.Instance.GetAdoptedData(_adoptedData);
+
+        // 초기 설정 완료
+        GameManager.Instance.IsTechTreeInitialized = true;
+
         // 새로 생성된 배열 참조
         _data.SocietyAdopted = _adoptedData[(int)TechTreeType.Society];
 
@@ -1318,7 +1324,7 @@ public class PlayManager : MonoBehaviour
     /* ==================== Struct ==================== */
 
     [Serializable]
-    public struct JsonData
+    private struct JsonData
     {
         public byte[] ByteArray;
         public short[] ShortArray;
@@ -1340,40 +1346,19 @@ public class PlayManager : MonoBehaviour
 
         public JsonData(bool initialize)
         {
-            if (initialize)
-            {
-                ByteArray = new byte[(int)VariableByte.EndByte];
-                ShortArray = new short[(int)VariableShort.EndShort];
-                UshortArray = new ushort[(int)VariableUshort.EndUshort];
-                IntArray = new int[(int)VariableInt.EndInt];
-                UintArray = new uint[(int)VariableUint.EndUint];
-                LongArray = new long[(int)VariableLong.EndLong];
-                FloatArray = new float[(int)VariableFloat.EndFloat];
-                DoubleArray = new double[(int)VariableDouble.EndDouble];
-                BoolArray = new bool[(int)VariableBool.EndBool];
-                Forces = new Force[Constants.NUMBER_OF_FORCES];
-                Lands = new List<Land>();
-                Cities = new List<City>();
-                Trades = new List<Trade>();
-            }
-            else
-            {
-                ByteArray = null;
-                ShortArray = null;
-                UshortArray = null;
-                IntArray = null;
-                UintArray = null;
-                LongArray = null;
-                FloatArray = null;
-                DoubleArray = null;
-                BoolArray = null;
-                Forces = null;
-                Lands = null;
-                Cities = null;
-                Trades = null;
-            }
-
-
+            ByteArray = new byte[(int)VariableByte.EndByte];
+            ShortArray = new short[(int)VariableShort.EndShort];
+            UshortArray = new ushort[(int)VariableUshort.EndUshort];
+            IntArray = new int[(int)VariableInt.EndInt];
+            UintArray = new uint[(int)VariableUint.EndUint];
+            LongArray = new long[(int)VariableLong.EndLong];
+            FloatArray = new float[(int)VariableFloat.EndFloat];
+            DoubleArray = new double[(int)VariableDouble.EndDouble];
+            BoolArray = new bool[(int)VariableBool.EndBool];
+            Forces = new Force[Constants.NUMBER_OF_FORCES];
+            Lands = new List<Land>();
+            Cities = new List<City>();
+            Trades = new List<Trade>();
             TechAdopted = null;
             ThoughtAdopted = null;
             SocietyAdopted = null;

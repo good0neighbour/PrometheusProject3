@@ -58,13 +58,13 @@ public class GameManager
         set;
     }
 
-    public bool IsTechTreeInitialized
+    public bool IsGameWin
     {
         get;
         set;
     }
 
-    public bool IsGameWin
+    public bool IsTechTreeInitialized
     {
         get;
         set;
@@ -172,7 +172,7 @@ public class GameManager
 #if PLATFORM_STANDALONE_WIN
         File.WriteAllText($"{Application.dataPath}/Settings.Json", JsonUtility.ToJson(_userSettings, false));
 #endif
-#if PlaTFORM_ANDROID
+#if PLATFORM_ANDROID
         File.WriteAllText($"{Application.persistentDataPath}/Settings.Json", JsonUtility.ToJson(_userSettings, false));
 #endif
     }

@@ -6,12 +6,12 @@ public class CoolTimeBtnConquestCategory1 : CoolTimeBtnDiplomacySemiBase
         AudioManager.Instance.PlayAuido(AudioType.Select);
 
         // 공작 방어 감소 정도
-        ScreenDiplomacy.CurrentForce.Chaos += (1.0f - ScreenDiplomacy.CurrentForce.Chaos) * ScreenDiplomacy.CurrentForce.Friendly * 2.0f;
+        ScreenDiplomacy.CurrentForce.Defence -= Constants.GENERAL_DIPLOMACY_DECREASEMENT * ScreenDiplomacy.CurrentForce.Friendly * 2.0f;
 
-        // 혼란 최대치
-        if (Constants.MAX_CHAOS < ScreenDiplomacy.CurrentForce.Chaos)
+        // 공작 방어력 최소치
+        if (Constants.MIN_DEFENCE > ScreenDiplomacy.CurrentForce.Defence)
         {
-            ScreenDiplomacy.CurrentForce.Chaos = Constants.MAX_CHAOS;
+            ScreenDiplomacy.CurrentForce.Defence = Constants.MIN_DEFENCE;
         }
 
         // 상태 표시

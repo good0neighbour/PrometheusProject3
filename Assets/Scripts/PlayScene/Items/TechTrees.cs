@@ -80,8 +80,6 @@ public class TechTrees : ScriptableObject
         SetNextNodes(_facilityNodes);
         SetNextNodes(_techNodes);
         SetNextNodes(_thoughtNodes);
-
-        GameManager.Instance.IsTechTreeInitialized = true;
     }
 
 

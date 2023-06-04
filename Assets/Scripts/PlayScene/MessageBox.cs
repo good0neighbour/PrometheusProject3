@@ -80,10 +80,12 @@ public class MessageBox : MonoBehaviour
                     sb.Append(replacements[replaceIndex]);
                     record = false;
                     break;
+
                 case '}':
                     ++replaceIndex;
                     record = true;
                     break;
+
                 default:
                     if (record)
                     {
@@ -119,6 +121,7 @@ public class MessageBox : MonoBehaviour
         {
             case 0:
                 return;
+
             default:
                 // 소리 재생
                 AudioManager.Instance.PlayAuido(AudioType.Alert);

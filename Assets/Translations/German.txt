@@ -160,6 +160,7 @@ Die Verwirrung nimmt stark zu;
 Pfauenverteidigung leicht reduziert;
 Reduzierte Arbeitsverteidigung;
 Arbeitsverteidigung stark reduziert;
+Handeln;
 Einkommen;
 Export;
 Jahresumsatz;

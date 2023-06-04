@@ -176,6 +176,7 @@ public class GeneralMenuButtons : MonoBehaviour
                 }
                 CurrentLeftIndex = (byte)index;
                 break;
+
             case 2:
                 if (CurrentRightIndex == index)
                 {
@@ -183,9 +184,12 @@ public class GeneralMenuButtons : MonoBehaviour
                 }
                 CurrentRightIndex = (byte)index;
                 break;
+
+#if UNITY_EDITOR
             default:
                 Debug.LogError("잘목된 메뉴 화면");
                 return;
+#endif
         }
 
         // 소리 재생

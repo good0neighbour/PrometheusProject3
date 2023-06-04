@@ -175,8 +175,12 @@ public class PopUpScreenLand : MonoBehaviour, IPopUpScreen
         {
             for (byte i = 0; i < Constants.NUMBER_OF_FORCES; ++i)
             {
-                PlayManager.Instance.GetForce(i).Conquest = 0.9f;
-                PlayManager.Instance.GetForce(i).Chaos = Constants.MAX_CHAOS;
+                Force force = PlayManager.Instance.GetForce(i);
+                force.Conquest = 0.9f;
+                force.Defence = Constants.MIN_DEFENCE;
+                force.Hostile = 0.0f;
+                force.Friendly = 0.5f;
+
             }
             MessageBox.Instance.EnqueueMessage(Language.Instance[
             "개발자용 치트를 사용했습니다. 속국화 90%"

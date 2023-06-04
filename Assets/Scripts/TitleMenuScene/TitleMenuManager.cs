@@ -241,6 +241,7 @@ public class TitleMenuManager : MonoBehaviour
                     // 소리 재생
                     AudioManager.Instance.PlayAuido(AudioType.Touch);
 
+                    // 화면 차례대로 표시
                     _textScreenBuilder.Append(_texts[_phase]);
                     _textScreen.text = _textScreenBuilder.ToString();
                     ++_phase;
@@ -248,24 +249,30 @@ public class TitleMenuManager : MonoBehaviour
                 }
                 else
                 {
+                    // 표시 완료
                     _currentScreen.SetButtons();
                     _screenAnimation = false;
                 }
             }
             else
             {
+                // 시간 경과
                 _timer += Time.deltaTime;
             }
+
+            //여기서 함수 종료
             return;
         }
         else if (_firstStart)
         {
             if (0 >= _timer)
             {
+                // 밝아지는 중
                 _warningText.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Cos(_timer) * 0.5f + 0.5f);
             }
             else if (Constants.DOUBLE_PI < _timer)
             {
+                // 더이상 필요 없음
                 Destroy(_warningText.gameObject);
                 _firstStart = false;
                 GameManager.Instance.IsApplicationFirstStarted = false;
@@ -273,10 +280,14 @@ public class TitleMenuManager : MonoBehaviour
             }
             else if (Constants.PI < _timer)
             {
+                // 어두워지는 중
                 _warningText.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Cos(_timer - Constants.PI) * 0.5f + 0.5f);
             }
 
+            // 시간 경과
             _timer += Time.deltaTime * Constants.STARTING_TEXT_SPEEDMULT;
+
+            // 여기서 함수 종료
             return;
         }
 

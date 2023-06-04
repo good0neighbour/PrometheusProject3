@@ -209,22 +209,22 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
         }
 
         // 전체 크기
-        float areaWidth = sizeX + _width * 0.5f;
-        float areaHeight = sizeY + _height * 0.5f;
+        sizeX += _width * 0.5f;
+        sizeY += _height * 0.5f;
         RectTransform contentArea = _techTreeContentArea.GetComponent<RectTransform>();
-        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, areaWidth);
-        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, areaHeight);
+        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, sizeX);
+        contentArea.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, sizeY);
 
         // 가운데 정렬
         float pivotX = 0.0f;
         float pivotY = 0.0f;
-        if (Constants.TECHTREE_AREA_WIDTH > areaWidth)
+        if (Constants.TECHTREE_AREA_WIDTH > sizeX)
         {
-            pivotX = (Constants.TECHTREE_AREA_WIDTH_CENTER * Constants.TECHTREE_AREA_WIDTH - areaWidth * 0.5f) / (Constants.TECHTREE_AREA_WIDTH - areaWidth);
+            pivotX = (Constants.TECHTREE_AREA_WIDTH_CENTER * Constants.TECHTREE_AREA_WIDTH - sizeX * 0.5f) / (Constants.TECHTREE_AREA_WIDTH - sizeX);
         }
-        if (_yCenterize && Constants.TECHTREE_AREA_HEIGHT > areaHeight)
+        if (_yCenterize && Constants.TECHTREE_AREA_HEIGHT > sizeY)
         {
-            pivotY = (Constants.TECHTREE_AREA_HEIGHT_CENTER * Constants.TECHTREE_AREA_HEIGHT - areaHeight * 0.5f) / (Constants.TECHTREE_AREA_HEIGHT - areaHeight);
+            pivotY = (Constants.TECHTREE_AREA_HEIGHT_CENTER * Constants.TECHTREE_AREA_HEIGHT - sizeY * 0.5f) / (Constants.TECHTREE_AREA_HEIGHT - sizeY);
         }
         contentArea.pivot = new Vector2(pivotX, pivotY);
     }
@@ -246,7 +246,7 @@ public abstract class TechTreeViewBase : MonoBehaviour, IState
             }
         }
 
-        // 모두 승인 됐으면 참 반환
+        // 모두 승인됐으면 참 반환
         return true;
     }
 

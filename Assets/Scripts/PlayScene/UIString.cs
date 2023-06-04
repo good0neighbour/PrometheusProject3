@@ -252,6 +252,12 @@ public class UIString
         }
     }
 
+    
+    public void GetAdoptedData(float[][] adoptedData)
+    {
+        _adopted = adoptedData;
+    }
+
 
 
     /* ==================== Private Methods ==================== */
@@ -292,7 +298,5 @@ public class UIString
         _floatUnits[(int)VariableFloat.ResearchSupportRate] = "%";
         _floatUnits[(int)VariableFloat.SocietySupportRate] = "%";
         _floatUnits[(int)VariableFloat.DiplomacySupportRate] = "%";
-
-        _adopted = PlayManager.Instance.GetAdoptedData();
     }
 }
