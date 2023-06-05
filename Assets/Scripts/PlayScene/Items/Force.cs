@@ -200,6 +200,10 @@ public class Force
         if (1.0f > Conquest)
         {
             Conquest -= Defence;
+            if (0.0f > Conquest)
+            {
+                Conquest = 0.0f;
+            }
         }
 
         // 메세지 생성

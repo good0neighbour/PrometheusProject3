@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -641,6 +641,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 943249177}
     m_Modifications:
     - target: {fileID: 9094076150717833881, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
@@ -736,6 +737,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 250921848}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9094076150717833894, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8155230}
   m_SourcePrefab: {fileID: 100100000, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
 --- !u!224 &8155227 stripped
 RectTransform:
@@ -856,7 +866,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: -10
   m_TargetDisplay: 0
@@ -941,7 +953,7 @@ MonoBehaviour:
   _oceanMiddle: 0.5
   _iceMin: 1
   _iceMiddle: 0.82
-  _nightBrightMultiply: 0.00001
+  _nightBrightMultiply: 0.00005
   _background: {fileID: 1563173916}
   _messageBoxBackground: {fileID: 676945768}
   _leftRightBtns:
@@ -6052,7 +6064,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 40
   m_TargetDisplay: 0
@@ -8483,7 +8497,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -11205,7 +11221,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -16240,7 +16258,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -24836,7 +24856,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -26412,6 +26434,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 603913632}
     m_Modifications:
     - target: {fileID: 3816832538383252188, guid: 8f7a788657187dc439f8ab9c02c2a85c, type: 3}
@@ -26507,6 +26530,9 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7a788657187dc439f8ab9c02c2a85c, type: 3}
 --- !u!224 &473510507 stripped
 RectTransform:
@@ -32150,7 +32176,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -34284,7 +34312,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -39399,7 +39429,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -44325,7 +44357,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -47746,8 +47780,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+      - m_Target: {fileID: 846971045}
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -53091,7 +53125,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -53584,6 +53620,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 778187209}
     m_Modifications:
     - target: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
@@ -53719,6 +53756,57 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1327889919}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2107995813}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 521771376}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 513895457}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956809288}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 416434253}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 454181608}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1426711618}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1972958185}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1994479702}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1274832854}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 33198733}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 232882472}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1804677808}
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1258085754}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9094076150717833894, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 983754655}
   m_SourcePrefab: {fileID: 100100000, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
 --- !u!224 &950770188 stripped
 RectTransform:
@@ -53968,7 +54056,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -54098,7 +54188,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
@@ -54536,7 +54628,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -57886,7 +57980,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -59755,8 +59851,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonCoolTime, Assembly-CSharp
+      - m_Target: {fileID: 1071647239}
+        m_TargetAssemblyTypeName: ButtonCoolTimeBase, Assembly-CSharp
         m_MethodName: BtnAdopt
         m_Mode: 1
         m_Arguments:
@@ -64160,7 +64256,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -64817,9 +64915,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -69286,7 +69392,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -70692,7 +70800,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 15
   m_TargetDisplay: 0
@@ -72328,7 +72438,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -85972,7 +86084,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 40
   m_TargetDisplay: 0
@@ -89681,7 +89795,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 30
   m_TargetDisplay: 0
@@ -98440,6 +98556,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 943249177}
     m_Modifications:
     - target: {fileID: 9094076150717833881, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
@@ -98547,6 +98664,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 792608922}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9094076150717833894, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1815102978}
   m_SourcePrefab: {fileID: 100100000, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
 --- !u!224 &1815102975 stripped
 RectTransform:
@@ -101928,7 +102054,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -104381,9 +104509,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -104553,6 +104689,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2018163153}
     m_Modifications:
     - target: {fileID: 3816832538383252188, guid: 8f7a788657187dc439f8ab9c02c2a85c, type: 3}
@@ -104648,6 +104785,9 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7a788657187dc439f8ab9c02c2a85c, type: 3}
 --- !u!224 &1925517320 stripped
 RectTransform:
@@ -109961,7 +110101,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -111522,9 +111664,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -114238,7 +114388,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -119259,6 +119411,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1863246859}
     m_Modifications:
     - target: {fileID: 3816832538383252188, guid: 8f7a788657187dc439f8ab9c02c2a85c, type: 3}
@@ -119354,6 +119507,9 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7a788657187dc439f8ab9c02c2a85c, type: 3}
 --- !u!222 &3822924867104153163
 CanvasRenderer:
@@ -122873,6 +123029,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 943249177}
     m_Modifications:
     - target: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
@@ -123016,6 +123173,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9094076150582487843, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 500452578}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9094076150717833894, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9094076150252287675}
   m_SourcePrefab: {fileID: 100100000, guid: 0424fb96986b1c34793cab5fdaa6e58a, type: 3}
 --- !u!1 &9094076150252287674 stripped
 GameObject:

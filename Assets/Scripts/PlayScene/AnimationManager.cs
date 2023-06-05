@@ -233,7 +233,7 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 1.0f;
             }
-            _night.SetColor("_EmissionColor", _nightColour * float0);
+            _night.SetColor("_EmissionColor", new Color(_nightColour.r * float0, _nightColour.g * float0, _nightColour.b * float0, 1.0f));
         }
 
         // ºùÇÏ

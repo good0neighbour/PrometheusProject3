@@ -15,6 +15,7 @@ public abstract class CoolTimeBtnMediaCultureSemiBase : ButtonCoolTimeBase
     protected override void Cost()
     {
         PlayManager.Instance[VariableUint.Culture] -= _cultureCost;
+        BottomBarRight.Instance.SpendAnimation(BottomBarRight.Displays.Culture);
     }
 
 
