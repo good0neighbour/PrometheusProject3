@@ -56,6 +56,11 @@ Shader "PrometheusProject/PlanetShader"
         half _PlanetRotation;
         half _CloudRotation;
 
+        struct PlanetSurfaceOutput
+        {
+            fixed4 Albedo;
+        };
+
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
         // #pragma instancing_options assumeuniformscaling
@@ -110,8 +115,8 @@ Shader "PrometheusProject/PlanetShader"
             fixed nonCloudArea = max(0, surfaceData.z - surfaceData.x);
             o.Metallic = _Metallic * nonCloudArea;
             o.Smoothness = _Glossiness * nonCloudArea;
-            nonCloudArea = max(0, surfaceData.y - surfaceData.x * 0.5);
-            o.Normal = UnpackNormal(tex2D(_IceNormal, IN.uv_IceNormal) * nonCloudArea + 0.5 * (1 - nonCloudArea));
+            nonCloudArea = max(0, surfaceData.y - surfaceData.x);
+            o.Normal = UnpackNormal(tex2D(_IceNormal, IN.uv_IceNormal) * nonCloudArea + fixed4(0.5, 0.5, 1, 1) * (1 - nonCloudArea));
             o.Alpha = 1.0;
         }
         ENDCG
