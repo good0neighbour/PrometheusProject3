@@ -81,6 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AtmpshereWidthness: 3
     - _BumpScale: 1
     - _CloudAlph: 1
     - _CloudRotation: -0.05
@@ -89,9 +90,10 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.4
+    - _Glossiness: 25
     - _GlossyReflections: 1
-    - _IceCutoff: 0.853
+    - _IceCutoff: 0.658
+    - _IceLinear: 0.8
     - _Metallic: 0.8
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -101,11 +103,13 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterCutoff: 0.391
+    - _WaterCutoff: 0.75
     - _ZWrite: 1
     m_Colors:
+    - _AtmosphereColour: {r: 0.5882353, g: 0.78431374, b: 0.9019608, a: 1}
     - _Color: {r: 0.54901963, g: 0.47058824, b: 0.39215687, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    - _WaterColor: {r: 0, g: 0.43137255, b: 0.78431374, a: 1}
+    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.46666667}
+    - _WaterColor: {r: 0, g: 0.43137237, b: 0.78431374, a: 0.40392157}
+    - _WaterSpecularColour: {r: 0.39215675, g: 0.7058823, b: 1, a: 0.39215687}
   m_BuildTextureStacks: []
