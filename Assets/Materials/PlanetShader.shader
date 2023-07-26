@@ -13,6 +13,8 @@ Shader "PrometheusProject/PlanetShader"
         _IceLinear ("IceLinear", Range(0,1)) = 0.5
         _Cloud ("CloudTexture", 2D) = "white" {}
         _CloudColor ("CloudColor", Color) = (1,1,1,1)
+        _OverCloudy ("OverCloudyTexture", 2D) = "white" {}
+        _OverCloudyAlpha ("OverCloudyAlpha", Range(0,1)) = 0.0
         _AtmosphereColour ("AtmosphereColour", Color) = (1,1,1,1)
         _AtmpshereWidthness ("AtmpshereWidthness", Range(0,10)) = 5.0
         _Night ("NightTexture", 2D) = "white" {}
@@ -39,6 +41,7 @@ Shader "PrometheusProject/PlanetShader"
         sampler2D _IceMap;
         sampler2D _IceNormal;
         sampler2D _Cloud;
+        sampler2D _OverCloudy;
         sampler2D _Night;
 
         struct Input
@@ -48,6 +51,7 @@ Shader "PrometheusProject/PlanetShader"
             fixed2 uv_IceMap;
             fixed2 uv_IceNormal;
             fixed2 uv_Cloud;
+            fixed2 uv_OverCloudy;
             fixed2 uv_Night;
         };
 
@@ -57,6 +61,7 @@ Shader "PrometheusProject/PlanetShader"
         fixed4 _IceColor;
         fixed _IceLinear;
         fixed4 _CloudColor;
+        fixed _OverCloudyAlpha;
         fixed4 _AtmosphereColour;
         fixed _AtmpshereWidthness;
         fixed4 _NightColour;
@@ -86,11 +91,17 @@ Shader "PrometheusProject/PlanetShader"
             // 표면 정보
             fixed4 surfaceData;
 
+            // 금성 대기
+            fixed4 overcloudy = tex2D(
+                _OverCloudy,
+                fixed2(IN.uv_OverCloudy.x + _Time.x * _CloudRotation, IN.uv_OverCloudy.y)
+            );
+
             // 구름 없는 영역
             surfaceData.x = 1 - tex2D(
                 _Cloud,
                 fixed2(IN.uv_Cloud.x + _Time.x * _CloudRotation, IN.uv_Cloud.y)
-            ).a * _CloudColor.a;
+            ).a * _CloudColor.a - _OverCloudyAlpha;
 
             // 빙하 영역
             surfaceData.y = 1 - step(
@@ -102,8 +113,7 @@ Shader "PrometheusProject/PlanetShader"
             );
 
             // 해양 영역
-            surfaceData.z = max(
-                0,
+            surfaceData.z = saturate(
                 step(
                     1 - _WaterColor.a,
                     tex2D(
@@ -121,7 +131,7 @@ Shader "PrometheusProject/PlanetShader"
                 _MainTex,
                 fixed2(IN.uv_MainTex.x + _Time.x * _PlanetRotation, IN.uv_MainTex.y)
             ) * _Color;
-            result.rgb = (result.rgb * surfaceData.w + _WaterColor.rgb * surfaceData.z + _IceColor.rgb * surfaceData.y) * surfaceData.x + (1 - surfaceData.x) * _CloudColor.rgb;
+            result.rgb = (result.rgb * surfaceData.w + _WaterColor.rgb * surfaceData.z + _IceColor.rgb * surfaceData.y) * surfaceData.x + (1 - surfaceData.x) * (_CloudColor.rgb * _CloudColor.a + overcloudy.rgb * overcloudy.a);
     
             // 야간 조명
             o.Night = tex2D(
@@ -137,8 +147,8 @@ Shader "PrometheusProject/PlanetShader"
             iceNormal.xyz = UnpackNormal(tex2D(_IceNormal, IN.uv_IceNormal));
     
             // 값 전달
-            _WaterSpecularColour.rgb = _WaterSpecularColour.rgb * saturate(surfaceData.z - surfaceData.x);
-            iceNormal.w = saturate(surfaceData.y - surfaceData.x);
+            _WaterSpecularColour.rgb = _WaterSpecularColour.rgb * saturate(surfaceData.z - (1 - surfaceData.x));
+            iceNormal.w = saturate(surfaceData.y - (1 - surfaceData.x));
             o.Albedo = result.rgb;
             o.Normal = iceNormal.xyz * iceNormal.w + originalNormal.xyz * (1 - iceNormal.w);
         }

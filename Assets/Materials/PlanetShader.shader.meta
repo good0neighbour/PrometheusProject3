@@ -2,7 +2,14 @@ fileFormatVersion: 2
 guid: b37d8b4f4cd75da45b351377993b9904
 ShaderImporter:
   externalObjects: {}
-  defaultTextures: []
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _WaterMap: {instanceID: 0}
+  - _IceMap: {instanceID: 0}
+  - _IceNormal: {instanceID: 0}
+  - _Cloud: {instanceID: 0}
+  - _OverCloudy: {instanceID: 0}
+  - _Night: {instanceID: 0}
   nonModifiableTextures: []
   userData: 
   assetBundleName: 

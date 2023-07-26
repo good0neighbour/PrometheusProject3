@@ -177,17 +177,17 @@ public class AnimationManager : MonoBehaviour
             if (1.0f > float0)
             {
                 _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0));
-                //_overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f);
+                _planetMaterial.SetFloat("_OverCloudyColor", 0.0f);
             }
             else if (3.0f > float0)
             {
                 _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.5f - float0 * 0.5f));
-                //_overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0 * 0.5f - 1.0f);
+                _planetMaterial.SetFloat("_OverCloudyColor", float0 * 0.5f - 1.0f);
             }
             else
             {
                 _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f));
-                //_overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.0f);
+                _planetMaterial.SetFloat("_OverCloudyAlpha", 1.0f);
             }
         }
 
