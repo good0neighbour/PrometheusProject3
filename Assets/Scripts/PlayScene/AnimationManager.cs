@@ -35,20 +35,12 @@ public class AnimationManager : MonoBehaviour
 
     [Header("3D 애니메이션")]
     [SerializeField] private float _spinSpeedmult = 1.0f;
-    [SerializeField] private float _cloudSpinSpeedmult = 1.0f;
 
     [Header("행성 색상 업데이트")]
     [SerializeField] private float _planetColourUpdateTimer = 1.0f;
     [SerializeField] private Color _landMin = new Color(140.0f / 255.0f, 120.0f / 255.0f, 100.0f / 255.0f);
     [SerializeField] private Color _landMax = new Color(90.0f / 255.0f, 120.0f / 255.0f, 30.0f / 255.0f);
-    [SerializeField] private Color _cloudColour = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-    [SerializeField] private Color _atmosphereBaseColor = new Color();
     [SerializeField] private Color _imagePlanetAtmosphereBaseColor = new Color();
-    [SerializeField] private Color _nightColour = new Color();
-    [SerializeField] private float _oceanMin = 0.95f;
-    [SerializeField] private float _oceanMiddle = 0.5f;
-    [SerializeField] private float _iceMin = 0.95f;
-    [SerializeField] private float _iceMiddle = 0.5f;
     [SerializeField] private float _nightBrightMultiply = 0.00001f;
 
     [Header("참조")]
@@ -57,23 +49,20 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private TMP_Text[] _leftRightBtns = new TMP_Text[6];
     [SerializeField] private Image _selection = null;
     [SerializeField] private Image _imagePlanetAtmosphere = null;
-    [SerializeField] private Transform _planet = null;
-    [SerializeField] private Transform _cloudTransform = null;
     [SerializeField] private Transform _sun = null;
     [SerializeField] private RectTransform _planetImage = null;
     [SerializeField] private RectTransform _spaceImage = null;
     [SerializeField] private RectTransform _messageBoxTransform = null;
-    [SerializeField] private Material _land = null;
-    [SerializeField] private Material _ocean = null;
-    [SerializeField] private Material _cloud = null;
-    [SerializeField] private Material _overcloudy = null;
-    [SerializeField] private Material _atmosphere = null;
-    [SerializeField] private Material _night = null;
-    [SerializeField] private Material _ice = null;
+    [SerializeField] private Material _planetMaterial = null;
 
     private RectTransform _backgroundTransform = null;
     private RectTransform _messageBoxBackgroundTransform = null;
     private Color _landColourGap = new Color();
+    private Color _oceanColour = new Color();
+    private Color _iceColour = new Color();
+    private Color _cloudColour = new Color();
+    private Color _atmoshpereColour = new Color();
+    private Color _nightColour = new Color();
     private float _leftRightTimer = 0.0f;
     private float _leftRightAdd = 0.0f;
     private float _leftRightMultiply = 0.0f;
@@ -83,12 +72,10 @@ public class AnimationManager : MonoBehaviour
     private float _spaceImageTargetPos = 0.0f;
     private float _messageBoxTargetPos = 0.0f;
     private float _timer = 0.0f;
-    private float _oceanGap = 0.0f;
-    private float _iceGap = 0.0f;
-    private float _waterLiquidMultiply = 1.0f / 1379705.3f;
+    private float _waterLiquidMultiply = 1.0f / 1379705.3f * 0.5f;
     private float _waterGasMultiply = 1.0f / 2.7f;
     private float _airPressureMultiply = 1.0f / 1013.25f;
-    private float _iceMultiply = 1.0f / 29000f;
+    private float _iceMultiply = 1.0f / 29000f * 0.5f;
     private int _breathStability = -1;
     private int _waterLiquid = -1;
     private int _waterGas = -1;
@@ -161,12 +148,11 @@ public class AnimationManager : MonoBehaviour
         {
             _breathStability = int0;
             float0 = _breathStability * 0.01f;
-            Color landColour = new Color(
+            _planetMaterial.color = new Color(
                 _landMin.r - _landColourGap.r * float0,
                 _landMin.g - _landColourGap.g * float0,
                 _landMin.b - _landColourGap.b * float0,
                 1.0f);
-            _land.color = landColour;
         }
 
         // 대양
@@ -174,12 +160,12 @@ public class AnimationManager : MonoBehaviour
         if (_waterLiquid != int0)
         {
             _waterLiquid = int0;
-            float0 = _oceanMin - _waterLiquid * _oceanGap * _waterLiquidMultiply;
+            float0 = _waterLiquid * _waterLiquidMultiply;
             if (0.0f > float0)
             {
                 float0 = 0.0f;
             }
-            _ocean.SetFloat("_Cutoff", float0);
+            _planetMaterial.SetColor("_WaterColor", new Color(_oceanColour.r, _oceanColour.g, _oceanColour.b, float0));
         }
 
         // 구름
@@ -190,18 +176,18 @@ public class AnimationManager : MonoBehaviour
             float0 = _waterGas * _waterGasMultiply;
             if (1.0f > float0)
             {
-                _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0);
-                _overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f);
+                _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0));
+                //_overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f);
             }
             else if (3.0f > float0)
             {
-                _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.5f - float0 * 0.5f);
-                _overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0 * 0.5f - 1.0f);
+                _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.5f - float0 * 0.5f));
+                //_overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0 * 0.5f - 1.0f);
             }
             else
             {
-                _cloud.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f);
-                _overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.0f);
+                _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f));
+                //_overcloudy.color = new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.0f);
             }
         }
 
@@ -215,8 +201,8 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 1.0f;
             }
-            _atmosphere.color = new Color(_atmosphereBaseColor.r, _atmosphereBaseColor.g, _atmosphereBaseColor.b, float0);
             _imagePlanetAtmosphere.color = new Color(_imagePlanetAtmosphereBaseColor.r, _imagePlanetAtmosphereBaseColor.g, _imagePlanetAtmosphereBaseColor.b, float0);
+            _planetMaterial.SetColor("_AtmosphereColour", new Color(_atmoshpereColour.r, _atmoshpereColour.g, _atmoshpereColour.b, float0));
         }
 
         // 야간 조명
@@ -233,7 +219,7 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 1.0f;
             }
-            _night.SetColor("_EmissionColor", new Color(_nightColour.r * float0, _nightColour.g * float0, _nightColour.b * float0, 1.0f));
+            _planetMaterial.SetColor("_NightColour", new Color(_nightColour.r, _nightColour.g, _nightColour.b, float0));
         }
 
         // 빙하
@@ -241,12 +227,12 @@ public class AnimationManager : MonoBehaviour
         if (_waterSolid != int0)
         {
             _waterSolid = int0;
-            float0 = _iceMin - _waterSolid * _iceGap * _iceMultiply;
+            float0 = _waterSolid * _iceMultiply;
             if (0.0f > float0)
             {
                 float0 = 0.0f;
             }
-            _ice.SetFloat("_Cutoff", float0);
+            _planetMaterial.SetColor("_IceColor", new Color(_iceColour.r, _iceColour.g, _iceColour.b, float0));
         }
     }
 
@@ -270,11 +256,16 @@ public class AnimationManager : MonoBehaviour
 
         // 고정 값
         _landColourGap = _landMin - _landMax;
-        _oceanGap = _oceanMin - _oceanMiddle;
-        _iceGap = _iceMin - _iceMiddle;
 
         // 처음 시작 시 0.5초 후 행성 색상 업데이트
         _timer = _planetColourUpdateTimer - 0.5f;
+
+        // 고정 색상 가져온다.
+        _oceanColour = _planetMaterial.GetColor("_WaterColor");
+        _iceColour = _planetMaterial.GetColor("_IceColor");
+        _cloudColour = _planetMaterial.GetColor("_CloudColor");
+        _atmoshpereColour = _planetMaterial.GetColor("_AtmosphereColour");
+        _nightColour = _planetMaterial.GetColor("_NightColour");
     }
 
 
@@ -333,14 +324,8 @@ public class AnimationManager : MonoBehaviour
         _messageBoxTransform.localPosition += new Vector3((_messageBoxTargetPos - _messageBoxTransform.localPosition.x) * _messageBoxSpeedmult * Time.deltaTime, 0.0f, 0.0f);
         #endregion
 
-        #region 3D 애니메이션
-        // 게임이 일시정지가 아닐 때만
-        if (Constants.GAME_RESUME == PlayManager.Instance.GameResume)
-        {
-            _planet.Rotate(0.0f, -_spinSpeedmult * Time.deltaTime, 0.0f);
-            _cloudTransform.Rotate(0.0f, -_cloudSpinSpeedmult * Time.deltaTime, 0.0f);
-            _sun.Rotate(0.0f, _spinSpeedmult * Time.deltaTime, 0.0f);
-        }
+        #region 직사광선 애니메이션
+        _sun.Rotate(0.0f, _spinSpeedmult * Time.deltaTime, 0.0f);
         #endregion
 
         #region 행성 색상

@@ -63,6 +63,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Night:
+        m_Texture: {fileID: 2800000, guid: b42fa7f592ac9a34c86f4aa5322ead5b, type: 3}
+        m_Scale: {x: 3, y: 2}
+        m_Offset: {x: 0, y: 0.5}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -81,9 +85,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AtmpshereWidthness: 3
+    - _AtmpshereWidthness: 2
     - _BumpScale: 1
-    - _CloudAlph: 1
+    - _CloudAlph: 0.37037036
     - _CloudRotation: -0.05
     - _CloudSpeedMult: 0.1
     - _Cutoff: 0.5
@@ -96,20 +100,26 @@ Material:
     - _IceLinear: 0.8
     - _Metallic: 0.8
     - _Mode: 0
+    - _NightArea: 0.2
+    - _NightEdge: 0.4
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PlanetRotation: -0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SurroundingAtmosphereWidth: 1.01
     - _UVSec: 0
     - _WaterCutoff: 0.75
     - _ZWrite: 1
     m_Colors:
-    - _AtmosphereColour: {r: 0.5882353, g: 0.78431374, b: 0.9019608, a: 1}
-    - _Color: {r: 0.54901963, g: 0.47058824, b: 0.39215687, a: 1}
+    - _AtmosphereColour: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.99777937}
+    - _CloudColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    - _Color: {r: 0.36862746, g: 0.47058824, b: 0.13960785, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.46666667}
-    - _WaterColor: {r: 0, g: 0.43137237, b: 0.78431374, a: 0.40392157}
+    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.57254905}
+    - _NightColour: {r: 1, g: 0.9019608, b: 0.78431374, a: 1}
+    - _SurroundingAtmosphereColour: {r: 1, g: 1, b: 1, a: 1}
+    - _WaterColor: {r: 0, g: 0.43137187, b: 0.68235296, a: 0.53735787}
     - _WaterSpecularColour: {r: 0.39215675, g: 0.7058823, b: 1, a: 0.39215687}
   m_BuildTextureStacks: []
