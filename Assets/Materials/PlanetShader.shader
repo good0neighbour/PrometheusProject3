@@ -131,7 +131,7 @@ Shader "PrometheusProject/PlanetShader"
                 _MainTex,
                 fixed2(IN.uv_MainTex.x + _Time.x * _PlanetRotation, IN.uv_MainTex.y)
             ) * _Color;
-            result.rgb = (result.rgb * surfaceData.w + _WaterColor.rgb * surfaceData.z + _IceColor.rgb * surfaceData.y) * surfaceData.x + (1 - surfaceData.x) * (_CloudColor.rgb * _CloudColor.a + overcloudy.rgb * overcloudy.a);
+            result.rgb = (result.rgb * surfaceData.w + _WaterColor.rgb * surfaceData.z + _IceColor.rgb * surfaceData.y) * surfaceData.x + (1 - surfaceData.x) * (_CloudColor.rgb * _CloudColor.a + overcloudy.rgb * _OverCloudyAlpha);
     
             // 야간 조명
             o.Night = tex2D(

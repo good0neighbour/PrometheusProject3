@@ -969,6 +969,7 @@ MonoBehaviour:
   _spaceImage: {fileID: 288131945}
   _messageBoxTransform: {fileID: 134415885}
   _planetMaterial: {fileID: 2100000, guid: d3b168966c4a275409d4cb9f16d795ad, type: 2}
+  _planet: {fileID: 197996089}
 --- !u!1 &14686840
 GameObject:
   m_ObjectHideFlags: 0
@@ -23906,7 +23907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &406448832
 RectTransform:
   m_ObjectHideFlags: 0

@@ -54,6 +54,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private RectTransform _spaceImage = null;
     [SerializeField] private RectTransform _messageBoxTransform = null;
     [SerializeField] private Material _planetMaterial = null;
+    [SerializeField] private MeshRenderer _planet = null;
 
     private RectTransform _backgroundTransform = null;
     private RectTransform _messageBoxBackgroundTransform = null;
@@ -259,6 +260,12 @@ public class AnimationManager : MonoBehaviour
 
         // 처음 시작 시 0.5초 후 행성 색상 업데이트
         _timer = _planetColourUpdateTimer - 0.5f;
+
+        // 행성 마테리얼 복사한다.
+        _planetMaterial = Instantiate(_planet.material);
+
+        // 행성 오브젝트에 복사한 마테리얼 참조 전해준다.
+        _planet.material = _planetMaterial;
 
         // 고정 색상 가져온다.
         _oceanColour = _planetMaterial.GetColor("_WaterColor");

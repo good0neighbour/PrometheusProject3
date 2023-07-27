@@ -119,13 +119,13 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AtmosphereColour: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.22600542}
-    - _CloudColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.37037036}
+    - _CloudColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     - _Color: {r: 0.54901963, g: 0.47058824, b: 0.39215687, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.13825862}
+    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     - _NightColour: {r: 1, g: 1, b: 1, a: 0.00055}
     - _OverCloudyColor: {r: 1, g: 1, b: 1, a: 1}
     - _SurroundingAtmosphereColour: {r: 1, g: 1, b: 1, a: 1}
-    - _WaterColor: {r: 0, g: 0.4313716, b: 0.68235296, a: 0.09193775}
+    - _WaterColor: {r: 0, g: 0.4313715, b: 0.68235296, a: 0}
     - _WaterSpecularColour: {r: 0.39215675, g: 0.7058823, b: 1, a: 0.39215687}
   m_BuildTextureStacks: []
