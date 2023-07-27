@@ -262,7 +262,7 @@ public class AnimationManager : MonoBehaviour
         _timer = _planetColourUpdateTimer - 0.5f;
 
         // 행성 마테리얼 복사한다.
-        _planetMaterial = Instantiate(_planet.material);
+        _planetMaterial = new Material(_planet.material);
 
         // 행성 오브젝트에 복사한 마테리얼 참조 전해준다.
         _planet.material = _planetMaterial;
