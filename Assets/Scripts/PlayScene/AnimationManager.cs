@@ -40,7 +40,6 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private float _planetColourUpdateTimer = 1.0f;
     [SerializeField] private Color _landMin = new Color(140.0f / 255.0f, 120.0f / 255.0f, 100.0f / 255.0f);
     [SerializeField] private Color _landMax = new Color(90.0f / 255.0f, 120.0f / 255.0f, 30.0f / 255.0f);
-    [SerializeField] private Color _imagePlanetAtmosphereBaseColor = new Color();
     [SerializeField] private float _nightBrightMultiply = 0.00001f;
 
     [Header("ÂüÁ¶")]
@@ -64,6 +63,7 @@ public class AnimationManager : MonoBehaviour
     private Color _cloudColour = new Color();
     private Color _atmoshpereColour = new Color();
     private Color _nightColour = new Color();
+    private Color _surroundingAtmosphereBaseColor = new Color();
     private float _leftRightTimer = 0.0f;
     private float _leftRightAdd = 0.0f;
     private float _leftRightMultiply = 0.0f;
@@ -202,7 +202,8 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 1.0f;
             }
-            _imagePlanetAtmosphere.color = new Color(_imagePlanetAtmosphereBaseColor.r, _imagePlanetAtmosphereBaseColor.g, _imagePlanetAtmosphereBaseColor.b, float0);
+            //_imagePlanetAtmosphere.color = new Color(_imagePlanetAtmosphereBaseColor.r, _imagePlanetAtmosphereBaseColor.g, _imagePlanetAtmosphereBaseColor.b, float0);
+            _planetMaterial.SetColor("_SurroundingAtmosphereColour", new Color(_surroundingAtmosphereBaseColor.r, _surroundingAtmosphereBaseColor.g, _surroundingAtmosphereBaseColor.b, float0));
             _planetMaterial.SetColor("_AtmosphereColour", new Color(_atmoshpereColour.r, _atmoshpereColour.g, _atmoshpereColour.b, float0));
         }
 
@@ -273,6 +274,7 @@ public class AnimationManager : MonoBehaviour
         _cloudColour = _planetMaterial.GetColor("_CloudColor");
         _atmoshpereColour = _planetMaterial.GetColor("_AtmosphereColour");
         _nightColour = _planetMaterial.GetColor("_NightColour");
+        _surroundingAtmosphereBaseColor = _planetMaterial.GetColor("_SurroundingAtmosphereColour");
     }
 
 

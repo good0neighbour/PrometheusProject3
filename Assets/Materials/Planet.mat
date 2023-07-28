@@ -113,7 +113,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SurroundingAtmosphereWidth: 1.01
+    - _SurroundingAtmosphereArea: 0.3
+    - _SurroundingAtmosphereWidth: 1.02
     - _UVSec: 0
     - _WaterCutoff: 0.75
     - _ZWrite: 1
@@ -122,10 +123,10 @@ Material:
     - _CloudColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     - _Color: {r: 0.54901963, g: 0.47058824, b: 0.39215687, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.4627451}
+    - _IceColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.56078434}
     - _NightColour: {r: 1, g: 1, b: 1, a: 0.00055}
     - _OverCloudyColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SurroundingAtmosphereColour: {r: 1, g: 1, b: 1, a: 1}
-    - _WaterColor: {r: 0, g: 0.43137148, b: 0.68235296, a: 0.23529412}
+    - _SurroundingAtmosphereColour: {r: 0.7058824, g: 0.9019608, b: 1, a: 1}
+    - _WaterColor: {r: 0, g: 0.43137145, b: 0.68235296, a: 0.1764706}
     - _WaterSpecularColour: {r: 0.39215675, g: 0.7058823, b: 1, a: 0.39215687}
   m_BuildTextureStacks: []
