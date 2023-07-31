@@ -29,14 +29,14 @@ Shader "PrometheusProject/PlanetShader"
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" }
+        Tags { "RenderType"="Opaque" }
         LOD 200
         
         // Çà¼º ´ë±âÃþ ·»´õ¸µ
         cull front
 
         CGPROGRAM
-        #pragma surface surf SurroundingAtmosphere noambient noshadow noforwardadd nolightmap novertexlight alpha:fade vertex:vert
+        #pragma surface surf SurroundingAtmosphere noambient noshadow noforwardadd nolightmap novertexlight vertex:vert keepalpha
         #pragma target 3.0
 
         struct Input
@@ -83,7 +83,7 @@ Shader "PrometheusProject/PlanetShader"
         
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf PlanetSurface noambient noshadow noforwardadd nolightmap novertexlight alpha:fade
+        #pragma surface surf PlanetSurface noambient noshadow noforwardadd nolightmap novertexlight
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
