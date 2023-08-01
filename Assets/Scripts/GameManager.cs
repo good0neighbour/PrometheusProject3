@@ -13,7 +13,7 @@ public class GameManager
 {
     private static GameManager _instance = null;
 
-    private JsonSettings _userSettings;
+    private JsonSettings _userSettings = new JsonSettings(true);
 
     public static GameManager Instance
     {

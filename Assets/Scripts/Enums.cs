@@ -10,6 +10,8 @@ public enum LanguageType
     French,
     Taiwanese,
     Japanese,
+    Russian,
+    Spanish,
     End
 }
 #endregion

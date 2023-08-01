@@ -47,7 +47,6 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private Image _messageBoxBackground = null;
     [SerializeField] private TMP_Text[] _leftRightBtns = new TMP_Text[6];
     [SerializeField] private Image _selection = null;
-    [SerializeField] private Image _imagePlanetAtmosphere = null;
     [SerializeField] private Transform _sun = null;
     [SerializeField] private RectTransform _planetImage = null;
     [SerializeField] private RectTransform _spaceImage = null;
@@ -166,7 +165,8 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 0.0f;
             }
-            _planetMaterial.SetColor("_WaterColor", new Color(_oceanColour.r, _oceanColour.g, _oceanColour.b, float0));
+            _planetMaterial.SetColor("_WaterColor",
+                new Color(_oceanColour.r, _oceanColour.g, _oceanColour.b, float0));
         }
 
         // 구름
@@ -177,18 +177,24 @@ public class AnimationManager : MonoBehaviour
             float0 = _waterGas * _waterGasMultiply;
             if (1.0f > float0)
             {
-                _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0));
-                _planetMaterial.SetFloat("_OverCloudyColor", 0.0f);
+                _planetMaterial.SetColor("_CloudColor",
+                    new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, float0));
+                _planetMaterial.SetFloat("_OverCloudyColor",
+                    0.0f);
             }
             else if (3.0f > float0)
             {
-                _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.5f - float0 * 0.5f));
-                _planetMaterial.SetFloat("_OverCloudyColor", float0 * 0.5f - 1.0f);
+                _planetMaterial.SetColor("_CloudColor",
+                    new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 1.5f - float0 * 0.5f));
+                _planetMaterial.SetFloat("_OverCloudyColor",
+                    float0 * 0.5f - 1.0f);
             }
             else
             {
-                _planetMaterial.SetColor("_CloudColor", new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f));
-                _planetMaterial.SetFloat("_OverCloudyAlpha", 1.0f);
+                _planetMaterial.SetColor("_CloudColor",
+                    new Color(_cloudColour.r, _cloudColour.g, _cloudColour.b, 0.0f));
+                _planetMaterial.SetFloat("_OverCloudyAlpha",
+                    1.0f);
             }
         }
 
@@ -202,9 +208,10 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 1.0f;
             }
-            //_imagePlanetAtmosphere.color = new Color(_imagePlanetAtmosphereBaseColor.r, _imagePlanetAtmosphereBaseColor.g, _imagePlanetAtmosphereBaseColor.b, float0);
-            _planetMaterial.SetColor("_SurroundingAtmosphereColour", new Color(_surroundingAtmosphereBaseColor.r, _surroundingAtmosphereBaseColor.g, _surroundingAtmosphereBaseColor.b, float0));
-            _planetMaterial.SetColor("_AtmosphereColour", new Color(_atmoshpereColour.r, _atmoshpereColour.g, _atmoshpereColour.b, float0));
+            _planetMaterial.SetColor("_SurroundingAtmosphereColour",
+                new Color(_surroundingAtmosphereBaseColor.r, _surroundingAtmosphereBaseColor.g, _surroundingAtmosphereBaseColor.b, float0));
+            _planetMaterial.SetColor("_AtmosphereColour",
+                new Color(_atmoshpereColour.r, _atmoshpereColour.g, _atmoshpereColour.b, float0));
         }
 
         // 야간 조명
@@ -221,7 +228,8 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 1.0f;
             }
-            _planetMaterial.SetColor("_NightColour", new Color(_nightColour.r, _nightColour.g, _nightColour.b, float0));
+            _planetMaterial.SetColor("_NightColour",
+                new Color(_nightColour.r, _nightColour.g, _nightColour.b, float0));
         }
 
         // 빙하
@@ -234,7 +242,8 @@ public class AnimationManager : MonoBehaviour
             {
                 float0 = 0.0f;
             }
-            _planetMaterial.SetColor("_IceColor", new Color(_iceColour.r, _iceColour.g, _iceColour.b, float0));
+            _planetMaterial.SetColor("_IceColor",
+                new Color(_iceColour.r, _iceColour.g, _iceColour.b, float0));
         }
     }
 
