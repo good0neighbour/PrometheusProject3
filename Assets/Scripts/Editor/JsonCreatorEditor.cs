@@ -2,14 +2,18 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(JsonCreator))]
-public class JsonCreatorEditor : Editor
+public class JsonCreatorEditor : EditorWindow
 {
     private struct JsonLanguage
     {
         public string[] Texts;
     }
 
+
+
+    /* ==================== Variables ==================== */
+
+    static private JsonCreatorEditor _window = null;
     private JsonLanguage _json;
     private Dictionary<string, int> _texts = null;
     private LanguageType _language = LanguageType.English;
@@ -20,18 +24,37 @@ public class JsonCreatorEditor : Editor
     private bool _isLoaded = false;
 
 
-    public override void OnInspectorGUI()
+
+    /* ==================== Private Methods ==================== */
+
+    [MenuItem("Window/PrometheusMission/Language Json Create")]
+    private static void Open()
+    {
+        if (null == _window)
+        {
+            _window = CreateInstance<JsonCreatorEditor>();
+
+            _window.position = new Rect(100.0f, 100.0f, 1000.0f, 1000.0f);
+        }
+
+        _window.Show();
+    }
+
+
+    private void OnGUI()
     {
         // json 파일 생성
         GUILayout.Label("\njson 파일 생성", EditorStyles.boldLabel);
         if (GUILayout.Button("한국어 json 및 번역용 파일 생성"))
         {
-            ((JsonCreator)target).LanSave();
+            Language.Instance.LanguageSave();
+            AssetDatabase.Refresh();
             _status = "한국어 json 저장됨.";
         }
         if (GUILayout.Button("다른 언어 json 생성"))
         {
-            ((JsonCreator)target).OhterLanSave();
+            Language.Instance.SaveOtherLanguages();
+            AssetDatabase.Refresh();
             _status = "다른 언어 json 저장됨.";
         }
 
@@ -76,10 +99,13 @@ public class JsonCreatorEditor : Editor
             }
 
             // 값
-            if (null != _value)
-            {
-                GUILayout.Label(_value, EditorStyles.boldLabel);
-            }
+            GUILayout.Label(_value, EditorStyles.boldLabel);
+        }
+
+        // 닫기 버튼
+        if (GUILayout.Button("닫기"))
+        {
+            _window.Close();
         }
     }
 
@@ -113,6 +139,24 @@ public class JsonCreatorEditor : Editor
                     break;
                 case LanguageType.English:
                     filename = "English";
+                    break;
+                case LanguageType.German:
+                    filename = "German";
+                    break;
+                case LanguageType.French:
+                    filename = "French";
+                    break;
+                case LanguageType.Taiwanese:
+                    filename = "Taiwanese";
+                    break;
+                case LanguageType.Japanese:
+                    filename = "Japanese";
+                    break;
+                case LanguageType.Russian:
+                    filename = "Russian";
+                    break;
+                case LanguageType.Spanish:
+                    filename = "Spanish";
                     break;
                 default:
                     Debug.LogError("잘못된 언어 종류.");

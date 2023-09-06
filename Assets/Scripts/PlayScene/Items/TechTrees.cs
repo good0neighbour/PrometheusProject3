@@ -11,7 +11,6 @@ public class TechTrees : ScriptableObject
         public string NodeName;
         public TechTreeType Type;
         public Vector2 NodePosition;
-        public ushort DescriptionNum;
         public float ProgressionValue;
         [Header("비용")]
         public ushort FundCost;
@@ -32,6 +31,7 @@ public class TechTrees : ScriptableObject
         public float Safety;
         [Header("요구사항")]
         public SubNode[] Requirments;
+        [HideInInspector] public ushort DescriptionNum;
     }
 
     [Serializable]

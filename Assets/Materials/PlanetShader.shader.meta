@@ -5,7 +5,6 @@ ShaderImporter:
   defaultTextures:
   - _MainTex: {instanceID: 0}
   - _WaterMap: {instanceID: 0}
-  - _IceMap: {instanceID: 0}
   - _IceNormal: {instanceID: 0}
   - _Cloud: {instanceID: 0}
   - _OverCloudy: {instanceID: 0}

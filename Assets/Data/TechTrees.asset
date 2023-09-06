@@ -16,7 +16,6 @@ MonoBehaviour:
   - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
     Type: 0
     NodePosition: {x: 0, y: 0}
-    DescriptionNum: 238
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -36,10 +35,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC6D0\uC790\uB860"
       Type: 1
+    DescriptionNum: 238
   - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
     Type: 0
     NodePosition: {x: 0, y: 1}
-    DescriptionNum: 240
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -61,10 +60,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD575\uBD84\uC5F4"
       Type: 1
+    DescriptionNum: 240
   - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
     Type: 0
     NodePosition: {x: 0, y: 2}
-    DescriptionNum: 242
     ProgressionValue: 0
     FundCost: 70
     ResearchCost: 0
@@ -86,10 +85,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD575\uC735\uD569"
       Type: 1
+    DescriptionNum: 242
   - NodeName: "\uACE1\uCC3D"
     Type: 0
     NodePosition: {x: 1, y: 0}
-    DescriptionNum: 244
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -107,10 +106,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 244
   - NodeName: "\uB18D\uC5C5\uB2E8\uC9C0"
     Type: 0
     NodePosition: {x: 1, y: 1}
-    DescriptionNum: 246
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -132,10 +131,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 246
   - NodeName: "\uBAA9\uCD95\uC5C5\uB2E8\uC9C0"
     Type: 0
     NodePosition: {x: 1, y: 2}
-    DescriptionNum: 248
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -157,10 +156,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 248
   - NodeName: "\uC2DD\uB8CC\uD488\uC810"
     Type: 0
     NodePosition: {x: 1, y: 3}
-    DescriptionNum: 250
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -180,10 +179,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uBAA9\uCD95\uC5C5\uB2E8\uC9C0"
       Type: 0
+    DescriptionNum: 250
   - NodeName: "\uBE44\uB8CC\uACF5\uC7A5"
     Type: 0
     NodePosition: {x: 1, y: 4}
-    DescriptionNum: 252
     ProgressionValue: 0
     FundCost: 25
     ResearchCost: 0
@@ -205,10 +204,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 252
   - NodeName: "\uB18D\uC0B0\uBB3C\uB958"
     Type: 0
     NodePosition: {x: 1, y: 5}
-    DescriptionNum: 254
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -228,10 +227,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uBE44\uB8CC\uACF5\uC7A5"
       Type: 0
+    DescriptionNum: 254
   - NodeName: "\uBCF4\uAC74\uC18C"
     Type: 0
     NodePosition: {x: 2, y: 0}
-    DescriptionNum: 256
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -249,10 +248,10 @@ MonoBehaviour:
     Health: 10
     Safety: 0
     Requirments: []
+    DescriptionNum: 256
   - NodeName: "\uBCF4\uAC74\uAD50\uC721"
     Type: 0
     NodePosition: {x: 2, y: 1}
-    DescriptionNum: 258
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -274,10 +273,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 258
   - NodeName: "\uC678\uACFC\uC13C\uD0C0"
     Type: 0
     NodePosition: {x: 2, y: 2}
-    DescriptionNum: 260
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -299,10 +298,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 260
   - NodeName: "\uC751\uAE09\uC2E4"
     Type: 0
     NodePosition: {x: 2, y: 3}
-    DescriptionNum: 262
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -322,10 +321,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC678\uACFC\uC13C\uD0C0"
       Type: 0
+    DescriptionNum: 262
   - NodeName: "\uBCD1\uC6D0"
     Type: 0
     NodePosition: {x: 2, y: 4}
-    DescriptionNum: 264
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -347,10 +346,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 264
   - NodeName: "\uC758\uD559\uC5F0\uAD6C\uC18C"
     Type: 0
     NodePosition: {x: 2, y: 5}
-    DescriptionNum: 266
     ProgressionValue: 0
     FundCost: 70
     ResearchCost: 0
@@ -370,10 +369,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uBCD1\uC6D0"
       Type: 0
+    DescriptionNum: 266
   - NodeName: "\uC18C\uBC29\uC11C"
     Type: 0
     NodePosition: {x: 3, y: 0}
-    DescriptionNum: 268
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -391,10 +390,10 @@ MonoBehaviour:
     Health: 0
     Safety: 2
     Requirments: []
+    DescriptionNum: 268
   - NodeName: "\uC548\uC804\uAD50\uC721"
     Type: 0
     NodePosition: {x: 3, y: 1}
-    DescriptionNum: 270
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -416,10 +415,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 270
   - NodeName: "\uC18C\uBC29\uB4DC\uB860"
     Type: 0
     NodePosition: {x: 3, y: 2}
-    DescriptionNum: 272
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -441,10 +440,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 272
   - NodeName: "\uC7AC\uD574\uACBD\uBCF4"
     Type: 0
     NodePosition: {x: 3, y: 3}
-    DescriptionNum: 274
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -464,10 +463,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC18C\uBC29\uB4DC\uB860"
       Type: 0
+    DescriptionNum: 274
   - NodeName: "\uC548\uC804\uAD00\uB9AC\uBCF8\uBD80"
     Type: 0
     NodePosition: {x: 3, y: 4}
-    DescriptionNum: 275
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -489,10 +488,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 275
   - NodeName: "\uD30C\uCD9C\uC18C"
     Type: 0
     NodePosition: {x: 4, y: 0}
-    DescriptionNum: 277
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -510,10 +509,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 277
   - NodeName: "\uBC94\uC8C4\uC608\uBC29\uAD50\uC721"
     Type: 0
     NodePosition: {x: 4, y: 1}
-    DescriptionNum: 279
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -535,10 +534,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 279
   - NodeName: "\uACBD\uCC30\uC11C"
     Type: 0
     NodePosition: {x: 4, y: 2}
-    DescriptionNum: 281
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -560,10 +559,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 281
   - NodeName: "\uAD50\uB3C4\uC18C"
     Type: 0
     NodePosition: {x: 4, y: 3}
-    DescriptionNum: 283
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -583,10 +582,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uACBD\uCC30\uC11C"
       Type: 0
+    DescriptionNum: 283
   - NodeName: "\uD615\uC0AC"
     Type: 0
     NodePosition: {x: 4, y: 4}
-    DescriptionNum: 285
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -608,10 +607,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD575\uC735\uD569\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 285
   - NodeName: "\uBC94\uC8C4\uC218\uC0AC\uAD6D"
     Type: 0
     NodePosition: {x: 4, y: 5}
-    DescriptionNum: 287
     ProgressionValue: 0
     FundCost: 70
     ResearchCost: 0
@@ -631,10 +630,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uD615\uC0AC"
       Type: 0
+    DescriptionNum: 287
   - NodeName: "\uC0C1\uC218\uB3C4"
     Type: 0
     NodePosition: {x: 5, y: 0}
-    DescriptionNum: 289
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -652,10 +651,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 289
   - NodeName: "\uC815\uC218\uCC98\uB9AC\uC2DC\uC124"
     Type: 0
     NodePosition: {x: 5, y: 1}
-    DescriptionNum: 291
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -679,10 +678,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
       Type: 1
+    DescriptionNum: 291
   - NodeName: "\uAD00\uB85C \uAC1C\uC120"
     Type: 0
     NodePosition: {x: 5, y: 2}
-    DescriptionNum: 293
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -704,10 +703,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 293
   - NodeName: "\uC790\uB3D9\uD654 \uC815\uC218\uCC98\uB9AC\uC7A5"
     Type: 0
     NodePosition: {x: 5, y: 3}
-    DescriptionNum: 295
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -729,10 +728,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC801\uC751\uBBF8\uC0DD\uBB3C"
       Type: 1
+    DescriptionNum: 295
   - NodeName: "\uD558\uC218\uB3C4"
     Type: 0
     NodePosition: {x: 6, y: 1}
-    DescriptionNum: 297
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -756,10 +755,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uBBF8\uC0DD\uBB3C\uD559"
       Type: 1
+    DescriptionNum: 297
   - NodeName: "\uD558\uC218\uCC98\uB9AC\uC2DC\uC124"
     Type: 0
     NodePosition: {x: 6, y: 2}
-    DescriptionNum: 299
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -783,10 +782,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD610\uAE30\uC131\uBBF8\uC0DD\uBB3C"
       Type: 1
+    DescriptionNum: 299
   - NodeName: "\uAD00\uAC70 \uAC1C\uC120"
     Type: 0
     NodePosition: {x: 6, y: 3}
-    DescriptionNum: 301
     ProgressionValue: 0
     FundCost: 15
     ResearchCost: 0
@@ -806,10 +805,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uD558\uC218\uCC98\uB9AC\uC2DC\uC124"
       Type: 0
+    DescriptionNum: 301
   - NodeName: "\uC790\uB3D9\uD654 \uD558\uC218\uCC98\uB9AC\uC7A5"
     Type: 0
     NodePosition: {x: 6, y: 4}
-    DescriptionNum: 303
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -833,10 +832,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC801\uC751\uBBF8\uC0DD\uBB3C"
       Type: 1
+    DescriptionNum: 303
   - NodeName: "\uC791\uC5C5\uC7A5"
     Type: 0
     NodePosition: {x: 7, y: 0}
-    DescriptionNum: 305
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -854,10 +853,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 305
   - NodeName: "\uACF5\uC7A5"
     Type: 0
     NodePosition: {x: 7, y: 1}
-    DescriptionNum: 307
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -881,10 +880,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uAE30\uACC4"
       Type: 1
+    DescriptionNum: 307
   - NodeName: "\uAE30\uACC4\uD654 \uACF5\uC7A5"
     Type: 0
     NodePosition: {x: 7, y: 2}
-    DescriptionNum: 309
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -908,10 +907,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
       Type: 1
+    DescriptionNum: 309
   - NodeName: "\uC0B0\uC5C5\uB2E8\uC9C0"
     Type: 0
     NodePosition: {x: 7, y: 3}
-    DescriptionNum: 311
     ProgressionValue: 0
     FundCost: 40
     ResearchCost: 0
@@ -933,10 +932,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC804\uC790\uC7A5\uBE44"
       Type: 1
+    DescriptionNum: 311
   - NodeName: "\uCCA8\uB2E8\uC0B0\uC5C5"
     Type: 0
     NodePosition: {x: 7, y: 4}
-    DescriptionNum: 313
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -960,10 +959,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC815\uBCF4\uD1B5\uC2E0"
       Type: 1
+    DescriptionNum: 313
   - NodeName: "\uC790\uB3D9\uD654 \uACF5\uC7A5"
     Type: 0
     NodePosition: {x: 7, y: 5}
-    DescriptionNum: 315
     ProgressionValue: 0
     FundCost: 60
     ResearchCost: 0
@@ -985,10 +984,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
       Type: 1
+    DescriptionNum: 315
   - NodeName: "\uAD50\uC721\uC2DC\uC124"
     Type: 0
     NodePosition: {x: 8, y: 0}
-    DescriptionNum: 317
     ProgressionValue: 0
     FundCost: 10
     ResearchCost: 0
@@ -1006,10 +1005,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 317
   - NodeName: "\uC815\uBCF4\uC13C\uD0C0"
     Type: 0
     NodePosition: {x: 8, y: 1}
-    DescriptionNum: 319
     ProgressionValue: 0
     FundCost: 20
     ResearchCost: 0
@@ -1031,10 +1030,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uD0DC\uC591\uAD11\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 319
   - NodeName: "\uACE0\uB4F1\uAD50\uC721\uC2DC\uC124"
     Type: 0
     NodePosition: {x: 8, y: 2}
-    DescriptionNum: 321
     ProgressionValue: 0
     FundCost: 30
     ResearchCost: 0
@@ -1056,10 +1055,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC6D0\uC790\uB825\uBC1C\uC804\uC18C"
       Type: 0
+    DescriptionNum: 321
   - NodeName: "\uB300\uD559"
     Type: 0
     NodePosition: {x: 8, y: 3}
-    DescriptionNum: 323
     ProgressionValue: 0
     FundCost: 50
     ResearchCost: 0
@@ -1081,10 +1080,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC591\uC790"
       Type: 1
+    DescriptionNum: 323
   - NodeName: "\uC5F0\uAD6C\uC2DC\uC124"
     Type: 0
     NodePosition: {x: 8, y: 4}
-    DescriptionNum: 325
     ProgressionValue: 0
     FundCost: 70
     ResearchCost: 0
@@ -1108,10 +1107,10 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uC591\uC790\uC5ED\uD559"
       Type: 1
+    DescriptionNum: 325
   - NodeName: "\uC785\uC790\uAC00\uC18D\uAE30"
     Type: 0
     NodePosition: {x: 8, y: 5}
-    DescriptionNum: 327
     ProgressionValue: 0
     FundCost: 100
     ResearchCost: 0
@@ -1133,11 +1132,11 @@ MonoBehaviour:
       Type: 0
     - NodeName: "\uB9E4\uAC1C\uC785\uC790"
       Type: 1
+    DescriptionNum: 327
   _techNodes:
   - NodeName: "\uC6D0\uC790\uB860"
     Type: 1
     NodePosition: {x: 0, y: 0}
-    DescriptionNum: 329
     ProgressionValue: 0.1
     FundCost: 10
     ResearchCost: 1
@@ -1155,10 +1154,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 329
   - NodeName: "\uD575\uBD84\uC5F4"
     Type: 1
     NodePosition: {x: 1, y: 0}
-    DescriptionNum: 331
     ProgressionValue: 0.083333336
     FundCost: 20
     ResearchCost: 3
@@ -1178,10 +1177,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC6D0\uC790\uB860"
       Type: 1
+    DescriptionNum: 331
   - NodeName: "\uAC15\uB825"
     Type: 1
     NodePosition: {x: 2, y: 0}
-    DescriptionNum: 333
     ProgressionValue: 0.071428575
     FundCost: 30
     ResearchCost: 5
@@ -1201,10 +1200,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uD575\uBD84\uC5F4"
       Type: 1
+    DescriptionNum: 333
   - NodeName: "\uC591\uC790"
     Type: 1
     NodePosition: {x: 3, y: 0}
-    DescriptionNum: 335
     ProgressionValue: 0.0625
     FundCost: 40
     ResearchCost: 7
@@ -1224,10 +1223,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uAC15\uB825"
       Type: 1
+    DescriptionNum: 335
   - NodeName: "\uD575\uC735\uD569"
     Type: 1
     NodePosition: {x: 4, y: 0}
-    DescriptionNum: 337
     ProgressionValue: 0.055555556
     FundCost: 50
     ResearchCost: 10
@@ -1247,10 +1246,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC591\uC790"
       Type: 1
+    DescriptionNum: 337
   - NodeName: "\uC591\uC790\uC5ED\uD559"
     Type: 1
     NodePosition: {x: 5, y: 0}
-    DescriptionNum: 339
     ProgressionValue: 0.05
     FundCost: 60
     ResearchCost: 12
@@ -1270,10 +1269,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uD575\uC735\uD569"
       Type: 1
+    DescriptionNum: 339
   - NodeName: "\uC911\uB825\uC7A5"
     Type: 1
     NodePosition: {x: 6, y: 0}
-    DescriptionNum: 341
     ProgressionValue: 0.045454547
     FundCost: 70
     ResearchCost: 16
@@ -1293,10 +1292,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC591\uC790\uC5ED\uD559"
       Type: 1
+    DescriptionNum: 341
   - NodeName: "\uB9E4\uAC1C\uC785\uC790"
     Type: 1
     NodePosition: {x: 7, y: 0}
-    DescriptionNum: 343
     ProgressionValue: 0.041666668
     FundCost: 80
     ResearchCost: 20
@@ -1316,10 +1315,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC911\uB825\uC7A5"
       Type: 1
+    DescriptionNum: 343
   - NodeName: "\uBBF8\uC0DD\uBB3C\uD559"
     Type: 1
     NodePosition: {x: 0, y: 1}
-    DescriptionNum: 345
     ProgressionValue: 0.1
     FundCost: 10
     ResearchCost: 2
@@ -1337,10 +1336,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 345
   - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
     Type: 1
     NodePosition: {x: 1, y: 1}
-    DescriptionNum: 347
     ProgressionValue: 0.083333336
     FundCost: 20
     ResearchCost: 5
@@ -1360,10 +1359,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uBBF8\uC0DD\uBB3C\uD559"
       Type: 1
+    DescriptionNum: 347
   - NodeName: "\uD610\uAE30\uC131\uBBF8\uC0DD\uBB3C"
     Type: 1
     NodePosition: {x: 2, y: 1}
-    DescriptionNum: 349
     ProgressionValue: 0.071428575
     FundCost: 30
     ResearchCost: 6
@@ -1383,10 +1382,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uD638\uAE30\uC131\uBBF8\uC0DD\uBB3C"
       Type: 1
+    DescriptionNum: 349
   - NodeName: "\uC801\uC751\uBBF8\uC0DD\uBB3C"
     Type: 1
     NodePosition: {x: 3, y: 1}
-    DescriptionNum: 351
     ProgressionValue: 0.0625
     FundCost: 40
     ResearchCost: 10
@@ -1406,10 +1405,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uD610\uAE30\uC131\uBBF8\uC0DD\uBB3C"
       Type: 1
+    DescriptionNum: 351
   - NodeName: "\uAE30\uACC4"
     Type: 1
     NodePosition: {x: 0, y: 2}
-    DescriptionNum: 353
     ProgressionValue: 0.1
     FundCost: 10
     ResearchCost: 2
@@ -1427,10 +1426,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 353
   - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
     Type: 1
     NodePosition: {x: 1, y: 2}
-    DescriptionNum: 355
     ProgressionValue: 0.083333336
     FundCost: 20
     ResearchCost: 5
@@ -1450,10 +1449,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uAE30\uACC4"
       Type: 1
+    DescriptionNum: 355
   - NodeName: "\uC804\uC790\uC7A5\uBE44"
     Type: 1
     NodePosition: {x: 2, y: 2}
-    DescriptionNum: 357
     ProgressionValue: 0.071428575
     FundCost: 30
     ResearchCost: 7
@@ -1473,10 +1472,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uB0B4\uC5F0\uAE30\uAD00"
       Type: 1
+    DescriptionNum: 357
   - NodeName: "\uC815\uBCF4\uD1B5\uC2E0"
     Type: 1
     NodePosition: {x: 3, y: 2}
-    DescriptionNum: 359
     ProgressionValue: 0.0625
     FundCost: 40
     ResearchCost: 10
@@ -1496,10 +1495,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC804\uC790\uC7A5\uBE44"
       Type: 1
+    DescriptionNum: 359
   - NodeName: "\uC18C\uD504\uD2B8\uC6E8\uC5B4"
     Type: 1
     NodePosition: {x: 4, y: 2}
-    DescriptionNum: 360
     ProgressionValue: 0.055555556
     FundCost: 50
     ResearchCost: 15
@@ -1519,10 +1518,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC815\uBCF4\uD1B5\uC2E0"
       Type: 1
+    DescriptionNum: 360
   - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
     Type: 1
     NodePosition: {x: 5, y: 2}
-    DescriptionNum: 362
     ProgressionValue: 0.05
     FundCost: 60
     ResearchCost: 18
@@ -1542,10 +1541,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC18C\uD504\uD2B8\uC6E8\uC5B4"
       Type: 1
+    DescriptionNum: 362
   - NodeName: "\uC0AC\uC6A9\uC790\uD559\uC2B5"
     Type: 1
     NodePosition: {x: 6, y: 2}
-    DescriptionNum: 364
     ProgressionValue: 0.045454547
     FundCost: 70
     ResearchCost: 20
@@ -1565,11 +1564,11 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC778\uACF5\uC9C0\uB2A5"
       Type: 1
+    DescriptionNum: 364
   _thoughtNodes:
   - NodeName: "\uBC95\uCE58\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 0, y: 2}
-    DescriptionNum: 366
     ProgressionValue: 0.1
     FundCost: 10
     ResearchCost: 3
@@ -1587,10 +1586,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 366
   - NodeName: "\uACBD\uD5D8\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 0, y: 3}
-    DescriptionNum: 368
     ProgressionValue: 0.1
     FundCost: 10
     ResearchCost: 3
@@ -1608,10 +1607,10 @@ MonoBehaviour:
     Health: 0
     Safety: 0
     Requirments: []
+    DescriptionNum: 368
   - NodeName: "\uC808\uB300\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 1, y: 2.5}
-    DescriptionNum: 370
     ProgressionValue: 0.083333336
     FundCost: 10
     ResearchCost: 4
@@ -1633,10 +1632,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uACBD\uD5D8\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 370
   - NodeName: "\uD68C\uC758\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 2, y: 1}
-    DescriptionNum: 372
     ProgressionValue: 0.071428575
     FundCost: 10
     ResearchCost: 5
@@ -1656,10 +1655,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 372
   - NodeName: "\uC2E4\uC874\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 2, y: 2}
-    DescriptionNum: 374
     ProgressionValue: 0.071428575
     FundCost: 10
     ResearchCost: 5
@@ -1679,10 +1678,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 374
   - NodeName: "\uD5C8\uBB34\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 2, y: 3}
-    DescriptionNum: 376
     ProgressionValue: 0.071428575
     FundCost: 10
     ResearchCost: 5
@@ -1702,10 +1701,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 376
   - NodeName: "\uC5FC\uC138\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 2, y: 4}
-    DescriptionNum: 378
     ProgressionValue: 0.071428575
     FundCost: 10
     ResearchCost: 5
@@ -1725,10 +1724,10 @@ MonoBehaviour:
     Requirments:
     - NodeName: "\uC808\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 378
   - NodeName: "\uC2E0\uAD8C\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 3, y: 1.5}
-    DescriptionNum: 380
     ProgressionValue: 0.055555556
     FundCost: 10
     ResearchCost: 8
@@ -1754,10 +1753,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC5FC\uC138\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 380
   - NodeName: "\uC790\uC720\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 3, y: 2.5}
-    DescriptionNum: 382
     ProgressionValue: 0.055555556
     FundCost: 10
     ResearchCost: 8
@@ -1783,10 +1782,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC5FC\uC138\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 382
   - NodeName: "\uC0C1\uB300\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 3, y: 3.5}
-    DescriptionNum: 384
     ProgressionValue: 0.055555556
     FundCost: 10
     ResearchCost: 8
@@ -1812,10 +1811,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC5FC\uC138\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 384
   - NodeName: "\uBBFC\uC871\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 4, y: 0.5}
-    DescriptionNum: 386
     ProgressionValue: 0.045454547
     FundCost: 10
     ResearchCost: 12
@@ -1839,10 +1838,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC0C1\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 386
   - NodeName: "\uC911\uC0C1\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 4, y: 1.5}
-    DescriptionNum: 388
     ProgressionValue: 0.045454547
     FundCost: 10
     ResearchCost: 12
@@ -1866,10 +1865,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC0C1\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 388
   - NodeName: "\uC2DD\uBBFC\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 4, y: 2.5}
-    DescriptionNum: 390
     ProgressionValue: 0.045454547
     FundCost: 10
     ResearchCost: 12
@@ -1893,10 +1892,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC0C1\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 390
   - NodeName: "\uC778\uBB38\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 4, y: 3.5}
-    DescriptionNum: 392
     ProgressionValue: 0.045454547
     FundCost: 10
     ResearchCost: 12
@@ -1920,10 +1919,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC0C1\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 392
   - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 4, y: 4.5}
-    DescriptionNum: 394
     ProgressionValue: 0.045454547
     FundCost: 10
     ResearchCost: 12
@@ -1947,10 +1946,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC0C1\uB300\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 394
   - NodeName: "\uC804\uCCB4\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 5, y: 1}
-    DescriptionNum: 396
     ProgressionValue: 0.03846154
     FundCost: 10
     ResearchCost: 15
@@ -1978,10 +1977,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 396
   - NodeName: "\uC81C\uAD6D\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 5, y: 2}
-    DescriptionNum: 398
     ProgressionValue: 0.03846154
     FundCost: 10
     ResearchCost: 15
@@ -2009,10 +2008,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 398
   - NodeName: "\uC9D1\uB2E8\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 5, y: 3}
-    DescriptionNum: 400
     ProgressionValue: 0.03846154
     FundCost: 10
     ResearchCost: 15
@@ -2040,10 +2039,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 400
   - NodeName: "\uAC1C\uC778\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 5, y: 4}
-    DescriptionNum: 402
     ProgressionValue: 0.03846154
     FundCost: 10
     ResearchCost: 15
@@ -2071,10 +2070,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uC6D0\uCE59\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 402
   - NodeName: "\uD569\uB9AC\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 6, y: 0}
-    DescriptionNum: 404
     ProgressionValue: 0.033333335
     FundCost: 10
     ResearchCost: 20
@@ -2100,10 +2099,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uAC1C\uC778\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 404
   - NodeName: "\uC138\uC18D\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 6, y: 1}
-    DescriptionNum: 406
     ProgressionValue: 0.033333335
     FundCost: 10
     ResearchCost: 20
@@ -2129,10 +2128,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uAC1C\uC778\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 406
   - NodeName: "\uC2E4\uC6A9\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 6, y: 2}
-    DescriptionNum: 408
     ProgressionValue: 0.033333335
     FundCost: 10
     ResearchCost: 20
@@ -2158,10 +2157,10 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uAC1C\uC778\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 408
   - NodeName: "\uACC4\uBABD\uC8FC\uC758"
     Type: 2
     NodePosition: {x: 6, y: 3}
-    DescriptionNum: 410
     ProgressionValue: 0.033333335
     FundCost: 10
     ResearchCost: 20
@@ -2187,3 +2186,4 @@ MonoBehaviour:
       Type: 2
     - NodeName: "\uAC1C\uC778\uC8FC\uC758"
       Type: 2
+    DescriptionNum: 410

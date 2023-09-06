@@ -948,7 +948,6 @@ MonoBehaviour:
   _selectionColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 1}
   _messageBoxSpeedmult: 4
   _spinSpeedmult: 1
-  _planetColourUpdateTimer: 2
   _landMin: {r: 0.54901963, g: 0.47058824, b: 0.39215687, a: 1}
   _landMax: {r: 0.3529412, g: 0.47058824, b: 0.11764706, a: 1}
   _nightBrightMultiply: 0.00005

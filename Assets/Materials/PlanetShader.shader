@@ -7,7 +7,6 @@ Shader "PrometheusProject/PlanetShader"
         _WaterMap ("OceanMap", 2D) = "white" {}
         _WaterColor ("OceanColor", Color) = (1,1,1,1)
         _WaterSpecularColour ("OceanSpecularColor", Color) = (1,1,1,1)
-        _IceMap ("IceMap", 2D) = "white" {}
         _IceNormal ("IceNormalMap", 2D) = "white" {}
         _IceColor ("IceColor", Color) = (1,1,1,1)
         _IceLinear ("IceLinear", Range(0,1)) = 0.5
@@ -90,7 +89,6 @@ Shader "PrometheusProject/PlanetShader"
 
         sampler2D _MainTex;
         sampler2D _WaterMap;
-        sampler2D _IceMap;
         sampler2D _IceNormal;
         sampler2D _Cloud;
         sampler2D _OverCloudy;
@@ -100,7 +98,6 @@ Shader "PrometheusProject/PlanetShader"
         {
             fixed2 uv_MainTex;
             fixed2 uv_WaterMap;
-            fixed2 uv_IceMap;
             fixed2 uv_IceNormal;
             fixed2 uv_Cloud;
             fixed2 uv_OverCloudy;
@@ -160,8 +157,8 @@ Shader "PrometheusProject/PlanetShader"
                 _IceColor.a,
                 tex2D(
                     _WaterMap,
-                    fixed2(IN.uv_IceMap.x + _Time.x * _PlanetRotation, IN.uv_IceMap.y)
-                ).a * (1 - _IceLinear) + (1 - abs(IN.uv_IceMap.y - 0.5) * 2) * _IceLinear
+                    fixed2(IN.uv_WaterMap.x + _Time.x * _PlanetRotation, IN.uv_WaterMap.y)
+                ).a * (1 - _IceLinear) + (1 - abs(IN.uv_WaterMap.y - 0.5) * 2) * _IceLinear
             );
 
             // 해양 영역

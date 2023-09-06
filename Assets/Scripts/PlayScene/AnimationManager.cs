@@ -37,7 +37,6 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] private float _spinSpeedmult = 1.0f;
 
     [Header("행성 색상 업데이트")]
-    [SerializeField] private float _planetColourUpdateTimer = 1.0f;
     [SerializeField] private Color _landMin = new Color(140.0f / 255.0f, 120.0f / 255.0f, 100.0f / 255.0f);
     [SerializeField] private Color _landMax = new Color(90.0f / 255.0f, 120.0f / 255.0f, 30.0f / 255.0f);
     [SerializeField] private float _nightBrightMultiply = 0.00001f;
@@ -71,7 +70,6 @@ public class AnimationManager : MonoBehaviour
     private float _planetImageTargetPos = 0.0f;
     private float _spaceImageTargetPos = 0.0f;
     private float _messageBoxTargetPos = 0.0f;
-    private float _timer = 0.0f;
     private float _waterLiquidMultiply = 1.0f / 1379705.3f * 0.5f;
     private float _waterGasMultiply = 1.0f / 2.7f;
     private float _airPressureMultiply = 1.0f / 1013.25f;
@@ -268,9 +266,6 @@ public class AnimationManager : MonoBehaviour
         // 고정 값
         _landColourGap = _landMin - _landMax;
 
-        // 처음 시작 시 0.5초 후 행성 색상 업데이트
-        _timer = _planetColourUpdateTimer - 0.5f;
-
         // 행성 마테리얼 복사한다.
         _planetMaterial = new Material(_planet.material);
 
@@ -347,12 +342,7 @@ public class AnimationManager : MonoBehaviour
         #endregion
 
         #region 행성 색상
-        _timer += Time.deltaTime;
-        if (_timer >= _planetColourUpdateTimer)
-        {
-            _timer -= _planetColourUpdateTimer;
-            PlanetColour();
-        }
+        PlanetColour();
         #endregion
     }
 }
